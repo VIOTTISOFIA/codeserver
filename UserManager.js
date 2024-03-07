@@ -31,6 +31,4 @@ gestorDeUsuarios.create({
   password: "hola5678",
 });
 
-//crear un nuevo usuario
-
 console.log(gestorDeUsuarios.read());
