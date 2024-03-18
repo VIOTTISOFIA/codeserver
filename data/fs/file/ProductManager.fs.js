@@ -54,11 +54,11 @@ class ProductManager {
     }
   }
 
-  async readOne(title) {
+  async readOne(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      const found = allParsed.find((product) => product.title === title);
+      const found = allParsed.find((product) => product.id === id);
       if (!found) {
         throw new Error("El producto que buscas no existe.");
       } else {
@@ -71,15 +71,15 @@ class ProductManager {
     }
   }
 
-  async destroy(title) {
+  async destroy(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      const found = allParsed.find((each) => each.title === title);
+      const found = allParsed.find((each) => each.id === id);
       if (!found) {
         throw new Error("Producto no encontrado.");
       } else {
-        let filtered = allParsed.filter((each) => each.title !== title);
+        let filtered = allParsed.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
         console.log("Producto encontrado y eliminado satisfactoriamente");
@@ -167,9 +167,9 @@ async function pruebaAsync() {
 
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("chupete");
-  await gestorDeProductos.destroy("chupete");
-  //await gestorDeProductos.destroy("mochila"); - Esta linea nos genera un error al no existir este producto en el JSON
+  await gestorDeProductos.readOne("80047a6dc78023b07277cfc0");
+  await gestorDeProductos.destroy("80047a6dc78023b07277cfc0");
+  //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
 pruebaAsync();
