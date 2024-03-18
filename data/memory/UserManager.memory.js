@@ -6,7 +6,7 @@ class UserManager {
   async create(data) {
     try {
       const user = {
-      id: Crypto.randomBytes(12).toString("hex"),
+      id: crypto.randomBytes(12).toString("hex"),
       foto: data.foto || "https://www.pngplay.com/image/325510",
       email: data.email,
       password: data.password,
@@ -14,7 +14,7 @@ class UserManager {
     };
 
     if (!data.email || !data.password || !data.role) {
-    throw new error ("Usuario no creado.Ingrese todos los datos.")
+    throw new error ("Usuario no creado. Ingrese todos los datos.")
   } else {
     UserManager.#users.push(user)
   }
@@ -53,12 +53,11 @@ destroy (id) {
   const filtered = UserManager.#users.filter((each)=>each.id!==id);
   UserManager.#users = filtered;
   console.log("Usuario eleminado");
-  }
 }    catch (error) {
   console.log (error)
 }
 }
-
+}
 
 
 const gestorDeUsuarios = new UserManager();
@@ -87,5 +86,7 @@ gestorDeUsuarios.create({
   role: "user"
 });
 
+
 console.log(gestorDeUsuarios.read());
-users.destroy(3)
+
+//users.destroy(3)
