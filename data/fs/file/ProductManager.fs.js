@@ -116,6 +116,55 @@ async function pruebaAsync() {
     stock: 15,
   });
 
+  await gestorDeProductos.create({
+    title: "practicuna",
+    category: "muebles",
+    price: 2500,
+    stock: 600,
+  });
+
+  await gestorDeProductos.create({
+    title: "pañalera Verona",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "set corta uñas",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set toalla y cambiador despues del baño",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "zapatos tejidos Sandia",
+    category: "calzado",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "cardigan tejido a mano",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "pijama disfraz de monstruo 6M",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   await gestorDeProductos.readOne("chupete");
