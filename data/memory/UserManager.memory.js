@@ -25,7 +25,7 @@ class UserManager {
   read() {
     try {
       if (UserManager.#users.length === 0) {
-        // throw new error("Ingrese nuevamente los datos");
+        throw new Error("Ingrese nuevamente los datos");
       } else {
         return UserManager.#users;
       }

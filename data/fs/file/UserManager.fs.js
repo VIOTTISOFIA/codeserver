@@ -44,9 +44,7 @@ class UserManager {
   async read() {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
-      users = JSON.parse(users);
-      throw new error("Ingrese nuevamente los datos");
-      return users;
+      return (users = JSON.parse(users));
     } catch (error) {
       console.log(error);
     }
@@ -107,5 +105,7 @@ async function test() {
     password: "hola1213",
     role: "user",
   });
+  console.log(await gestorDeUsuarios.read());
+  console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
 test();
