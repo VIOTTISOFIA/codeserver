@@ -84,4 +84,5 @@ gestorDeUsuarios.create({
   role: "user",
 });
 
+
 console.log(gestorDeUsuarios.read());
