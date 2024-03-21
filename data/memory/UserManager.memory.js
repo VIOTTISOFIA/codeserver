@@ -38,12 +38,12 @@ class UserManager {
     try {
       const one = UserManager.#users.find((each) => each.id === id);
       if (!one) {
-        throw new error("No existe el usuario");
+        throw new Error("No existe el usuario");
       } else {
         return one;
       }
     } catch (error) {
-      this.console.log(error);
+      console.log(error);
     }
   }
   destroy(id) {
