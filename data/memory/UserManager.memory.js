@@ -14,9 +14,7 @@ class UserManager {
       };
 
       if (!data.email || !data.password || !data.role) {
-
         throw new Error("Usuario no creado.Ingrese todos los datos.");
-
       } else {
         UserManager.#users.push(user);
       }
@@ -46,10 +44,7 @@ class UserManager {
         return one;
       }
     } catch (error) {
-
       console.log(error);
-
-    }
   }
   destroy(id) {
     try {
