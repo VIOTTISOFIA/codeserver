@@ -60,7 +60,7 @@ class UserManager {
         return one;
       }
     } catch (error) {
-      this.console.log(error);
+      console.log(error);
     }
   }
   async destroy(id) {
