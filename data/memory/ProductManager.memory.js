@@ -142,17 +142,17 @@ function prueba() {
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
   
-  const productTitle = "chupete";
+  const productId = "chupete";
   
   try {
-    const deleteProduct = gestorDeProductos.readOne(productTitle);
+    const deleteProduct = gestorDeProductos.readOne(productId);
     if (deleteProduct) {
-      gestorDeProductos.destroy(productTitle);
-      console.log(`Producto "${deleteProduct.title}" eliminado satisfactoriamente.`);
+      gestorDeProductos.destroy(productId);
+      console.log(`Producto con ID "${productId}" eliminado satisfactoriamente.`); 
       console.log("Productos después de la eliminación:");
       console.log(gestorDeProductos.read());
     } else {
-      console.log(`El producto "${productTitle}" no existe en la lista. Intentalo nuevamente`);
+      console.log(`El producto con ID "${productId}" no existe en la lista. Inténtalo nuevamente`);
     }
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
