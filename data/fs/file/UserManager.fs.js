@@ -53,22 +53,24 @@ class UserManager {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
-      return users.find((each) => each.id === id);
-
-      if (!users) {
-        throw new error("No existe el usuario");
+      let one = users.find((each) => each.id === id);
+      if (!one) {
+        throw new Error("No existe el usuario");
       } else {
-        return users;
+        return one;
       }
     } catch (error) {
-      this.console.log(error);
+      console.log(error);
     }
   }
   async destroy(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
-      const filtered = users.filter((each) => each.id !== id);
+
+      let filtered = users.filter((each) => each.id !== id);
+      filtered = JSON.stringify(filtered, null, 2);
+
       await fs.promises.writeFile(filtered);
       console.log("Usuario eleminado");
     } catch (error) {
