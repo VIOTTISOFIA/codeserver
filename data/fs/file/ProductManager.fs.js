@@ -82,7 +82,7 @@ class ProductManager {
         let filtered = allParsed.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-        console.log("Producto encontrado y eliminado satisfactoriamente");
+        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
         return found;
       }
     } catch (error) {
@@ -167,8 +167,8 @@ async function pruebaAsync() {
 
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("80047a6dc78023b07277cfc0");
-  await gestorDeProductos.destroy("80047a6dc78023b07277cfc0");
+  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
+  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
