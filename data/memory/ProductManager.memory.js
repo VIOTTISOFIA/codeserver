@@ -38,9 +38,9 @@ class ProductManager {
     }
   }
 
-  readOne(title) {
+  readOne(id) {
     try {
-      const find = ProductManager.#products.find((each) => each.title === title);
+      const find = ProductManager.#products.find((each) => each.id === id);
       if (!find) {
         throw new Error(
           "El producto que buscas no existe. Verifica el dato proporcionado e intentalo nuevamente."
@@ -52,11 +52,11 @@ class ProductManager {
       console.log(error);
     }
   }
-  destroy(title) {
+  destroy(id) {
     try {
-      this.readOne(title);
+      this.readOne(id);
       const filtered = ProductManager.#products.filter(
-        (each) => each.title !== title
+        (each) => each.id !== id
       );
       ProductManager.#products = filtered;
       console.log("Producto encontrado");
@@ -142,17 +142,17 @@ function prueba() {
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
   
-  const productTitle = "chupete";
+  const productId = "123";
   
   try {
-    const deleteProduct = gestorDeProductos.readOne(productTitle);
+    const deleteProduct = gestorDeProductos.readOne(productId);
     if (deleteProduct) {
-      gestorDeProductos.destroy(productTitle);
+      gestorDeProductos.destroy(productId);
       console.log(`Producto "${deleteProduct.title}" eliminado satisfactoriamente.`);
       console.log("Productos después de la eliminación:");
       console.log(gestorDeProductos.read());
     } else {
-      console.log(`El producto "${productTitle}" no existe en la lista. Intentalo nuevamente`);
+      console.log(`El producto "${productId}" no existe en la lista. Intentalo nuevamente`);
     }
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
