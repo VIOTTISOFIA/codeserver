@@ -14,7 +14,7 @@ class UserManager {
       };
 
       if (!data.email || !data.password || !data.role) {
-        throw new error("Usuario no creado.Ingrese todos los datos.");
+        throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
         UserManager.#users.push(user);
       }
@@ -38,16 +38,13 @@ class UserManager {
     try {
       const one = UserManager.#users.find((each) => each.id === id);
       if (!one) {
-
         throw new Error("No existe el usuario");
 
-        t
       } else {
         return one;
       }
     } catch (error) {
-     console.log(error);
-    }
+      console.log(error);
   }
   destroy(id) {
     try {
