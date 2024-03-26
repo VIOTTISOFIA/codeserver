@@ -1,175 +1,163 @@
 const fs = require("fs");
 const crypto = require("crypto");
+const { error } = require("console");
 
 class ProductManager {
-  constructor() {
-    this.path = "./data/fs/file/Products.json";
-    this.init();
-  }
-  init() {
-    const exists = fs.existsSync(this.path);
-    if (!exists) {
-      const stringData = JSON.stringify([], null, 2);
-      fs.writeFileSync(this.path, stringData);
-      console.log("archivo creado!");
-    } else {
-      console.log("archivo ya existe!");
-    }
-  }
-  async create(data) {
+  static #products = [];
+  create(data) {
     try {
+      const product = {
+        id: crypto.randomBytes(12).toString("hex"),
+        title: data.title,
+        photo: data.photo || "images/package.png",
+        category: data.category,
+        price: data.price,
+        stock: data.stock,
+      };
+
       if (!data.title || !data.category || !data.price || !data.stock) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
-        const product = {
-          id: crypto.randomBytes(12).toString("hex"),
-          title: data.title,
-          photo: data.photo || "images/package.png",
-          category: data.category,
-          price: data.price,
-          stock: data.stock,
-        };
-
-        let products = await fs.promises.readFile(this.path, "utf-8");
-        products = JSON.parse(products);
-        products.push(product);
+        ProductManager.#products.push(product);
         console.log("Producto creado");
-        products = JSON.stringify(products, null, 2);
-        await fs.promises.writeFile(this.path, products);
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
-  async read() {
+  read() {
     try {
-      let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
-      console.log("Productos obtenidos: ", allParsed);
-      return allParsed;
-    } catch (error) {
-      console.error("Error al obtener los datos");
-      throw error;
-    }
-  }
-
-  async readOne(id) {
-    try {
-      let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
-      const found = allParsed.find((product) => product.id === id);
-      if (!found) {
-        throw new Error("El producto que buscas no existe.");
+      if (ProductManager.#products.length === 0) {
+        throw new Error("No existen productos");
       } else {
-        console.log(found);
-        return found;
+        return ProductManager.#products;
       }
     } catch (error) {
-      console.error("Error al leer el producto:", error.message);
-      throw error;
+      console.log(error);
     }
   }
 
-  async destroy(id) {
+  readOne(id) {
     try {
-      let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
-      const found = allParsed.find((each) => each.id === id);
-      if (!found) {
-        throw new Error("Producto no encontrado.");
+      const find = ProductManager.#products.find((each) => each.id === id);
+      if (!find) {
+        throw new Error(
+          "El producto que buscas no existe. Verifica el dato proporcionado e intentalo nuevamente."
+        );
       } else {
-        let filtered = allParsed.filter((each) => each.id !== id);
-        filtered = JSON.stringify(filtered, null, 2);
-        await fs.promises.writeFile(this.path, filtered);
-        console.log(`El producto con ID ${id} encontrado y eliminado satisfactoriamente`);
-        return found;
+        return find;
       }
     } catch (error) {
-      console.error("Error al eliminar el producto:", error.message);
-      throw error;
+      console.log(error);
+    }
+  }
+  destroy(id) {
+    try {
+      this.readOne(id);
+      const filtered = ProductManager.#products.filter(
+        (each) => each.id !== id
+      );
+      ProductManager.#products = filtered;
+      console.log("Producto encontrado");
+    } catch (error) {
+      console.log(error + "verifique nuevamente");
     }
   }
 }
 
-async function pruebaAsync() {
+function prueba() {
   const gestorDeProductos = new ProductManager();
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "chupete",
     category: "chupetes",
     price: 1500,
     stock: 1000,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "conjunto enterizo unisex",
     category: "indumentaria",
     price: 900,
     stock: 800,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "porta chupetes",
     category: "accesorios",
     price: 750,
     stock: 15,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "practicuna",
     category: "muebles",
     price: 2500,
     stock: 600,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "pañalera Verona",
     category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "set corta uñas",
     category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "Set toalla y cambiador despues del baño",
     category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "zapatos tejidos Sandia",
     category: "calzado",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "cardigan tejido a mano",
     category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.create({
+  gestorDeProductos.create({
     title: "pijama disfraz de monstruo 6M",
     category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
-  await gestorDeProductos.read();
-  //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("3e81be9523ca0096be54d26b");
-  await gestorDeProductos.destroy("3e81be9523ca0096be54d26b");
-  //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
+  console.log("Productos creados:");
+  console.log(gestorDeProductos.read());
+  
+  const productId = "chupete";
+  
+  try {
+    const deleteProduct = gestorDeProductos.readOne(productId);
+    if (deleteProduct) {
+      gestorDeProductos.destroy(productId);
+      console.log(`Producto con ID "${productId}" eliminado satisfactoriamente.`); 
+      console.log("Productos después de la eliminación:");
+      console.log(gestorDeProductos.read());
+    } else {
+      console.log(`El producto con ID "${productId}" no existe en la lista. Inténtalo nuevamente`);
+    }
+  } catch (error) {
+    console.error("Error al intentar eliminar el producto:", error.message);
+  }
+
 }
 
-pruebaAsync();
+prueba();
