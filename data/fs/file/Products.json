@@ -1,6 +1,6 @@
 [
   {
-    "id": "02ee6a3eb7d39efd120aa2af",
+    "id": "02c65e969690649d5a3ab80e",
     "title": "conjunto enterizo unisex",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -8,7 +8,7 @@
     "stock": 800
   },
   {
-    "id": "b683d4b28e40da5a1647dda4",
+    "id": "75b58ebb205430cb1d678072",
     "title": "porta chupetes",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -16,7 +16,7 @@
     "stock": 15
   },
   {
-    "id": "1c26f93e42c1d6503880cba1",
+    "id": "3299a0ce02a75902c714040a",
     "title": "practicuna",
     "photo": "images/package.png",
     "category": "muebles",
@@ -24,7 +24,7 @@
     "stock": 600
   },
   {
-    "id": "cef079d3513c97e03403de13",
+    "id": "342593bece4f6e60c0b1daba",
     "title": "pañalera Verona",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -32,7 +32,7 @@
     "stock": 250
   },
   {
-    "id": "7c5c7511d6a407be93d25553",
+    "id": "18fbc139a04c3a172a1ce33e",
     "title": "set corta uñas",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -40,7 +40,7 @@
     "stock": 250
   },
   {
-    "id": "0298ad6205f92afe6a4cafc6",
+    "id": "f17def9ebac0d89c95ef0d06",
     "title": "Set toalla y cambiador despues del baño",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -48,7 +48,7 @@
     "stock": 250
   },
   {
-    "id": "e7ed8fbf577aeb4587c1e74a",
+    "id": "44bb21f9017378330b3ca394",
     "title": "zapatos tejidos Sandia",
     "photo": "images/package.png",
     "category": "calzado",
@@ -56,7 +56,7 @@
     "stock": 250
   },
   {
-    "id": "c8b88f2dcdf33ee9a0672a32",
+    "id": "7869c95fba40de16e6922723",
     "title": "cardigan tejido a mano",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -64,7 +64,7 @@
     "stock": 250
   },
   {
-    "id": "43e6a5bc27673c73d1a9b6c8",
+    "id": "80386f5861dff5eb0b9e2849",
     "title": "pijama disfraz de monstruo 6M",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -72,7 +72,7 @@
     "stock": 250
   },
   {
-    "id": "0bd14247e8fb473afdff8a3d",
+    "id": "762c6894bb403dcf3ca3919d",
     "title": "chupete",
     "photo": "images/package.png",
     "category": "chupetes",
@@ -80,7 +80,7 @@
     "stock": 1000
   },
   {
-    "id": "ba8c2e2ace89e0cef416487c",
+    "id": "4e0df2e8a6e555acb93c417a",
     "title": "conjunto enterizo unisex",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -88,7 +88,7 @@
     "stock": 800
   },
   {
-    "id": "1892b6e1d5730f2958591cf7",
+    "id": "84972a1e9f0196e3281bdc1b",
     "title": "porta chupetes",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -96,7 +96,7 @@
     "stock": 15
   },
   {
-    "id": "feb63c803c0ebfb1058c35c6",
+    "id": "d04718ced6e786f7db505e27",
     "title": "practicuna",
     "photo": "images/package.png",
     "category": "muebles",
@@ -104,7 +104,7 @@
     "stock": 600
   },
   {
-    "id": "06d4705b5eae8afcbd72b430",
+    "id": "332b7dcdc9b2a40436f4c3f7",
     "title": "pañalera Verona",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -112,7 +112,7 @@
     "stock": 250
   },
   {
-    "id": "4cc7dc656e564fda82ba9e1b",
+    "id": "5470d0de651b895f8ab14101",
     "title": "set corta uñas",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -120,7 +120,7 @@
     "stock": 250
   },
   {
-    "id": "5da782b81cf75afe342f9bbf",
+    "id": "61351684eb1e768b7b28362b",
     "title": "Set toalla y cambiador despues del baño",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -128,7 +128,7 @@
     "stock": 250
   },
   {
-    "id": "7e2119836a71adf385e43d98",
+    "id": "48ec8f15fb92b8839a469452",
     "title": "zapatos tejidos Sandia",
     "photo": "images/package.png",
     "category": "calzado",
@@ -136,7 +136,7 @@
     "stock": 250
   },
   {
-    "id": "9ec83d648696097f7d4cbeed",
+    "id": "460761af79a85c289bb6ee89",
     "title": "cardigan tejido a mano",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -144,7 +144,87 @@
     "stock": 250
   },
   {
-    "id": "56bb39ec465831b4c0d63a91",
+    "id": "1010febae2193f75059f7e62",
+    "title": "pijama disfraz de monstruo 6M",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "23e817a175536ef6011538d8",
+    "title": "chupete",
+    "photo": "images/package.png",
+    "category": "chupetes",
+    "price": 1500,
+    "stock": 1000
+  },
+  {
+    "id": "f6aa18cc05360ed4cc582d31",
+    "title": "conjunto enterizo unisex",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 900,
+    "stock": 800
+  },
+  {
+    "id": "1303e753c58d802d21ac8d0d",
+    "title": "porta chupetes",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "id": "64f0e1d49c5c7409429ea5c0",
+    "title": "practicuna",
+    "photo": "images/package.png",
+    "category": "muebles",
+    "price": 2500,
+    "stock": 600
+  },
+  {
+    "id": "7f26832a074757822cf06ab3",
+    "title": "pañalera Verona",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "e97ed1d636f2ac084df2da24",
+    "title": "set corta uñas",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "a4bca0ba295f3aa4d630bf87",
+    "title": "Set toalla y cambiador despues del baño",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "7b80641f22947c847f95af10",
+    "title": "zapatos tejidos Sandia",
+    "photo": "images/package.png",
+    "category": "calzado",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "3464a0a4de0013601b5e4e67",
+    "title": "cardigan tejido a mano",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "7d3136fb5287e23a14de1b1f",
     "title": "pijama disfraz de monstruo 6M",
     "photo": "images/package.png",
     "category": "indumentaria",
