@@ -1,0 +1,154 @@
+[
+  {
+    "id": "02ee6a3eb7d39efd120aa2af",
+    "title": "conjunto enterizo unisex",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 900,
+    "stock": 800
+  },
+  {
+    "id": "b683d4b28e40da5a1647dda4",
+    "title": "porta chupetes",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "id": "1c26f93e42c1d6503880cba1",
+    "title": "practicuna",
+    "photo": "images/package.png",
+    "category": "muebles",
+    "price": 2500,
+    "stock": 600
+  },
+  {
+    "id": "cef079d3513c97e03403de13",
+    "title": "pañalera Verona",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "7c5c7511d6a407be93d25553",
+    "title": "set corta uñas",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "0298ad6205f92afe6a4cafc6",
+    "title": "Set toalla y cambiador despues del baño",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "e7ed8fbf577aeb4587c1e74a",
+    "title": "zapatos tejidos Sandia",
+    "photo": "images/package.png",
+    "category": "calzado",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "c8b88f2dcdf33ee9a0672a32",
+    "title": "cardigan tejido a mano",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "43e6a5bc27673c73d1a9b6c8",
+    "title": "pijama disfraz de monstruo 6M",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "0bd14247e8fb473afdff8a3d",
+    "title": "chupete",
+    "photo": "images/package.png",
+    "category": "chupetes",
+    "price": 1500,
+    "stock": 1000
+  },
+  {
+    "id": "ba8c2e2ace89e0cef416487c",
+    "title": "conjunto enterizo unisex",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 900,
+    "stock": 800
+  },
+  {
+    "id": "1892b6e1d5730f2958591cf7",
+    "title": "porta chupetes",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "id": "feb63c803c0ebfb1058c35c6",
+    "title": "practicuna",
+    "photo": "images/package.png",
+    "category": "muebles",
+    "price": 2500,
+    "stock": 600
+  },
+  {
+    "id": "06d4705b5eae8afcbd72b430",
+    "title": "pañalera Verona",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "4cc7dc656e564fda82ba9e1b",
+    "title": "set corta uñas",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "5da782b81cf75afe342f9bbf",
+    "title": "Set toalla y cambiador despues del baño",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "7e2119836a71adf385e43d98",
+    "title": "zapatos tejidos Sandia",
+    "photo": "images/package.png",
+    "category": "calzado",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "9ec83d648696097f7d4cbeed",
+    "title": "cardigan tejido a mano",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "56bb39ec465831b4c0d63a91",
+    "title": "pijama disfraz de monstruo 6M",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  }
+]
