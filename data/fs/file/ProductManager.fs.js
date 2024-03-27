@@ -83,8 +83,8 @@ class ProductManager {
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
 
-        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
 
+        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
         return found;
       }
     } catch (error) {

@@ -158,6 +158,7 @@ function prueba() {
     console.error("Error al intentar eliminar el producto:", error.message);
   }
 
+
 }
 
 
@@ -228,5 +229,6 @@ gestorDeProductos.create({
 });
 
 console.log(gestorDeProductos.read());
+
 
 prueba();
