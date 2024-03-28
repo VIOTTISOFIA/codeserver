@@ -1,13 +1,13 @@
 {
-  "name": "codeserver",
+  "name": "serveruser",
   "version": "1.0.0",
   "description": "",
-  "main": "serverProducts.js",
-  "scripts": {
-    "start": "node ./serverProducts.js",
-    "dev": "nodemon /serverProducts.js"
-  },
+  "main": "server.js",
   "type": "module",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "nodemon /server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
