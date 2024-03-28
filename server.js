@@ -1,12 +1,12 @@
 import express from "express";
-// import userManager from "./data/fs/UserManager.fs.js";
+import userManager from "./data/fs/UserManager.fs.js";
 const server = express();
 const port = 8080;
 const ready = () => console.log("server ready on port" + port);
 
 server.listen(port, ready);
 
-// // middlewares
+// middlewares
 server.use(express.urlencoded({ extended: true }));
 
 // router
@@ -28,13 +28,13 @@ server.get("/", async (req, respuesta) => {
 
 // parametro
 
-server.get("/api/users/:uid", async (req, res) => {
+server.get("/api/users/:id/:role", async (req, res) => {
   try {
-    const { uid } = req.params;
-    // const data = { id, role };
-    // const users = await UserManager.create(data);
+    const { id, role } = req.params;
+    const data = { uid, role };
+    const one = await userManager.create(data);
     return res.status(200).json({
-      response: uid,
+      response: one,
       succcess: true,
     });
   } catch (error) {

@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class UserManager {
   constructor() {
-    this.path = "./user.json";
+    this.path = "./data/fs/file/user.json";
     this.init();
   }
   init() {
@@ -28,7 +28,7 @@ class UserManager {
       };
 
       if (!data.email || !data.password || !data.role) {
-        throw new error("Usuario no creado.Ingrese todos los datos.");
+        throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
         let users = await fs.promises.readFile(this.path, "utf-8");
         users = JSON.parse(users);
@@ -110,6 +110,6 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-test();
+// test();
 const userManager = new UserManager();
 export default userManager;
