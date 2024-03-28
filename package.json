@@ -1,15 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "serveruser",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "start": "node ./server.js",
-    "dev": "nodemon /server.js"
-  },
-=======
   "name": "codeserver",
   "version": "1.0.0",
   "description": "",
@@ -19,16 +8,11 @@
     "dev": "nodemon /serverProducts.js"
   },
   "type": "module",
->>>>>>> b5e54c642151d58a4107c36e7264509e73cd1c54
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "express": "^4.19.2"
-=======
     "express": "^4.19.1"
->>>>>>> b5e54c642151d58a4107c36e7264509e73cd1c54
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
