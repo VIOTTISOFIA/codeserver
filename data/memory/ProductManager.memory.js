@@ -1,4 +1,3 @@
-
 const fs = require("fs");
 const crypto = require("crypto");
 const { error } = require("console");
@@ -161,8 +160,8 @@ function prueba() {
 
 }
 
+
 prueba();
-=======
 class ProductManager {
   static #products = [];
   create(data) {
@@ -229,3 +228,5 @@ gestorDeProductos.create({
 });
 
 console.log(gestorDeProductos.read());
+
+prueba();

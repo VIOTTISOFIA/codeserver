@@ -67,10 +67,8 @@ class UserManager {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
-
       let filtered = users.filter((each) => each.id !== id);
       filtered = JSON.stringify(filtered, null, 2);
-
       await fs.promises.writeFile(filtered);
       console.log("Usuario eleminado");
     } catch (error) {
