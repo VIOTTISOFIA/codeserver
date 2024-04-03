@@ -30,9 +30,13 @@ class UserManager {
       if (!data.email || !data.password || !data.role) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
+        // creo el objeto con los datos de la nota
         let users = await fs.promises.readFile(this.path, "utf-8");
+        // espero la lectura del archivo y lo guardo en la variable all
         users = JSON.parse(users);
+        // parseo
         users.push(user);
+        // pusheo
         console.log("usuario creado");
         users = JSON.stringify(users, null, 2);
         await fs.promises.writeFile(this.path, users);
@@ -41,10 +45,21 @@ class UserManager {
       console.log(error);
     }
   }
-  async read() {
+  async read(rol) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
-      return (users = JSON.parse(users));
+      // espero la lectura del archivo y lo guardo en la variable users
+      users = JSON.parse(users);
+      // parseo
+      users = users.filter((each) => each.role === rol);
+      if (users.length === 0) {
+        //  si no hay notas
+        // throw new Error("no hay usuarios");
+        return null;
+      } else {
+        console.log(users);
+        return users;
+      }
     } catch (error) {
       console.log(error);
     }
