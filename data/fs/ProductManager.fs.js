@@ -1,5 +1,5 @@
-const fs = require("fs");
-const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class ProductManager {
   constructor() {
@@ -42,12 +42,13 @@ class ProductManager {
     }
   }
 
-  async read() {
+  async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      console.log("Productos obtenidos: ", allParsed);
-      return allParsed;
+      const filtered = allParsed.filter((each) =>each.category === category)
+      console.log("Productos obtenidos: ", filtered);
+      return filtered;
     } catch (error) {
       console.error("Error al obtener los datos");
       throw error;
@@ -169,9 +170,12 @@ async function pruebaAsync() {
 
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
-  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
 pruebaAsync();
+
+const productManager = new ProductManager();
+export default productManager;
