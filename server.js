@@ -9,7 +9,7 @@ server.listen(port, ready);
 
 // middlewares
 server.use(express.urlencoded({ extended: true }));
-//server.use(express.json());
+server.use(express.json());
 
 // router
 server.get("/", async (req, res) => {
