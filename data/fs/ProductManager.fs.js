@@ -177,7 +177,7 @@ async function pruebaAsync() {
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
-pruebaAsync();
+//pruebaAsync();
 
 const productManager = new ProductManager();
 export default productManager;
