@@ -126,6 +126,7 @@ server.get("/api/products/:pid", async (req, res) => {
       error.statusCode = 404;
       throw error;
     }
+    
   } catch (error) {
     console.log(error);
     return res.status(error.statusCode).json({

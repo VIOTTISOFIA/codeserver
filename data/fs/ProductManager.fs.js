@@ -46,7 +46,7 @@ class ProductManager {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      const filtered = allParsed.filter((each) =>each.category === category)
+      const filtered = allParsed.filter((each) => each.category === category);
       console.log("Productos obtenidos: ", filtered);
       return filtered;
     } catch (error) {
@@ -84,7 +84,9 @@ class ProductManager {
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
 
-        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
+        console.log(
+          `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
+        );
 
         return found;
       }
