@@ -170,6 +170,83 @@ async function pruebaAsync() {
     stock: 250,
   });
 
+  await gestorDeProductos.create({
+    title: "Peluche de cebra con sonido",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de herramientas para taller",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Bicicleta con rueditas de apoyo",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Casa de muñecas",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Patines princesas Disney de 4 ruedas",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Zapatillas con luces HotWheels",
+    category: "calzado",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de vinchas con brillos",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Camisa manga larga para nene",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Pantalon de vestir nene colores surtidos",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de princesas",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de MarioBros",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
