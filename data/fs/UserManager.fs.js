@@ -51,17 +51,15 @@ class UserManager {
       // espero la lectura del archivo y lo guardo en la variable users
       users = JSON.parse(users);
       // parseo
-      users = users.filter((each) => each.role === rol);
-      if (users.length === 0) {
-        //  si no hay notas
-        // throw new Error("no hay usuarios");
-        return null;
-      } else {
-        console.log(users);
-        return users;
-      }
+      rol && (users = users.filter((each) => each.role === rol));
+      // if (users.length === 0) {
+      //  si no hay notas
+      // throw new Error("no hay usuarios");
+      return users;
+      // } else {
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
   async readOne(id) {
@@ -69,23 +67,52 @@ class UserManager {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let one = users.find((each) => each.id === id);
-      if (!one) {
-        throw new Error("No existe el usuario");
-      } else {
-        return one;
-      }
+      // if (!one) {
+      //   throw new Error("No existe el usuario");
+      // } else {
+      return one;
+      // }
     } catch (error) {
       console.log(error);
+      return error;
     }
   }
+
+  async update(id, data) {
+    try {
+      let users = await this.read();
+      let one = users.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        users = JSON.stringify(users, null, 2);
+        await fs.promises.writeFile(this.path, users);
+        return one;
+      } else {
+        const error = new Error("not found!");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      throw Error;
+    }
+  }
+
   async destroy(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let filtered = users.filter((each) => each.id !== id);
-      filtered = JSON.stringify(filtered, null, 2);
-      await fs.promises.writeFile(filtered);
-      console.log("Usuario eleminado");
+      if (users) {
+        filtered = JSON.stringify(filtered, null, 2);
+        await fs.promises.writeFile(filtered);
+        return users;
+      } else {
+        const error = new Error("not found!");
+        error.statusCode = 404;
+        throw error;
+      }
     } catch (error) {
       console.log(error);
     }

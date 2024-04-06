@@ -18,7 +18,8 @@
     "foto": "celine.jpg",
     "email": "celine@hotmail.com",
     "password": "hola91011",
-    "role": "user"
+    "role": "hija",
+    "text": "texto modificado"
   },
   {
     "id": "eaf12613a1925c28fe7ddfb9",
