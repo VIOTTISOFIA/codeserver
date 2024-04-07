@@ -171,14 +171,7 @@ async function pruebaAsync() {
     price: 15000,
     stock: 250,
   });
-  await gestorDeProductos.read();
-  //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
-  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
-  //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
-}
 
-pruebaAsync ()
   await gestorDeProductos.create({
     title: "Peluche de cebra con sonido",
     category: "jugueteria",
@@ -255,11 +248,10 @@ pruebaAsync ()
     price: 15000,
     stock: 250,
   });
-
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  //await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
-  //await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
+  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
