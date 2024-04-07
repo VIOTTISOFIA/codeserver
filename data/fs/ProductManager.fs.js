@@ -1,5 +1,6 @@
-const fs = require("fs");
-const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
+
 
 class ProductManager {
   constructor() {
@@ -42,12 +43,14 @@ class ProductManager {
     }
   }
 
-  async read() {
+
+  async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      console.log("Productos obtenidos: ", allParsed);
-      return allParsed;
+      const filtered = allParsed.filter((each) => each.category === category);
+      console.log("Productos obtenidos: ", filtered);
+      return filtered;
     } catch (error) {
       console.error("Error al obtener los datos");
       throw error;
@@ -83,7 +86,9 @@ class ProductManager {
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
 
-        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
+
+          `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
+ 
 
         return found;
       }
@@ -166,7 +171,6 @@ async function pruebaAsync() {
     price: 15000,
     stock: 250,
   });
-
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
@@ -174,4 +178,92 @@ async function pruebaAsync() {
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
-pruebaAsync();
+pruebaAsync ()
+  await gestorDeProductos.create({
+    title: "Peluche de cebra con sonido",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de herramientas para taller",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Bicicleta con rueditas de apoyo",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Casa de muñecas",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Patines princesas Disney de 4 ruedas",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Zapatillas con luces HotWheels",
+    category: "calzado",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de vinchas con brillos",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Camisa manga larga para nene",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Pantalon de vestir nene colores surtidos",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de princesas",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de MarioBros",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.read();
+  //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
+  //await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
+}
+
+//pruebaAsync();
+
+const productManager = new ProductManager();
+export default productManager

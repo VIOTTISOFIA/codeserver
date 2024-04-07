@@ -139,6 +139,83 @@ function prueba() {
     stock: 250,
   });
 
+   gestorDeProductos.create({
+    title: "Peluche de cebra con sonido",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Set de herramientas para taller",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Bicicleta con rueditas de apoyo",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Casa de muñecas",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Patines princesas Disney de 4 ruedas",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Zapatillas con luces HotWheels",
+    category: "calzado",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Set de vinchas con brillos",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Camisa manga larga para nene",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Pantalon de vestir nene colores surtidos",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Cinturon de princesas",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+   gestorDeProductos.create({
+    title: "Cinturon de MarioBros",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
   
@@ -156,9 +233,7 @@ function prueba() {
     }
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
-  }
-
-}
+ 
 
 
 prueba();
@@ -228,5 +303,6 @@ gestorDeProductos.create({
 });
 
 console.log(gestorDeProductos.read());
+
 
 prueba();

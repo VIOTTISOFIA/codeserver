@@ -51,6 +51,7 @@ class UserManager {
       // espero la lectura del archivo y lo guardo en la variable users
       users = JSON.parse(users);
       // parseo
+
       rol && (users = users.filter((each) => each.role === rol));
       // if (users.length === 0) {
       //  si no hay notas
@@ -60,6 +61,7 @@ class UserManager {
     } catch (error) {
       console.log(error);
       throw error;
+
     }
   }
   async readOne(id) {
@@ -67,11 +69,7 @@ class UserManager {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let one = users.find((each) => each.id === id);
-      // if (!one) {
-      //   throw new Error("No existe el usuario");
-      // } else {
       return one;
-      // }
     } catch (error) {
       console.log(error);
       return error;
@@ -104,6 +102,7 @@ class UserManager {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let filtered = users.filter((each) => each.id !== id);
+
       if (users) {
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(filtered);
@@ -113,6 +112,7 @@ class UserManager {
         error.statusCode = 404;
         throw error;
       }
+
     } catch (error) {
       console.log(error);
     }
