@@ -1,6 +1,7 @@
 import fs from "fs";
 import crypto from "crypto";
 
+
 class ProductManager {
   constructor() {
     this.path = "./data/fs/file/Products.json";
@@ -41,6 +42,7 @@ class ProductManager {
       console.error(error);
     }
   }
+
 
   async read(category) {
     try {
@@ -84,9 +86,9 @@ class ProductManager {
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
 
-        console.log(
+
           `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
-        );
+ 
 
         return found;
       }
@@ -169,7 +171,14 @@ async function pruebaAsync() {
     price: 15000,
     stock: 250,
   });
+  await gestorDeProductos.read();
+  //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
+  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
+  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
+}
 
+pruebaAsync ()
   await gestorDeProductos.create({
     title: "Peluche de cebra con sonido",
     category: "jugueteria",
@@ -257,4 +266,4 @@ async function pruebaAsync() {
 //pruebaAsync();
 
 const productManager = new ProductManager();
-export default productManager;
+export default productManager

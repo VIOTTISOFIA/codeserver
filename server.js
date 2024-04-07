@@ -59,8 +59,28 @@ const update = async (req, res) => {
     });
   }
 };
+
+
+const destroy = async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const one = await userManager.destroy(uid);
+    return res.json({
+      statusCode: 200,
+      response: one,
+    });
+  } catch (error) {
+    return res.json({
+      statusCode: error.statusCode || 500,
+      message: error.message || "coder api ERROR",
+    });
+  }
+};
+
 server.post("/api/users", create);
 server.put("/api/users/:uid", update);
+server.delete("/api/users/:uid", destroy);
+
 // otra ruta para leer todos
 // luego mando una consulta para hacer un filtro
 server.get("/api/users", async (req, res) => {
@@ -112,6 +132,7 @@ server.get("/api/users/:uid", async (req, res) => {
   }
 });
 
+
 server.get("/api/products/:pid", async (req, res) => {
   try {
     const { pid } = req.params;
@@ -158,6 +179,7 @@ server.get("/api/users/:id/:role", async (req, res) => {
   }
 });
 
+
 server.get("/api/products/:id/:category", async (req, res) => {
   try {
     const { id, category } = req.params;
@@ -175,3 +197,4 @@ server.get("/api/products/:id/:category", async (req, res) => {
     });
   }
 });
+

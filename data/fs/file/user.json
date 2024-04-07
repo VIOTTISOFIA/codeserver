@@ -18,13 +18,5 @@
     "foto": "celine.jpg",
     "email": "celine@hotmail.com",
     "password": "hola91011",
-    "role": "user"
-  },
-  {
-    "id": "eaf12613a1925c28fe7ddfb9",
-    "foto": "martin.jpg",
-    "email": "martin@hotmail.com",
-    "password": "hola1213",
-    "role": "user"
   }
 ]
