@@ -150,6 +150,6 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-// test();
+//test();
 const userManager = new UserManager();
 export default userManager;

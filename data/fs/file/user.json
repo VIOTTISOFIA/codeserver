@@ -1,22 +1,30 @@
 [
   {
-    "id": "41b66e5db1db023d252bf415",
+    "id": "6c95382850b15ffb41fc3eb7",
     "foto": "sofia.jpg",
     "email": "sofi_04_04@hotmail.com",
     "password": "hola1234",
     "role": "adm"
   },
   {
-    "id": "8ac3ef34536ef0b6e889cc8a",
+    "id": "485d70ab19cf7c915feb4210",
     "foto": "roxana.jpg",
     "email": "roxana@hotmail.com",
     "password": "hola5678",
     "role": "user"
   },
   {
-    "id": "03ea0082c30dff19bafc6e94",
+    "id": "0ae98c95c608b52da44efd8a",
     "foto": "celine.jpg",
     "email": "celine@hotmail.com",
     "password": "hola91011",
+    "role": "user"
+  },
+  {
+    "id": "88f0f9ab3bed119a7557c4c1",
+    "foto": "martin.jpg",
+    "email": "martin@hotmail.com",
+    "password": "hola1213",
+    "role": "user"
   }
 ]
