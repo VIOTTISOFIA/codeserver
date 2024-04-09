@@ -1,6 +1,8 @@
 import express from "express";
 import userManager from "./data/fs/UserManager.fs.js";
 import productManager from "./data/fs/ProductManager.fs.js";
+//import indexRouter from "./src/routers/api/index.router.js";
+
 const server = express();
 const port = 8080;
 const ready = () => console.log("server ready on port" + port);
@@ -9,7 +11,9 @@ server.listen(port, ready);
 
 // middlewares
 server.use(express.urlencoded({ extended: true }));
-server.use(express.json());
+//server.use(express.json());
+
+//server.use("/", indexRouter)
 
 // router
 server.get("/", async (req, res) => {
@@ -27,6 +31,7 @@ server.get("/", async (req, res) => {
   }
 });
 
+/*
 const create = async (req, res) => {
   try {
     const data = req.body;
@@ -80,6 +85,7 @@ const destroy = async (req, res) => {
 server.post("/api/users", create);
 server.put("/api/users/:uid", update);
 server.delete("/api/users/:uid", destroy);
+*/
 
 // otra ruta para leer todos
 // luego mando una consulta para hacer un filtro
@@ -108,6 +114,29 @@ server.get("/api/users", async (req, res) => {
   }
 });
 
+server.get("/api/products", async (req, res) => {
+  try {
+    const { category } = req.query;
+    const all = await productManager.read(category);
+    if (all.length !== 0) {
+      return res.status(200).json({
+        response: all,
+        success: true,
+      });
+    } else {
+      const error = new Error("NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(error.statusCode).json({
+      response: error.message,
+      success: false,
+    });
+  }
+});
+
 //un parametro
 server.get("/api/users/:uid", async (req, res) => {
   try {
@@ -132,7 +161,6 @@ server.get("/api/users/:uid", async (req, res) => {
   }
 });
 
-
 server.get("/api/products/:pid", async (req, res) => {
   try {
     const { pid } = req.params;
@@ -147,7 +175,6 @@ server.get("/api/products/:pid", async (req, res) => {
       error.statusCode = 404;
       throw error;
     }
-    
   } catch (error) {
     console.log(error);
     return res.status(error.statusCode).json({
@@ -179,16 +206,17 @@ server.get("/api/users/:id/:role", async (req, res) => {
   }
 });
 
-
 server.get("/api/products/:id/:category", async (req, res) => {
   try {
     const { id, category } = req.params;
     const data = { id, category };
     const one = await productManager.create(data);
-    return res.status(201).json({
-      response: one,
-      success: true,
-    });
+    if (one) {
+      return res.status(200).json({
+        response: one,
+        success: true,
+      });
+    }
   } catch (error) {
     console.log(error);
     return res.status(error.statusCode).json({

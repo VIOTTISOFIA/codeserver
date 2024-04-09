@@ -1,6 +1,14 @@
 [
   {
-    "id": "02c65e969690649d5a3ab80e",
+    "id": "7d2bdc42a4414c4a77c36d23",
+    "title": "chupete",
+    "photo": "images/package.png",
+    "category": "chupetes",
+    "price": 1500,
+    "stock": 1000
+  },
+  {
+    "id": "907036f5efc426ea02d5bfd1",
     "title": "conjunto enterizo unisex",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -8,7 +16,7 @@
     "stock": 800
   },
   {
-    "id": "75b58ebb205430cb1d678072",
+    "id": "22d683b11316a4e8669af965",
     "title": "porta chupetes",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -16,7 +24,7 @@
     "stock": 15
   },
   {
-    "id": "3299a0ce02a75902c714040a",
+    "id": "ab1d6fc42afeb3ae7bcb6be4",
     "title": "practicuna",
     "photo": "images/package.png",
     "category": "muebles",
@@ -24,7 +32,7 @@
     "stock": 600
   },
   {
-    "id": "342593bece4f6e60c0b1daba",
+    "id": "57b7fcbf570707a314238ed7",
     "title": "pañalera Verona",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -32,7 +40,7 @@
     "stock": 250
   },
   {
-    "id": "18fbc139a04c3a172a1ce33e",
+    "id": "5f7fcc96f70d5ea3d3be12f1",
     "title": "set corta uñas",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -40,7 +48,7 @@
     "stock": 250
   },
   {
-    "id": "f17def9ebac0d89c95ef0d06",
+    "id": "f78aabc3789506816dc865f6",
     "title": "Set toalla y cambiador despues del baño",
     "photo": "images/package.png",
     "category": "accesorios",
@@ -48,7 +56,7 @@
     "stock": 250
   },
   {
-    "id": "44bb21f9017378330b3ca394",
+    "id": "2dba857d5b86c79931704e73",
     "title": "zapatos tejidos Sandia",
     "photo": "images/package.png",
     "category": "calzado",
@@ -56,7 +64,7 @@
     "stock": 250
   },
   {
-    "id": "7869c95fba40de16e6922723",
+    "id": "d0f99f7c57b20cbdbecc3c63",
     "title": "cardigan tejido a mano",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -64,7 +72,7 @@
     "stock": 250
   },
   {
-    "id": "80386f5861dff5eb0b9e2849",
+    "id": "8f66e08f1f29f42bd211f4ce",
     "title": "pijama disfraz de monstruo 6M",
     "photo": "images/package.png",
     "category": "indumentaria",
@@ -72,11 +80,91 @@
     "stock": 250
   },
   {
-    "id": "762c6894bb403dcf3ca3919d",
-    "title": "chupete",
+    "id": "7fb3ca4240602a0cae042937",
+    "title": "Peluche de cebra con sonido",
     "photo": "images/package.png",
-    "category": "chupetes",
-    "price": 1500,
-    "stock": 1000
+    "category": "jugueteria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "91bf8f729348216264d270f1",
+    "title": "Set de herramientas para taller",
+    "photo": "images/package.png",
+    "category": "jugueteria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "d7917b17bccaa2c48dd0ded9",
+    "title": "Bicicleta con rueditas de apoyo",
+    "photo": "images/package.png",
+    "category": "deportes",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "0691362b03bfd27b7a9d42e2",
+    "title": "Casa de muñecas",
+    "photo": "images/package.png",
+    "category": "jugueteria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "90fe0f5c664d9359250e2e4d",
+    "title": "Patines princesas Disney de 4 ruedas",
+    "photo": "images/package.png",
+    "category": "deportes",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "2d98b90d0c989717b2482b9c",
+    "title": "Zapatillas con luces HotWheels",
+    "photo": "images/package.png",
+    "category": "calzado",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "3f6056d706f0e91a9976d87d",
+    "title": "Set de vinchas con brillos",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "7f5d0710e9b2af67eda32bb4",
+    "title": "Camisa manga larga para nene",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "63b95376c63134c4f5b8d8f5",
+    "title": "Pantalon de vestir nene colores surtidos",
+    "photo": "images/package.png",
+    "category": "indumentaria",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "f8636f9104118449447b25cc",
+    "title": "Cinturon de princesas",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
+  },
+  {
+    "id": "0ac63f253213dddb6869b6a4",
+    "title": "Cinturon de MarioBros",
+    "photo": "images/package.png",
+    "category": "accesorios",
+    "price": 15000,
+    "stock": 250
   }
 ]

@@ -1,7 +1,6 @@
 import fs from "fs";
 import crypto from "crypto";
 
-
 class ProductManager {
   constructor() {
     this.path = "./data/fs/file/Products.json";
@@ -43,14 +42,12 @@ class ProductManager {
     }
   }
 
-
   async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      const filtered = allParsed.filter((each) => each.category === category);
-      console.log("Productos obtenidos: ", filtered);
-      return filtered;
+      category && (all = all.filter(each => each.category === category))
+            return all
     } catch (error) {
       console.error("Error al obtener los datos");
       throw error;
@@ -85,15 +82,35 @@ class ProductManager {
         let filtered = allParsed.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-
-
+        console.log(
           `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
- 
-
+        );
         return found;
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error.message);
+      throw error;
+    }
+  }
+
+  async update(id, data) {
+    try {
+      let all = await this.read();
+      let one = all.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        all = JSON.stringify(all, null, 2);
+        await fspromises.writeFile(this.path, all);
+        return one;
+      } else {
+        const error = new Error("NOT FOUND")
+        error.statusCode = 404
+        throw error
+      }
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error.message);
       throw error;
     }
   }
@@ -250,12 +267,12 @@ async function pruebaAsync() {
   });
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
-  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
+  //await gestorDeProductos.destroy("0ac63f253213dddb6869b6a4");
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
 //pruebaAsync();
 
 const productManager = new ProductManager();
-export default productManager
+export default productManager;
