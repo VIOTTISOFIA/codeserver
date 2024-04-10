@@ -1,9 +1,9 @@
-const fs = require("fs");
-const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class ProductManager {
   constructor() {
-    this.path = "./data/fs/file/Products.json";
+    this.path = "./src/data/fs/file/Products.json";
     this.init();
   }
   init() {
@@ -42,12 +42,12 @@ class ProductManager {
     }
   }
 
-  async read() {
+  async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       const allParsed = JSON.parse(all);
-      console.log("Productos obtenidos: ", allParsed);
-      return allParsed;
+      category && (all = all.filter((each) => each.category === category));
+      return all;
     } catch (error) {
       console.error("Error al obtener los datos");
       throw error;
@@ -82,13 +82,35 @@ class ProductManager {
         let filtered = allParsed.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-
-        console.log(`El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`);
-
+        console.log(
+          `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
+        );
         return found;
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error.message);
+      throw error;
+    }
+  }
+
+  async update(id, data) {
+    try {
+      let all = await this.read();
+      let one = all.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        all = JSON.stringify(all, null, 2);
+        await fspromises.writeFile(this.path, all);
+        return one;
+      } else {
+        const error = new Error("NOT FOUND");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error.message);
       throw error;
     }
   }
@@ -167,11 +189,90 @@ async function pruebaAsync() {
     stock: 250,
   });
 
+  await gestorDeProductos.create({
+    title: "Peluche de cebra con sonido",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de herramientas para taller",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Bicicleta con rueditas de apoyo",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Casa de muñecas",
+    category: "jugueteria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Patines princesas Disney de 4 ruedas",
+    category: "deportes",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Zapatillas con luces HotWheels",
+    category: "calzado",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Set de vinchas con brillos",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Camisa manga larga para nene",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Pantalon de vestir nene colores surtidos",
+    category: "indumentaria",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de princesas",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
+
+  await gestorDeProductos.create({
+    title: "Cinturon de MarioBros",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
+  });
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
-  await gestorDeProductos.readOne("a7b0d971c4f1e09334a66f60");
-  await gestorDeProductos.destroy("a7b0d971c4f1e09334a66f60");
+  //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
+  //await gestorDeProductos.destroy("0ac63f253213dddb6869b6a4");
   //await gestorDeProductos.destroy("80047a"); - Esta linea nos genera un error al no existir este producto en el JSON
 }
 
-pruebaAsync();
+//pruebaAsync();
+
+const productManager = new ProductManager();
+export default productManager;
