@@ -1,30 +1,47 @@
+<<<<<<< HEAD
+[
+  {
+    "id": "6c95382850b15ffb41fc3eb7",
+=======
 
 [
   {
 
     "id": "950ffdebf54f79300a3c7328",
+>>>>>>> dev
     "foto": "sofia.jpg",
     "email": "sofi_04_04@hotmail.com",
     "password": "hola1234",
     "role": "adm"
   },
   {
+<<<<<<< HEAD
+    "id": "485d70ab19cf7c915feb4210",
+=======
 
     "id": "e892b85c163f450793d1e7b8",
+>>>>>>> dev
     "foto": "roxana.jpg",
     "email": "roxana@hotmail.com",
     "password": "hola5678",
     "role": "user"
   },
   {
+<<<<<<< HEAD
+    "id": "0ae98c95c608b52da44efd8a",
+=======
 
     "id": "d859625727731352c38f6145",
+>>>>>>> dev
     "foto": "celine.jpg",
     "email": "celine@hotmail.com",
     "password": "hola91011",
     "role": "user"
   },
   {
+<<<<<<< HEAD
+    "id": "88f0f9ab3bed119a7557c4c1",
+=======
 
     "id": "3dffd1e81372c410722c554b",
     "foto": "martin.jpg",
@@ -197,10 +214,15 @@
   },
   {
     "id": "694447c1e6063a93d66075bd",
+>>>>>>> dev
     "foto": "martin.jpg",
     "email": "martin@hotmail.com",
     "password": "hola1213",
     "role": "user"
   }
+<<<<<<< HEAD
+]
+=======
 ]
 
+>>>>>>> dev
