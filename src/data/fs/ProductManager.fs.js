@@ -18,16 +18,16 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if (!data.title || !data.category || !data.price || !data.stock) {
+      if ( !data.title ) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
           photo: data.photo || "images/package.png",
-          category: data.category,
-          price: data.price,
-          stock: data.stock,
+          category: data.category || "NOT DEFINED",
+          price: data.price || "1",
+          stock: data.stock || "1",
         };
 
         let products = await fs.promises.readFile(this.path, "utf-8");
@@ -45,7 +45,7 @@ class ProductManager {
   async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
+      all = JSON.parse(all);
       category && (all = all.filter((each) => each.category === category));
       return all;
     } catch (error) {
@@ -57,15 +57,13 @@ class ProductManager {
   async readOne(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
-      const found = allParsed.find((product) => product.id === id);
+      all = JSON.parse(all);
+      let found = all.find((product) => product.id === id);
       if (!found) {
         throw new Error("El producto que buscas no existe.");
-      } else {
-        console.log(found);
-        return found;
       }
-    } catch (error) {
+        return found;
+      } catch (error) {
       console.error("Error al leer el producto:", error.message);
       throw error;
     }
@@ -96,7 +94,8 @@ class ProductManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((each) => each.id === id);
+      all = JSON.parse(all);
+      let one = all.find((product) => product.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -260,11 +259,82 @@ async function pruebaAsync() {
   });
 
   await gestorDeProductos.create({
-    title: "Cinturon de MarioBros",
-    category: "accesorios",
-    price: 15000,
-    stock: 250,
+    title: "Buzo talle 2 Frozen"
   });
+
+  await gestorDeProductos.create({
+    title: "Muñeco Buzz Lightyear con sonido"
+  });
+
+  await gestorDeProductos.create({
+    title: "Remera talle 4 F1 Ferrari"
+  });
+
+  await gestorDeProductos.create({
+    title: "Conjunto talle 3 AFA"
+  });
+
+  await gestorDeProductos.create({
+    title: "Vestido con lazos de fiesta talle 2"
+  });
+
+  await gestorDeProductos.create({
+    title: "Sandalias rosas para nena"
+  });
+
+  await gestorDeProductos.create({
+    title: "Coche Carestino reclinable a 3 niveles"
+  });
+
+  await gestorDeProductos.create({
+    title: "Asiento elevador Carestino para niños"
+  });
+
+  await gestorDeProductos.create({
+    title: "Butaca de viaje Carestino con giro 360°"
+  });
+
+  await gestorDeProductos.create({
+    title: "Sillita mecedora Carestino para siestas"
+  });
+
+  await gestorDeProductos.create({
+    title: "Sacaleche electrico con mamadera"
+  });
+
+  await gestorDeProductos.create({
+    title: "Mamadera Avent 12onz"
+  });
+
+  await gestorDeProductos.create({
+    title: "Bañera plegable con soporte para Recien nacidos"
+  });
+
+  await gestorDeProductos.create({
+    title: "Silla de comedor con juguete unisex"
+  });
+
+  await gestorDeProductos.create({
+    title: "xCombo mosquitero + protector de lluvia para cochecitos"
+  });
+
+  await gestorDeProductos.create({
+    title: "Cochecito SMARTDUO Carestino"
+  });
+
+  await gestorDeProductos.create({
+    title: "Mochila portabebes"
+  });
+
+  await gestorDeProductos.create({
+    title: "Gimnasio didactico multifuncion"
+  });
+
+  await gestorDeProductos.create({
+    title: "Mecedor de caballito de madera"
+  });
+
+  
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");

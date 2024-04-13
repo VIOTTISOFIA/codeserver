@@ -139,6 +139,82 @@ function prueba() {
     stock: 250,
   });
 
+  gestorDeProductos.create({
+    title: "Buzo talle 2 Frozen"
+  });
+
+  gestorDeProductos.create({
+    title: "Muñeco Buzz Lightyear con sonido"
+  });
+
+  gestorDeProductos.create({
+    title: "Remera talle 4 F1 Ferrari"
+  });
+
+  gestorDeProductos.create({
+    title: "Conjunto talle 3 AFA"
+  });
+
+  gestorDeProductos.create({
+    title: "Vestido con lazos de fiesta talle 2"
+  });
+
+  gestorDeProductos.create({
+    title: "Sandalias rosas para nena"
+  });
+
+  gestorDeProductos.create({
+    title: "Coche Carestino reclinable a 3 niveles"
+  });
+
+  gestorDeProductos.create({
+    title: "Asiento elevador Carestino para niños"
+  });
+
+  gestorDeProductos.create({
+    title: "Butaca de viaje Carestino con giro 360°"
+  });
+
+  gestorDeProductos.create({
+    title: "Sillita mecedora Carestino para siestas"
+  });
+
+  gestorDeProductos.create({
+    title: "Sacaleche electrico con mamadera"
+  });
+
+  gestorDeProductos.create({
+    title: "Mamadera Avent 12onz"
+  });
+
+  gestorDeProductos.create({
+    title: "Bañera plegable con soporte para Recien nacidos"
+  });
+
+  gestorDeProductos.create({
+    title: "Silla de comedor con juguete unisex"
+  });
+
+  gestorDeProductos.create({
+    title: "xCombo mosquitero + protector de lluvia para cochecitos"
+  });
+
+  gestorDeProductos.create({
+    title: "Cochecito SMARTDUO Carestino"
+  });
+
+  gestorDeProductos.create({
+    title: "Mochila portabebes"
+  });
+
+  gestorDeProductos.create({
+    title: "Gimnasio didactico multifuncion"
+  });
+
+  gestorDeProductos.create({
+    title: "Mecedor de caballito de madera"
+  });
+
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
 
