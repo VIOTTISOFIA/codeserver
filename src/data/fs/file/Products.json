@@ -318,5 +318,21 @@
     "category": "NOT DEFINED",
     "price": "1",
     "stock": "1"
+  },
+  {
+    "id": "763812a6aab0368d13512fe6",
+    "title": "primer producto desde postman",
+    "photo": "images/package.png",
+    "category": "NOT DEFINED",
+    "price": "1",
+    "stock": "1"
+  },
+  {
+    "id": "875ce06356b791344ab3d063",
+    "title": "producto modificado",
+    "photo": "images/package.png",
+    "category": "prueba postman",
+    "price": "1",
+    "stock": "1"
   }
 ]

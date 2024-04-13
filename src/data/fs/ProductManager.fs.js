@@ -18,7 +18,7 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if ( !data.title ) {
+      if (!data.title) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
         const product = {
@@ -36,9 +36,11 @@ class ProductManager {
         console.log("Producto creado");
         products = JSON.stringify(products, null, 2);
         await fs.promises.writeFile(this.path, products);
+        return product;
       }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 
@@ -62,8 +64,8 @@ class ProductManager {
       if (!found) {
         throw new Error("El producto que buscas no existe.");
       }
-        return found;
-      } catch (error) {
+      return found;
+    } catch (error) {
       console.error("Error al leer el producto:", error.message);
       throw error;
     }
@@ -72,21 +74,19 @@ class ProductManager {
   async destroy(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      const allParsed = JSON.parse(all);
-      const found = allParsed.find((each) => each.id === id);
-      if (!found) {
-        throw new Error("Producto no encontrado.");
+      all = JSON.parse(all);
+      const one = all.find((product) => product.id === id);
+      if (!one) {
+        throw new Error("Product not found");
       } else {
-        let filtered = allParsed.filter((each) => each.id !== id);
+        let filtered = all.filter((product) => product.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-        console.log(
-          `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
-        );
-        return found;
+        console.log(`El producto con ID "${id}" fue encontrado y eliminado satisfactoriamente`);
+        return one;
       }
     } catch (error) {
-      console.error("Error al eliminar el producto:", error.message);
+      console.error("Error al eliminar el producto:", error);
       throw error;
     }
   }
@@ -94,14 +94,13 @@ class ProductManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      all = JSON.parse(all);
       let one = all.find((product) => product.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
         }
         all = JSON.stringify(all, null, 2);
-        await fspromises.writeFile(this.path, all);
+        await fs.promises.writeFile(this.path, all);
         return one;
       } else {
         const error = new Error("NOT FOUND");
@@ -259,82 +258,81 @@ async function pruebaAsync() {
   });
 
   await gestorDeProductos.create({
-    title: "Buzo talle 2 Frozen"
+    title: "Buzo talle 2 Frozen",
   });
 
   await gestorDeProductos.create({
-    title: "Muñeco Buzz Lightyear con sonido"
+    title: "Muñeco Buzz Lightyear con sonido",
   });
 
   await gestorDeProductos.create({
-    title: "Remera talle 4 F1 Ferrari"
+    title: "Remera talle 4 F1 Ferrari",
   });
 
   await gestorDeProductos.create({
-    title: "Conjunto talle 3 AFA"
+    title: "Conjunto talle 3 AFA",
   });
 
   await gestorDeProductos.create({
-    title: "Vestido con lazos de fiesta talle 2"
+    title: "Vestido con lazos de fiesta talle 2",
   });
 
   await gestorDeProductos.create({
-    title: "Sandalias rosas para nena"
+    title: "Sandalias rosas para nena",
   });
 
   await gestorDeProductos.create({
-    title: "Coche Carestino reclinable a 3 niveles"
+    title: "Coche Carestino reclinable a 3 niveles",
   });
 
   await gestorDeProductos.create({
-    title: "Asiento elevador Carestino para niños"
+    title: "Asiento elevador Carestino para niños",
   });
 
   await gestorDeProductos.create({
-    title: "Butaca de viaje Carestino con giro 360°"
+    title: "Butaca de viaje Carestino con giro 360°",
   });
 
   await gestorDeProductos.create({
-    title: "Sillita mecedora Carestino para siestas"
+    title: "Sillita mecedora Carestino para siestas",
   });
 
   await gestorDeProductos.create({
-    title: "Sacaleche electrico con mamadera"
+    title: "Sacaleche electrico con mamadera",
   });
 
   await gestorDeProductos.create({
-    title: "Mamadera Avent 12onz"
+    title: "Mamadera Avent 12onz",
   });
 
   await gestorDeProductos.create({
-    title: "Bañera plegable con soporte para Recien nacidos"
+    title: "Bañera plegable con soporte para Recien nacidos",
   });
 
   await gestorDeProductos.create({
-    title: "Silla de comedor con juguete unisex"
+    title: "Silla de comedor con juguete unisex",
   });
 
   await gestorDeProductos.create({
-    title: "xCombo mosquitero + protector de lluvia para cochecitos"
+    title: "xCombo mosquitero + protector de lluvia para cochecitos",
   });
 
   await gestorDeProductos.create({
-    title: "Cochecito SMARTDUO Carestino"
+    title: "Cochecito SMARTDUO Carestino",
   });
 
   await gestorDeProductos.create({
-    title: "Mochila portabebes"
+    title: "Mochila portabebes",
   });
 
   await gestorDeProductos.create({
-    title: "Gimnasio didactico multifuncion"
+    title: "Gimnasio didactico multifuncion",
   });
 
   await gestorDeProductos.create({
-    title: "Mecedor de caballito de madera"
+    title: "Mecedor de caballito de madera",
   });
 
-  
   await gestorDeProductos.read();
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
