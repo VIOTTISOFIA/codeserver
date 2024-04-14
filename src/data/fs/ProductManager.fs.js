@@ -18,7 +18,7 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if (!data.title) {
+      if ( !data.title ) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
         const product = {
@@ -112,8 +112,8 @@ class ProductManager {
       throw error;
     }
   }
-}
 
+}
 async function pruebaAsync() {
   const gestorDeProductos = new ProductManager();
 
