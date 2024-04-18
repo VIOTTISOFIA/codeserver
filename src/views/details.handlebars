@@ -1,1 +1,12 @@
-<h1>DETAIL OF PRODUCT: {{product.id}} </h1>
+{{#if product.id}}
+
+  <h1>DETAIL OF PRODUCT: {{product.id}} </h1>
+  <p> {{product.title}} </p>
+  <p> {{product.category}} </p>
+  
+{{else}}
+  <h1>NOT FOUND PRODUCT</h1>
+{{/if}}
+
+
+{{!-- verificar porque no mantiene la vista y no arroja el h1 del else --}}
