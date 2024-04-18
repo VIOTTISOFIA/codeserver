@@ -23,9 +23,9 @@ server.set("views", __dirname + "/src/views");
 // middlewares
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+server.use(morgan('dev'));
 
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);
-server.use(morgan('dev'));
