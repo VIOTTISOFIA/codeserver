@@ -17,22 +17,23 @@ class UserManager {
     }
   }
 
+  //VERIFICAR CON POSTMAN ESTE METODO Y CORREGIR PROPIEDAD ID QUE ARROJA 'UNDEFINED'
   async create(data) {
     try {
       const user = {
         id: crypto.randomBytes(12).toString("hex"),
-        foto: data.foto || "https://www.pngplay.com/image/325510",
+        foto: data.foto || "https://i.postimg.cc/wTgNFWhR/profile.png",
         email: data.email,
         password: data.password,
-        role: data.role,
+        role: data.role || "0",
       };
 
-      if (!data.email || !data.password || !data.role) {
+      if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
-        // creo el objeto con los datos de la nota
+        // creo el objeto con los datos del usuario
         let users = await fs.promises.readFile(this.path, "utf-8");
-        // espero la lectura del archivo y lo guardo en la variable all
+        // espero la lectura del archivo y lo guardo en la variable users
         users = JSON.parse(users);
         // parseo
         users.push(user);
@@ -40,6 +41,7 @@ class UserManager {
         console.log("usuario creado");
         users = JSON.stringify(users, null, 2);
         await fs.promises.writeFile(this.path, users);
+        return user;
       }
     } catch (error) {
       console.log(error);
@@ -52,11 +54,7 @@ class UserManager {
       users = JSON.parse(users);
       // parseo
       rol && (users = users.filter((each) => each.role === rol));
-      // if (users.length === 0) {
-      //  si no hay notas
-      // throw new Error("no hay usuarios");
       return users;
-      // } else {
     } catch (error) {
       console.log(error);
       throw error;
@@ -67,11 +65,7 @@ class UserManager {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let one = users.find((each) => each.id === id);
-      // if (!one) {
-      //   throw new Error("No existe el usuario");
-      // } else {
       return one;
-      // }
     } catch (error) {
       console.log(error);
       return error;
@@ -99,6 +93,7 @@ class UserManager {
     }
   }
 
+  //CORREGIR FUNCION DESTROY EN FUNCIONALIDAD Y AGREGAR CONSOLE.LOG CON EL OBJETO COMO RESPUESTA DEL USUARIO ELIMINADO
   async destroy(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
@@ -124,25 +119,21 @@ const User = new UserManager();
 async function test() {
   const gestorDeUsuarios = new UserManager();
   await gestorDeUsuarios.create({
-    foto: "sofia.jpg",
     email: "sofi_04_04@hotmail.com",
     password: "hola1234",
     role: "adm",
   });
   await gestorDeUsuarios.create({
-    foto: "roxana.jpg",
     email: "roxana@hotmail.com",
     password: "hola5678",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "celine.jpg",
     email: "celine@hotmail.com",
     password: "hola91011",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "martin.jpg",
     email: "martin@hotmail.com",
     password: "hola1213",
     role: "user",
@@ -150,6 +141,8 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-// test();
+//test();
 const userManager = new UserManager();
 export default userManager;
+
+//CORREGIR RUTAS MARCADAS PARA MEJOR FUNCIONAMIENTO DEL MANAGER

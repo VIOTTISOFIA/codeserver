@@ -66,6 +66,31 @@ class ProductManager {
   }
 }
 
+/* 
+DEBO HACER QUE ESTA FUNCION UPDATE SEA DE TIPO MEMORY SIN ASINCRONISMO NI FS
+
+update(id, data) {
+  try {
+    let all = await this.read();
+    let one = all.find((product) => product.id === id);
+    if (one) {
+      for (let prop in data) {
+        one[prop] = data[prop];
+      }
+      all = JSON.stringify(all, null, 2);
+      await fs.promises.writeFile(this.path, all);
+      return one;
+    } else {
+      const error = new Error("NOT FOUND");
+      error.statusCode = 404;
+      throw error;
+    }
+  } catch (error) {
+    console.error("Error al actualizar el producto:", error.message);
+    throw error;
+  }
+} */
+
 function prueba() {
   const gestorDeProductos = new ProductManager();
 

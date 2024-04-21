@@ -13,4 +13,11 @@ viewsRouter.get("/home", (req, res, next) => {
     return next(error);
   }
 });
+viewsRouter.get("/", (req, res, next) => {
+  try {
+  return res.render("products", { title: "PRODUCTS" } );
+  } catch (error) {
+    return next(error);
+  }
+});
 export default viewsRouter;
