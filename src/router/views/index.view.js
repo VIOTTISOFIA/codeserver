@@ -6,7 +6,7 @@ const viewsRouter = Router();
 
 viewsRouter.use("/products", productsRouter);
 viewsRouter.use("/users", usersRouter);
-viewsRouter.get("/home", (req, res, next) => {
+viewsRouter.get("/", (req, res, next) => {
   try {
   return res.render("index", { title: "HOME" } );
   } catch (error) {
@@ -20,4 +20,14 @@ viewsRouter.get("/", (req, res, next) => {
     return next(error);
   }
 });
+
+viewsRouter.get("/real", (req, res, next) => {
+  try {
+    return res.render("real", {title: "PRODUCTS"})
+  } catch (error) {
+    return next(error)
+  }
+})
+
+
 export default viewsRouter;
