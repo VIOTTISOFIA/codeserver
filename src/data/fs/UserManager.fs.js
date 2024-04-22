@@ -19,17 +19,16 @@ class UserManager {
 
   async create(data) {
     try {
-      const user = {
-        id: crypto.randomBytes(12).toString("hex"),
-        foto: data.foto || "https://www.pngplay.com/image/325510",
-        email: data.email,
-        password: data.password,
-        role: data.role,
-      };
-
-      if (!data.email || !data.password || !data.role) {
+      if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
+        const user = {
+          id: crypto.randomBytes(12).toString("hex"),
+          foto: data.photo || "https://www.pngplay.com/image/325510",
+          email: data.email,
+          password: data.password,
+          role: data.role,
+        };
         // creo el objeto con los datos de la nota
         let users = await fs.promises.readFile(this.path, "utf-8");
         // espero la lectura del archivo y lo guardo en la variable all
@@ -40,54 +39,56 @@ class UserManager {
         console.log("usuario creado");
         users = JSON.stringify(users, null, 2);
         await fs.promises.writeFile(this.path, users);
+        return user;
       }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async read(rol) {
-    try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
-      // espero la lectura del archivo y lo guardo en la variable users
-      users = JSON.parse(users);
-      // parseo
-      rol && (users = users.filter((each) => each.role === rol));
-      // if (users.length === 0) {
-      //  si no hay notas
-      // throw new Error("no hay usuarios");
-      return users;
-      // } else {
     } catch (error) {
       console.log(error);
       throw error;
     }
   }
+  async read(role) {
+    try {
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      // espero la lectura del archivo y lo guardo en la variable users
+      all = JSON.parse(all);
+      // parseo
+      role && (all = all.filter((each) => each.role === role));
+      // if (users.length === 0) {
+      //  si no hay notas
+      // throw new Error("no hay usuarios");
+      return all;
+      // } else {
+    } catch (error) {
+      console.log("error al obtener los datos");
+      throw error;
+    }
+  }
   async readOne(id) {
     try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
-      users = JSON.parse(users);
-      let one = users.find((each) => each.id === id);
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      all = JSON.parse(all);
+      let found = all.find((user) => user.id === id);
       // if (!one) {
       //   throw new Error("No existe el usuario");
       // } else {
-      return one;
+      return found;
       // }
     } catch (error) {
-      console.log(error);
+      console.log("error al leer el usuario:", error.message);
       return error;
     }
   }
 
   async update(id, data) {
     try {
-      let users = await this.read();
-      let one = users.find((each) => each.id === id);
+      let all = await this.read();
+      let one = all.find((each) => each.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
         }
-        users = JSON.stringify(users, null, 2);
-        await fs.promises.writeFile(this.path, users);
+        all = JSON.stringify(all, null, 2);
+        await fs.promises.writeFile(this.path, all);
         return one;
       } else {
         const error = new Error("not found!");
@@ -101,20 +102,23 @@ class UserManager {
 
   async destroy(id) {
     try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
-      users = JSON.parse(users);
-      let filtered = users.filter((each) => each.id !== id);
-      if (users) {
-        filtered = JSON.stringify(filtered, null, 2);
-        await fs.promises.writeFile(filtered);
-        return users;
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      all = JSON.parse(all);
+      const one = all.find((user) => user.id === id);
+      if (!one) {
+        throw new Error("User not found");
       } else {
-        const error = new Error("not found!");
-        error.statusCode = 404;
-        throw error;
+        let filtered = all.filter((user) => user.id !== id);
+        filtered = JSON.stringify(filtered, null, 2);
+        await fs.promises.writeFile(this.path, filtered);
+        console.log(
+          `El user con ID "${id}" fue encontrado y eliminado satisfactoriamente`
+        );
+        return one;
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error al eliminar el producto:", error);
+      throw error;
     }
   }
 }
@@ -124,25 +128,25 @@ const User = new UserManager();
 async function test() {
   const gestorDeUsuarios = new UserManager();
   await gestorDeUsuarios.create({
-    foto: "sofia.jpg",
+    photo: "sofia.jpg",
     email: "sofi_04_04@hotmail.com",
     password: "hola1234",
     role: "adm",
   });
   await gestorDeUsuarios.create({
-    foto: "roxana.jpg",
+    photo: "roxana.jpg",
     email: "roxana@hotmail.com",
     password: "hola5678",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "celine.jpg",
+    photo: "celine.jpg",
     email: "celine@hotmail.com",
     password: "hola91011",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "martin.jpg",
+    photo: "martin.jpg",
     email: "martin@hotmail.com",
     password: "hola1213",
     role: "user",
