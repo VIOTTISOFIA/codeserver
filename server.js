@@ -10,6 +10,7 @@ import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
 
+// http server
 const server = express();
 const port = 8080;
 const ready = () => console.log("server ready on port" + port);

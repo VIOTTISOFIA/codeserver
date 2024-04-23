@@ -17,21 +17,19 @@ class UserManager {
     }
   }
 
-  //VERIFICAR CON POSTMAN ESTE METODO Y CORREGIR PROPIEDAD ID QUE ARROJA 'UNDEFINED'
   async create(data) {
     try {
-      const user = {
-        id: crypto.randomBytes(12).toString("hex"),
-        foto: data.foto || "https://i.postimg.cc/wTgNFWhR/profile.png",
-        email: data.email,
-        password: data.password,
-        role: data.role || "0",
-      };
-
       if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
-        // creo el objeto con los datos del usuario
+        const user = {
+          id: crypto.randomBytes(12).toString("hex"),
+          foto: data.photo || "https://www.pngplay.com/image/325510",
+          email: data.email,
+          password: data.password,
+          role: data.role,
+        };
+        // creo el objeto con los datos de la nota
         let users = await fs.promises.readFile(this.path, "utf-8");
         // espero la lectura del archivo y lo guardo en la variable users
         users = JSON.parse(users);
@@ -45,18 +43,19 @@ class UserManager {
       }
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
-  async read(rol) {
+  async read(role) {
     try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
+      let all = await fs.promises.readFile(this.path, "utf-8");
       // espero la lectura del archivo y lo guardo en la variable users
-      users = JSON.parse(users);
+      all = JSON.parse(all);
       // parseo
-      rol && (users = users.filter((each) => each.role === rol));
-      return users;
+      role && (all = all.filter((each) => each.role === role));
+      return all;
     } catch (error) {
-      console.log(error);
+      console.log("error al obtener los datos");
       throw error;
     }
   }
@@ -67,21 +66,21 @@ class UserManager {
       let one = users.find((each) => each.id === id);
       return one;
     } catch (error) {
-      console.log(error);
+      console.log("error al leer el usuario:", error.message);
       return error;
     }
   }
 
   async update(id, data) {
     try {
-      let users = await this.read();
-      let one = users.find((each) => each.id === id);
+      let all = await this.read();
+      let one = all.find((each) => each.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
         }
-        users = JSON.stringify(users, null, 2);
-        await fs.promises.writeFile(this.path, users);
+        all = JSON.stringify(all, null, 2);
+        await fs.promises.writeFile(this.path, all);
         return one;
       } else {
         const error = new Error("not found!");
@@ -93,23 +92,25 @@ class UserManager {
     }
   }
 
-  //CORREGIR FUNCION DESTROY EN FUNCIONALIDAD Y AGREGAR CONSOLE.LOG CON EL OBJETO COMO RESPUESTA DEL USUARIO ELIMINADO
   async destroy(id) {
     try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
-      users = JSON.parse(users);
-      let filtered = users.filter((each) => each.id !== id);
-      if (users) {
-        filtered = JSON.stringify(filtered, null, 2);
-        await fs.promises.writeFile(filtered);
-        return users;
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      all = JSON.parse(all);
+      const one = all.find((user) => user.id === id);
+      if (!one) {
+        throw new Error("User not found");
       } else {
-        const error = new Error("not found!");
-        error.statusCode = 404;
-        throw error;
+        let filtered = all.filter((user) => user.id !== id);
+        filtered = JSON.stringify(filtered, null, 2);
+        await fs.promises.writeFile(this.path, filtered);
+        console.log(
+          `El user con ID "${id}" fue encontrado y eliminado satisfactoriamente`
+        );
+        return one;
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error al eliminar el producto:", error);
+      throw error;
     }
   }
 }
@@ -144,5 +145,3 @@ async function test() {
 //test();
 const userManager = new UserManager();
 export default userManager;
-
-//CORREGIR RUTAS MARCADAS PARA MEJOR FUNCIONAMIENTO DEL MANAGER

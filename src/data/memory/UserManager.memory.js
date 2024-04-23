@@ -7,16 +7,14 @@ class UserManager {
     try {
       const user = {
         id: crypto.randomBytes(12).toString("hex"),
-        foto: data.foto || "https://www.pngplay.com/image/325510",
+        photo: data.photo || "https://www.pngplay.com/image/325510",
         email: data.email,
         password: data.password,
         role: data.role,
       };
 
-      if (!data.email || !data.password || !data.role) {
-
+      if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
-
       } else {
         UserManager.#users.push(user);
       }
@@ -48,6 +46,28 @@ class UserManager {
       console.log(error);
     }
   }
+
+  update(id, data) {
+    try {
+      let all = this.read();
+      let one = all.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        all = JSON.stringify(all, null, 2);
+        fs.promises.writeFile(this.path, all);
+        return one;
+      } else {
+        const error = new Error("not found!");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      throw Error;
+    }
+  }
+
   destroy(id) {
     try {
       this.readOne(id);
@@ -62,25 +82,25 @@ class UserManager {
 
 const gestorDeUsuarios = new UserManager();
 gestorDeUsuarios.create({
-  foto: "sofia.jpg",
+  photo: "sofia.jpg",
   email: "sofi_04_04@hotmail.com",
   password: "hola1234",
   role: "adm",
 });
 gestorDeUsuarios.create({
-  foto: "roxana.jpg",
+  photo: "roxana.jpg",
   email: "roxana@hotmail.com",
   password: "hola5678",
   role: "user",
 });
 gestorDeUsuarios.create({
-  foto: "celine.jpg",
+  photo: "celine.jpg",
   email: "celine@hotmail.com",
   password: "hola91011",
   role: "user",
 });
 gestorDeUsuarios.create({
-  foto: "martin.jpg",
+  photo: "martin.jpg",
   email: "martin@hotmail.com",
   password: "hola1213",
   role: "user",
