@@ -55,8 +55,6 @@ class UserManager {
         for (let prop in data) {
           one[prop] = data[prop];
         }
-        all = JSON.stringify(all, null, 2);
-        fs.promises.writeFile(this.path, all);
         return one;
       } else {
         const error = new Error("not found!");
@@ -64,6 +62,7 @@ class UserManager {
         throw error;
       }
     } catch (error) {
+      console.error("Error al actualizar el usuario:", error.message);
       throw Error;
     }
   }
