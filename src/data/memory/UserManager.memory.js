@@ -58,7 +58,27 @@ class UserManager {
       console.log(error);
     }
   }
+
+  update(id, data) {
+    try {
+      let one = UserManager.#users.find((each) => each.id !== id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        return one;
+      } else {
+        const error = new Error("not found!");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      console.error("Error al actualizar el usuario:", error.message);
+      throw Error;
+    }
+  }
 }
+
 
 const gestorDeUsuarios = new UserManager();
 gestorDeUsuarios.create({
