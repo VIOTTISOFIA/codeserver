@@ -1,0 +1,52 @@
+ <h1 class="text-center bg-success-subtle p-2 text-dark-emphasis bg-opacity-25 fst-italic">The Baby's Shop</h1>
+
+<section>
+<article class="w-75 align-items-center d-flex flex-column">
+    <h2 class="text-center">REGISTER FORM!</h2>
+
+    <form class="d-flex flex-column w-50 ">
+        <input class="m-2" type="text" name="photo" id="photo" placeholder="PHOTO">
+        <input class="m-2" type="title" name="title" id="title" placeholder="TITLE">
+        <input class="m-2" type="category" name="category" id="category" placeholder="CATEGORY">
+        <input class="m-2" type="price" name="price" id="price" placeholder="PRICE">
+        <input class="m-2" type="stock" name="stock" id="stock" placeholder="STOCK">
+        <input class="m-2" type="button" id="register" value="REGISTER!">
+    </form>
+    </article>
+<article id = "products" class="d-flex flex-wrap w-50"></article>
+</section>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<script>
+ const socket = io();
+ socket.on("products", data => {
+ console.log(data)
+ let template = ``
+template = data.map(each => `
+    <div class="card" style="width: 18rem;">
+            <img src="${each.photo}" class="card-img-top" alt="${each.id}">
+        <div class="card-body">
+                <h5 class="card-title"> ${each.title} </h5>
+                <p class="card-text">Category: ${each.category} </p>
+            <div class="card-body d-flex justify-content-around">
+                <strong class="card-text">Price: ${each.price} </strong>
+                <strong class="card-text">Stock: ${each.stock} </strong>
+            </div>  
+        </div>
+    </div>
+`
+).join("")
+   document.querySelector("#products").innerHTML = template
+  })
+  document.querySelector("#register").addEventListener("click", (event) => {
+   let photo = document.querySelector("#photo").value
+   let title = document.querySelector("#title").value
+   let category = document.querySelector("#category").value
+   let price = document.querySelector("#price").value
+   let stock = document.querySelector("#stock").value
+   console.log({ photo, title, category, price, stock })
+   socket.emit("register", { photo, title, category, price, stock })
+  })
+</script>
+    
