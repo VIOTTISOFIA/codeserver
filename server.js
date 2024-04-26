@@ -22,6 +22,7 @@ nodeServer.listen(port, ready);
 const socketServer = new Server(nodeServer);
 // creo un servidor de TCP, construyendo una instancia del servidor de socketServer, pasando como base el servidor de node
 socketServer.on("connection", socketCb);
+export { socketServer };
 
 server.engine("handlebars", engine());
 server.set("view engine", "handlebars");
@@ -29,6 +30,7 @@ server.set("views", __dirname + "/src/views");
 
 // middlewares
 server.use(express.urlencoded({ extended: true }));
+server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
 
