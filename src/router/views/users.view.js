@@ -1,15 +1,15 @@
 import { Router } from "express";
-import usersManager from "../../data/fs/UserManager.fs.js";
+import userManager from "../../data/fs/UserManager.fs.js";
 
 const usersRouter = Router();
 
-// usersRouter.get("/real", async (req, res, next) => {
-//   try {
-//     return res.render("real", { title: "REAL" });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
+usersRouter.get("/real", async (req, res, next) => {
+  try {
+    return res.render("real", { title: "REAL" });
+  } catch (error) {
+    return next(error);
+  }
+});
 usersRouter.get("/register", async (req, res, next) => {
   try {
     return res.render("register", { title: "REGISTER" });
@@ -27,8 +27,8 @@ usersRouter.get("/register", async (req, res, next) => {
 usersRouter.get("/:uid", async (req, res, next) => {
   try {
     const { uid } = req.params;
-    const profile = await usersManager.readOne(uid);
-    return res.render("profile", { title: "PROFILE" });
+    const profile = await userManager.readOne(uid);
+    return res.render("profile", { title: "REAL", profile });
   } catch (error) {
     return next(error);
   }
