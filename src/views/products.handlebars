@@ -1,0 +1,19 @@
+
+<main class="d-flex flex-column align-items-center w-100 flex-grow-1">
+    <h1 class="bg-success-subtle p-2 text-center w-100 fst-italic text-dark-emphasis"> PRODUCTS </h1>
+    <section class="text-center m-3 w-100 d-flex d-flex flex-wrap justify-content-center gap-3">
+        {{#each products}}
+        <div class="card" style="width: 18rem;">
+            <img src="{{this.photo}}" class="card-img-top" alt="{{this.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{this.title}}</h5>
+                <p class="card-text">Category: {{this.category}}</p>
+                <div class="card-body d-flex justify-content-around">
+                    <strong class="card-text">Price: {{this.price}}</strong>
+                    <strong class="card-text">Stock: {{this.stock}}</strong>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+</main>
