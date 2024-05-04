@@ -5,11 +5,12 @@ const collection = "products";
 const schema = new Schema(
   {
     title: { type: String, required: true },
-    photo: { type: String, default: "COLOCAR RUTA DE LAS IMAGENES"},
+    photo: { type: String, default: "https://i.postimg.cc/pVcL6v4t/package.png"},
     category: {
       type: String,
       default: "Not defined",
       enum: [
+        "Not defined",
         "Accesorios",
         "Indumentaria",
         "Muebles",
@@ -18,8 +19,8 @@ const schema = new Schema(
         "Deportes",
       ],
     },
-    price: { type: Number },
-    stock: { type: Number },
+    price: { type: Number, default: "1" },
+    stock: { type: Number, default: "1" },
   },
   {
     timestamps: true,
