@@ -66,6 +66,7 @@ class ProductManager {
 
   update(id, data) {
     try {
+      this.readOne(id);
       const one = ProductManager.#products.find((product) => product.id === id);
       if (one) {
         for (let prop in data) {
