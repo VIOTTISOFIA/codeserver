@@ -19,9 +19,8 @@ class CartsManager {
 
   async create(data) {
     try {
+      let cart;
       if (!cart) {
-        throw new Error("Not found!");
-      } else {
         const cart = {
           user_id: crypto.randomBytes(12).toString("hex"),
           product_id: crypto.randomBytes(12).toString("hex"),
@@ -35,7 +34,9 @@ class CartsManager {
         console.log("Created");
         carts = JSON.stringify(carts, null, 2);
         await fs.promises.writeFile(this.path, carts);
-        return product;
+        return cart;
+      } else {
+        throw new Error("Not found!");
       }
     } catch (error) {
       console.log(error);
@@ -114,4 +115,40 @@ class CartsManager {
   }
 }
 
-//ARMAR FUNCION TEST PARA PROBAR LOS METODOS DE LA CLASE
+async function test() {
+  const gestorDeCarts = new CartsManager();
+/* 
+  await gestorDeCarts.create({
+    quantity: "2",
+  });
+
+  await gestorDeCarts.create({
+    quantity: "5",
+    state: "paid",
+  });
+
+  await gestorDeCarts.create({
+    quantity: "4",
+    state: "delivered",
+  }); */
+
+  console.log(await gestorDeCarts.read());
+  //console.log(await gestorDeCarts.readOne("103afd77d65cef61b42e0dbe"))
+  
+  //METODO UPDATE 
+  const cartState = "reserved"; 
+  const updateState = { state: "paid" };
+  try {
+    const updatedCart = await gestorDeCarts.update(cartState, updateState);
+    console.log("Carrito actualizado:", updatedCart);
+  } catch (error) {
+    console.error("Error al actualizar el carrito:", error);
+  }
+
+  console.log("Carritos después de la actualización:");
+  console.log(await gestorDeCarts.read());
+  
+  //console.log(await gestorDeCarts.destroy("delivered"))
+}
+
+//test();
