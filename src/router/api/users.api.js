@@ -1,6 +1,7 @@
 import { Router, response } from "express";
 // importo
-import userManager from "../../data/fs/userManager.fs.js";
+// import userManager from "../../data/fs/UserManager.fs.js";
+import userManager from "../../data/mongo/UserManager.mongo.js";
 const usersRouter = Router();
 // genero
 usersRouter.get("/", read);

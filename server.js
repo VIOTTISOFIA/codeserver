@@ -10,20 +10,25 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
+import dbConnect from "./src/utils/dbConnect.util.js";
 
-console.log("TODAS LAS VARIABLES DE ENTORNO: " + process.env);
-console.log(process.env);
+// console.log(process.env);
+// console.log(process.env.MONGO_URI);
 
 // http server
 const server = express();
-const port = 8080;
-const ready = () => console.log("server ready on port" + port);
+const port = process.env.PORT || 8080;
+const ready = async () => {
+  console.log("server ready on port" + port);
+  await dbConnect();
+};
+
 const nodeServer = createServer(server);
 nodeServer.listen(port, ready);
 
 // tcp server
 // creo un servidor de nodeServer, con el metodo nativo createServer, con las config del servidor de express
-const socketServer = new Server(nodeServer);
+socketServer = new Server(nodeServer);
 // creo un servidor de TCP, construyendo una instancia del servidor de socketServer, pasando como base el servidor de node
 socketServer.on("connection", socketCb);
 export { socketServer };
