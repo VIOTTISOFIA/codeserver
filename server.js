@@ -28,7 +28,7 @@ nodeServer.listen(port, ready);
 
 // tcp server
 // creo un servidor de nodeServer, con el metodo nativo createServer, con las config del servidor de express
-socketServer = new Server(nodeServer);
+const socketServer = new Server(nodeServer);
 // creo un servidor de TCP, construyendo una instancia del servidor de socketServer, pasando como base el servidor de node
 socketServer.on("connection", socketCb);
 export { socketServer };
