@@ -24,8 +24,8 @@ class ProductManager {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
-          photo: data.photo || "images/package.png",
-          category: data.category || "NOT DEFINED",
+          photo: data.photo || "https://i.postimg.cc/pVcL6v4t/package.png",
+          category: data.category || "Not defined",
           price: data.price || "1",
           stock: data.stock || "1",
         };
@@ -62,11 +62,13 @@ class ProductManager {
       all = JSON.parse(all);
       let found = all.find((product) => product.id === id);
       if (!found) {
-        throw new Error("El producto que buscas no existe.");
+        const error = new Error("NOT FOUND");
+        error.statusCode = 404;
+        throw error;
       }
       return found;
     } catch (error) {
-      console.error("Error al leer el producto:", error.message);
+       console.error("Error al leer el producto:", error.message);
       throw error;
     }
   }
@@ -118,141 +120,141 @@ async function pruebaAsync() {
   const gestorDeProductos = new ProductManager();
 
   await gestorDeProductos.create({
-    title: "chupete",
-    category: "chupetes",
+    title: "Chupete",
+    category: "Accesorios",
     price: 1500,
     stock: 1000,
   });
 
   await gestorDeProductos.create({
-    title: "conjunto enterizo unisex",
-    category: "indumentaria",
+    title: "Conjunto enterizo unisex",
+    category: "Indumentaria",
     price: 900,
     stock: 800,
   });
 
   await gestorDeProductos.create({
-    title: "porta chupetes",
-    category: "accesorios",
+    title: "Porta-chupetes",
+    category: "Accesorios",
     price: 750,
     stock: 15,
   });
 
   await gestorDeProductos.create({
-    title: "practicuna",
-    category: "muebles",
+    title: "Practicuna",
+    category: "Muebles",
     price: 2500,
     stock: 600,
   });
 
   await gestorDeProductos.create({
-    title: "pañalera Verona",
-    category: "accesorios",
+    title: "Pañalera Verona",
+    category: "Accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "set corta uñas",
-    category: "accesorios",
+    title: "Set corta uñas",
+    category: "Accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set toalla y cambiador despues del baño",
-    category: "accesorios",
+    category: "Accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "zapatos tejidos Sandia",
-    category: "calzado",
+    title: "Zapatos tejidos Sandia",
+    category: "Calzado",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "cardigan tejido a mano",
-    category: "indumentaria",
+    title: "Cardigan tejido a mano",
+    category: "Indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "pijama disfraz de monstruo 6M",
-    category: "indumentaria",
+    title: "Pijama disfraz de monstruo 6M",
+    category: "Indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Peluche de cebra con sonido",
-    category: "jugueteria",
+    category: "Jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set de herramientas para taller",
-    category: "jugueteria",
+    category: "Jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Bicicleta con rueditas de apoyo",
-    category: "deportes",
+    category: "Deportes",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Casa de muñecas",
-    category: "jugueteria",
+    category: "Jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Patines princesas Disney de 4 ruedas",
-    category: "deportes",
+    category: "Deportes",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Zapatillas con luces HotWheels",
-    category: "calzado",
+    category: "Calzado",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set de vinchas con brillos",
-    category: "accesorios",
+    category: "Accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Camisa manga larga para nene",
-    category: "indumentaria",
+    category: "Indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Pantalon de vestir nene colores surtidos",
-    category: "indumentaria",
+    category: "Indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Cinturon de princesas",
-    category: "accesorios",
+    category: "Accesorios",
     price: 15000,
     stock: 250,
   });
@@ -262,7 +264,7 @@ async function pruebaAsync() {
   });
 
   await gestorDeProductos.create({
-    title: "Muñeco Buzz Lightyear con sonido",
+    title: "Muñeco 'Buzz Lightyear' con sonido",
   });
 
   await gestorDeProductos.create({
@@ -314,7 +316,7 @@ async function pruebaAsync() {
   });
 
   await gestorDeProductos.create({
-    title: "xCombo mosquitero + protector de lluvia para cochecitos",
+    title: "Combo mosquitero + protector de lluvia para cochecitos",
   });
 
   await gestorDeProductos.create({
@@ -333,7 +335,11 @@ async function pruebaAsync() {
     title: "Mecedor de caballito de madera",
   });
 
-  await gestorDeProductos.read();
+  await gestorDeProductos.create({
+    title: "Muñeco 'Woody' Toy Story con sonido",
+  });
+
+  console.log(await gestorDeProductos.read());
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
   //await gestorDeProductos.destroy("0ac63f253213dddb6869b6a4");

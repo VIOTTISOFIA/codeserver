@@ -31,7 +31,7 @@ class UserManager {
         };
         // creo el objeto con los datos de la nota
         let users = await fs.promises.readFile(this.path, "utf-8");
-        // espero la lectura del archivo y lo guardo en la variable all
+        // espero la lectura del archivo y lo guardo en la variable users
         users = JSON.parse(users);
         // parseo
         users.push(user);
@@ -53,11 +53,7 @@ class UserManager {
       all = JSON.parse(all);
       // parseo
       role && (all = all.filter((each) => each.role === role));
-      // if (users.length === 0) {
-      //  si no hay notas
-      // throw new Error("no hay usuarios");
       return all;
-      // } else {
     } catch (error) {
       console.log("error al obtener los datos");
       throw error;
@@ -65,14 +61,10 @@ class UserManager {
   }
   async readOne(id) {
     try {
-      let all = await fs.promises.readFile(this.path, "utf-8");
-      all = JSON.parse(all);
-      let found = all.find((user) => user.id === id);
-      // if (!one) {
-      //   throw new Error("No existe el usuario");
-      // } else {
-      return found;
-      // }
+      let users = await fs.promises.readFile(this.path, "utf-8");
+      users = JSON.parse(users);
+      let one = users.find((each) => each.id === id);
+      return one;
     } catch (error) {
       console.log("error al leer el usuario:", error.message);
       return error;
@@ -128,25 +120,21 @@ const User = new UserManager();
 async function test() {
   const gestorDeUsuarios = new UserManager();
   await gestorDeUsuarios.create({
-    photo: "sofia.jpg",
     email: "sofi_04_04@hotmail.com",
     password: "hola1234",
     role: "adm",
   });
   await gestorDeUsuarios.create({
-    photo: "roxana.jpg",
     email: "roxana@hotmail.com",
     password: "hola5678",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    photo: "celine.jpg",
     email: "celine@hotmail.com",
     password: "hola91011",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    photo: "martin.jpg",
     email: "martin@hotmail.com",
     password: "hola1213",
     role: "user",
@@ -154,6 +142,6 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-// test();
+//test();
 const userManager = new UserManager();
 export default userManager;

@@ -52,19 +52,39 @@ class ProductManager {
       console.log(error);
     }
   }
+
   destroy(id) {
     try {
       this.readOne(id);
-      const filtered = ProductManager.#products.filter(
-        (each) => each.id !== id
-      );
+      const filtered = ProductManager.#products.filter((each) => each.id !== id);
       ProductManager.#products = filtered;
       console.log("Producto encontrado");
     } catch (error) {
       console.log(error + "verifique nuevamente");
     }
   }
+
+  update(id, data) {
+    try {
+      this.readOne(id);
+      const one = ProductManager.#products.find((product) => product.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+        return one;
+      } else {
+        const error = new Error("NOT FOUND");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error.message);
+      throw error;
+    }
+  }
 }
+
 
 function prueba() {
   const gestorDeProductos = new ProductManager();
@@ -239,4 +259,4 @@ function prueba() {
   }
 }
 
-prueba();
+//prueba();

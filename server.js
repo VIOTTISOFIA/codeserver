@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import "dotenv/config.js";
+=======
+import "dotenv/config.js"
+>>>>>>> 622b0f58e1998642b42a020b533d69ac6739c369
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -10,6 +14,7 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
+<<<<<<< HEAD
 import dbConnect from "./src/utils/dbConnect.util.js";
 
 // console.log(process.env);
@@ -23,15 +28,22 @@ const ready = async () => {
   await dbConnect();
 };
 
+=======
+import dbConnect from './src/utils/dbConnect.util.js';
+
+// http server
+const server = express();
+const port = process.env.PORT || 9000;
+const ready = async () => {
+    console.log("server ready on port" + port);
+    await dbConnect()
+}
+>>>>>>> 622b0f58e1998642b42a020b533d69ac6739c369
 const nodeServer = createServer(server);
+const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);
 
-// tcp server
-// creo un servidor de nodeServer, con el metodo nativo createServer, con las config del servidor de express
-const socketServer = new Server(nodeServer);
-// creo un servidor de TCP, construyendo una instancia del servidor de socketServer, pasando como base el servidor de node
 socketServer.on("connection", socketCb);
-export { socketServer };
 
 server.engine("handlebars", engine());
 server.set("view engine", "handlebars");
