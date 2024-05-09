@@ -62,11 +62,13 @@ class ProductManager {
       all = JSON.parse(all);
       let found = all.find((product) => product.id === id);
       if (!found) {
-        throw new Error("El producto que buscas no existe.");
+        const error = new Error("NOT FOUND");
+        error.statusCode = 404;
+        throw error;
       }
       return found;
     } catch (error) {
-      console.error("Error al leer el producto:", error.message);
+       console.error("Error al leer el producto:", error.message);
       throw error;
     }
   }
