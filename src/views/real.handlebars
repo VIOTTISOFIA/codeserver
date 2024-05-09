@@ -1,5 +1,4 @@
  <h1 class="text-center bg-success-subtle p-2 text-dark-emphasis bg-opacity-25 fst-italic">The Baby's Shop</h1>
-
 <section>
 <article class="w-75 align-items-center d-flex flex-column">
     <h2 class="text-center">REGISTER FORM!</h2>
@@ -10,7 +9,7 @@
         <input class="m-2" type="category" name="category" id="category" placeholder="CATEGORY">
         <input class="m-2" type="price" name="price" id="price" placeholder="PRICE">
         <input class="m-2" type="stock" name="stock" id="stock" placeholder="STOCK">
-        <input class="m-2" type="button" id="register" value="REGISTER!">
+        <input class="m-2" type="button" id="Register" value="REGISTER!">
     </form>
     </article>
 <article id = "products" class="d-flex flex-wrap w-50"></article>
@@ -39,14 +38,14 @@ template = data.map(each => `
 ).join("")
    document.querySelector("#products").innerHTML = template
   })
-  document.querySelector("#register").addEventListener("click", (event) => {
+  document.querySelector("#Register").addEventListener("click", (event) => {
    let photo = document.querySelector("#photo").value
    let title = document.querySelector("#title").value
    let category = document.querySelector("#category").value
    let price = document.querySelector("#price").value
    let stock = document.querySelector("#stock").value
    console.log({ photo, title, category, price, stock })
-   socket.emit("register", { photo, title, category, price, stock })
+   socket.emit("Register", { photo, title, category, price, stock })
   })
 </script>
     
