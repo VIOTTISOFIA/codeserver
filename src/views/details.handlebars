@@ -1,9 +1,23 @@
 {{#if product.id}}
 
-  <h1>DETAIL OF PRODUCT: {{product.id}} </h1>
-  <p> {{product.title}} </p>
-  <p> {{product.category}} </p>
-  
+<div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
+      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product.id}} </h1>
+      <hr>
+  <div class="row g-0">
+    <div class="col-md-4 align-content-center">
+      <img src="{{product.photo}}" class="img-fluid object-fit-cover rounded-start border-end border-dark-subtle" alt="{{product.title}}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size: 23px;">{{product.title}}</h5>
+        <p class="card-text" style="font-size: 18px;">Category: {{product.category}}</p>
+        <p class="card-text" style="font-size: 18px;"><small class="text-body-secondary">Stock: {{product.stock}}</small> <small class="text-body-secondary">Price: {{product.price}}</small> </p>
+        <button href="#" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to List</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {{else}}
   <h1>NOT FOUND PRODUCT</h1>
 {{/if}}
