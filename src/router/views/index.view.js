@@ -25,7 +25,7 @@ viewsRouter.get("/", (req, res, next) => {
   }
 });
 
-viewsRouter.get("/real", (req, res, next) => {
+viewsRouter.get("/products/real", (req, res, next) => {
   try {
     return res.render("real", {title: "PRODUCTS"})
   } catch (error) {
