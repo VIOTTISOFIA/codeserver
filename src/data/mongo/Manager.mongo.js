@@ -10,15 +10,10 @@ class Manager {
       throw error;
     }
   }
-<<<<<<< HEAD
-  async read(role) {
-    // role para filtrar por roles
-=======
-
-  async read(category) {
->>>>>>> 622b0f58e1998642b42a020b533d69ac6739c369
+  async read(filter) {
+    // filter para filtrar con el objeto que corresponda
     try {
-      const all = await this.Model.find();
+      const all = await this.Model.find(filter);
       return all;
     } catch (error) {
       throw error;
@@ -41,24 +36,14 @@ class Manager {
       throw error;
     }
   }
-<<<<<<< HEAD
-  async destroy(id) {
-    try {
-      const one = await this.Model.findByIdAndDelete(id);
-=======
 
   async destroy(id) {
     try {
       const one = await this.Model.findByIdAndDelete(id);
       return one;
->>>>>>> 622b0f58e1998642b42a020b533d69ac6739c369
     } catch (error) {
       throw error;
     }
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 622b0f58e1998642b42a020b533d69ac6739c369
 export default Manager;
