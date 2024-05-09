@@ -1,0 +1,37 @@
+[
+  {
+    "id": "0160e77987c0838af4fc55e6",
+    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "email": "sofi_04_04@hotmail.com",
+    "password": "hola1234",
+    "role": "adm"
+  },
+  {
+    "id": "c57de3e294a5e516589117d2",
+    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "email": "roxana@hotmail.com",
+    "password": "hola5678",
+    "role": "user"
+  },
+  {
+    "id": "87c0dc28e059461874632a50",
+    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "email": "celine@hotmail.com",
+    "password": "hola91011",
+    "role": "user"
+  },
+  {
+    "id": "db4ea255b35eec82ab9e991b",
+    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "email": "martin@hotmail.com",
+    "password": "hola1213",
+    "role": "user"
+  },
+  {
+    "id": "17cd2e3f3b301a0de9bc70f4",
+    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "email": "prueba@coder.com",
+    "password": "hola",
+    "role": "0"
+  }
+]

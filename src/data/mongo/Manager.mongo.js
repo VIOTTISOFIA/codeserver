@@ -10,8 +10,8 @@ class Manager {
       throw error;
     }
   }
-  async read(role) {
-    // role para filtrar por roles
+
+  async read(category) {
     try {
       const all = await this.Model.find();
       return all;
@@ -36,12 +36,15 @@ class Manager {
       throw error;
     }
   }
+
   async destroy(id) {
     try {
       const one = await this.Model.findByIdAndDelete(id);
+      return one;
     } catch (error) {
       throw error;
     }
   }
 }
+
 export default Manager;
