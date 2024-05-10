@@ -25,14 +25,6 @@ viewsRouter.get("/", (req, res, next) => {
   }
 });
 
-viewsRouter.get("/real", (req, res, next) => {
-  try {
-    return res.render("real", {title: "PRODUCTS"})
-  } catch (error) {
-    return next(error)
-  }
-})
-
 viewsRouter.get("/login", (req, res, next) => {
   try {
   return res.render("login", { title: "LOGIN" } );

@@ -13,6 +13,15 @@ productsRouter.get ("/", async (req, res, next) => {
     }
 })
 
+productsRouter.get("/real", async (req, res, next) => {
+    try {
+        const realProducts = await productManager.read();
+        return res.render("real", { realProducts });
+    } catch (error) {
+        return next(error);
+    }
+})
+
 productsRouter.get ("/:pid", async (req, res, next) => {
     try {
         const { pid } = req.params
@@ -23,13 +32,5 @@ productsRouter.get ("/:pid", async (req, res, next) => {
     }
 })
 
-productsRouter.get("/products/real", async (req, res, next) => {
-    try {
-        const realProducts = await productManager.read();
-        return res.render("real", { realProducts });
-    } catch (error) {
-        return next(error);
-    }
-})
 
 export default productsRouter;
