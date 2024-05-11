@@ -46,11 +46,20 @@ class UserManager {
       console.log(error);
     }
   }
+  destroy(id) {
+    try {
+      this.readOne(id);
+      const filtered = UserManager.#users.filter((each) => each.id !== id);
+      UserManager.#users = filtered;
+      console.log("Usuario eliminado");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   update(id, data) {
     try {
-      let all = this.read();
-      let one = all.find((each) => each.id === id);
+      let one = UserManager.#users.find((each) => each.id !== id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -66,22 +75,12 @@ class UserManager {
       throw Error;
     }
   }
-
-  destroy(id) {
-    try {
-      this.readOne(id);
-      const filtered = UserManager.#users.filter((each) => each.id !== id);
-      UserManager.#users = filtered;
-      console.log("Usuario eliminado");
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
+
 
 const gestorDeUsuarios = new UserManager();
 gestorDeUsuarios.create({
-  photo: "sofia.jpg",
+  foto: "sofia.jpg",
   email: "sofi_04_04@hotmail.com",
   password: "hola1234",
   role: "adm",

@@ -84,7 +84,6 @@ class ProductManager {
   }
 }
 
-
 function prueba() {
   const gestorDeProductos = new ProductManager();
 
