@@ -7,16 +7,14 @@ class UserManager {
     try {
       const user = {
         id: crypto.randomBytes(12).toString("hex"),
-        foto: data.foto || "https://www.pngplay.com/image/325510",
+        photo: data.photo || "https://www.pngplay.com/image/325510",
         email: data.email,
         password: data.password,
         role: data.role,
       };
 
-      if (!data.email || !data.password || !data.role) {
-
+      if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
-
       } else {
         UserManager.#users.push(user);
       }
@@ -88,19 +86,19 @@ gestorDeUsuarios.create({
   role: "adm",
 });
 gestorDeUsuarios.create({
-  foto: "roxana.jpg",
+  photo: "roxana.jpg",
   email: "roxana@hotmail.com",
   password: "hola5678",
   role: "user",
 });
 gestorDeUsuarios.create({
-  foto: "celine.jpg",
+  photo: "celine.jpg",
   email: "celine@hotmail.com",
   password: "hola91011",
   role: "user",
 });
 gestorDeUsuarios.create({
-  foto: "martin.jpg",
+  photo: "martin.jpg",
   email: "martin@hotmail.com",
   password: "hola1213",
   role: "user",

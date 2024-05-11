@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import { Router, response } from "express";
+=======
 import { Router } from "express";
+>>>>>>> dev
 // importo
 import userManager from "../../data/fs/UserManager.fs.js";
 const usersRouter = Router();
@@ -12,6 +16,20 @@ usersRouter.delete("/:uid", destroy);
 async function read(req, res, next) {
   try {
     const { role } = req.query;
+<<<<<<< HEAD
+    const all = await userManager.read(role);
+    if (all.length > 0) {
+      return res.json({
+        statusCode: 200,
+        response: all,
+      });
+    } else {
+      const error = new Error("not found");
+      error.statusCode = 404;
+      throw error;
+    }
+  } catch (error) {
+=======
     const users = await userManager.read(role);
     if (users) {
       return res.status(200).json({
@@ -26,6 +44,7 @@ async function read(req, res, next) {
     }
   } catch (error) {
     console.log(error);
+>>>>>>> dev
     return next(error);
   }
 }
@@ -36,9 +55,15 @@ async function readOne(req, res, next) {
     const { uid } = req.params;
     const one = await userManager.readOne(uid);
     if (one) {
+<<<<<<< HEAD
+      return res.json({
+        statusCode: 200,
+        response: one,
+=======
       return res.status(200).json({
         response: one,
         success: true,
+>>>>>>> dev
       });
     } else {
       const error = new Error("not found");

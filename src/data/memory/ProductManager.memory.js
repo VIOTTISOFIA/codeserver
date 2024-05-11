@@ -52,12 +52,11 @@ class ProductManager {
       console.log(error);
     }
   }
+
   destroy(id) {
     try {
       this.readOne(id);
-      const filtered = ProductManager.#products.filter(
-        (each) => each.id !== id
-      );
+      const filtered = ProductManager.#products.filter((each) => each.id !== id);
       ProductManager.#products = filtered;
       console.log("Producto encontrado");
     } catch (error) {
@@ -258,4 +257,4 @@ function prueba() {
   }
 }
 
-prueba();
+//prueba();

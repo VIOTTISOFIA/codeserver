@@ -83,8 +83,8 @@ class UserManager {
         for (let prop in data) {
           one[prop] = data[prop];
         }
-        users = JSON.stringify(users, null, 2);
-        await fs.promises.writeFile(this.path, users);
+        all = JSON.stringify(all, null, 2);
+        await fs.promises.writeFile(this.path, all);
         return one;
       } else {
         const error = new Error("not found!");
@@ -124,25 +124,21 @@ const User = new UserManager();
 async function test() {
   const gestorDeUsuarios = new UserManager();
   await gestorDeUsuarios.create({
-    foto: "sofia.jpg",
     email: "sofi_04_04@hotmail.com",
     password: "hola1234",
     role: "adm",
   });
   await gestorDeUsuarios.create({
-    foto: "roxana.jpg",
     email: "roxana@hotmail.com",
     password: "hola5678",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "celine.jpg",
     email: "celine@hotmail.com",
     password: "hola91011",
     role: "user",
   });
   await gestorDeUsuarios.create({
-    foto: "martin.jpg",
     email: "martin@hotmail.com",
     password: "hola1213",
     role: "user",
@@ -150,6 +146,6 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-// test();
+//test();
 const userManager = new UserManager();
 export default userManager;
