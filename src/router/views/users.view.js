@@ -28,14 +28,4 @@ usersRouter.get("/profile", async (req, res, next) => {
   }
 });
 
-usersRouter.get ("/:uid", async (req, res, next) => {
-  try {
-      const { uid } = req.params
-      const one = await userManager.readOne(uid)
-      return res.render ("profile", { user:one })
-  } catch (error) {
-      return next(error)
-  }
-})
-
 export default usersRouter;
