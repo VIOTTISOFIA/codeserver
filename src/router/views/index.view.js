@@ -11,7 +11,7 @@ viewsRouter.use("/users", usersRouter);
 viewsRouter.get("/", async (req, res, next) => {
   try {
     const products = await productManager.read();
-  return res.render("index", { title: "HOME", products } );
+    return res.render("index", { title: "HOME", products });
   } catch (error) {
     return next(error);
   }
@@ -19,7 +19,7 @@ viewsRouter.get("/", async (req, res, next) => {
 
 viewsRouter.get("/", (req, res, next) => {
   try {
-  return res.render("products", { title: "PRODUCTS" } );
+    return res.render("products", { title: "PRODUCTS" });
   } catch (error) {
     return next(error);
   }
@@ -27,7 +27,7 @@ viewsRouter.get("/", (req, res, next) => {
 
 viewsRouter.get("/login", (req, res, next) => {
   try {
-  return res.render("login", { title: "LOGIN" } );
+    return res.render("login", { title: "LOGIN" });
   } catch (error) {
     return next(error);
   }
@@ -35,20 +35,17 @@ viewsRouter.get("/login", (req, res, next) => {
 
 viewsRouter.get("/register", (req, res, next) => {
   try {
-  return res.render("register", { title: "REGISTER" } );
+    return res.render("register", { title: "REGISTER" });
   } catch (error) {
     return next(error);
   }
 });
-
-viewsRouter.get("/profile", async (req, res, next) => {
-  try {
-    const users = await userManager.read();
-  return res.render("profile", { title: "PROFILE", users } );
-  } catch (error) {
-    return next(error);
-  }
-});
-
-
+// viewsRouter.get("/profile", async (req, res, next) => {
+//   try {
+//     const users = await userManager.read();
+//     return res.render("profile", { title: "PROFILE", users });
+//   } catch (error) {
+//     return next(error);
+//   }
+// });
 export default viewsRouter;
