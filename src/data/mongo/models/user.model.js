@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const collection = "users";
 const schema = new Schema(
@@ -11,11 +11,23 @@ const schema = new Schema(
       type: String,
       default: "https://www.pngplay.com/image/325510",
     },
+
+    // user_id: {
+    //   type: Types.ObjectId,
+    //   ref: "users",
+    //   index: true,
+    //   required: true,
+    // },
+    // user: { type: String, required: true },
+
   },
   {
     timestamps: true,
   }
 );
+// schema.pre("find", function () {
+//   this.populate("user_id", "email photo -_id");
+// });
 
 const User = model(collection, schema);
 export default User;
