@@ -13,7 +13,10 @@ class Manager {
   async read(filter) {
     // filter para filtrar con el objeto que corresponda
     try {
+
       const all = await this.Model.find(filter).lean();
+      
+
       return all;
     } catch (error) {
       throw error;

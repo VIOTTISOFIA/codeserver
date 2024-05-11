@@ -11,6 +11,7 @@ const schema = new Schema(
       type: String,
       default: "https://www.pngplay.com/image/325510",
     },
+
     // user_id: {
     //   type: Types.ObjectId,
     //   ref: "users",
@@ -18,6 +19,7 @@ const schema = new Schema(
     //   required: true,
     // },
     // user: { type: String, required: true },
+
   },
   {
     timestamps: true,
