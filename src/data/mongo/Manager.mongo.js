@@ -13,9 +13,7 @@ class Manager {
   async read(filter) {
     // filter para filtrar con el objeto que corresponda
     try {
-
       const all = await this.Model.find(filter).lean();
-      
 
       return all;
     } catch (error) {
@@ -26,6 +24,7 @@ class Manager {
     try {
       //   const one = await User.findById(id);
       const one = await this.Model.findOne({ _id: id }).lean();
+      // .populate("user_id", "-_id email photo");
       return one;
     } catch (error) {
       throw error;
