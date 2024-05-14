@@ -4,9 +4,8 @@ const collection = "users";
 const schema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
-    age: { type: Number, default: 12 },
-    // password: data.password,
-    role: { type: String, required: true, index: true },
+    password: { type: String, required: true },
+    role: { type: Number, default: 0 },
     photo: {
       type: String,
       default: "https://www.pngplay.com/image/325510",

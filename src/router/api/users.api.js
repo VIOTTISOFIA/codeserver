@@ -1,14 +1,15 @@
-import { Router, response } from "express";
+import { Router } from "express";
 // importo
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/UserManager.mongo.js";
-const usersRouter = Router();
+
+const usersApi = Router();
 // genero
-usersRouter.get("/", read);
-usersRouter.get("/:uid", readOne);
-usersRouter.post("/", create);
-usersRouter.put("/:uid", update);
-usersRouter.delete("/:uid", destroy);
+usersApi.get("/", read);
+usersApi.get("/:uid", readOne);
+usersApi.post("/", create);
+usersApi.put("/:uid", update);
+usersApi.delete("/:uid", destroy);
 
 async function read(req, res, next) {
   try {
@@ -90,5 +91,5 @@ async function destroy(req, res, next) {
   }
 }
 
-export default usersRouter;
+export default usersApi;
 // exporto
