@@ -5,7 +5,10 @@ const collection = "products";
 const schema = new Schema(
   {
     title: { type: String, required: true },
-    photo: { type: String, default: "https://i.postimg.cc/pVcL6v4t/package.png"},
+    photo: {
+      type: String,
+      default: "https://i.postimg.cc/pVcL6v4t/package.png",
+    },
     category: {
       type: String,
       default: "Not defined",

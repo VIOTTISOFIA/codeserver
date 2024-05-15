@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userManager from "../../data/mongo/UserManager.mongo.js";
+import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 // import userManager from "../../data/fs/UserManager.fs.js";
 
 const usersRouter = Router();
@@ -25,11 +25,9 @@ usersRouter.get("/:uid", async (req, res, next) => {
     console.log(one);
 
     return res.render("profile", { user: one });
-      } catch (error) {
+  } catch (error) {
     return next(error);
-    
   }
 });
-
 
 export default usersRouter;
