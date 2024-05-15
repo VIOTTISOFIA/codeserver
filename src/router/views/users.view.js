@@ -25,11 +25,9 @@ usersRouter.get("/:uid", async (req, res, next) => {
     console.log(one);
 
     return res.render("profile", { user: one });
-      } catch (error) {
+  } catch (error) {
     return next(error);
-    
   }
 });
-
 
 export default usersRouter;
