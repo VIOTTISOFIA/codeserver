@@ -14,7 +14,7 @@ import dbConnect from './src/utils/dbConnect.util.js';
 
 // http server
 const server = express();
-const port = process.env.PORT || 9000;
+const port = 8080;
 const ready = async () => {
     console.log("server ready on port" + port);
     await dbConnect()
