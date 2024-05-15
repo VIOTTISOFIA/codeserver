@@ -1,4 +1,4 @@
-import "dotenv/config.js"
+import "dotenv/config.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -10,15 +10,19 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
-import dbConnect from './src/utils/dbConnect.util.js';
+import dbConnect from "./src/utils/dbConnect.util.js";
+
+// console.log(process.env);
+// console.log(process.env.MONGO_URI);
 
 // http server
 const server = express();
 const port = 8080;
 const ready = async () => {
-    console.log("server ready on port" + port);
-    await dbConnect()
-}
+  console.log("server ready on port" + port);
+  await dbConnect();
+};
+
 const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);

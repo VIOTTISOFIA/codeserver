@@ -10,10 +10,11 @@ class Manager {
       throw error;
     }
   }
-
-  async read(category) {
+  async read(filter) {
+    // filter para filtrar con el objeto que corresponda
     try {
-      const all = await this.Model.find();
+      const all = await this.Model.find(filter).lean();
+
       return all;
     } catch (error) {
       throw error;
@@ -22,7 +23,7 @@ class Manager {
   async readOne(id) {
     try {
       //   const one = await User.findById(id);
-      const one = await this.Model.findOne({ _id: id });
+      const one = await this.Model.findOne({ _id: id }).lean();
       return one;
     } catch (error) {
       throw error;
@@ -46,5 +47,4 @@ class Manager {
     }
   }
 }
-
 export default Manager;
