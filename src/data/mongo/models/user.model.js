@@ -23,11 +23,8 @@ const schema = new Schema(
     timestamps: true,
   }
 );
-schema.pre("find", function () {
-  this.populate("user_id", "email photo -_id");
-});
-// schema.pre("findOneAndUpdate", function () {
-//   this.populate("user_id", "email");
+// schema.pre("find", function () {
+//   this.populate("user_id", "email photo -_id");
 // });
 
 const User = model(collection, schema);

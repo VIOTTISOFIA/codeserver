@@ -24,7 +24,6 @@ class Manager {
     try {
       //   const one = await User.findById(id);
       const one = await this.Model.findOne({ _id: id }).lean();
-      // .populate("user_id", "-_id email photo");
       return one;
     } catch (error) {
       throw error;

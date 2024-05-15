@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userManager from "../../data/mongo/managers/UserManager.mongo.js";
+import userManager from "../../data/mongo/UserManager.mongo.js";
 // import userManager from "../../data/fs/UserManager.fs.js";
 
 const usersRouter = Router();
