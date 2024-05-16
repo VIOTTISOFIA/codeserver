@@ -50,7 +50,18 @@ async function readOne(req, res, next) {
     return next(error);
   }
 }
-
+// usersApi.post("/", async (req, res, next) {
+//    try {
+//     const data = req.body;
+//     const one = await userManager.create(data);
+//     return res.json({
+//       statusCode: 201,
+//       message: "CREATED ID: " + one.id,
+//     });
+//   } catch (error) {
+//     return next(error);
+//   }
+// })
 async function create(req, res, next) {
   try {
     const data = req.body;

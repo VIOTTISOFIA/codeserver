@@ -26,6 +26,9 @@ const schema = new Schema(
 // schema.pre("find", function () {
 //   this.populate("user_id", "email photo -_id");
 // });
+// schema.pre("findOne", function () {
+//   this.populate("user_id", "email");
+// });
 
 const User = model(collection, schema);
 export default User;
