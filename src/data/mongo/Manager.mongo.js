@@ -13,7 +13,8 @@ class Manager {
   async read(filter) {
     // filter para filtrar con el objeto que corresponda
     try {
-      const all = await this.Model.find(filter).lean();
+      const all = await this.Model.find(filter).lean()
+      //.populate("user_id", "-_id email photo")
 
       return all;
     } catch (error) {
