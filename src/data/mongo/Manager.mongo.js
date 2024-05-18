@@ -14,13 +14,22 @@ class Manager {
     // filter para filtrar con el objeto que corresponda
     try {
       const all = await this.Model.find(filter).lean()
-      //.populate("user_id", "-_id email photo")
-
       return all;
     } catch (error) {
       throw error;
     }
   }
+
+  async paginate({ filter, opts }) {
+    // filter para filtrar con el objeto que corresponda
+    try {
+      const all = await this.Model.paginate(filter, opts)
+      return all;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async readOne(id) {
     try {
       //   const one = await User.findById(id);

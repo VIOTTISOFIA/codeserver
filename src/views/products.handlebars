@@ -11,7 +11,8 @@
             <strong class="card-text">Price: {{this.price}}</strong>
             <strong class="card-text">Stock: {{this.stock}}</strong>
           </div>
-          <button href="#" class="btn btn-info d-flex w-50 justify-content-center mx-auto">See more</button>
+          <a href="/products/{{this._id}}" class="btn btn-primary mt-auto">Ver más</a>
+{{!--           <button href="#" class="btn btn-info d-flex w-50 justify-content-center mx-auto">See more</button> --}}
         </div>
       </div>
     {{/each}}
