@@ -1,4 +1,6 @@
+
 import { Router } from "express";
+import { Router, response } from "express";
 // importo
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
@@ -36,10 +38,11 @@ async function readOne(req, res, next) {
     const { uid } = req.params;
     const one = await userManager.readOne(uid);
     if (one) {
+
       return res.json({
         statusCode: 200,
         response: one,
-      });
+      })
     } else {
       const error = new Error("not found");
       error.statusCode = 404;

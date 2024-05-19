@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class ProductManager {
   constructor() {
-    this.path = "./src/data/fs/file/Products.json";
+    this.path = "./data/fs/file/Products.json";
     this.init();
   }
   init() {
@@ -18,16 +18,16 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if ( !data.title ) {
+      if (!data.title || !data.category || !data.price || !data.stock) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
-          photo: data.photo || "https://i.postimg.cc/pVcL6v4t/package.png",
-          category: data.category || "Not defined",
-          price: data.price || "1",
-          stock: data.stock || "1",
+          photo: data.photo || "images/package.png",
+          category: data.category,
+          price: data.price,
+          stock: data.stock,
         };
 
         let products = await fs.promises.readFile(this.path, "utf-8");
@@ -36,20 +36,18 @@ class ProductManager {
         console.log("Producto creado");
         products = JSON.stringify(products, null, 2);
         await fs.promises.writeFile(this.path, products);
-        return product;
       }
     } catch (error) {
       console.error(error);
-      throw error;
     }
   }
 
   async read(category) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      all = JSON.parse(all);
-      category && (all = all.filter((each) => each.category === category));
-      return all;
+      const allParsed = JSON.parse(all);
+      category && (all = all.filter(each => each.category === category))
+            return all
     } catch (error) {
       console.error("Error al obtener los datos");
       throw error;
@@ -59,16 +57,16 @@ class ProductManager {
   async readOne(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      all = JSON.parse(all);
-      let found = all.find((product) => product.id === id);
+      const allParsed = JSON.parse(all);
+      const found = allParsed.find((product) => product.id === id);
       if (!found) {
-        const error = new Error("NOT FOUND");
-        error.statusCode = 404;
-        throw error;
+        throw new Error("El producto que buscas no existe.");
+      } else {
+        console.log(found);
+        return found;
       }
-      return found;
     } catch (error) {
-       console.error("Error al leer el producto:", error.message);
+      console.error("Error al leer el producto:", error.message);
       throw error;
     }
   }
@@ -76,19 +74,21 @@ class ProductManager {
   async destroy(id) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
-      all = JSON.parse(all);
-      const one = all.find((product) => product.id === id);
-      if (!one) {
-        throw new Error("Product not found");
+      const allParsed = JSON.parse(all);
+      const found = allParsed.find((each) => each.id === id);
+      if (!found) {
+        throw new Error("Producto no encontrado.");
       } else {
-        let filtered = all.filter((product) => product.id !== id);
+        let filtered = allParsed.filter((each) => each.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-        console.log(`El producto con ID "${id}" fue encontrado y eliminado satisfactoriamente`);
-        return one;
+        console.log(
+          `El producto con ID "${productId}" fue encontrado y eliminado satisfactoriamente`
+        );
+        return found;
       }
     } catch (error) {
-      console.error("Error al eliminar el producto:", error);
+      console.error("Error al eliminar el producto:", error.message);
       throw error;
     }
   }
@@ -96,254 +96,176 @@ class ProductManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((product) => product.id === id);
+      let one = all.find((each) => each.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
         }
         all = JSON.stringify(all, null, 2);
-        await fs.promises.writeFile(this.path, all);
+        await fspromises.writeFile(this.path, all);
         return one;
       } else {
-        const error = new Error("NOT FOUND");
-        error.statusCode = 404;
-        throw error;
+        const error = new Error("NOT FOUND")
+        error.statusCode = 404
+        throw error
       }
     } catch (error) {
       console.error("Error al actualizar el producto:", error.message);
       throw error;
     }
   }
-
 }
+
 async function pruebaAsync() {
   const gestorDeProductos = new ProductManager();
 
   await gestorDeProductos.create({
-    title: "Chupete",
-    category: "Accesorios",
+    title: "chupete",
+    category: "chupetes",
     price: 1500,
     stock: 1000,
   });
 
   await gestorDeProductos.create({
-    title: "Conjunto enterizo unisex",
-    category: "Indumentaria",
+    title: "conjunto enterizo unisex",
+    category: "indumentaria",
     price: 900,
     stock: 800,
   });
 
   await gestorDeProductos.create({
-    title: "Porta-chupetes",
-    category: "Accesorios",
+    title: "porta chupetes",
+    category: "accesorios",
     price: 750,
     stock: 15,
   });
 
   await gestorDeProductos.create({
-    title: "Practicuna",
-    category: "Muebles",
+    title: "practicuna",
+    category: "muebles",
     price: 2500,
     stock: 600,
   });
 
   await gestorDeProductos.create({
-    title: "Pañalera Verona",
-    category: "Accesorios",
+    title: "pañalera Verona",
+    category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "Set corta uñas",
-    category: "Accesorios",
+    title: "set corta uñas",
+    category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set toalla y cambiador despues del baño",
-    category: "Accesorios",
+    category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "Zapatos tejidos Sandia",
-    category: "Calzado",
+    title: "zapatos tejidos Sandia",
+    category: "calzado",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "Cardigan tejido a mano",
-    category: "Indumentaria",
+    title: "cardigan tejido a mano",
+    category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "Pijama disfraz de monstruo 6M",
-    category: "Indumentaria",
+    title: "pijama disfraz de monstruo 6M",
+    category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Peluche de cebra con sonido",
-    category: "Jugueteria",
+    category: "jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set de herramientas para taller",
-    category: "Jugueteria",
+    category: "jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Bicicleta con rueditas de apoyo",
-    category: "Deportes",
+    category: "deportes",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Casa de muñecas",
-    category: "Jugueteria",
+    category: "jugueteria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Patines princesas Disney de 4 ruedas",
-    category: "Deportes",
+    category: "deportes",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Zapatillas con luces HotWheels",
-    category: "Calzado",
+    category: "calzado",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Set de vinchas con brillos",
-    category: "Accesorios",
+    category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Camisa manga larga para nene",
-    category: "Indumentaria",
+    category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Pantalon de vestir nene colores surtidos",
-    category: "Indumentaria",
+    category: "indumentaria",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
     title: "Cinturon de princesas",
-    category: "Accesorios",
+    category: "accesorios",
     price: 15000,
     stock: 250,
   });
 
   await gestorDeProductos.create({
-    title: "Buzo talle 2 Frozen",
+    title: "Cinturon de MarioBros",
+    category: "accesorios",
+    price: 15000,
+    stock: 250,
   });
-
-  await gestorDeProductos.create({
-    title: "Muñeco 'Buzz Lightyear' con sonido",
-  });
-
-  await gestorDeProductos.create({
-    title: "Remera talle 4 F1 Ferrari",
-  });
-
-  await gestorDeProductos.create({
-    title: "Conjunto talle 3 AFA",
-  });
-
-  await gestorDeProductos.create({
-    title: "Vestido con lazos de fiesta talle 2",
-  });
-
-  await gestorDeProductos.create({
-    title: "Sandalias rosas para nena",
-  });
-
-  await gestorDeProductos.create({
-    title: "Coche Carestino reclinable a 3 niveles",
-  });
-
-  await gestorDeProductos.create({
-    title: "Asiento elevador Carestino para niños",
-  });
-
-  await gestorDeProductos.create({
-    title: "Butaca de viaje Carestino con giro 360°",
-  });
-
-  await gestorDeProductos.create({
-    title: "Sillita mecedora Carestino para siestas",
-  });
-
-  await gestorDeProductos.create({
-    title: "Sacaleche electrico con mamadera",
-  });
-
-  await gestorDeProductos.create({
-    title: "Mamadera Avent 12onz",
-  });
-
-  await gestorDeProductos.create({
-    title: "Bañera plegable con soporte para Recien nacidos",
-  });
-
-  await gestorDeProductos.create({
-    title: "Silla de comedor con juguete unisex",
-  });
-
-  await gestorDeProductos.create({
-    title: "Combo mosquitero + protector de lluvia para cochecitos",
-  });
-
-  await gestorDeProductos.create({
-    title: "Cochecito SMARTDUO Carestino",
-  });
-
-  await gestorDeProductos.create({
-    title: "Mochila portabebes",
-  });
-
-  await gestorDeProductos.create({
-    title: "Gimnasio didactico multifuncion",
-  });
-
-  await gestorDeProductos.create({
-    title: "Mecedor de caballito de madera",
-  });
-
-  await gestorDeProductos.create({
-    title: "Muñeco 'Woody' Toy Story con sonido",
-  });
-
-<<<<<<< HEAD
-  console.log(await gestorDeProductos.read());
-=======
   await gestorDeProductos.read();
->>>>>>> dev
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
   //await gestorDeProductos.destroy("0ac63f253213dddb6869b6a4");
