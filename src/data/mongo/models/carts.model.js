@@ -31,7 +31,7 @@ schema.pre("find", function () {
   this.populate("user_id", "email photo");
 });
 schema.pre("findOne", function () {
-  this.populate("products_id", "category");
+  this.populate("products_id", "email");
 });
 
 const Cart = model(collection, schema);

@@ -1,4 +1,5 @@
 import { Schema, Types, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const collection = "users";
 const schema = new Schema(
@@ -23,12 +24,6 @@ const schema = new Schema(
     timestamps: true,
   }
 );
-// schema.pre("find", function () {
-//   this.populate("user_id", "email photo -_id");
-// });
-// schema.pre("findOne", function () {
-//   this.populate("user_id", "email");
-// });
-
+schema.plugin(mongoosePaginate);
 const User = model(collection, schema);
 export default User;
