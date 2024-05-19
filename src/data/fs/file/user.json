@@ -33,5 +33,26 @@
     "email": "prueba@coder.com",
     "password": "hola",
     "role": "0"
+<<<<<<< HEAD
+  },
+  {
+    "id": "3f908aa2d9f7f65da75b9775",
+    "foto": "https://www.pngplay.com/image/325510",
+    "email": {},
+    "password": {}
+  },
+  {
+    "id": "40b5c22cccaabba2a1a9b8c5",
+    "foto": "https://www.pngplay.com/image/325510",
+    "email": {},
+    "password": {}
+  },
+  {
+    "id": "2f2bc5be1e116997ec0aeb6a",
+    "foto": "https://www.bing.com/search?q=mar%c3%ada+(madre+de+jes%c3%bas)&filters=dtbk:%22MCFvdmVydmlldyFvdmVydmlldyFjMDg3MjRhOS04NTY4LWJmODMtMGNjOC1jZGVkYTRiMmE1OTM%3d%22+sid:%22c08724a9-8568-bf83-0cc8-cdeda4b2a593%22+tphint:%22f%22&FORM=DEPNAV",
+    "email": {},
+    "password": {}
+=======
+>>>>>>> dev
   }
 ]

@@ -13,8 +13,19 @@ class UserManager {
         role: data.role,
       };
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/data/memory/UserManager.memory.js
+      if (!data.email || !data.password) {
+========
+      if (!data.email || !data.password || !data.role) {
+
+>>>>>>>> dev:data/memory/UserManager.memory.js
+        throw new Error("Usuario no creado.Ingrese todos los datos.");
+
+=======
       if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
+>>>>>>> dev
       } else {
         UserManager.#users.push(user);
       }
@@ -46,6 +57,13 @@ class UserManager {
       console.log(error);
     }
   }
+<<<<<<< HEAD
+
+  update(id, data) {
+    try {
+      let all = this.read();
+      let one = all.find((each) => each.id === id);
+=======
   destroy(id) {
     try {
       this.readOne(id);
@@ -60,6 +78,7 @@ class UserManager {
   update(id, data) {
     try {
       let one = UserManager.#users.find((each) => each.id !== id);
+>>>>>>> dev
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -75,12 +94,31 @@ class UserManager {
       throw Error;
     }
   }
+<<<<<<< HEAD
+
+  destroy(id) {
+    try {
+      this.readOne(id);
+      const filtered = UserManager.#users.filter((each) => each.id !== id);
+      UserManager.#users = filtered;
+      console.log("Usuario eliminado");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+const gestorDeUsuarios = new UserManager();
+gestorDeUsuarios.create({
+  photo: "sofia.jpg",
+=======
 }
 
 
 const gestorDeUsuarios = new UserManager();
 gestorDeUsuarios.create({
   foto: "sofia.jpg",
+>>>>>>> dev
   email: "sofi_04_04@hotmail.com",
   password: "hola1234",
   role: "adm",

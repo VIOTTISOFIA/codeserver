@@ -1,5 +1,6 @@
 import { Router } from "express";
-import productManager from "../../data/fs/ProductManager.fs.js";
+//import productManager from "../../data/fs/ProductManager.fs.js";
+import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 
 const productsRouter = Router();
 
@@ -51,7 +52,7 @@ async function create(req, res, next) {
   try {
     const data = req.body;
     const one = await productManager.create(data);
-      return res.json({
+    return res.json({
       statusCode: 201,
       message: "CREATED ID: " + one.id,
     });
@@ -67,7 +68,7 @@ async function update(req, res, next) {
     const one = await productManager.update(pid, data);
     return res.json({
       statusCode: 200,
-      message: "UPDATED ID: " + one.id
+      message: "UPDATED ID: " + one.id,
     });
   } catch (error) {
     console.error("Error al actualizar el producto:", error);
