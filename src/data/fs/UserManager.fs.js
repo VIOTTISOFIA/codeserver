@@ -29,11 +29,7 @@ class UserManager {
           password: data.password,
           role: data.role,
         };
-<<<<<<< HEAD
         // creo el objeto con los datos de la nota
-=======
-        // creo el objeto con los datos del usuario
->>>>>>> dev
         let users = await fs.promises.readFile(this.path, "utf-8");
         // espero la lectura del archivo y lo guardo en la variable users
         users = JSON.parse(users);
@@ -50,7 +46,6 @@ class UserManager {
       throw error;
     }
   }
-<<<<<<< HEAD
   async read(role) {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
@@ -61,19 +56,6 @@ class UserManager {
       return all;
     } catch (error) {
       console.log("error al obtener los datos");
-=======
-
-  async read(role) {
-    try {
-      let users = await fs.promises.readFile(this.path, "utf-8");
-      // espero la lectura del archivo y lo guardo en la variable users
-      users = JSON.parse(users);
-      // parseo
-      role && (users = users.filter((each) => each.role === role));
-      return users;
-    } catch (error) {
-      console.log(error);
->>>>>>> dev
       throw error;
     }
   }
@@ -82,31 +64,17 @@ class UserManager {
       let users = await fs.promises.readFile(this.path, "utf-8");
       users = JSON.parse(users);
       let one = users.find((each) => each.id === id);
-<<<<<<< HEAD
       return one;
     } catch (error) {
       console.log("error al leer el usuario:", error.message);
-=======
-      if (!one) {
-        throw new Error("El usuario que buscas no existe.");
-      }
-      return one
-    } catch (error) {
-      console.log(error);
->>>>>>> dev
       return error;
     }
   }
 
   async update(id, data) {
     try {
-<<<<<<< HEAD
       let all = await this.read();
       let one = all.find((each) => each.id === id);
-=======
-      let users = await this.read();
-      let one = users.find((each) => each.id === id);
->>>>>>> dev
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];

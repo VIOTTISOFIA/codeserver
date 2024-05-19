@@ -339,11 +339,7 @@ async function pruebaAsync() {
     title: "Muñeco 'Woody' Toy Story con sonido",
   });
 
-<<<<<<< HEAD
   console.log(await gestorDeProductos.read());
-=======
-  await gestorDeProductos.read();
->>>>>>> dev
   //await gestorDeProductos.readOne(); - Esta linea nos genera un error al no tener parametro definido.
   //await gestorDeProductos.readOne("0ac63f253213dddb6869b6a4");
   //await gestorDeProductos.destroy("0ac63f253213dddb6869b6a4");

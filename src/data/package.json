@@ -1,9 +1,5 @@
 {
-<<<<<<<< HEAD:package.json
   "name": "server",
-========
-  "name": "serveruser",
->>>>>>>> dev:src/data/package.json
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -15,13 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-<<<<<<<< HEAD:package.json
-========
-  "dependencies": {
-    "express": "^4.19.2"
-  },
->>>>>>>> dev:src/data/package.json
-  "devDependencies": {
+"devDependencies": {
     "nodemon": "^3.1.0"
   },
   "dependencies": {

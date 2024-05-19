@@ -1,5 +1,3 @@
-
-import { Router } from "express";
 import { Router, response } from "express";
 // importo
 // import userManager from "../../data/fs/UserManager.fs.js";
