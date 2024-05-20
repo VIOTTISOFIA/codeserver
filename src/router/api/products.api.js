@@ -56,9 +56,7 @@ async function paginate (req, res, next) {
         limit: all.limit,
         prevPage: all.prevPage,
         nextPage: all.nextPage,
-
       }
-     
     });
     
   } catch (error) {

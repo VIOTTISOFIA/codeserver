@@ -4,6 +4,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
+import ExpressHandlebars from "express-handlebars";
 
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
@@ -27,9 +28,26 @@ const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);
 
+//configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
+const hbs = ExpressHandlebars.create({
+  helpers: {
+      range: function(start, end) {
+          let range = [];
+          for (let i = start; i <= end; i++) {
+              range.push(i);
+          }
+          return range;
+      },
+      ifEquals: function(arg1, arg2, options) {
+          return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+      }
+  }
+});
+
+
 socketServer.on("connection", socketCb);
 
-server.engine("handlebars", engine());
+server.engine("handlebars", hbs.engine);
 server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 

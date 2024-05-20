@@ -1,3 +1,6 @@
+import mongoose from 'mongoose';
+import mongoosePaginate from "mongoose-paginate-v2";
+
 class Manager {
   constructor(Model) {
     this.Model = Model;
@@ -20,11 +23,17 @@ class Manager {
     }
   }
 
-  async paginate({ filter, opts }) {
-    // filter para filtrar con el objeto que corresponda
+  async paginate({ filter = {}, opts = {} } = {}) {
     try {
-      const all = await this.Model.paginate(filter, opts)
-      return all;
+      const options = {
+        ...opts,
+        page: opts.page || 1, // Página predeterminada: 1
+        limit: opts.limit || 10 // Límite predeterminado: 10
+      };
+
+      const result = await this.Model.paginate(filter, options);
+      console.log(result)
+      return result;
     } catch (error) {
       throw error;
     }
@@ -57,4 +66,7 @@ class Manager {
     }
   }
 }
+
+mongoose.plugin(mongoosePaginate)
+
 export default Manager;
