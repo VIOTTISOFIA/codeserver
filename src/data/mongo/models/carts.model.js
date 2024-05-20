@@ -28,11 +28,11 @@ const schema = new Schema(
 );
 
 schema.pre("find", function () {
-  this.populate("user_id", "email, role");
+  this.populate("user_id", "email photo");
 });
-// schema.pre("find", function () {
-//   this.populate("products_id", "");
-// });
+schema.pre("findOne", function () {
+  this.populate("products_id", "email");
+});
 
 const Cart = model(collection, schema);
 export default Cart;

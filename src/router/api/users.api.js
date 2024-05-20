@@ -1,4 +1,4 @@
-import { Router, response } from "express";
+import { Router } from "express";
 // importo
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
@@ -36,11 +36,10 @@ async function readOne(req, res, next) {
     const { uid } = req.params;
     const one = await userManager.readOne(uid);
     if (one) {
-
       return res.json({
         statusCode: 200,
         response: one,
-      })
+      });
     } else {
       const error = new Error("not found");
       error.statusCode = 404;
@@ -51,7 +50,18 @@ async function readOne(req, res, next) {
     return next(error);
   }
 }
-
+// usersApi.post("/", async (req, res, next) {
+//    try {
+//     const data = req.body;
+//     const one = await userManager.create(data);
+//     return res.json({
+//       statusCode: 201,
+//       message: "CREATED ID: " + one.id,
+//     });
+//   } catch (error) {
+//     return next(error);
+//   }
+// })
 async function create(req, res, next) {
   try {
     const data = req.body;

@@ -318,8 +318,6 @@
     "category": "Not defined",
     "price": "1",
     "stock": "1"
-<<<<<<< HEAD
-=======
   },
   {
     "id": "9ab5becaf55b60d8b6f31362",
@@ -328,6 +326,5 @@
     "category": "accesorios",
     "price": "1",
     "stock": "1"
->>>>>>> dev
   }
 ]
