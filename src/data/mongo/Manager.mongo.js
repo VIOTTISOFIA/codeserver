@@ -39,10 +39,10 @@ class Manager {
     }
   }
 
-  async readOne(id) {
+  async readOne(filter) {
     try {
       //   const one = await User.findById(id);
-      const one = await this.Model.findOne({ _id: id }).lean();
+      const one = await this.Model.findOne({ filter }).lean();
       return one;
     } catch (error) {
       throw error;
@@ -57,9 +57,9 @@ class Manager {
     }
   }
 
-  async destroy(id) {
+  async destroy(filter) {
     try {
-      const one = await this.Model.findByIdAndDelete(id);
+      const one = await this.Model.findByIdAndDelete(filter);
       return one;
     } catch (error) {
       throw error;

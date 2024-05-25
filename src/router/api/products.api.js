@@ -37,11 +37,9 @@ async function paginate (req, res, next) {
     if (req.query.limit) {
       opts.limit = req.query.limit      
     }
-
     if (req.query.page) {
       opts.page = req.query.page
     }
-    
     if(req.query.user_id) {
       filter.user_id = req.query.user_id
     }
