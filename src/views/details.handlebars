@@ -3,7 +3,7 @@
 {{#if product.id}}
 
 <div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
-      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product.id}} </h1>
+      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product._id}} </h1>
       <hr>
   <div class="row g-0">
     <div class="col-md-4 align-content-center">
@@ -29,3 +29,4 @@
 
 
 {{!-- verificar porque no mantiene la vista y no arroja el h1 del else --}}
+{{!-- <a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary mt-auto">Volver</a>--}}

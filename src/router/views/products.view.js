@@ -6,42 +6,63 @@ const productsRouter = Router();
 
 productsRouter.get("/", async (req, res, next) => {
   try {
-    const products = await productManager.read();
-    return res.render("products", { products });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    // Obtengo productos paginados directamente con las opciones de paginación
+    const result = await productManager.paginate({
+      filter: {},
+      opts: { page, limit }
+    });
+
+    // Renderizo la vista de productos con los datos obtenidos
+    res.render("products", {
+      products: result.docs.map(product => ({
+        id: product._id, 
+        photo: product.photo,
+        title: product.title,
+        category: product.category,
+        price: product.price,
+        stock: product.stock,
+      })),
+      total: result.totalDocs,
+      page: result.page,
+      pages: result.totalPages
+    });
+
   } catch (error) {
     return next(error);
   }
 });
 
+// Nueva ruta para manejar la paginación a partir de pagina 2
 productsRouter.get("/paginate", async (req, res, next) => {
-    try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
 
-        // Obtengo productos paginados directamente con las opciones de paginación
-        const result = await productManager.paginate({
-          filter: {},
-          opts: { page, limit }
-        });
-        
-        // Renderizo la vista de productos con los datos obtenidos
-        res.render("products",{
-          products: result.docs.map(product => ({
-            id: product._id, 
-            photo: product.photo,
-            title: product.title,
-            category: product.category,
-            price: product.price,
-            stock: product.stock,
-          })),
-          total: result.totalDocs,
-          page: result.page,
-          pages: result.totalPages
-      });
+    const result = await productManager.paginate({
+      filter: {},
+      opts: { page, limit }
+    });
 
-    } catch (error) {
-      return next(error);
-    }
+    res.render("products", {
+      products: result.docs.map(product => ({
+        id: product._id, 
+        photo: product.photo,
+        title: product.title,
+        category: product.category,
+        price: product.price,
+        stock: product.stock,
+      })),
+      total: result.totalDocs,
+      page: result.page,
+      pages: result.totalPages
+    });
+
+  } catch (error) {
+    return next(error);
+  }
 });
 
 productsRouter.get("/real", async (req, res, next) => {

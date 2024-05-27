@@ -39,10 +39,10 @@ class Manager {
     }
   }
 
-  async readOne(filter) {
+  async readOne(id) {
     try {
       //   const one = await User.findById(id);
-      const one = await this.Model.findOne({ filter }).lean();
+      const one = await this.Model.findById(id).lean();
       return one;
     } catch (error) {
       throw error;
