@@ -7,9 +7,21 @@ const cartsRouter = Router();
 cartsRouter.get("/:cid", async (req, res, next) => {
   try {
     const { cid } = req.params;
-    const cart = await cartsManager.getCartById(cid);
-    const products = await productsManager.getProducts();
+    const cart = await cartsManager.readOne(cid);
+    const products = await productsManager.read();
     return res.render("carts", { cart, products });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+cartsRouter.get("/:user_id", async (req, res, next) => {
+  try {
+    const { user_id } = req.params; // Obtén el ID del usuario de los parámetros de la URL
+    const cart = await cartsManager.readOne({user_id}); // Busca el carrito específico por el ID del usuario
+
+    // Renderiza la vista "carts" pasando el carrito
+    return res.render("carts", { title: "CART", cart });
   } catch (error) {
     return next(error);
   }
@@ -17,4 +29,6 @@ cartsRouter.get("/:cid", async (req, res, next) => {
 
 export default cartsRouter;
 
-//ACA TENGO QUE CREAR UNA RUTA HACIA LA VISTA DE UN CARRITO Y AGREGAR FUNCIONALIDAD AL BOTON DE ADD TO LIST DESDE LA VISTA DE DETAILS
+//ACA TENGO QUE CREAR UNA RUTA HACIA LA VISTA DE UN CARRITO Y 
+//AGREGAR FUNCIONALIDAD AL BOTON DE ADD TO LIST DESDE LA VISTA DE DETAILS
+
