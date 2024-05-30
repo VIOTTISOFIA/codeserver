@@ -28,26 +28,37 @@ cartsRouter.get("/", async (req, res, next) => {
       response: all,
     });
   } catch (error) {
-    return next (error);
+    return next(error);
   }
-})
+});
 
 //Endpoint para leer un carrito segun ID de usuario
-cartsRouter.get("/:user_id", async (req, res, next) => {
+
+cartsRouter.get("/user", async (req, res, next) => {
   try {
-    const { user_id } = req.params;
-    const all = await cartsManager.read({ user_id });
-    if (all.length > 0) {
+    const { user_id } = req.query;
+
+    // Verificar explícitamente si user_id está definido
+    if (!user_id) {
+      const error = new Error("User ID is required");
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const cart = await cartsManager.readCart({ user_id });
+    if (cart.length > 0) {
       return res.json({
         statusCode: 200,
         message: "READ",
-        response: all,
+        response: cart,
       });
-    }
-      const error = new Error("NOT FOUND");
+    } else {
+      const error = new Error("Cart not found for user required");
       error.statusCode = 404;
       throw error;
+    }
   } catch (error) {
+    console.error("Error occurred:", error);  // Log para capturar cualquier error
     return next(error);
   }
 });
@@ -82,7 +93,6 @@ cartsRouter.delete("/:cid", async (req, res, next) => {
       });
     } else {
       throw new Error(`Failed to delete cart with ID ${cid}.`);
-
     }
   } catch (error) {
     return next(error);

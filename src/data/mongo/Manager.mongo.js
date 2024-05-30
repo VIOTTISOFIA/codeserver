@@ -41,13 +41,23 @@ class Manager {
 
   async readOne(filter) {
     try {
-      //   const one = await User.findById(id);
-      const one = await this.Model.findById(filter).lean();
-      return one;
+        const one = await this.Model.findOne(filter).lean();
+        return one;
     } catch (error) {
-      throw error;
+        throw error;
     }
+}
+
+//nuevo metodo 'readCart' para usar en el endpoint que trae todos los carritos de un usuario
+async readCart(filter) {
+  try {
+      const results = await this.Model.find(filter).lean();
+      return results;
+  } catch (error) {
+      throw error;
   }
+}
+
   async update(id, data) {
     try {
       const one = await this.Model.findByIdAndUpdate(id, data, { new: true });
