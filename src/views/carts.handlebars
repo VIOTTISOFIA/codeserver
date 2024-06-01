@@ -1,58 +1,39 @@
 <main>
-    <h1 class="text-center bg-success-subtle p-2 text-dark-emphasis bg-opacity-25 fst-italic w-100">The Baby's Shop</h1>
-    <h2 class="fw-bold text-center">Your Cart!</h2>
-    {{#if cart}}
-    <section class="text-center m-3 w-100 d-flex flex-wrap justify-content-center gap-3">
-        {{#each cart}}
-        <div class="card" style="width: 18rem;">
-            <img src="{{this.photo}}" class="card-img-top" alt="{{this.title}}">
-            <div class="card-body">
-                <h5 class="card-title">{{this.title}}</h5>
-                    <strong class="card-text">Price: {{this.price}}</strong>
-                    <label for="quantity">Cantidad:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="{{this.quantity}}"> 
-            </div>
-                <a href="#" class="btn btn-primary mt-auto">BUY!</a>
-            </div>
+    {{#if carts}}
+    <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
+      <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Carritos del Usuario: {{#if carts.[0].user_id}}{{carts.[0].user_id.email}}{{/if}}</h2>
+    </div>
+    <br>
+    {{#each carts}}
+    <div class="d-flex mb-2 mx-auto justify-content-center">
+
+      <div class="border border-black rounded-2 d-flex mt-3">
+
+        <div class="col-md-4 align-content-center">
+          <img class="img-fluid object-fit-cover p-3" style="width: 20rem" src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}" alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
         </div>
-        {{/each}}
-    </section>
-    {{else}}
-    <p class="text-center">Your cart is empty!</p>
-    {{/if}}
+      
+        <div class="mx-3">
+          <h3 class="my-3 " "font-size: 20px;">Producto: {{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
+         <label for="quantity">Cantidad:</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="{{this.quantity}}">
+        <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
+       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+        </div>
+       
+      </div>
+
+    </div>
+    {{/each}}
+    <div class="d-flex justify-content-between">
+       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+        <button href="#" class="btn btn-info mx-auto">Buy now</button>
+       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+
+    </div>
+  {{else}}
+    <p>No se encontraron carritos para el usuario especificado.</p>
+  {{/if}}
 </main>
 
-
-{{!-- verificar porque no arroja el carrito creado en mongo --}}
-
-
-
-
-
-
-
-{{!-- ------------------------------------------------------------------------------------------------------------------ --}}
-
-{{!-- <main>
-    <h1 class="text-center bg-success-subtle p-2 text-dark-emphasis bg-opacity-25 fst-italic W-100">The Baby's Shop</h1>
-    <h2 class="fw-bold text-center">Your Cart!</h2>
-    <section class="text-center m-3 w-100 d-flex flex-wrap justify-content-center gap-3">
-        {{#each cart}}
-        <div class="card" style="width: 18rem;">
-                        <img src="{{this.photo}}" class="card-img-top" alt="{{this.title}}">
-                <div class="card-body">
-                                <h5 class="card-title">{{this.title}}</h5>
-                                <p class="card-text">Category: {{this.category}}</p>
-                        <div class="card-body d-flex justify-content-around">
-                                <strong class="card-text">Price: {{this.price}}</strong>
-                                <strong class="card-text">Stock: {{this.stock}}</strong>
-                        </div>
-                       {{!--  <a href="/products/{{this._id}}" class="btn btn-primary mt-auto">BUY!</a> --}}
-             {{!--    </div>
-        </div> --}}
-      {{!--   {{/each}} </main> --}}
-
-{{!-- AGREGAR ICONO TRASH PARA ELIMINAR UN PRODUCTO
-TAMBIEN AGREGAR UNA CAJA DE BOTONES PARA SUMAR O RESTAR CANTIDADES MEDIANTE UN BOTON - Y UN + 
-AGREGAR UN BOTON DE FINALIZAR LA COMPRA Y VACIAR EL CARRITO
-AGREGAR UN BOTON DE CANCELAR COMPRA Y VACIAR EL CARRITO--}}
+{{!-- DAR FUNCIONLIDAD A LOS BOTONES DE COMPRAR Y ELIMINAR --}}

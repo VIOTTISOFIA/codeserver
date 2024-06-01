@@ -7,7 +7,10 @@ Tenemos:
   - Una ruta para actualizar un producto dentro de un carrito (se elimina uno y se agrega otro) mediante el ID de el carrito especifico.
   - Una ruta para eliminar un producto especifico de un carrito
 
+Asi mismo se creo un nuevo metodo en el manager generico (readCart) para usar especificamente con las rutas de carts. Esto para no generar conflictos con el manager de products y users por las modificaciones necesarias.
+
 Tambien se creo el enrutador correspondiente para la vista de los productos de un carrito 
 
-Para probarlo, debemos seguir las siguientes indicaciones:
-------------------------
+Para probarlo, usamos la siguiente ruta:
+
+http://localhost:8080/carts/cart?user_id="_id-de-un-usuario-existente" por ejemplo "66379f89fdc2a1f1c2040722" (sin las comillas)

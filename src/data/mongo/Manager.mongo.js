@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 class Manager {
@@ -16,7 +16,7 @@ class Manager {
   async read(filter) {
     // filter para filtrar con el objeto que corresponda
     try {
-      const all = await this.Model.find(filter).lean()
+      const all = await this.Model.find(filter).lean();
       return all;
     } catch (error) {
       throw error;
@@ -28,11 +28,11 @@ class Manager {
       const options = {
         ...opts,
         page: opts.page || 1, // Página predeterminada: 1
-        limit: opts.limit || 10 // Límite predeterminado: 10
+        limit: opts.limit || 10, // Límite predeterminado: 10
       };
 
       const result = await this.Model.paginate(filter, options);
-      console.log(result)
+      console.log(result);
       return result;
     } catch (error) {
       throw error;
@@ -41,22 +41,22 @@ class Manager {
 
   async readOne(filter) {
     try {
-        const one = await this.Model.findOne(filter).lean();
-        return one;
+      const one = await this.Model.findById(filter).lean();
+      return one;
     } catch (error) {
-        throw error;
+      throw error;
     }
-}
+  }
 
-//nuevo metodo 'readCart' para usar en el endpoint que trae todos los carritos de un usuario
-async readCart(filter) {
-  try {
+  //nuevo metodo 'readCart' para usar en el endpoint que trae todos los carritos de un usuario
+  async readCart(filter) {
+    try {
       const results = await this.Model.find(filter).lean();
       return results;
-  } catch (error) {
+    } catch (error) {
       throw error;
+    }
   }
-}
 
   async update(id, data) {
     try {
@@ -77,6 +77,6 @@ async readCart(filter) {
   }
 }
 
-mongoose.plugin(mongoosePaginate)
+mongoose.plugin(mongoosePaginate);
 
 export default Manager;
