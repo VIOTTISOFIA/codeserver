@@ -7,19 +7,19 @@
     {{#each carts}}
     <div class="d-flex mb-2 mx-auto justify-content-center">
 
-      <div class="border border-black rounded-2 d-flex mt-3">
+      <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
 
         <div class="col-md-4 align-content-center">
           <img class="img-fluid object-fit-cover p-3" style="width: 20rem" src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}" alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
         </div>
       
         <div class="mx-3">
-          <h3 class="my-3 " "font-size: 20px;">Producto: {{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
+          <h3 class="my-3 " "font-size: 20px;">{{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
          <label for="quantity">Cantidad:</label>
           <input type="number" id="quantity" name="quantity" min="1" value="{{this.quantity}}">
         <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
-       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
-        </div>
+       <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}"><img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+       </div>
        
       </div>
 
@@ -27,13 +27,36 @@
     {{/each}}
     <div class="d-flex justify-content-between">
        <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
-        <button href="#" class="btn btn-info mx-auto">Buy now</button>
+        {{!-- <button href="#" class="btn btn-info mx-auto">Buy now</button> --}}
        <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
-
     </div>
   {{else}}
     <p>No se encontraron carritos para el usuario especificado.</p>
   {{/if}}
 </main>
 
-{{!-- DAR FUNCIONLIDAD A LOS BOTONES DE COMPRAR Y ELIMINAR --}}
+<script>
+  async function removeFromCart(cartItemId) {
+    try {
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/${cartItemId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        // muestro un mensaje de exito
+        alert("Product deleted successfully");
+
+        // Si la solicitud se realizó con éxito, recargar la página
+        location.reload();
+      } 
+      else {
+        // Si hubo un error en la solicitud, mostrar un mensaje de error
+        console.error("Error on deleting product:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error on deleting product:", error.message);
+    }
+  }
+</script>
+

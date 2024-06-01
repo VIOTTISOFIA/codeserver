@@ -9,8 +9,8 @@ Tenemos:
 
 Asi mismo se creo un nuevo metodo en el manager generico (readCart) para usar especificamente con las rutas de carts. Esto para no generar conflictos con el manager de products y users por las modificaciones necesarias.
 
-Tambien se creo el enrutador correspondiente para la vista de los productos de un carrito 
+Tambien se creo el enrutador correspondiente para la vista de los productos de un carrito usando plantillas de handlebars
 
 Para probarlo, usamos la siguiente ruta:
 
-http://localhost:8080/carts/cart?user_id="_id-de-un-usuario-existente" por ejemplo "66379f89fdc2a1f1c2040722" (sin las comillas)
+http://localhost:8080/carts/cart?user_id=66379f89fdc2a1f1c2040722 (ID harcodeado para que funcione con metodo 'create' y 'destroy')
