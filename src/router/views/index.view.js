@@ -1,11 +1,13 @@
 import { Router } from "express";
 import productsRouter from "./products.view.js";
 import usersRouter from "./users.view.js";
-import userManager from "../../data/fs/UserManager.fs.js";
-import productManager from "../../data/fs/ProductManager.fs.js";
+import cartsRouter from "./carts.view.js";
+import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
+
 
 const viewsRouter = Router();
 
+viewsRouter.use("/carts", cartsRouter);
 viewsRouter.use("/products", productsRouter);
 viewsRouter.use("/users", usersRouter);
 viewsRouter.get("/", async (req, res, next) => {
@@ -40,12 +42,4 @@ viewsRouter.get("/register", (req, res, next) => {
     return next(error);
   }
 });
-// viewsRouter.get("/profile", async (req, res, next) => {
-//   try {
-//     const users = await userManager.read();
-//     return res.render("profile", { title: "PROFILE", users });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
 export default viewsRouter;

@@ -24,6 +24,11 @@ const schema = new Schema(
     timestamps: true,
   }
 );
+
 schema.plugin(mongoosePaginate);
+// schema.pre("find", function () {
+//   this.populate("user_id", "email photo -_id");
+// });
+
 const User = model(collection, schema);
 export default User;
