@@ -26,16 +26,16 @@
     </div>
     {{/each}}
     <div class="d-flex justify-content-between w-50 mx-auto">
-       <a href="#" onclick="checkout()"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
-       <a href="#" onclick="destroyAll"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+       <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
+       <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
     </div>
   {{else}}
-    <p>No se encontraron carritos para el usuario especificado.</p>
+    <p>Tu carrito esta vacio</p>
   {{/if}}
 </main>
 
 <script>
-  //funcion para eliminar un producto del carrito
+    //funcion para eliminar un producto del carrito
   async function removeFromCart(cartItemId) {
     try {
       // Realizar una solicitud DELETE al endpoint correspondiente
@@ -59,8 +59,57 @@
     }
   }
 
-  //funcion para cancelar y vaciar el carrito CREAR LA FUNCIONALIDAD CON EL BOTON
-  
-  //funcion para confirmar la compra y vaciar el carrito
-</script>
+  //funcion para cancelar y vaciar el carrito 
+  async function destroyAll(event, user_id) {
+    try{
+      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+      console.log("User ID:", user_id);
 
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/cart/${user_id}`, {
+        method: 'DELETE'
+      });
+
+      console.log("fetch:", response)
+
+      if(response.ok) {
+        alert("Cart is empty")
+        console.log("resultado:",response)
+        location.reload()
+        
+      } else {
+         const error = await response.json();
+        console.error("Error on cart deleting:", error.message);
+      }
+    } catch(error){
+      console.error(error)
+    }
+  }
+
+//funcion para confirmar la compra y vaciar el carrito
+  async function checkout(event, user_id) {
+    try{
+      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+      console.log("User ID:", user_id);
+
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/cart/${user_id}`, {
+        method: 'DELETE'
+      });
+
+      console.log("fetch:", response)
+
+      if(response.ok) {
+        alert("successful purchase!")
+        console.log("resultado:",response)
+        location.reload()
+        
+      } else {
+         const error = await response.json();
+        console.error("Error on purchase:", error.message);
+      }
+    } catch(error){
+      console.error(error)
+    }
+  }
+</script>
