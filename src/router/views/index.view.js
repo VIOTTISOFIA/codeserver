@@ -42,5 +42,4 @@ viewsRouter.get("/register", (req, res, next) => {
     return next(error);
   }
 });
-
 export default viewsRouter;

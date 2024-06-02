@@ -50,7 +50,6 @@ async function readOne(req, res, next) {
     return next(error);
   }
 }
-
 async function create(req, res, next) {
   try {
     const data = req.body;
