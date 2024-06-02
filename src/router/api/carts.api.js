@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { ObjectId } from 'mongodb';
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 
 const cartsRouter = Router();
@@ -8,6 +9,7 @@ cartsRouter.get("/", read);
 cartsRouter.get("/cart", readCart);
 cartsRouter.put("/:cid", update);
 cartsRouter.delete("/:cid", destroy);
+cartsRouter.delete("/cart/:user_id", destroyAll);
 
 //Endpoint para crear un carrito
 async function create(req, res, next) {
@@ -59,6 +61,7 @@ async function readCart(req, res, next) {
         message: "READ",
         response: cart,
       });
+
     } else {
       const error = new Error("Cart not found for user required");
       error.statusCode = 404;
@@ -105,4 +108,26 @@ async function destroy(req, res, next) {
     return next(error);
   }
 }
+
+async function destroyAll(req, res, next) {
+  try {
+    const { user_id } = req.params;
+    console.log("user_id:", user_id)
+
+    const userIdObject = new ObjectId(user_id); 
+    console.log("Conversion a ObjectId:", userIdObject);
+ 
+    const result = await cartsManager.destroyAll(userIdObject);
+    console.log("respuesta final",  result)
+    return res.json({
+      statusCode: 200,
+      message: "DELETED",
+      response: result,
+    });
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+}
+
 export default cartsRouter;

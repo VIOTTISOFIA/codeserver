@@ -75,7 +75,20 @@ class Manager {
       throw error;
     }
   }
-}
+
+//nuevo metodo 'destroyAll' para usar en el endpoint que elimina todos los carritos de un usuario
+  async destroyAll(userId) {
+    try {
+      console.log("userId recibido en destroyAll:", userId);
+      const result = await this.Model.deleteMany({ 'user_id': userId });
+      console.log("Resultado de la eliminación:", result);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+  }
 
 mongoose.plugin(mongoosePaginate);
 

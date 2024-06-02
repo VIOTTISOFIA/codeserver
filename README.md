@@ -7,7 +7,9 @@ Tenemos:
   - Una ruta para actualizar un producto dentro de un carrito (se elimina uno y se agrega otro) mediante el ID de el carrito especifico.
   - Una ruta para eliminar un producto especifico de un carrito
 
-Asi mismo se creo un nuevo metodo en el manager generico (readCart) para usar especificamente con las rutas de carts. Esto para no generar conflictos con el manager de products y users por las modificaciones necesarias.
+Asi mismo se crearon dos nuevos metodos en el manager generico:
+  - (readCart) para usar especificamente con las rutas de carts. Esto para no generar conflictos con el manager de products y users por las modificaciones necesarias.
+  - (destroyAll) para eliminar todos los carritos de un usuario segun su ID
 
 Tambien se creo el enrutador correspondiente para la vista de los productos de un carrito usando plantillas de handlebars
 

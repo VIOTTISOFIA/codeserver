@@ -25,10 +25,9 @@
 
     </div>
     {{/each}}
-    <div class="d-flex justify-content-between">
-       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
-        {{!-- <button href="#" class="btn btn-info mx-auto">Buy now</button> --}}
-       <a href="#"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+    <div class="d-flex justify-content-between w-50 mx-auto">
+       <a href="#" onclick="checkout()"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
+       <a href="#" onclick="destroyAll"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
     </div>
   {{else}}
     <p>No se encontraron carritos para el usuario especificado.</p>
@@ -36,6 +35,7 @@
 </main>
 
 <script>
+  //funcion para eliminar un producto del carrito
   async function removeFromCart(cartItemId) {
     try {
       // Realizar una solicitud DELETE al endpoint correspondiente
@@ -58,5 +58,9 @@
       console.error("Error on deleting product:", error.message);
     }
   }
+
+  //funcion para cancelar y vaciar el carrito CREAR LA FUNCIONALIDAD CON EL BOTON
+  
+  //funcion para confirmar la compra y vaciar el carrito
 </script>
 

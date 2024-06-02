@@ -28,7 +28,7 @@ const schema = new Schema(
 );
 
 schema.pre("find", function () {
-  this.populate("user_id", "email photo -_id");
+  this.populate("user_id", "email photo");
 });
 
 //Hacemos populacion de el producto con todos sus datos
