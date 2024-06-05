@@ -24,7 +24,9 @@ class UserManager {
       } else {
         const user = {
           id: crypto.randomBytes(12).toString("hex"),
-          foto: data.photo || "https://www.pngplay.com/image/325510",
+          photo:
+            data.photo ||
+            "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
           email: data.email,
           password: data.password,
           role: data.role,
@@ -142,6 +144,6 @@ async function test() {
   console.log(await gestorDeUsuarios.read());
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
-//test();
+// test();
 const userManager = new UserManager();
 export default userManager;

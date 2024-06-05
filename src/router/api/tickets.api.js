@@ -15,6 +15,23 @@ ticketsRouter.get("/:uid", async (req, res, next) => {
           user_id: new Types.ObjectId(uid),
         },
       },
+      {
+        $lookup: {
+          foreignField: "_id",
+          from: "products",
+          localField: "product_id",
+          as: "product_id",
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [{ $arrayElemAt: ["$product_id", 0] }, "$ROOT"],
+          },
+        },
+      },
+      { $set: { subTotal: { $multiply: ["$quantity", "$price"] } } },
+      // { $group: { _id: "$user_id", total: { $sum: "$subTotal" } } },
     ]);
     // console.log(`Found tickets: ${JSON.stringify(tickets)}`);
     return res.json({

@@ -40,12 +40,12 @@ viewsRouter.get("/register", (req, res, next) => {
     return next(error);
   }
 });
-// viewsRouter.get("/profile", async (req, res, next) => {
-//   try {
-//     const users = await userManager.read();
-//     return res.render("profile", { title: "PROFILE", users });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
+viewsRouter.get("/profile", async (req, res, next) => {
+  try {
+    const users = await userManager.read();
+    return res.render("profile", { title: "PROFILE", users });
+  } catch (error) {
+    return next(error);
+  }
+});
 export default viewsRouter;

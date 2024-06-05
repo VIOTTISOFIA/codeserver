@@ -14,7 +14,6 @@ class Manager {
     // filter para filtrar con el objeto que corresponda
     try {
       const all = await this.Model.find(filter).lean();
-
       return all;
     } catch (error) {
       throw error;
@@ -24,7 +23,7 @@ class Manager {
   async paginate({ filter, opts }) {
     try {
       const all = await this.Model.paginate(filter, opts);
-
+      console.log(filter);
       return all;
     } catch (error) {
       throw error;
@@ -53,6 +52,15 @@ class Manager {
     try {
       const one = await this.Model.findByIdAndDelete(id);
       return one;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async aggregate(obj) {
+    try {
+      const result = await this.Model.aggregate(obj);
+      return result;
     } catch (error) {
       throw error;
     }
