@@ -13,4 +13,12 @@ export default async (socket) => {
     await userManager.create(data);
     socket.emit("users", await userManager.read());
   });
+  socket.on("Register", async (data) => {
+    await productManager.create(data);
+    socket.emit("products", await productManager.read());
+  });
+  socket.on("register", async (data) => {
+    await userManager.create(data);
+    socket.emit("users", await userManager.read());
+  });
 };

@@ -82,7 +82,7 @@ class UserManager {
 
 const gestorDeUsuarios = new UserManager();
 gestorDeUsuarios.create({
-  photo: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
+  photo: "sofia.jpg",
   email: "sofi_04_04@hotmail.com",
   password: "hola1234",
   role: "adm",
