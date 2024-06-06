@@ -15,4 +15,4 @@ Tambien se creo el enrutador correspondiente para la vista de los productos de u
 
 Para probarlo, usamos la siguiente ruta:
 
-http://localhost:8080/carts/cart?user_id=66379f89fdc2a1f1c2040722 (ID harcodeado para que funcione con metodo 'create' y 'destroy')
+http://localhost:8080/carts/cart?user_id=6660fcb73892bc1eecfeabe9 (ID harcodeado para que funcione con metodo 'create' y 'destroy')
