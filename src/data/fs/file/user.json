@@ -1,29 +1,33 @@
 [
   {
-    "id": "a14b01f9875c8d233f2cc6d0",
+    "id": "0f91fe4dbd35789ca1be6fa0",
     "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "sofi_04_04@hotmail.com",
+    "age": 33,
     "password": "hola1234",
     "role": "adm"
   },
   {
-    "id": "24d3f1788c9bfa97f146fe43",
+    "id": "7866e3e2b4a8313b38316061",
     "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "roxana@hotmail.com",
+    "age": 24,
     "password": "hola5678",
     "role": "user"
   },
   {
-    "id": "0afcd4f0e59762029e346146",
+    "id": "bf91a83d73fb3fd4e454789e",
     "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "celine@hotmail.com",
+    "age": 18,
     "password": "hola91011",
     "role": "user"
   },
   {
-    "id": "0f5102ad3d2579454d223a8c",
+    "id": "48a35bdd67b2944c0d985980",
     "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "martin@hotmail.com",
+    "age": 33,
     "password": "hola1213",
     "role": "user"
   }

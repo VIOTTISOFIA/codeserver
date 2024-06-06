@@ -28,6 +28,7 @@ class UserManager {
             data.photo ||
             "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
           email: data.email,
+          age: data.age,
           password: data.password,
           role: data.role,
         };
@@ -123,21 +124,25 @@ async function test() {
   const gestorDeUsuarios = new UserManager();
   await gestorDeUsuarios.create({
     email: "sofi_04_04@hotmail.com",
+    age: 33,
     password: "hola1234",
     role: "adm",
   });
   await gestorDeUsuarios.create({
     email: "roxana@hotmail.com",
+    age: 24,
     password: "hola5678",
     role: "user",
   });
   await gestorDeUsuarios.create({
     email: "celine@hotmail.com",
+    age: 18,
     password: "hola91011",
     role: "user",
   });
   await gestorDeUsuarios.create({
     email: "martin@hotmail.com",
+    age: 33,
     password: "hola1213",
     role: "user",
   });
