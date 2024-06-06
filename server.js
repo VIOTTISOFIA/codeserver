@@ -31,19 +31,18 @@ nodeServer.listen(port, ready);
 //configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
 const hbs = ExpressHandlebars.create({
   helpers: {
-      range: function(start, end) {
-          let range = [];
-          for (let i = start; i <= end; i++) {
-              range.push(i);
-          }
-          return range;
-      },
-      ifEquals: function(arg1, arg2, options) {
-          return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    range: function (start, end) {
+      let range = [];
+      for (let i = start; i <= end; i++) {
+        range.push(i);
       }
-  }
+      return range;
+    },
+    ifEquals: function (arg1, arg2, options) {
+      return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+    },
+  },
 });
-
 
 socketServer.on("connection", socketCb);
 
