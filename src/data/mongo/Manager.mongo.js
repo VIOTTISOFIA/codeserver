@@ -23,7 +23,17 @@ class Manager {
     }
   }
 
-  async paginate({ filter = {}, opts = {} } = {}) {
+  async paginate({ filter, opts }) {
+    try {
+      const all = await this.Model.paginate(filter, opts);
+      console.log(filter);
+      return all;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async readOne(id) {
     try {
       const options = {
         ...opts,
@@ -76,11 +86,11 @@ class Manager {
     }
   }
 
-//nuevo metodo 'destroyAll' para usar en el endpoint que elimina todos los carritos de un usuario
+  //nuevo metodo 'destroyAll' para usar en el endpoint que elimina todos los carritos de un usuario
   async destroyAll(userId) {
     try {
       console.log("userId recibido en destroyAll:", userId);
-      const result = await this.Model.deleteMany({ 'user_id': userId });
+      const result = await this.Model.deleteMany({ user_id: userId });
       console.log("Resultado de la eliminación:", result);
 
       return result;
@@ -88,7 +98,16 @@ class Manager {
       throw error;
     }
   }
+
+  async aggregate(obj) {
+    try {
+      const result = await this.Model.aggregate(obj);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
+}
 
 mongoose.plugin(mongoosePaginate);
 

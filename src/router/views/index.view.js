@@ -4,7 +4,6 @@ import usersRouter from "./users.view.js";
 import cartsRouter from "./carts.view.js";
 import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 
-
 const viewsRouter = Router();
 
 viewsRouter.use("/carts", cartsRouter);
@@ -38,6 +37,14 @@ viewsRouter.get("/login", (req, res, next) => {
 viewsRouter.get("/register", (req, res, next) => {
   try {
     return res.render("register", { title: "REGISTER" });
+  } catch (error) {
+    return next(error);
+  }
+});
+viewsRouter.get("/profile", async (req, res, next) => {
+  try {
+    const users = await userManager.read();
+    return res.render("profile", { title: "PROFILE", users });
   } catch (error) {
     return next(error);
   }
