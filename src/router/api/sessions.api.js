@@ -2,10 +2,11 @@ import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import session from "express-session";
 import isValidEmail from "../../middlewares/isValidEmail.mid.js";
+import isValidData from "../../middlewares/isValidData.mid.js";
 
 const sessionRouter = Router();
 
-sessionRouter.post("/register", isValidEmail, async (req, res, next) => {
+sessionRouter.post("/register", isValidData, isValidEmail, async (req, res, next) => {
   try {
     const data = req.body
     await userManager.create(data);
