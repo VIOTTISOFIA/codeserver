@@ -16,9 +16,9 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      required: true,
+     /*  required: true, */
     },
-    user: { type: String, required: true },
+    /* user: { type: String, required: true }, */
   },
   {
     timestamps: true,
@@ -32,3 +32,6 @@ schema.plugin(mongoosePaginate);
 
 const User = model(collection, schema);
 export default User;
+
+
+// linea 19 y 21 las comento para eliminar el campo obligatorio del id de usuario

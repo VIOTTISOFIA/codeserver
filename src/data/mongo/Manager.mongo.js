@@ -48,6 +48,16 @@ class Manager {
     }
   }
 
+  //nuevo metodo 'ReadByEmail' utilizado en sessions
+  async readByEmail(email) {
+    try {
+      const one = await this.Model.findOne({ email });
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   //nuevo metodo 'readCart' para usar en el endpoint que trae todos los carritos de un usuario
   async readCart(filter) {
     try {
