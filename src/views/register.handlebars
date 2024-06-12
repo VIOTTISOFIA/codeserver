@@ -18,10 +18,14 @@
 <script>
     document.querySelector("#register").addEventListener("click", async ()=> {
         const data = {
-            photo: document.querySelector("#photo").value,
             email: document.querySelector("#email").value,
             age: document.querySelector("#age").value,
             password: document.querySelector("#password").value,
+        }
+
+        const photoValue = document.querySelector("#photo").value;
+        if (photoValue) {
+            data.photo = photoValue;
         }
 
         const opts = {

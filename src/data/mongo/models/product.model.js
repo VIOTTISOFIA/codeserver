@@ -9,7 +9,7 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      required: true,
+      /* required: true, */
     },
     title: { type: String, required: true },
     photo: {
