@@ -15,8 +15,48 @@
     <article id="products" class="d-flex flex-wrap w-50"></article>
 </section>
 
-<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
+<script>
+    document.querySelector("#register").addEventListener("click", async () => {
+        const data = {
+            email: document.querySelector("#email").value,
+            age: document.querySelector("#age").value,
+            password: document.querySelector("#password").value,
+        }
+
+        const photoValue = document.querySelector("#photo").value;
+        if (photoValue) {
+            data.photo = photoValue;
+        }
+
+        const opts = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        }
+
+        let response = await fetch("/api/sessions/register", opts)
+        response = await response.json()
+
+        console.log(response)
+
+        if (response.statusCode === 201) {
+            alert("User created successfully")
+            location.replace("/login")
+        } else {
+            alert(response.message)
+        }
+
+
+
+    })
+
+</script>
+
+
+
+{{!-- // -------------- SCRIPT DE WEBSOCKETS -------------------------// --}}
+{{!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 <script>
     const socket = io();
     socket.on("users", data => {
@@ -42,4 +82,4 @@
         console.log({ photo, email, password})
         socket.emit("register", { photo, email, password })
     })
-</script>
+</script> --}}
