@@ -7,17 +7,16 @@
         <form class="d-flex flex-column w-50 ">
             <input class="m-2" type="text" name="photo" id="photo" placeholder="PHOTO">
             <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL">
-            <input class="m-2" type="text" name="age" id="age" placeholder="AGE">
-            <input class="m-2" type="text" name="password" id="password" placeholder="PASSWORD">
+            <input class="m-2" type="text" name="age" id="age" placeholder="AGE" required>
+            <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD" required>
             <input class="m-2" type="button" id="register" value="REGISTER!">
         </form>
     </article>
     <article id="products" class="d-flex flex-wrap w-50"></article>
 </section>
 
-
 <script>
-    document.querySelector("#register").addEventListener("click", async () => {
+    document.querySelector("#register").addEventListener("click", async ()=> {
         const data = {
             email: document.querySelector("#email").value,
             age: document.querySelector("#age").value,
@@ -33,36 +32,46 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
-        }
+            }
 
-        let response = await fetch("/api/sessions/register", opts)
-        response = await response.json()
+            let response = await fetch ("/api/sessions/register", opts)
+            response = await response.json()
 
-        console.log(response)
+            console.log(response)
 
-        if (response.statusCode === 201) {
-            alert("User created successfully")
-            location.replace("/login")
-        } else {
-            alert(response.message)
-        }
+            if (response.statusCode === 201) {
+                alert("User created successfully")
+                location.replace("/login")
+            } else {
+                alert(response.message)
+            }
+            
+            
 
-
-
-    })
-
+    } )
+            
 </script>
 
 
 
-{{!-- // -------------- SCRIPT DE WEBSOCKETS -------------------------// --}}
-{{!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-<script>
-    const socket = io();
-    socket.on("users", data => {
-        console.log(data)
-        let template = ``
-        template = data.map(each => `
+
+
+
+
+
+
+
+
+{{!-- // --------------   SCRIPT DE WEBSOCKETS   -------------------------// --}}
+
+{{!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script> --}}
+
+{{!-- <script>
+   // const socket = io();
+   // socket.on("users", data => {
+   //     console.log(data)
+   //     let template = ``
+      //    template = data.map(each => `
     <div class="card" style="width: 18rem;">
             <img src="${each.photo}" class="card-img-top" alt="${each.id}">
         <div class="card-body">

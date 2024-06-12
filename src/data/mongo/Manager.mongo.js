@@ -50,15 +50,17 @@ class Manager {
   }
   async readByEmail(email) {
     try {
-      const one = await this.Model.findOne({ email });
+      const one = await this.Model.findById(filter).lean();
       return one;
     } catch (error) {
       throw error;
     }
   }
-  async readOne(filter) {
+
+  //nuevo metodo 'ReadByEmail' utilizado en sessions
+  async readByEmail(email) {
     try {
-      const one = await this.Model.findById(filter).lean();
+      const one = await this.Model.findOne({ email });
       return one;
     } catch (error) {
       throw error;
