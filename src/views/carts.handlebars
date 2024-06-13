@@ -29,7 +29,13 @@
        <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
     </div>
   {{else}}
-    <p>Tu carrito esta vacio</p>
+  <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded">
+    <div class="d-flex justify-content-center">
+    <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Bolsas de compras">
+  </div>
+    <p class="text-center fst-italic" style="font-size: 35px;">Your cart is empty!</p>
+    <a class="btn btn-primary mt-auto w-50 align-self-center" href="/products">Continue shopping!</a>
+  </div>
   {{/if}}
 </main>
 
