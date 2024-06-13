@@ -44,6 +44,7 @@ sessionRouter.get("/online", (req, res, next) => {
         statusCode: 200,
         message: "Is online",
         user_id: req.session.user_id,
+        email: req.session.email,
       });
     }
     return res.json({

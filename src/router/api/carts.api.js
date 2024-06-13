@@ -13,8 +13,20 @@ cartsRouter.delete("/cart/:user_id", destroyAll);
 
 //Endpoint para crear un carrito
 async function create(req, res, next) {
-  try {
-    const data = req.body;
+    try {
+      const data = req.body;
+      const user_id = req.session.user_id;
+      //console.log("user_id:", user_id)
+  
+      if (!user_id) {
+        return res.status(401).json({
+          statusCode: 401,
+          message: "User not logged in",
+        });
+      }
+      // Añadir el user_id a los datos
+      data.user_id = user_id;
+  
     const one = await cartsManager.create(data);
     return res.json({
       statusCode: 201,
@@ -41,7 +53,6 @@ async function read(req, res, next) {
 }
 
 //Endpoint para leer un carrito segun ID de usuario
-
 async function readCart(req, res, next) {
   try {
     const { user_id } = req.query;
