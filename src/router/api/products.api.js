@@ -1,13 +1,14 @@
 import { Router } from "express";
 //import productManager from "../../data/fs/ProductManager.fs.js";
 import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/", read);
 productsRouter.get("/paginate", paginate);
 productsRouter.get("/:pid", readOne);
-productsRouter.post("/", create);
+productsRouter.post("/", isValidAdmin, create);
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
 
@@ -30,7 +31,7 @@ async function read(req, res, next) {
   }
 }
 
-async function paginate (req, res, next) {
+async function paginate(req, res, next) {
   try {
     const filter = {};
     const opts = {};

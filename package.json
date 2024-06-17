@@ -15,10 +15,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "connect-mongo": "^5.1.0",
->>>>>>> mongoose_Roxana
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -28,10 +25,7 @@
     "mongoose-paginate-v2": "^1.8.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-<<<<<<< HEAD
-=======
     "session-file-store": "^1.5.0",
->>>>>>> mongoose_Roxana
     "socket.io": "^4.7.5"
   }
 }

@@ -7,11 +7,8 @@ import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-<<<<<<< HEAD
-=======
 //import fileStore from "session-file-store";
 import MongoStore from "connect-mongo";
->>>>>>> mongoose_Roxana
 
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
@@ -75,18 +72,17 @@ server.use(cookieParser(process.env.SECRET_COOKIE));
 //const FileSession = fileStore(session);
 server.use(
   session({
-
-  //FILESTORE
-  /*  store: new FileSession({
+    //FILESTORE
+    /*  store: new FileSession({
       path: "./src/data/fs/file/sessions",
       ttl: 60 * 60,
     }), */
 
-  //MONGOSTORE
-    store: new MongoStore ({
-       mongoUrl: process.env.MONGO_URI,
-       ttl: 60 * 60
-     }),
+    //MONGOSTORE
+    store: new MongoStore({
+      mongoUrl: process.env.MONGO_URI,
+      ttl: 60 * 60,
+    }),
     secret: process.env.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
