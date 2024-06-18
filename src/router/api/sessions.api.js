@@ -26,6 +26,8 @@ sessionRouter.post("/login", async (req, res, next) => {
       req.session.online = true;
       req.session.role = one.role;
       req.session.user_id = one._id;
+      req.session.photo = one.photo;
+      console.log("login session: ", req.session);
       return res.json({ statusCode: 200, message: "Logged in!" });
     }
     return res.json({
@@ -58,7 +60,11 @@ sessionRouter.get("/online", (req, res, next) => {
 
 sessionRouter.post("/signout", (req, res, next) => {
   try {
+    //console.log("Signout session before destroy: ", req.session)
+
     req.session.destroy();
+    //console.log("Session destroyed");
+    res.clearCookie('connect.sid');
     return res.json({
       statusCode: 200,
       message: "Signed out!",
@@ -68,6 +74,9 @@ sessionRouter.post("/signout", (req, res, next) => {
   }
 });
 
+
 export default sessionRouter;
 
 //Por lo general todos los metodos de 'sessions' son de tipo post
+
+//volver a ver clase cookies 1 y revisar la respuesta de res.cookie
