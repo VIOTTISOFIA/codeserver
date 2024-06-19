@@ -4,6 +4,7 @@ async function isValidUser(req, res, next) {
   try {
     const { email } = req.body;
     const one = await userManager.readByEmail(email);
+    console.log(req.sessions);
 
     if (!one) {
       const error = new Error("Bad auth from register!");

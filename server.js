@@ -46,6 +46,10 @@ const hbs = ExpressHandlebars.create({
       return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     },
   },
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 });
 
 socketServer.on("connection", socketCb);
@@ -89,7 +93,11 @@ server.use(
     //cookie: { maxAge: 60 * 60 * 1000 }
   })
 );
-
+server.use((req, res, next) => {
+  res.locals.user_id = req.session.user_id || null;
+  // pasa el user_idsi estan en la session, de lo contrario null
+  next();
+});
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);

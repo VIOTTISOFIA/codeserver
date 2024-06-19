@@ -34,13 +34,23 @@
             {{!-- <a class="nav-link" href="/profile">PROFILE</a> --}}
           </li>
         </ul>
+        </div>
         <div class="container-fluid">
           <form class="d-flex justify-content-end" role="search">
             <input class="form-control w-25 d-flex me-2 " type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success text-dark" type="submit">Search</button>
           </form>
         </div>
-      </div>
+        <div class="mx-5 d-flex gap-2">
+          <a href="/login">
+            <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png"
+              alt="User Widget">
+          </a>
+            <a href="/carts/cart?user_id={{user_id}}">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png"
+                alt="Cart Widget">
+            </a>
+        </div>
     </div>
   </nav>
 
