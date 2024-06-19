@@ -43,7 +43,13 @@
             <button class="btn btn-outline-success text-dark" type="submit">Search</button>
           </form>
         </div>
-        <div class="mx-5 d-flex gap-2">
+
+        <div class="mx-5 d-flex gap-2" id="user-options">
+        <!-- Estas opciones serán actualizadas por JavaScript -->
+        </div>
+
+
+        {{!-- <div class="mx-5 d-flex gap-2">
           <a href="/login">
             <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
           </a>
@@ -53,14 +59,14 @@
             <a href="#" onclick="signOut()">
               <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout widget">
               </a>
-        </div>
+        </div> --}}
     </div>
   </nav>
 
   {{{body}}}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="/scripts/signOut.js"></script>
+  <script src="/scripts/functions.js"></script>
 
 </body>
 
