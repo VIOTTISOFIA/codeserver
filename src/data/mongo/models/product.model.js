@@ -18,6 +18,7 @@ const schema = new Schema(
     },
     category: {
       type: String,
+      required: true,
       default: "Not defined",
       enum: [
         "Not defined",
@@ -32,6 +33,12 @@ const schema = new Schema(
     },
     price: { type: Number, default: "1" },
     stock: { type: Number, default: "1" },
+    user_id: {
+      type: Types.ObjectId,
+      ref: "users",
+      index: true,
+      required: true,
+    },
   },
   {
     timestamps: true,

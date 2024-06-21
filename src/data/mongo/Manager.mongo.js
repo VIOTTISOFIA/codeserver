@@ -48,6 +48,15 @@ class Manager {
     }
   }
 
+  // async readByEmail(email) {
+  //   try {
+  //     const one = await this.Model.findById(filter).lean();
+  //     return one;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
   //nuevo metodo 'ReadByEmail' utilizado en sessions
   async readByEmail(email) {
     try {
@@ -86,11 +95,11 @@ class Manager {
     }
   }
 
-//nuevo metodo 'destroyAll' para usar en el endpoint que elimina todos los carritos de un usuario
+  //nuevo metodo 'destroyAll' para usar en el endpoint que elimina todos los carritos de un usuario
   async destroyAll(userId) {
     try {
       console.log("userId recibido en destroyAll:", userId);
-      const result = await this.Model.deleteMany({ 'user_id': userId });
+      const result = await this.Model.deleteMany({ user_id: userId });
       console.log("Resultado de la eliminación:", result);
 
       return result;

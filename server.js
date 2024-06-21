@@ -46,6 +46,10 @@ const hbs = ExpressHandlebars.create({
       return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     },
   },
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 });
 
 socketServer.on("connection", socketCb);
@@ -55,6 +59,15 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 // middlewares
+server.get(cookieParser(process.env.SECRET_COOKIE));
+server.get(
+  session({
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 },
+  })
+);
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
@@ -63,9 +76,8 @@ server.use(cookieParser(process.env.SECRET_COOKIE));
 //const FileSession = fileStore(session);
 server.use(
   session({
-
-  //FILESTORE
-  /*  store: new FileSession({
+    //FILESTORE
+    /*  store: new FileSession({
       path: "./src/data/fs/file/sessions",
       ttl: 60 * 60,
     }), */

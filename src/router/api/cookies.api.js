@@ -18,13 +18,12 @@ cookiesRouter.get("/set", (req, res, next) => {
 cookiesRouter.get("/", (req, res, next) => {
   try {
     const cookies = req.cookies;
-    const onLine = req.cookies.onLine;
-    return res.json({ cookies});
+    const online = req.cookies.online;
+    return res.json({ cookies, online });
   } catch (error) {
     return next(error);
   }
 });
-
 cookiesRouter.get("/destroy/:cookie", (req, res, next) => {
   try {
     const { cookie } = req.params;
@@ -54,5 +53,4 @@ cookiesRouter.get("/get-signed", (req, res, next) => {
     return next(error);
   }
 });
-
 export default cookiesRouter;

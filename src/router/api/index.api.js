@@ -4,7 +4,7 @@ import usersRouter from "./users.api.js";
 import cartsRouter from "./carts.api.js";
 import ticketsRouter from "./tickets.api.js";
 import cookiesRouter from "./cookies.api.js";
-import sessionRouter from "./sessions.api.js";
+import sessionsRouter from "./sessions.api.js";
 
 const apiRouter = Router();
 
@@ -13,6 +13,6 @@ apiRouter.use("/users", usersRouter);
 apiRouter.use("/carts", cartsRouter);
 apiRouter.use("/tickets", ticketsRouter);
 apiRouter.use("/cookies", cookiesRouter);
-apiRouter.use("/sessions", sessionRouter);
+apiRouter.use("/sessions", sessionsRouter);
 
 export default apiRouter;
