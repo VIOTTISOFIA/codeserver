@@ -17,7 +17,7 @@ Para probarlo, usamos la siguiente ruta:
 
 http://localhost:8080/carts/cart?user_id=6660fcb73892bc1eecfeabe9 (ID harcodeado para que funcione con metodo 'create' y 'destroy')
 
-** DESAFIO ENTREGABLE "SPRINT6" **
+**DESAFIO ENTREGABLE "SPRINT6"**
 
 En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies. 
 
