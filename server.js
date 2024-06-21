@@ -73,8 +73,8 @@ server.use(
   //MONGOSTORE
   secret: process.env.SECRET_SESSION,
   resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 },
+  saveUninitialized: false,
+  cookie: { maxAge: 10 * 60 * 1000 },
   store: new MongoStore ({
      mongoUrl: process.env.MONGO_URI,
      ttl: 60 * 60

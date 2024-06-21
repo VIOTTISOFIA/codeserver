@@ -15,9 +15,10 @@
         <div class="mx-3">
           <h3 class="my-3 " "font-size: 20px;">{{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
          <label for="quantity">Cantidad:</label>
-          <input type="number" id="quantity" name="quantity" min="1" value="{{this.quantity}}">
+          <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}">
         <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
        <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}"><img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+       <a href="#" onclick="updateCart(event, '{{this._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/tJmvT5bg/Icono-De-C-rculo-De-Flecha-Aislado.png"></a>
        </div>
        
       </div>
@@ -38,83 +39,3 @@
   </div>
   {{/if}}
 </main>
-
-<script>
-    //funcion para eliminar un producto del carrito
-  async function removeFromCart(cartItemId) {
-    try {
-      // Realizar una solicitud DELETE al endpoint correspondiente
-      const response = await fetch(`/api/carts/${cartItemId}`, {
-        method: 'DELETE'
-      });
-
-      if (response.ok) {
-        // muestro un mensaje de exito
-        alert("Product deleted successfully");
-
-        // Si la solicitud se realizó con éxito, recargar la página
-        location.reload();
-      } 
-      else {
-        // Si hubo un error en la solicitud, mostrar un mensaje de error
-        console.error("Error on deleting product:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error on deleting product:", error.message);
-    }
-  }
-
-  //funcion para cancelar y vaciar el carrito 
-  async function destroyAll(event, user_id) {
-    try{
-      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
-      //console.log("User ID:", user_id);
-
-      // Realizar una solicitud DELETE al endpoint correspondiente
-      const response = await fetch(`/api/carts/cart/${user_id}`, {
-        method: 'DELETE'
-      });
-
-      //console.log("fetch:", response)
-
-      if(response.ok) {
-        alert("Cart is empty")
-        console.log("resultado:",response)
-        location.reload()
-        
-      } else {
-         const error = await response.json();
-        console.error("Error on cart deleting:", error.message);
-      }
-    } catch(error){
-      console.error(error)
-    }
-  }
-
-//funcion para confirmar la compra y vaciar el carrito
-  async function checkout(event, user_id) {
-    try{
-      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
-      //console.log("User ID:", user_id);
-
-      // Realizar una solicitud DELETE al endpoint correspondiente
-      const response = await fetch(`/api/carts/cart/${user_id}`, {
-        method: 'DELETE'
-      });
-
-      //console.log("fetch:", response)
-
-      if(response.ok) {
-        alert("successful purchase!")
-        console.log("resultado:",response)
-        location.reload()
-        
-      } else {
-         const error = await response.json();
-        console.error("Error on purchase:", error.message);
-      }
-    } catch(error){
-      console.error(error)
-    }
-  }
-</script>

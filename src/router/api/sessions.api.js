@@ -76,7 +76,3 @@ sessionRouter.post("/signout", (req, res, next) => {
 
 
 export default sessionRouter;
-
-//Por lo general todos los metodos de 'sessions' son de tipo post
-
-//volver a ver clase cookies 1 y revisar la respuesta de res.cookie

@@ -21,7 +21,7 @@ async function create(req, res, next) {
       if (!user_id) {
         return res.status(401).json({
           statusCode: 401,
-          message: "User not logged in",
+          message: "Please login for adding to cart",
         });
       }
       // Añadir el user_id a los datos
@@ -88,8 +88,8 @@ async function readCart(req, res, next) {
 async function update(req, res, next) {
   try {
     const { cid } = req.params;
-    const data = req.body;
-    const one = await cartsManager.update(cid, data);
+    const { quantity } = req.body;
+    const one = await cartsManager.update(cid, { quantity });
     return res.json({
       statusCode: 200,
       message: "UPDATED",
