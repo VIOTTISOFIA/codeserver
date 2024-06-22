@@ -34,10 +34,10 @@ async function checkSession() {
 
     if (response.ok && result.statusCode === 200) {
       userOptions.innerHTML = `
-      <a href="/profile">
+      <a href="/users">
           <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
         </a>
-        <a href="/carts/cart?user_id=${result.user_id}">
+        <a href="/carts">
           <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
         </a>
         <a href="#" onclick="signOut()">

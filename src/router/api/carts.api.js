@@ -55,8 +55,16 @@ async function read(req, res, next) {
 //Endpoint para leer un carrito segun ID de usuario
 async function readCart(req, res, next) {
   try {
-    const { user_id } = req.query;
+    if (!req.session || !req.session.user) {
+      const error = new Error("User session is required");
+      error.statusCode = 400;
+      throw error;
+    }
 
+    // Acceder al user_id desde req.session.user
+    const user_id = req.session.user.user_id;
+    console.log("user_id:", user_id);
+    
     // Verificar explícitamente si user_id está definido
     if (!user_id) {
       const error = new Error("User ID is required");
@@ -123,13 +131,13 @@ async function destroy(req, res, next) {
 async function destroyAll(req, res, next) {
   try {
     const { user_id } = req.params;
-    console.log("user_id:", user_id)
+    //console.log("user_id:", user_id)
 
     const userIdObject = new ObjectId(user_id); 
-    console.log("Conversion a ObjectId:", userIdObject);
+    //console.log("Conversion a ObjectId:", userIdObject);
  
     const result = await cartsManager.destroyAll(userIdObject);
-    console.log("respuesta final",  result)
+    //console.log("respuesta final",  result)
     return res.json({
       statusCode: 200,
       message: "DELETED",

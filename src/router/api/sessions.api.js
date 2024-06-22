@@ -65,19 +65,27 @@ sessionRouter.get("/online", (req, res, next) => {
 
 sessionRouter.post("/signout", (req, res, next) => {
   try {
-    //console.log("Signout session before destroy: ", req.session)
+
+    if(req.session.email) {
+      //console.log("Signout session before destroy: ", req.session)
 
     req.session.destroy();
     //console.log("Session destroyed");
-    res.clearCookie('connect.sid');
+    res.clearCookie("connect.sid");
     return res.json({
       statusCode: 200,
       message: "Signed out!",
     });
+    }
+
+    return res.json({
+      statusCode: 401,
+      message: "No active session to signout!",
+    })
+    
   } catch (error) {
     return next(error);
   }
 });
-
 
 export default sessionRouter;

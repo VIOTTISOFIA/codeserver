@@ -27,6 +27,13 @@ En esta entrega se han implementado nuevas funcionalidades y nuevos metodos rela
 
 - Asimismo el perfil de un usuario y su carrito (si existe) se renderizan en funcion a la sesion iniciada. 
 
-- Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar los datos agregados al momento de hacer un nuevo registro de usuario. 
+- Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB. 
 
-- Finalmente, creamos un nuevo metodo al Manager generico de mongo: "ReadByEmail", el cual utilizamos para generar el incio de sesion correcto de un usuario.
+- Finalmente, creamos un nuevo metodo al Manager generico de mongo: "ReadByEmail", el cual utilizamos para generar el incio de sesion correcto de un usuario segun el email registrado. Este mismo metodo tambien fue creado en el manager correspondiente a usuarios segun la persistencia (FS o Memory)
+
+**IMPORTANTE**
+
+Como ya estamos avanzando con la siguiente entrega, las contraseñas de los usuarios estan hasheadas, por lo que recomendamos crear un nuevo registro para que no haga conflicto en validacion de password. igualmente, tenemos un usuario sin contraseña hasheada con los siguientes datos para el inicio de sesion:
+
+  - email: prueba1@coder.com
+  -contraseña: hola1213
