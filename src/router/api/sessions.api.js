@@ -5,12 +5,14 @@ import isValidEmail from "../../middlewares/isValidEmail.mid.js";
 import isValidData from "../../middlewares/isValidData.mid.js";
 import isValidUser from "../../middlewares/isValidUser.mid.js";
 import isValidPassword from "../../middlewares/isValidPassword.mid.js";
+import createHashPassword from "../../middlewares/createHashPassword.mid.js";
 const sessionRouter = Router();
 
 sessionRouter.post(
   "/register",
   isValidData,
   isValidEmail,
+  createHashPassword,
   async (req, res, next) => {
     try {
       const data = req.body;
@@ -42,7 +44,7 @@ sessionRouter.post(
   }
 );
 
-sessionRouter.get("/online", (req, res, next) => {
+sessionRouter.get("/online", async (req, res, next) => {
   try {
     if (req.session.online) {
       return res.json({
