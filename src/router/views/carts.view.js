@@ -17,9 +17,13 @@ cartsRouter.get("/cart/:cid", async (req, res, next) => {
   }
 });
 
-cartsRouter.get("/cart", async (req, res, next) => {
-  try {
-    const { user_id } = req.query;
+cartsRouter.get("/", async (req, res, next) => {
+    try {
+      console.log("Session:", req.session);
+
+      // Obtener user_id desde la sesión
+    const user_id = req.session.user_id;
+    console.log("user_id:", user_id);
 
     if (!user_id) {
       const error = new Error("User ID is required");
@@ -33,10 +37,6 @@ cartsRouter.get("/cart", async (req, res, next) => {
 
     //leo todos los carritos del usuario
     const carts = await cartsManager.read({ user_id });
-
-    // Obtener todos los productos de la base de datos
-    const products = await productsManager.read();
-
 
    const cartDetails = carts.map((cart) => {
     

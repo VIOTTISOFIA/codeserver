@@ -74,6 +74,18 @@ class UserManager {
     }
   }
 
+  async readByEmail(email) {
+    try {
+      let users = await fs.promises.readFile(this.path, "utf-8");
+      users = JSON.parse(users);
+      let one = users.find((each) => each.email === email);
+      return one;
+    } catch (error) {
+      console.log("Error al leer el usuario por email:", error.message);
+      return error;
+    }
+  }
+
   async update(id, data) {
     try {
       let all = await this.read();

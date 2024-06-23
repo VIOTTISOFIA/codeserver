@@ -82,22 +82,24 @@ server.use(
       ttl: 60 * 60,
     }), */
 
-    //MONGOSTORE
-    store: new MongoStore({
-      mongoUrl: process.env.MONGO_URI,
-      ttl: 60 * 60,
-    }),
-    secret: process.env.SECRET_SESSION,
-    resave: true,
-    saveUninitialized: true,
-    //cookie: { maxAge: 60 * 60 * 1000 }
-  })
+  //MONGOSTORE
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 10 * 60 * 1000 },
+  store: new MongoStore ({
+     mongoUrl: process.env.MONGO_URI,
+     ttl: 60 * 60
+   }),
+})
 );
+
+//variables globales
 server.use((req, res, next) => {
-  res.locals.user_id = req.session.user_id || null;
-  // pasa el user_idsi estan en la session, de lo contrario null
+  res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
   next();
 });
+
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);
