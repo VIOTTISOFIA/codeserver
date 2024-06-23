@@ -11,9 +11,24 @@
             <strong class="card-text">Price: {{this.price}}</strong>
             <strong class="card-text">Stock: {{this.stock}}</strong>
           </div>
-          <button href="#" class="btn btn-info d-flex w-50 justify-content-center mx-auto">See more</button>
+          <a href="/products/{{this.id}}" class="btn btn-primary mt-auto">See more</a>
         </div>
       </div>
     {{/each}}
   </section>
+
+  <div>
+    {{#each (range 1 pages)}}
+        <button 
+            data-page="{{this}}" 
+            class="pagination-button btn btn-primary mt-auto"
+            {{#ifEquals this ../page}}disabled{{/ifEquals}}
+        >
+            {{this}}
+        </button>
+    {{/each}}
+</div>
+
+    {{!-- script de conexion de paginacion con botones en JS --}}
+    <script src="/scripts/pagination.js"></script>
 </main>

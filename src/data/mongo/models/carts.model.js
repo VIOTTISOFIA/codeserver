@@ -30,8 +30,10 @@ const schema = new Schema(
 schema.pre("find", function () {
   this.populate("user_id", "email photo");
 });
-schema.pre("findOne", function () {
-  this.populate("products_id", "email");
+
+//Hacemos populacion de el producto con todos sus datos
+schema.pre("find", function () {
+  this.populate("product_id");
 });
 
 const Cart = model(collection, schema);

@@ -7,7 +7,8 @@ class UserManager {
     try {
       const user = {
         id: crypto.randomBytes(12).toString("hex"),
-        photo: data.photo || "https://www.pngplay.com/image/325510",
+        photo:
+          data.photo || "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
         email: data.email,
         password: data.password,
         role: data.role,
@@ -87,19 +88,19 @@ gestorDeUsuarios.create({
   role: "adm",
 });
 gestorDeUsuarios.create({
-  photo: "roxana.jpg",
+  photo: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
   email: "roxana@hotmail.com",
   password: "hola5678",
   role: "user",
 });
 gestorDeUsuarios.create({
-  photo: "celine.jpg",
+  photo: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
   email: "celine@hotmail.com",
   password: "hola91011",
   role: "user",
 });
 gestorDeUsuarios.create({
-  photo: "martin.jpg",
+  photo: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
   email: "martin@hotmail.com",
   password: "hola1213",
   role: "user",

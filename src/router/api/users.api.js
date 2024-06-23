@@ -5,9 +5,9 @@ import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 
 const usersApi = Router();
 // genero
-usersApi.get("/", read);
-usersApi.get("/:uid", readOne);
 usersApi.post("/", create);
+usersApi.get("/", read);
+usersApi.get("/users", readOne);
 usersApi.put("/:uid", update);
 usersApi.delete("/:uid", destroy);
 
@@ -33,8 +33,8 @@ async function read(req, res, next) {
 //un parametro
 async function readOne(req, res, next) {
   try {
-    const { uid } = req.params;
-    const one = await userManager.readOne(uid);
+    const { email } = req.session;
+    const one = await userManager.readOne(email);
     if (one) {
       return res.json({
         statusCode: 200,
@@ -50,18 +50,7 @@ async function readOne(req, res, next) {
     return next(error);
   }
 }
-// usersApi.post("/", async (req, res, next) {
-//    try {
-//     const data = req.body;
-//     const one = await userManager.create(data);
-//     return res.json({
-//       statusCode: 201,
-//       message: "CREATED ID: " + one.id,
-//     });
-//   } catch (error) {
-//     return next(error);
-//   }
-// })
+
 async function create(req, res, next) {
   try {
     const data = req.body;

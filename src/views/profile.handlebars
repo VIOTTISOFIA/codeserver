@@ -1,15 +1,14 @@
-
-
 <main class="d-flex flex-column align-items-center w-100 flex-grow-1">
     <h1 class="bg-success-subtle p-2 text-center w-100 fst-italic text-dark-emphasis"> USERS </h1>
-    <section class="text-center m-3 w-100 d-flex d-flex flex-wrap justify-content-center gap-3">
+    <section class="text-center m-3 w-100 d-flex d-flex  justify-content-center gap-3">
 
-        {{#if user._id}}
+        {{!-- {{#if user._id}} --}}
+<h1>{{user._id}} </h1>
 
-        <h1>{{user._id}} </h1>
-
-        <div class="card" style="width: 18rem;">
-            <img src="{{user.photo}}" class="card-img-top" alt="{{user.id}}" />
+        <div class="card" style="width: 18rem;">   
+            
+            <img src="{{user.photo}}" class="card-img-top" alt="{{user._id}}"/>
+            <div class="card-body">
             <div class="card-body">
                 <h5 class="card-title">{{user.email}}</h5>
                 <h5 class="m-2 p-2 text-center">Age: {{user.age}}</h5>
@@ -18,9 +17,11 @@
                 </div>
             </div>
         </div>
-        {{/if}}
-
+        {{!-- {{/if}} --}}
     </section>
 </main>
+
+
+
 
 

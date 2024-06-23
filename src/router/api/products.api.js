@@ -1,13 +1,14 @@
 import { Router } from "express";
 //import productManager from "../../data/fs/ProductManager.fs.js";
 import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/", read);
 productsRouter.get("/paginate", paginate);
 productsRouter.get("/:pid", readOne);
-productsRouter.post("/", create);
+productsRouter.post("/", isValidAdmin, create);
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
 
@@ -34,11 +35,11 @@ async function paginate(req, res, next) {
   try {
     const filter = {};
     const opts = {};
-    if ((req.limit = req.query.limit)) {
+    if (req.query.limit) {
       opts.limit = req.query.limit;
     }
     if (req.query.page) {
-      opts.limit = req.query.page;
+      opts.page = req.query.page;
     }
     if (req.query.user_id) {
       filter.user_id = req.query.user_id;
