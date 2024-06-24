@@ -6,17 +6,17 @@ import isValidData from "../../middlewares/isValidData.mid.js";
 import isValidUser from "../../middlewares/isValidUser.mid.js";
 import isValidPassword from "../../middlewares/isValidPassword.mid.js";
 import createHashPassword from "../../middlewares/createHashPassword.mid.js";
+import passport from "../../middlewares/passport.mid.js";
 const sessionRouter = Router();
 
 sessionRouter.post(
   "/register",
-  isValidData,
-  isValidEmail,
-  createHashPassword,
+  // isValidData,
+  // isValidEmail,
+  // createHashPassword,
+  passport.authenticate("register", { session: false }),
   async (req, res, next) => {
     try {
-      const data = req.body;
-      await userManager.create(data);
       return res.json({ statusCode: 201, message: "Registered!" });
     } catch (error) {
       return next(error);
@@ -26,17 +26,9 @@ sessionRouter.post(
 
 sessionRouter.post(
   "/login",
-  isValidUser,
-  isValidPassword,
+  passport.authenticate("login", { session: false }),
   async (req, res, next) => {
     try {
-      const { email } = req.body;
-      const one = await userManager.readByEmail(email);
-      req.session.email = email;
-      req.session.online = true;
-      req.session.role = one.role;
-      req.session.photo = one.photo;
-      req.session.user_id = one._id;
       return res.json({ statusCode: 200, message: "Logged in!" });
     } catch (error) {
       return next(error);
@@ -65,11 +57,16 @@ sessionRouter.get("/online", async (req, res, next) => {
 
 sessionRouter.post("/signout", (req, res, next) => {
   try {
-    req.session.destroy();
-    return res.json({
-      statusCode: 200,
-      message: "Signed out!",
-    });
+    if (req.session.email) {
+      req.session.destroy();
+      return res.json({
+        statusCode: 200,
+        message: "Signed out!",
+      });
+    }
+    const error = new Error("Invalid credentials from Singout");
+    error.statusCode = 401;
+    throw error;
   } catch (error) {
     return next(error);
   }
