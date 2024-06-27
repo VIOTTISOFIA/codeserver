@@ -29,32 +29,4 @@ usersRouter.get("/", async (req, res, next) => {
     return next(error);
   }
 });
-// usersRouter.get("/", async (req, res, next) => {
-//   try {
-//     // Asegúrate de que estás accediendo al objeto usuario almacenado en la sesión
-//     const user = req.session.user;
-
-//     // Verificación adicional para asegurar que el usuario esté presente
-//     if (!user) {
-//       throw new Error("Usuario no autenticado");
-//     }
-
-//     console.log(user.email); // Verifica que tienes el correo electrónico
-//     return res.render("profile", { user });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
-
-// usersRouter.get("/:uid", async (req, res, next) => {
-//   try {
-//     const { uid } = req.params;
-//     const one = await userManager.readOne(uid);
-//     console.log(one);
-
-//     return res.render("profile", { user: one });
-//   } catch (error) {
-//     return next(error);
-//   }
-// });
 export default usersRouter;

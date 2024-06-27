@@ -29,7 +29,11 @@ sessionRouter.post(
   passport.authenticate("login", { session: false }),
   async (req, res, next) => {
     try {
-      return res.json({ statusCode: 200, message: "Logged in!" });
+      return res.json({
+        statusCode: 200,
+        message: "Logged in!",
+        token: req.user.token,
+      });
     } catch (error) {
       return next(error);
     }
@@ -71,7 +75,21 @@ sessionRouter.post("/signout", (req, res, next) => {
     return next(error);
   }
 });
-
+sessionRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+sessionRouter.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  (req, res, next) => {
+    try {
+      return res.json({ statusCode: 200, message: "Logged in with google!" });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
 export default sessionRouter;
 
 //Por lo general todos los metodos de 'sessions' son de tipo post
