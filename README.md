@@ -37,3 +37,14 @@ Como ya estamos avanzando con la siguiente entrega, las contraseñas de los usua
 
   - email: prueba1@coder.com
   -contraseña: hola1213
+
+
+**DESAFIO ENTREGABLE "SPRINT7"**
+
+En esta entrega hemos implementado el generador de estrategias de "Passport" el cual fue utilizado como middleware para hacer de nuestro codigo mas eficiente, limpio y estructurado. 
+
+Se crearon 2 estrategias de autenticacion y autorizacion: "Login y Register", con las cuales aseguramos la eficiencia de nuestro proyecto de e-commerce y delegando funcionalidades.
+
+Tambien se implemento el uso de la biblioteca "Bcrypt" que nos ayuda a mantener la seguridad y privacidad de nuestros clientes mediante el haseo de contraseñas. Adicionalmente hicimos correccion al middleware "password" para autenticar y verificar las contraseñas almacenadas con las recibidas desde el front mediante el uso de "VerifyHash".
+
+Para probar nuestro proyecto pueden crear un usuario libremente el cual sera almacenado en nuestra base de datos con la contraseña protegida. Podran crear un nuevo carrito y visualizar su perfil de usuario segun la sesion iniciada.
