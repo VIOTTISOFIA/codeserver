@@ -43,7 +43,7 @@ passport.use(
         const one = await userManager.readByEmail(email);
         if (!one) {
           const error = new Error("Bad auth from login!");
-          error.StatusCode = 401;
+          error.statusCode = 401;
           return done(error);
         }
         const verify = verifyHash(password, one.password);
@@ -53,15 +53,18 @@ passport.use(
           // req.session.role = one.role;
           // req.session.photo = one.photo;
           // req.session.user_id = one._id;
-          const data = {
+          const user = {
             email,
             role: one.role,
             photo: one.photo,
             _id: one._id,
             online: true,
           };
-          const token = createToken(data);
-          return done(null, one);
+          const token = createToken(user);
+          user.token = token;
+          return done(null, user);
+          // agrego la propiedad USER al objeto de requerimientos
+          // esa propiedad USER tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
         const error = new Error("Invalid credentials");
         error.statusCode = 401;
