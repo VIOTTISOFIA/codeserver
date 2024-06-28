@@ -28,6 +28,7 @@ async function checkSession() {
   try {
     const response = await fetch('/api/sessions/online');
     const result = await response.json();
+    console.log(result)
 
     const userOptions = document.getElementById('user-options');
     userOptions.innerHTML = ''; // Limpia el contenido anterior

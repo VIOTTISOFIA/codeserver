@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { ObjectId } from 'mongodb';
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
+import isAuth from "../../middlewares/isAuth.mid.js";
 
 const cartsRouter = Router();
 
-cartsRouter.post("/", create);
+cartsRouter.post("/", isAuth, create);
 cartsRouter.get("/", read);
 cartsRouter.get("/cart", readCart);
 cartsRouter.put("/:cid", update);
@@ -15,7 +16,7 @@ cartsRouter.delete("/cart/:user_id", destroyAll);
 async function create(req, res, next) {
     try {
       const data = req.body;
-      const user_id = req.session.user_id;
+      const user_id = req.user._id;
       //console.log("user_id:", user_id)
   
       if (!user_id) {

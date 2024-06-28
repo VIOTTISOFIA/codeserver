@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
-//import { createToken } from "../utils/token.util.js";
+import { createToken } from "../utils/token.util.js";
 
 //ESTRATEGIA PARA REGISTER
 passport.use(
@@ -45,7 +45,7 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const one = await userManager.readByEmail(email);
-        console.log(req.sessions);
+        console.log("Estrategia login", req.session);
 
         if (!one) {
           const error = new Error("Bad auth from login!");
@@ -55,19 +55,22 @@ passport.use(
 
         const verify = verifyHash(password, one.password);
         if (verify) {
-          req.session.email = email;
-          req.session.online = true;
-          req.session.role = one.role;
-          req.session.photo = one.photo;
-          req.session.user_id = one._id;
-          req.session.photo = one.photo;
-          console.log("login session: ", req.session);
+          const user = {
+            email,
+            role: one.role,
+            photo: one.photo,
+            _id: one._id,
+            online: true,
+          };
 
-          /* const data = { email, role: one.role, photo: one.photo,_id: one._id, online:true }
-          const token = createToken(data)
-          one.token = token */
+          console.log(user);
+          const token = createToken(user);
+          user.token = token;
+          console.log("user tokenizado", user);
 
-          return done(null, one);
+          return done(null, user);
+          //agrega la prop USER al obj de req
+          //esa prop USER tiene todas las props que se definen en el obj correspondiente
         }
 
         const error = new Error("Invalid credentials");
