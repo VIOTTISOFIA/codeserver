@@ -34,16 +34,13 @@
 
     if (addToCart) {
       addToCart.addEventListener("click", async (event) => {
-        // Prevenir el comportamiento predeterminado del botón
         event.preventDefault();
 
         // Obtener el ID del producto y la cantidad
         const product_id = "{{product._id}}";
-        const user_id = "6660fcb73892bc1eecfeabe9";
         const quantity = 1;
 
         //console.log("Product ID:", product_id);
-        //console.log("User ID:", user_id);
         //console.log("Quantity:", quantity);
 
         try {
@@ -55,7 +52,6 @@
             },
             body: JSON.stringify({
               product_id,
-              user_id,
               quantity
             })
           });
@@ -63,8 +59,8 @@
           // Revisar el estado de la respuesta
           if (response.ok) {
             const responseData = await response.json();
-            //console.log("Response Data:", responseData);
             alert("Product added to cart successfully");
+            location.reload("/products")
           } else {
             const errorData = await response.json();
             console.error('Error:', errorData);

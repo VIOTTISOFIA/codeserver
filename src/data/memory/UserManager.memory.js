@@ -48,6 +48,19 @@ class UserManager {
     }
   }
 
+  readByEmail(email) {
+    try {
+      const one = UserManager.#users.find((each) => each.email === email);
+      if (!one) {
+        throw new Error("No existe el usuario");
+      } else {
+        return one;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   update(id, data) {
     try {
       let all = this.read();

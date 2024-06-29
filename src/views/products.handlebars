@@ -21,7 +21,7 @@
     {{#each (range 1 pages)}}
         <button 
             data-page="{{this}}" 
-            class="pagination-button btn btn-primary mt-auto"
+            class="pagination-button btn btn-primary mt-auto mx-1 mb-3"
             {{#ifEquals this ../page}}disabled{{/ifEquals}}
         >
             {{this}}

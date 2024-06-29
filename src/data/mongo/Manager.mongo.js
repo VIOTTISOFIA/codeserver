@@ -48,15 +48,6 @@ class Manager {
     }
   }
 
-  // async readByEmail(email) {
-  //   try {
-  //     const one = await this.Model.findById(filter).lean();
-  //     return one;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
   //nuevo metodo 'ReadByEmail' utilizado en sessions
   async readByEmail(email) {
     try {

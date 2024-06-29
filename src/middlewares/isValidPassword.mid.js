@@ -36,5 +36,4 @@ async function isValidPassword(req, res, next) {
     return next(error);
   }
 }
-
 export default isValidPassword;
