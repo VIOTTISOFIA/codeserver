@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 
 const cartsRouter = Router();
@@ -13,20 +13,8 @@ cartsRouter.delete("/cart/:user_id", destroyAll);
 
 //Endpoint para crear un carrito
 async function create(req, res, next) {
-    try {
-      const data = req.body;
-      const user_id = req.session.user_id;
-      //console.log("user_id:", user_id)
-  
-      if (!user_id) {
-        return res.status(401).json({
-          statusCode: 401,
-          message: "Please login for adding to cart",
-        });
-      }
-      // Añadir el user_id a los datos
-      data.user_id = user_id;
-  
+  try {
+    const data = req.body;
     const one = await cartsManager.create(data);
     return res.json({
       statusCode: 201,
@@ -64,7 +52,7 @@ async function readCart(req, res, next) {
     // Acceder al user_id desde req.session.user
     const user_id = req.session.user.user_id;
     console.log("user_id:", user_id);
-    
+
     // Verificar explícitamente si user_id está definido
     if (!user_id) {
       const error = new Error("User ID is required");
@@ -80,7 +68,6 @@ async function readCart(req, res, next) {
         message: "READ",
         response: cart,
       });
-
     } else {
       const error = new Error("Cart not found for user required");
       error.statusCode = 404;
@@ -133,9 +120,9 @@ async function destroyAll(req, res, next) {
     const { user_id } = req.params;
     //console.log("user_id:", user_id)
 
-    const userIdObject = new ObjectId(user_id); 
+    const userIdObject = new ObjectId(user_id);
     //console.log("Conversion a ObjectId:", userIdObject);
- 
+
     const result = await cartsManager.destroyAll(userIdObject);
     //console.log("respuesta final",  result)
     return res.json({

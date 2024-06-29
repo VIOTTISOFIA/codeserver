@@ -18,10 +18,10 @@ cartsRouter.get("/cart/:cid", async (req, res, next) => {
 });
 
 cartsRouter.get("/", async (req, res, next) => {
-    try {
-      console.log("Session:", req.session);
+  try {
+    console.log("Session:", req.session);
 
-      // Obtener user_id desde la sesión
+    // Obtener user_id desde la sesión
     const user_id = req.session.user_id;
     console.log("user_id:", user_id);
 
@@ -38,28 +38,30 @@ cartsRouter.get("/", async (req, res, next) => {
     //leo todos los carritos del usuario
     const carts = await cartsManager.read({ user_id });
 
-   const cartDetails = carts.map((cart) => {
-    
-    // Verifica si cart.user_id está definido y si cart.user_id._id está definido
-    if (cart.user_id && cart.user_id._id) {
-      // Encuentra el usuario correspondiente en la lista de usuarios
-      const user = users.find(
-        (user) => user._id.toString() === cart.user_id._id.toString()
-      );
-  
-      if (user) {
-        return {
-          ...cart,
-          user_id: user,
-        };
+    // Obtener todos los productos de la base de datos
+    const products = await productsManager.read();
+
+    const cartDetails = carts.map((cart) => {
+      // Verifica si cart.user_id está definido y si cart.user_id._id está definido
+      if (cart.user_id && cart.user_id._id) {
+        // Encuentra el usuario correspondiente en la lista de usuarios
+        const user = users.find(
+          (user) => user._id.toString() === cart.user_id._id.toString()
+        );
+
+        if (user) {
+          return {
+            ...cart,
+            user_id: user,
+          };
+        }
       }
-    }
-  
-    // Si no se puede encontrar el usuario o las propiedades están indefinidas, devuelve el carrito sin cambios
-    return cart;
-  });
-  
-  // Renderiza la vista
+
+      // Si no se puede encontrar el usuario o las propiedades están indefinidas, devuelve el carrito sin cambios
+      return cart;
+    });
+
+    // Renderiza la vista
     return res.render("carts", { title: "Carts user", carts: cartDetails });
   } catch (error) {
     console.error("Error occurred:", error);

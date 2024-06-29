@@ -48,7 +48,7 @@ class Manager {
     }
   }
 
-//nuevo metodo 'ReadByEmail' utilizado en sessions
+  //nuevo metodo 'ReadByEmail' utilizado en sessions
   async readByEmail(email) {
     try {
       const one = await this.Model.findOne({ email });
