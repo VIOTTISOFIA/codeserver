@@ -1,19 +1,11 @@
 import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import session from "express-session";
-import isValidEmail from "../../middlewares/isValidEmail.mid.js";
-import isValidData from "../../middlewares/isValidData.mid.js";
-import isValidUser from "../../middlewares/isValidUser.mid.js";
-import isValidPassword from "../../middlewares/isValidPassword.mid.js";
-import createHashPassword from "../../middlewares/createHashPassword.mid.js";
 import passport from "../../middlewares/passport.mid.js";
 const sessionRouter = Router();
 
 sessionRouter.post(
   "/register",
-  // isValidData,
-  // isValidEmail,
-  // createHashPassword,
   passport.authenticate("register", { session: false }),
   async (req, res, next) => {
     try {
@@ -63,18 +55,22 @@ sessionRouter.post("/signout", (req, res, next) => {
   try {
     if (req.session.email) {
       req.session.destroy();
+      res.clearCookie("connect.sid");
+      //console.log("Session destroyed");
       return res.json({
         statusCode: 200,
         message: "Signed out!",
       });
+      }
+      return res.json({
+        statusCode: 401,
+        message: "No active session to signout!",
+      })
+    } catch (error) {
+      return next(error);
     }
-    const error = new Error("Invalid credentials from Singout");
-    error.statusCode = 401;
-    throw error;
-  } catch (error) {
-    return next(error);
-  }
-});
+  });
+
 sessionRouter.get(
   "/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
