@@ -48,11 +48,11 @@ passport.use(
         }
         const verify = verifyHash(password, one.password);
         if (verify) {
-          // req.session.email = email;
-          // req.session.online = true;
-          // req.session.role = one.role;
-          // req.session.photo = one.photo;
-          // req.session.user_id = one._id;
+          req.session.email = email;
+          req.session.online = true;
+          req.session.role = one.role;
+          req.session.photo = one.photo;
+          req.session.user_id = one._id;
           const user = {
             email,
             role: one.role,
