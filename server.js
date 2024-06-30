@@ -99,11 +99,6 @@ server.use((req, res, next) => {
   res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
   next();
 });
-server.use((req, res, next) => {
-  res.locals.user_id = req.session.user_id || null;
-  // pasa el user_idsi estan en la session, de lo contrario null
-  next();
-});
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);

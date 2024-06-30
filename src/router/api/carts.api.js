@@ -49,9 +49,8 @@ async function readCart(req, res, next) {
       throw error;
     }
 
-    // Acceder al user_id desde req.session.user
     const user_id = req.session.user.user_id;
-    console.log("user_id:", user_id);
+    //console.log("user_id:", user_id);
 
     // Verificar explícitamente si user_id está definido
     if (!user_id) {
@@ -74,7 +73,7 @@ async function readCart(req, res, next) {
       throw error;
     }
   } catch (error) {
-    console.error("Error occurred:", error); // Log para capturar cualquier error
+    console.error("Error occurred:", error);
     return next(error);
   }
 }
@@ -118,13 +117,8 @@ async function destroy(req, res, next) {
 async function destroyAll(req, res, next) {
   try {
     const { user_id } = req.params;
-    //console.log("user_id:", user_id)
-
     const userIdObject = new ObjectId(user_id);
-    //console.log("Conversion a ObjectId:", userIdObject);
-
     const result = await cartsManager.destroyAll(userIdObject);
-    //console.log("respuesta final",  result)
     return res.json({
       statusCode: 200,
       message: "DELETED",

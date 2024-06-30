@@ -38,9 +38,6 @@ cartsRouter.get("/", async (req, res, next) => {
     //leo todos los carritos del usuario
     const carts = await cartsManager.read({ user_id });
 
-    // Obtener todos los productos de la base de datos
-    const products = await productsManager.read();
-
     const cartDetails = carts.map((cart) => {
       // Verifica si cart.user_id está definido y si cart.user_id._id está definido
       if (cart.user_id && cart.user_id._id) {
@@ -57,11 +54,8 @@ cartsRouter.get("/", async (req, res, next) => {
         }
       }
 
-      // Si no se puede encontrar el usuario o las propiedades están indefinidas, devuelve el carrito sin cambios
       return cart;
     });
-
-    // Renderiza la vista
     return res.render("carts", { title: "Carts user", carts: cartDetails });
   } catch (error) {
     console.error("Error occurred:", error);
