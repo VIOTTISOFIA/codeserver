@@ -27,7 +27,6 @@
 
 </main>
 
-
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const addToCart = document.getElementById("addToCart");
@@ -39,9 +38,6 @@
         // Obtener el ID del producto y la cantidad
         const product_id = "{{product._id}}";
         const quantity = 1;
-
-        //console.log("Product ID:", product_id);
-        //console.log("Quantity:", quantity);
 
         try {
           // Realizar la solicitud POST para añadir el producto al carrito
