@@ -1,15 +1,16 @@
 <section>
-    <article class="w-75 align-items-center d-flex flex-column">
-        <h2 class="text-center">LOG IN!</h2>
+  <article class="w-75 align-items-center d-flex flex-column">
+    <h2 class="text-center">LOG IN TO YOUR ACCOUNT!</h2>
+    <h3 class="text-center">Do not have an account? Sign up</h3>
 
-        <form class="d-flex flex-column w-50 ">
-            {{!-- <input class="m-2" type="text" name="photo" id="photo" placeholder="PHOTO"> --}}
-            <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL">
-            <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD">
-            <input class="m-2" type="button" id="login" value="LOG IN!">
-        </form>
-    </article>
-    <article id="products" class="d-flex flex-wrap w-50"></article>
+    <form class="d-flex flex-column w-50">
+      <input class="m-2" type="button" id="google-login" value="Login with Google"/>
+      <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL"/>
+      <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD"/>
+      <input class="m-2" type="button" id="login" value="LOG IN!" />
+    </form>
+  </article>
+  <article id="products" class="d-flex flex-wrap w-50"></article>
 </section>
 
 <script>
@@ -38,4 +39,8 @@
         alert(response.message)
        }
     } )
+
+    document.querySelector("#google-login").addEventListener("click", () => {
+        window.location.href = "/api/sessions/google";
+    });
 </script>

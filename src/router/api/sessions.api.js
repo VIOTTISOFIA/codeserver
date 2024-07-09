@@ -1,15 +1,9 @@
 import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import session from "express-session";
-import isValidEmail from "../../middlewares/isValidEmail.mid.js";
-import isValidData from "../../middlewares/isValidData.mid.js";
-import isValidUser from "../../middlewares/isValidUser.mid.js";
-import isValidPassword from "../../middlewares/isValidPassword.mid.js";
-import createHashPassword from "../../middlewares/createHashPassword.mid.js";
 import passport from "../../middlewares/passport.mid.js";
-import isAuth from "../../middlewares/isAuth.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
-
+import isAuth from "../../middlewares/isAuth.mid.js";
 const sessionRouter = Router();
 
 sessionRouter.post(
@@ -18,8 +12,6 @@ sessionRouter.post(
   passportCb("register"),
   async (req, res, next) => {
     try {
-      const data = req.body;
-      await userManager.create(data);
       return res.json({ statusCode: 201, message: "Registered!" });
     } catch (error) {
       return next(error);
@@ -92,4 +84,19 @@ sessionRouter.post("/signout", isAuth, (req, res, next) => {
   }
 });
 
+sessionRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+sessionRouter.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  (req, res, next) => {
+    try {
+      return res.json({ statusCode: 200, message: "Logged in with google!" });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
 export default sessionRouter;

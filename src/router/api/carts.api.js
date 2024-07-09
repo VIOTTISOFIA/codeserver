@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
 
@@ -81,14 +81,13 @@ async function readCart(req, res, next) {
         message: "READ",
         response: cart,
       });
-
     } else {
       const error = new Error("Cart not found for user required");
       error.statusCode = 404;
       throw error;
     }
   } catch (error) {
-    console.error("Error occurred:", error); // Log para capturar cualquier error
+    console.error("Error occurred:", error);
     return next(error);
   }
 }
@@ -132,13 +131,8 @@ async function destroy(req, res, next) {
 async function destroyAll(req, res, next) {
   try {
     const { user_id } = req.params;
-    //console.log("user_id:", user_id)
-
-    const userIdObject = new ObjectId(user_id); 
-    //console.log("Conversion a ObjectId:", userIdObject);
- 
+    const userIdObject = new ObjectId(user_id);
     const result = await cartsManager.destroyAll(userIdObject);
-    //console.log("respuesta final",  result)
     return res.json({
       statusCode: 200,
       message: "DELETED",

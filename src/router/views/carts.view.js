@@ -55,11 +55,8 @@ cartsRouter.get("/", isAuth, async (req, res, next) => {
         }
       }
 
-      // Si no se puede encontrar el usuario o las propiedades están indefinidas, devuelve el carrito sin cambios
       return cart;
     });
-
-    // Renderiza la vista
     return res.render("carts", { title: "Carts user", carts: cartDetails });
   } catch (error) {
     console.error("Error occurred:", error);
