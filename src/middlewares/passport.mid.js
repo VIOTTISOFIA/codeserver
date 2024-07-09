@@ -1,5 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
@@ -14,8 +15,8 @@ passport.use(
       try {
         if (!email || !password) {
           const error = new Error("Please enter email and passsword");
-          error.statusCode = 400;
-          return done(error);
+          error.statusCode = 401;
+          return done(null, null, error);
         }
 
         const one = await userManager.readByEmail(email);
@@ -45,7 +46,7 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const one = await userManager.readByEmail(email);
-        console.log("Estrategia login", req.session);
+        //console.log("Estrategia login", req.session);
 
         if (!one) {
           const error = new Error("Bad auth from login!");
@@ -82,5 +83,27 @@ passport.use(
     }
   )
 );
+
+//ESTRATEGIA PARA JWT
+passport.use(
+  "jwt",
+  new JwtStrategy(
+    { jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies["token"]]),
+      secretOrKey: process.env.SECRET_JWT
+    },
+    (data, done)=>{
+      try {
+        if (data) {
+          return done(null, data)
+        } else {
+          const error = new Error("Forbidden from Jwt!");
+          error.statusCode = 403;
+          return done(error);
+        }
+      } catch (error) {
+        return done (error)
+      }
+    }  )
+)
 
 export default passport;

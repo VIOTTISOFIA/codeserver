@@ -53,7 +53,7 @@ async function checkSession() {
       `;
     }
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error:', error.message);
   }
 }
 // Llama a checkSession al cargar la página

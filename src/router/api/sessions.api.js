@@ -8,15 +8,14 @@ import isValidPassword from "../../middlewares/isValidPassword.mid.js";
 import createHashPassword from "../../middlewares/createHashPassword.mid.js";
 import passport from "../../middlewares/passport.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 
 const sessionRouter = Router();
 
 sessionRouter.post(
   "/register",
-  /* isValidData,
-  isValidEmail,
-  createHashPassword, */
-  passport.authenticate("register", { session: false }),
+  //passport.authenticate("register", { session: false }),
+  passportCb("register"),
   async (req, res, next) => {
     try {
       const data = req.body;
@@ -30,20 +29,12 @@ sessionRouter.post(
 
 sessionRouter.post(
   "/login",
-  /* isValidUser,
-  isValidPassword, */
-  passport.authenticate("login", { session: false }),
+  //passport.authenticate("login", { session: false }),
+  passportCb("login"),
   async (req, res, next) => {
     try {
       const { email } = req.body;
       const one = await userManager.readByEmail(email);
-      /*  req.session.email = email;
-      req.session.online = true;
-      req.session.role = one.role;
-      req.session.photo = one.photo;
-      req.session.user_id = one._id;
-      req.session.photo = one.photo;
-      console.log("login session: ", req.session); */
       return res.cookie("token", req.user.token, { signedCookie: true }).json({
         statusCode: 200,
         message: "Logged in!",
@@ -55,25 +46,30 @@ sessionRouter.post(
   }
 );
 
-sessionRouter.get("/online", isAuth, async (req, res, next) => {
-  try {
-    //if (req.session.online) {
-    if (req.user.online) {
+sessionRouter.get(
+  "/online",
+  /* passport.authenticate("jwt", { session: false }) */
+  passportCb("jwt"),
+  async (req, res, next) => {
+    try {
+      //if (req.session.online) {
+      if (req.user.online) {
+        return res.json({
+          statusCode: 200,
+          message: "Is online",
+          user_id: req.user.user_id,
+          email: req.user.email,
+        });
+      }
       return res.json({
-        statusCode: 200,
-        message: "Is online",
-        user_id: req.user.user_id,
-        email: req.user.email,
+        statusCode: 401,
+        message: "Bad auth!",
       });
+    } catch (error) {
+      return next(error);
     }
-    return res.json({
-      statusCode: 401,
-      message: "Bad auth!",
-    });
-  } catch (error) {
-    return next(error);
   }
-});
+);
 
 sessionRouter.post("/signout", isAuth, (req, res, next) => {
   try {
@@ -81,10 +77,10 @@ sessionRouter.post("/signout", isAuth, (req, res, next) => {
       //console.log("Signout session before destroy: ", req.session)
 
       res.clearCookie("token");
-    return res.json({
-      statusCode: 200,
-      message: "Signed out!",
-    });
+      return res.json({
+        statusCode: 200,
+        message: "Signed out!",
+      });
     }
 
     return res.json({

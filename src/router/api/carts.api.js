@@ -20,7 +20,7 @@ async function create(req, res, next) {
       //console.log("user_id:", user_id)
   
       if (!user_id) {
-        return res.status(401).json({
+        return res.statusCode(401).json({
           statusCode: 401,
           message: "Please login for adding to cart",
         });
