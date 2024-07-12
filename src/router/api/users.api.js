@@ -1,15 +1,20 @@
 import { Router } from "express";
-// importo
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
+import CustomRouter from "../customRouter.js";
 
-const usersApi = Router();
-// genero
-usersApi.post("/", create);
-usersApi.get("/", read);
-usersApi.get("/users", readOne);
-usersApi.put("/:uid", update);
-usersApi.delete("/:uid", destroy);
+class UsersRouter extends CustomRouter {
+  init() {
+    //FALTA AGREGAR POLICIES
+    this.create("/", create);
+    this.read("/", read);
+    this.read("/users", readOne);
+    this.update("/:uid", update);
+    this.destroy("/:uid", destroy);
+  }
+}
+
+const usersApi = new UsersRouter();
 
 async function read(req, res, next) {
   try {
@@ -30,7 +35,6 @@ async function read(req, res, next) {
   }
 }
 
-//un parametro
 async function readOne(req, res, next) {
   try {
     const { email } = req.session;
@@ -91,5 +95,5 @@ async function destroy(req, res, next) {
   }
 }
 
-export default usersApi;
+export default usersApi.getRouter();
 // exporto

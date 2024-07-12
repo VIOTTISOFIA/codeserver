@@ -2,32 +2,38 @@ import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
+import CustomRouter from "../customRouter.js";
 
-const cartsRouter = Router();
+class CartsRouter extends CustomRouter {
+  init() {
+    //FALTA AGREGAR POLICIES
+    this.create("/", isAuth, create);
+    this.read("/", read);
+    this.read("/cart", readCart);
+    this.update("/:cid", update);
+    this.destroy("/:cid", destroy);
+    this.destroy("/cart/:user_id", destroyAll);
+  }
+}
 
-cartsRouter.post("/", isAuth, create);
-cartsRouter.get("/", read);
-cartsRouter.get("/cart", readCart);
-cartsRouter.put("/:cid", update);
-cartsRouter.delete("/:cid", destroy);
-cartsRouter.delete("/cart/:user_id", destroyAll);
+const cartsRouter = new CartsRouter();
 
 //Endpoint para crear un carrito
 async function create(req, res, next) {
-    try {
-      const data = req.body;
-      const user_id = req.user._id;
-      //console.log("user_id:", user_id)
-  
-      if (!user_id) {
-        return res.statusCode(401).json({
-          statusCode: 401,
-          message: "Please login for adding to cart",
-        });
-      }
-      // Añadir el user_id a los datos
-      data.user_id = user_id;
-  
+  try {
+    const data = req.body;
+    const user_id = req.user._id;
+    //console.log("user_id:", user_id)
+
+    if (!user_id) {
+      return res.statusCode(401).json({
+        statusCode: 401,
+        message: "Please login for adding to cart",
+      });
+    }
+    // Añadir el user_id a los datos
+    data.user_id = user_id;
+
     const one = await cartsManager.create(data);
     return res.json({
       statusCode: 201,
@@ -65,7 +71,7 @@ async function readCart(req, res, next) {
     // Acceder al user_id desde req.session.user
     const user_id = req.session.user.user_id;
     console.log("user_id:", user_id);
-    
+
     // Verificar explícitamente si user_id está definido
     if (!user_id) {
       const error = new Error("User ID is required");
@@ -144,4 +150,4 @@ async function destroyAll(req, res, next) {
   }
 }
 
-export default cartsRouter;
+export default cartsRouter.getRouter();

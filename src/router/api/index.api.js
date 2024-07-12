@@ -5,14 +5,19 @@ import cartsRouter from "./carts.api.js";
 import ticketsRouter from "./tickets.api.js";
 import cookiesRouter from "./cookies.api.js";
 import sessionsRouter from "./sessions.api.js";
+import CustomRouter from "../customRouter.js";
 
-const apiRouter = Router();
+class ApiRouter extends CustomRouter {
+  init() {
+    this.use("/products", productRouter);
+    this.use("/users", usersRouter);
+    this.use("/carts", cartsRouter);
+    this.use("/tickets", ticketsRouter);
+    this.use("/cookies", cookiesRouter);
+    this.use("/sessions", sessionsRouter);
+  }
+}
 
-apiRouter.use("/products", productRouter);
-apiRouter.use("/users", usersRouter);
-apiRouter.use("/carts", cartsRouter);
-apiRouter.use("/tickets", ticketsRouter);
-apiRouter.use("/cookies", cookiesRouter);
-apiRouter.use("/sessions", sessionsRouter);
+const apiRouter = new ApiRouter();
 
-export default apiRouter;
+export default apiRouter.getRouter();
