@@ -3,9 +3,10 @@ import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import CustomRouter from "../customRouter.js";
 
+//FALTA AGREGAR POLICIES Y RESPUESTAS AUTOMATICAS DE CUSTOM ROUTER
+
 class UsersRouter extends CustomRouter {
   init() {
-    //FALTA AGREGAR POLICIES
     this.create("/", create);
     this.read("/", read);
     this.read("/users", readOne);
