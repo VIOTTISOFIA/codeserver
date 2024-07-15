@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
@@ -15,8 +16,8 @@ passport.use(
         // QUE CONSTA DE TODO LO QUE VALIDAMOS EN LOS MIDDLEWARES
         if (!email || !password) {
           const error = new Error("Please enter email and password");
-          error.StatusCode = 400;
-          return done(error);
+          error.StatusCode = 401;
+          return done(null, null, error);
         }
         const one = await userManager.readByEmail(email);
         if (one) {
@@ -48,11 +49,11 @@ passport.use(
         }
         const verify = verifyHash(password, one.password);
         if (verify) {
-          req.session.email = email;
-          req.session.online = true;
-          req.session.role = one.role;
-          req.session.photo = one.photo;
-          req.session.user_id = one._id;
+          // req.session.email = email;
+          // req.session.online = true;
+          // req.session.role = one.role;
+          // req.session.photo = one.photo;
+          // req.session.user_id = one._id;
           const user = {
             email,
             role: one.role,
@@ -62,6 +63,7 @@ passport.use(
           };
           const token = createToken(user);
           user.token = token;
+          console.log("user tokenizado, user");
           return done(null, user);
           // agrego la propiedad USER al objeto de requerimientos
           // esa propiedad USER tiene todas las propiedades que estamos definiendo en el objeto correspondiente
@@ -106,6 +108,31 @@ passport.use(
           (req.session.user_id = user._id);
 
         return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+// ESTRATEGIA PARA JWT
+passport.use(
+  "jwt",
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (req) => req?.cookies["token"],
+      ]),
+      secretOrKey: process.env.SECRET_JWT,
+    },
+    (data, done) => {
+      try {
+        if (data) {
+          return done(null, data);
+        } else {
+          const error = new Error("Forbidden from login!");
+          error.statusCode = 403;
+          return done(error);
+        }
       } catch (error) {
         return done(error);
       }

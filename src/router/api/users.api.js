@@ -2,14 +2,19 @@ import { Router } from "express";
 // importo
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
+import CustomRouter from "../customRouter.js";
 
-const usersApi = Router();
-// genero
-usersApi.post("/", create);
-usersApi.get("/", read);
-usersApi.get("/users", readOne);
-usersApi.put("/:uid", update);
-usersApi.delete("/:uid", destroy);
+class UsersRouter extends CustomRouter {
+  // genero
+  init() {
+    this.create("/", ["USER"], create);
+    this.read("/", ["USER", "ADMIN"], read);
+    this.read("/users", ["USER", "ADMIN"], readOne);
+    this.update("/:uid", ["USER"], update);
+    this.destroy("/:uid", ["USER"], destroy);
+  }
+}
+const usersRouter = new UsersRouter();
 
 async function read(req, res, next) {
   try {
@@ -91,5 +96,5 @@ async function destroy(req, res, next) {
   }
 }
 
-export default usersApi;
+export default usersRouter.getRouter();
 // exporto

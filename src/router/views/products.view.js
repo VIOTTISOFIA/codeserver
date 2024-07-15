@@ -12,13 +12,13 @@ productsRouter.get("/", async (req, res, next) => {
     // Obtengo productos paginados directamente con las opciones de paginación
     const result = await productManager.paginate({
       filter: {},
-      opts: { page, limit }
+      opts: { page, limit },
     });
 
     // Renderizo la vista de productos con los datos obtenidos
     res.render("products", {
-      products: result.docs.map(product => ({
-        id: product._id, 
+      products: result.docs.map((product) => ({
+        id: product._id,
         photo: product.photo,
         title: product.title,
         category: product.category,
@@ -27,9 +27,8 @@ productsRouter.get("/", async (req, res, next) => {
       })),
       total: result.totalDocs,
       page: result.page,
-      pages: result.totalPages
+      pages: result.totalPages,
     });
-
   } catch (error) {
     return next(error);
   }
@@ -43,12 +42,12 @@ productsRouter.get("/paginate", async (req, res, next) => {
 
     const result = await productManager.paginate({
       filter: {},
-      opts: { page, limit }
+      opts: { page, limit },
     });
 
     res.render("products", {
-      products: result.docs.map(product => ({
-        id: product._id, 
+      products: result.docs.map((product) => ({
+        id: product._id,
         photo: product.photo,
         title: product.title,
         category: product.category,
@@ -57,9 +56,8 @@ productsRouter.get("/paginate", async (req, res, next) => {
       })),
       total: result.totalDocs,
       page: result.page,
-      pages: result.totalPages
+      pages: result.totalPages,
     });
-
   } catch (error) {
     return next(error);
   }

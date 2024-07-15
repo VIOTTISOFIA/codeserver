@@ -34,21 +34,24 @@
             body: JSON.stringify(data)
             }
 
-            let response = await fetch ("/api/sessions/register", opts)
-            response = await response.json()
+             try {
+            let response = await fetch("/api/sessions/register", opts);
+            response = await response.json();
 
-            console.log(response)
+            console.log(response);
 
             if (response.statusCode === 201) {
-                alert("User created successfully")
-                location.replace("/login")
+                alert("User created successfully");
+                location.replace("/login");
             } else {
-                alert(response.message)
+                alert(response.message);
             }
-            
-            
+        } catch (error) {
+            console.error("Error during fetch:", error);
+            alert("An error occurred. Please try again.");
+        }
+    });
 
-    } )
             
 </script>
 
