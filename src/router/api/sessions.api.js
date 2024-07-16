@@ -70,12 +70,14 @@ class SeSSionRouter extends CustomRouter {
     this.create("/signout", ["USER", "ADMIN"], (req, res, next) => {
       try {
         if (req.user.email) {
-          res.clearCookie("token");
-          //console.log("Session destroyed");
-          return res.json({
-            statusCode: 200,
-            message: "Signed out!",
-          });
+          //  return res
+          //   .clearCookie("token");
+          //   //console.log("Session destroyed");
+          //   .json({
+          //     statusCode: 200,
+          //     message: "Signed out!",
+          //   });
+          return res.clearCookie("token").message200("Signed out!");
         }
         return res.json({
           statusCode: 401,
