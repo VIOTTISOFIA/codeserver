@@ -7,8 +7,16 @@ const createToken = (data) => {
 };
 
 const verifyToken = (token) => {
+<<<<<<< HEAD
+  console.log("token verificado: ",token)
+  const data = jwt.verify(token, process.env.SECRET_JWT);
+  return data;
+};
+
+=======
   console.log("token verificado: ", token);
   const data = jwt.verify(token, process.env.SECRET_JWT);
   return data;
 };
+>>>>>>> sprint8
 export { createToken, verifyToken };

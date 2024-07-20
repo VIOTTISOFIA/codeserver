@@ -1,12 +1,12 @@
-//import { Router } from "express";
+import { Router } from "express";
 //import productManager from "../../data/fs/ProductManager.fs.js";
 import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
-    this.read("/", ["PUBLIC"], read);
+    this.read("/",["PUBLIC"], read);
     this.read("/paginate", ["PUBLIC"], paginate);
     this.read("/:pid", ["PUBLIC"], readOne);
     this.create("/", ["ADMIN"], isValidAdmin, create);

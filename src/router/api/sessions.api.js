@@ -2,7 +2,7 @@ import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
@@ -87,4 +87,4 @@ class SessionsRouter extends CustomRouter {
 }
 
 const sessionRouter = new SessionsRouter();
-export default sessionRouter.getRouter;
+export default sessionRouter.getRouter();

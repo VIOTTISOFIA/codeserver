@@ -1,8 +1,8 @@
 import { Types } from "mongoose";
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
-import CustomRouter from "../CustomRouter.js";
-//import { Router } from "express";
+import CustomRouter from "../customRouter.js";
+import { Router } from "express";
 
 class TicketsRouter extends CustomRouter {
   init() {

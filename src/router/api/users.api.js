@@ -1,7 +1,7 @@
 //import { Router } from "express";
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 
 class UsersRouter extends CustomRouter {
   // genero
