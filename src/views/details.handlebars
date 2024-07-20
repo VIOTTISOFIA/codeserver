@@ -1,34 +1,37 @@
 <main>
-<a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary mt-auto">Volver</a>
-{{#if product.id}}
+  <a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary mt-auto">Volver</a>
+  {{#if product.id}}
 
-<div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
-      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product._id}} </h1>
-      <hr>
-  <div class="row g-0">
-    <div class="col-md-4 align-content-center">
-      <img src="{{product.photo}}" class="img-fluid object-fit-cover rounded-start border-end border-dark-subtle" alt="{{product.title}}">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title" style="font-size: 23px;">{{product.title}}</h5>
-        <p class="card-text" style="font-size: 18px;">Category: {{product.category}}</p>
-        <p class="card-text" style="font-size: 18px;"><small class="text-body-secondary">Stock: {{product.stock}}</small> <small class="text-body-secondary">Price: {{product.price}}</small> </p>
-        <button id="addToCart" type="button" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to Cart</button>
-        
+  <div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
+    <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product._id}} </h1>
+    <hr>
+    <div class="row g-0">
+      <div class="col-md-4 align-content-center">
+        <img src="{{product.photo}}" class="img-fluid object-fit-cover rounded-start border-end border-dark-subtle"
+          alt="{{product.title}}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title" style="font-size: 23px;">{{product.title}}</h5>
+          <p class="card-text" style="font-size: 18px;">Category: {{product.category}}</p>
+          <p class="card-text" style="font-size: 18px;"><small class="text-body-secondary">Stock:
+              {{product.stock}}</small> <small class="text-body-secondary">Price: {{product.price}}</small> </p>
+          <button id="addToCart" type="button" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to
+            Cart</button>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{{else}}
+  {{else}}
   <h1>NOT FOUND PRODUCT</h1>
-{{/if}}
+  {{/if}}
 
 </main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     const addToCart = document.getElementById("addToCart");
 
     if (addToCart) {
@@ -57,7 +60,13 @@
             const responseData = await response.json();
             alert("Product added to cart successfully");
             location.reload("/products")
-          } else {
+          } 
+          
+          else if (response.status === 401) {
+            alert("Please log in for adding to cart");
+          }
+
+          else {
             const errorData = await response.json();
             console.error('Error:', errorData);
             alert("Error adding product to cart: " + (errorData.message || 'Unknown error'));

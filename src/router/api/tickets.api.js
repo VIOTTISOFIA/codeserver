@@ -1,57 +1,71 @@
-import { Router } from "express";
 import { Types } from "mongoose";
-
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
+import isAuth from "../../middlewares/isAuth.mid.js";
+import CustomRouter from "../customRouter.js";
+import { Router } from "express";
 
-const ticketsRouter = Router();
+class TicketsRouter extends CustomRouter {
+  init() {
+    this.create("/", ["USER"], isAuth, async (req, res, next) => {
+      try {
+        const user_id = req.user._id; // Obtener user_id desde el token verificado
+        
+        if (!user_id) {
+          throw new Error("User ID not found in request");
+        }
+        console.log("user_id:", user_id);
 
-ticketsRouter.get("/:uid", async (req, res, next) => {
-  try {
-    const { uid } = req.params;
-    // console.log(`Received request for user ID: ${uid}`);
-    const tickets = await cartsManager.aggregate([
-      {
-        $match: {
-          user_id: new Types.ObjectId(uid),
-        },
-      },
-      {
-        $lookup: {
-          foreignField: "_id",
-          from: "products",
-          localField: "product_id",
-          as: "product_id",
-        },
-      },
-      {
-        $replaceRoot: {
-          newRoot: {
-            $mergeObjects: [{ $arrayElemAt: ["$product_id", 0] }, "$ROOT"],
+        const tickets = await cartsManager.aggregate([
+          {
+            $match: {
+              user_id: new Types.ObjectId(user_id),
+            },
           },
-        },
-      },
-      { $set: { subTotal: { $multiply: ["$quantity", "$price"] } } },
-      // { $group: { _id: "$user_id", total: { $sum: "$subTotal" } } },
-      // {
-      //   $project: {
-      //     _id: 0,
-      //     user_id: "$_id",
-      //     total: "$total",
-      //     date: new Date(),
-      //   },
-      // },
+          {
+            $lookup: {
+              from: "products",
+              localField: "product_id",
+              foreignField: "_id",
+              as: "product_info",
+            },
+          },
+          {
+            $unwind: "$product_info",
+          },
+          {
+            $set: {
+              subTotal: { $multiply: ["$quantity", "$product_info.price"] },
+            },
+          },
+        {
+            $group: { _id: "$user_id", total: { $sum: "$subTotal" } },
+          },
+         {
+            $project: {
+              _id: 0,
+              user_id: "$_id",
+              total: "$total",
+              date: new Date(),
+            },
+          },
+         {
+            $merge: {
+              into: "tickets",
+            },
+          },
+        ]);
 
-      // { $merge: { into: "tickets" } },
-    ]);
-    // console.log(`Found tickets: ${JSON.stringify(tickets)}`);
-    return res.json({
-      statusCode: 200,
-      response: tickets,
+        return res.json({
+          statusCode: 200,
+          message: "Ticket created successfully",
+          response: tickets,
+        });
+      } catch (error) {
+        return next(error);
+      }
     });
-  } catch (error) {
-    // console.error(`Error processing request: ${error.message}`);
-    return next(error);
   }
-});
+}
+const ticketsRouter = new TicketsRouter();
 
-export default ticketsRouter;
+export default ticketsRouter.getRouter();

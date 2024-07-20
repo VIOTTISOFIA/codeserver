@@ -7,11 +7,11 @@ import CustomRouter from "../customRouter.js";
 
 class UsersRouter extends CustomRouter {
   init() {
-    this.create("/", create);
-    this.read("/", read);
-    this.read("/users", readOne);
-    this.update("/:uid", update);
-    this.destroy("/:uid", destroy);
+    this.create("/", ["PUBLIC"],create);
+    this.read("/", ["ADMIN"], read);
+    this.read("/users", ["ADMIN", "USER"], readOne);
+    this.update("/:uid", ["ADMIN", "USER"], update);
+    this.destroy("/:uid", ["ADMIN", "USER"], destroy);
   }
 }
 

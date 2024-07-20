@@ -4,7 +4,7 @@ import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
 import CustomRouter from "../customRouter.js";
 
-class SeSSionsRouter extends CustomRouter {
+class SessionsRouter extends CustomRouter {
   init() {
     this.create(
       "/register",
@@ -105,6 +105,6 @@ class SeSSionsRouter extends CustomRouter {
   }
 }
 
-const sessionRouter = new SeSSionsRouter();
+const sessionRouter = new SessionsRouter();
 
 export default sessionRouter.getRouter();

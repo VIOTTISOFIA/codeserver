@@ -3,21 +3,16 @@ import { verifyToken } from "../utils/token.util.js";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 
 class CustomRouter {
-  //para contruir y configurar cada instancia del enrutador
   constructor() {
     this.router = Router();
     this.init();
   }
 
-  //para obtener todas las rutas del enrutador definido
   getRouter() {
     return this.router;
   }
 
-  //para inicializar las clases/propiedades heredadas(sub-routers)
   init() {}
-
-  //para manejar las cbs (middlewares y la final)
   applyCbs(callbacks) {
     return callbacks.map((callback) => async (...params) => {
       try {
