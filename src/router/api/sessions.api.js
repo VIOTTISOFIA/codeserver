@@ -1,12 +1,10 @@
-import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
-import session from "express-session";
 import passport from "../../middlewares/passport.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
-import passportCb from "../../middlewares/passportCb.js";
-import CustomRouter from "../customRouter.js";
+import CustomRouter from "../CustomRouter.js";
 
-class SeSSionRouter extends CustomRouter {
+class SessionsRouter extends CustomRouter {
   init() {
     this.create(
       "/register",
@@ -14,7 +12,7 @@ class SeSSionRouter extends CustomRouter {
       passportCb("register"),
       async (req, res, next) => {
         try {
-          return res.json({ statusCode: 201, message: "Registered!" });
+          return res.response201("Registered!");
         } catch (error) {
           return next(error);
         }
@@ -31,11 +29,7 @@ class SeSSionRouter extends CustomRouter {
           const one = await userManager.readByEmail(email);
           return res
             .cookie("token", req.user.token, { signedCookie: true })
-            .json({
-              statusCode: 200,
-              message: "Logged in!",
-              // token: req.user.token,
-            });
+            .response200("Logged in! " + one.email);
         } catch (error) {
           return next(error);
         }
@@ -48,41 +42,23 @@ class SeSSionRouter extends CustomRouter {
       passportCb("jwt"),
       async (req, res, next) => {
         try {
-          // if (req.session.online) {
           if (req.user.online) {
-            return res.json({
-              statusCode: 200,
-              message: "Is online",
-              user_id: req.user.user_id,
-              email: req.user.email,
-            });
+            return res.response200("Is online");
           }
-          return res.json({
-            statusCode: 401,
-            message: "Bad auth!",
-          });
+          return res.error401();
         } catch (error) {
           return next(error);
         }
       }
     );
 
-    this.create("/signout", ["USER", "ADMIN"], (req, res, next) => {
+    this.create("/signout", ["USER", "ADMIN"], isAuth, (req, res, next) => {
       try {
         if (req.user.email) {
-          //  return res
-          //   .clearCookie("token");
-          //   //console.log("Session destroyed");
-          //   .json({
-          //     statusCode: 200,
-          //     message: "Signed out!",
-          //   });
-          return res.clearCookie("token").message200("Signed out!");
+          res.clearCookie("token");
+          return res.response200("Signed out!");
         }
-        return res.json({
-          statusCode: 401,
-          message: "No active session to signout!",
-        });
+        return res.error401();
       } catch (error) {
         return next(error);
       }
@@ -110,5 +86,5 @@ class SeSSionRouter extends CustomRouter {
   }
 }
 
-const sessionRouter = new SeSSionRouter();
+const sessionRouter = new SessionsRouter();
 export default sessionRouter.getRouter;

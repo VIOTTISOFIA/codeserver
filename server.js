@@ -100,6 +100,7 @@ server.use((req, res, next) => {
   next();
 });
 
+// endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);

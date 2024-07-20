@@ -2,6 +2,7 @@ import { Router } from "express";
 import cartsManager from "../../data/mongo/managers/CartsManager.mongo.js";
 import productsManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 import usersManager from "../../data/mongo/managers/UserManager.mongo.js";
+import isAuth from "../../middlewares/isAuth.mid.js";
 
 const cartsRouter = Router();
 
@@ -17,12 +18,12 @@ cartsRouter.get("/cart/:cid", async (req, res, next) => {
   }
 });
 
-cartsRouter.get("/", async (req, res, next) => {
+cartsRouter.get("/", isAuth, async (req, res, next) => {
   try {
-    console.log("Session:", req.session);
+    console.log("Session:", req.user);
 
     // Obtener user_id desde la sesión
-    const user_id = req.session.user_id;
+    const user_id = req.user._id;
     console.log("user_id:", user_id);
 
     if (!user_id) {
