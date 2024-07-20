@@ -49,3 +49,11 @@ Se crearon 2 estrategias de autenticacion y autorizacion: "Login y Register", co
 Tambien se implemento el uso de la biblioteca "Bcrypt" que nos ayuda a mantener la seguridad y privacidad de nuestros clientes mediante el haseo de contraseñas. Adicionalmente hicimos correccion al middleware "password" para autenticar y verificar las contraseñas almacenadas con las recibidas desde el front mediante el uso de "VerifyHash".
 
 Para probar nuestro proyecto pueden crear un usuario libremente el cual sera almacenado en nuestra base de datos con la contraseña protegida. Podran crear un nuevo carrito y visualizar su perfil de usuario segun la sesion iniciada.
+
+**DESAFIO ENTREGABLE "SPRINT7"**
+
+En esta entrega se agrego la generacion de tickets de compra en mongoDB mediante el uso del metido "aggregate" de mongoose.
+
+Tambien se agrego la nueva funcionalidad de customRouter para agilizar y optimizar el codigo mediante respuestas "automaticas" agregadas en el archivo de customRouter, las cuales nos permiten usar una sola linea de codigo dependiendo del coodigo de estado generado y la respuesta del servidor que se haya configurado.
+
+Asimismo, dentro del customRouter hemos agregado el uso de "Policies" para la correcta autenticacion del usuario, es decir, si es usuario comun o un administrador del sitio tendra acceso a diferentes funcionalidades.
