@@ -87,4 +87,4 @@ class SessionsRouter extends CustomRouter {
 }
 
 const sessionRouter = new SessionsRouter();
-export default sessionRouter.getRouter;
+export default sessionRouter.getRouter();

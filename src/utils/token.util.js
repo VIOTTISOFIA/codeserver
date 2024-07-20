@@ -7,8 +7,9 @@ const createToken = (data) => {
 };
 
 const verifyToken = (token) => {
-  console.log("token verificado: ", token);
+  console.log("token verificado: ",token)
   const data = jwt.verify(token, process.env.SECRET_JWT);
   return data;
 };
+
 export { createToken, verifyToken };

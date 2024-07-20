@@ -6,7 +6,7 @@ import CustomRouter from "../CustomRouter.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
-    this.read("/", ["PUBLIC"], read);
+    this.read("/",["PUBLIC"], read);
     this.read("/paginate", ["PUBLIC"], paginate);
     this.read("/:pid", ["PUBLIC"], readOne);
     this.create("/", ["ADMIN"], isValidAdmin, create);

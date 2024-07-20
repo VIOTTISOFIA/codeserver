@@ -60,8 +60,8 @@
             const responseData = await response.json();
             alert("Product added to cart successfully");
             location.reload("/products")
-          }
-
+          } 
+          
           else if (response.status === 401) {
             alert("Please log in for adding to cart");
           }
