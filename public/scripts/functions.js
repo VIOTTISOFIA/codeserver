@@ -154,6 +154,6 @@ async function updateCart(event, cartItemId) {
       console.error("Error on updating product:", response.statusText);
     }
   } catch (error) {
-    console.error("Error  on updating product:", error.message);
+    console.error("Error on updating product:", error.message);
   }
 }

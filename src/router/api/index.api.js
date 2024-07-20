@@ -1,4 +1,3 @@
-import { Router } from "express";
 import productRouter from "./products.api.js";
 import usersRouter from "./users.api.js";
 import cartsRouter from "./carts.api.js";
@@ -19,5 +18,4 @@ class ApiRouter extends CustomRouter {
 }
 
 const apiRouter = new ApiRouter();
-
 export default apiRouter.getRouter();

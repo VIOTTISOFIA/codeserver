@@ -43,12 +43,9 @@ passport.use(
   "login",
   new LocalStrategy(
     { passReqToCallback: true, usernameField: "email" },
-
     async (req, email, password, done) => {
       try {
         const one = await userManager.readByEmail(email);
-        //console.log("Estrategia login", req.session);
-
         if (!one) {
           const error = new Error("Bad auth from login!");
           error.statusCode = 401;
@@ -69,12 +66,10 @@ passport.use(
           const token = createToken(user);
           user.token = token;
           console.log("user tokenizado", user);
-
           return done(null, user);
-          //agrega la prop USER al obj de req
-          //esa prop USER tiene todas las props que se definen en el obj correspondiente
+          // agrego la propiedad USER al objeto de requerimientos
+          // esa propiedad USER tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
-
         const error = new Error("Invalid credentials");
         error.statusCode = 401;
         return done(error);

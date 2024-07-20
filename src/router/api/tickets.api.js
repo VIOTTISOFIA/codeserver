@@ -8,8 +8,8 @@ class TicketsRouter extends CustomRouter {
   init() {
     this.create("/", ["USER"], isAuth, async (req, res, next) => {
       try {
-        const user_id = req.user._id; // Obtener user_id desde el token verificado
-        
+        const user_id = req.user._id; //Obtengo user_id desde el token verificado
+
         if (!user_id) {
           throw new Error("User ID not found in request");
         }
@@ -37,10 +37,10 @@ class TicketsRouter extends CustomRouter {
               subTotal: { $multiply: ["$quantity", "$product_info.price"] },
             },
           },
-        {
+          {
             $group: { _id: "$user_id", total: { $sum: "$subTotal" } },
           },
-         {
+          {
             $project: {
               _id: 0,
               user_id: "$_id",
@@ -48,24 +48,20 @@ class TicketsRouter extends CustomRouter {
               date: new Date(),
             },
           },
-         {
+          {
             $merge: {
               into: "tickets",
             },
           },
         ]);
 
-        return res.json({
-          statusCode: 200,
-          message: "Ticket created successfully",
-          response: tickets,
-        });
+        return res.response200("Ticket created successfully", tickets);
       } catch (error) {
         return next(error);
       }
     });
   }
 }
-const ticketsRouter = new TicketsRouter();
 
+const ticketsRouter = new TicketsRouter();
 export default ticketsRouter.getRouter();

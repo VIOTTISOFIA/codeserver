@@ -55,7 +55,6 @@ async function readCart(req, res, next) {
 
     // Acceder al user_id desde req.session.user
     const user_id = req.user._id;
-    console.log("user_id:", user_id);
 
     // Verificar explícitamente si user_id está definido
     if (!user_id) {
@@ -67,7 +66,6 @@ async function readCart(req, res, next) {
     const cart = await cartsManager.readCart({ user_id });
     //console.log(cart);
     if (cart.length > 0) {
-      //return res.json({ statusCode: 200, message: "READ", response: cart });
       return res.response200("READ", cart);
     } else {
       const error = new Error("Cart not found for user required");
@@ -86,11 +84,10 @@ async function update(req, res, next) {
     const { cid } = req.params;
     const { quantity } = req.body;
     const updatedCart = await cartsManager.update(cid, { quantity });
-    /* const updatedCart = await cartsManager.readOne(cid); */
     const product = await productsManager.readOne(updatedCart.product_id);
     const subTotal = updatedCart.quantity * product.price;
     updatedCart.subTotal = subTotal;
-   return res.response200("UPDATED", { updatedCart, subTotal });
+    return res.response200("UPDATED", { updatedCart, subTotal });
   } catch (error) {
     return next(error);
   }
@@ -114,8 +111,7 @@ async function destroy(req, res, next) {
 
 async function destroyAll(req, res, next) {
   try {
-    const user_id = req.user._id; // Obtener user_id desde el token verificado
-    console.log("user_id:", user_id);
+    const user_id = req.user._id;
     const userIdObject = new ObjectId(user_id);
     const result = await cartsManager.destroyAll(userIdObject);
     return res.response200("DELETED", result);
