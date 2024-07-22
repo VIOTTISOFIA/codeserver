@@ -1,4 +1,4 @@
-import "dotenv/config.js";
+import enviroment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -16,13 +16,14 @@ import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
 import dbConnect from "./src/utils/dbConnect.util.js";
+import argsUtil from "./src/utils/args.util.js";
 
 // console.log(process.env);
 // console.log(process.env.MONGO_URI);
 
 // http server
 const server = express();
-const port = 8080;
+const port = enviroment.PORT || argsUtil.p;
 const ready = async () => {
   console.log("server ready on port" + port);
   await dbConnect();
@@ -72,7 +73,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
-server.use(cookieParser(process.env.SECRET_COOKIE));
+server.use(cookieParser(enviroment.SECRET_COOKIE));
 //const FileSession = fileStore(session);
 server.use(
   session({
@@ -103,3 +104,17 @@ server.use((req, res, next) => {
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);
+
+// console.log(argsUtil);
+// console.log(enviroment);
+// process.on("exit", (code) => {
+//   console.log("Justo antes de cerrarse");
+//   console.log(code);
+// });
+// process.on("uncaughtException", (exc) => {
+//   console.log("Exception no cacheada");
+// });
+// process.on("message", (message) => {
+//   console.log("Cuando reciba mensaje de otro proceso");
+//   console.log(message);
+// });
