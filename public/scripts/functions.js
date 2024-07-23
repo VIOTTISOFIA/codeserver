@@ -82,8 +82,9 @@ async function removeFromCart(cartItemId) {
 async function destroyAll(event, user_id) {
   try {
     event.preventDefault();
-    const response = await fetch(`/api/carts/cart/${user_id}`, {
+    const response = await fetch(`/api/carts/cart/empty`, {
       method: "DELETE",
+      credentials: "include",
     });
 
     if (response.ok) {
@@ -102,19 +103,32 @@ async function destroyAll(event, user_id) {
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
-    const response = await fetch(`/api/carts/cart/${user_id}`, {
-      method: "DELETE",
+    
+    // Crear un ticket
+    const ticketResponse = await fetch(`/api/tickets`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     });
 
-    if (response.ok) {
-      alert("successful purchase!");
+    if (ticketResponse.ok) {
+      alert("Success purchase!");
+
+      // Vaciar el carrito después de crear el ticket
+      const emptyCart = await fetch(`/api/carts/cart/empty`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      
       location.reload();
     } else {
-      const error = await response.json();
-      console.error("Error on purchase:", error.message);
+      const ticketError = await ticketResponse.json();
+      console.error("Error creating ticket:", ticketError.message);
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error:", error);
   }
 }
 

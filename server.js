@@ -73,7 +73,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
-server.use(cookieParser(enviroment.SECRET_COOKIE));
+server.use(cookieParser(process.env.SECRET_COOKIE));
 //const FileSession = fileStore(session);
 server.use(
   session({

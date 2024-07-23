@@ -1,10 +1,10 @@
-import { Router } from "express";
+
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
-import session from "express-session";
+
 import passport from "../../middlewares/passport.mid.js";
-// import isAuth from "../../middlewares/isAuth.mid.js";
+import isAuth from "../../middlewares/isAuth.mid.js";
 import passportCb from "../../middlewares/passportCb.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 import {
   register,
   login,
@@ -13,9 +13,21 @@ import {
   profile,
 } from "../../controllers/sessions.controller.js";
 
-class SeSSionRouter extends CustomRouter {
+
+class SessionsRouter extends CustomRouter {
   init() {
-    this.create("/register", ["PUBLIC"], passportCb("register"), register);
+    this.create(
+      "/register",
+      ["PUBLIC"],
+      passportCb("register"),
+      async (req, res, next) => {
+        try {
+          return res.response201("Registered!");
+        } catch (error) {
+          return next(error);
+        }
+      }
+    );
 
     this.create(
       "/login",
@@ -112,8 +124,7 @@ class SeSSionRouter extends CustomRouter {
     //     return next(error);
     //   }
     // }
-  }
-}
+  }}
 
 const sessionRouter = new SeSSionRouter();
 export default sessionRouter.getRouter;
