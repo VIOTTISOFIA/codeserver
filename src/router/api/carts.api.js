@@ -21,14 +21,14 @@ const cartsRouter = new CartsRouter();
 async function create(req, res, next) {
   try {
     const data = req.body;
-    const user_id =req.user ? req.user._id : null;
-    if (!user_id) {
-      return res.response401("Please login for adding to cart");
+    const user_id = req.user ? req.user._id : null;
+    if (user_id) {
+      data.user_id = user_id;
+      const one = await cartsManager.create(data);
+      return res.response201("CREATED");
+    } else {
+      return res.error400("Please login for adding to cart");
     }
-
-    data.user_id = user_id;
-    const one = await cartsManager.create(data);
-    return res.response201("CREATED");
   } catch (error) {
     return next(error);
   }
