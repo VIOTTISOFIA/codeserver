@@ -1,55 +1,34 @@
 [
   {
-    "id": "0160e77987c0838af4fc55e6",
-    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "id": "0f91fe4dbd35789ca1be6fa0",
+    "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "sofi_04_04@hotmail.com",
+    "age": 33,
     "password": "hola1234",
     "role": "adm"
   },
   {
-    "id": "c57de3e294a5e516589117d2",
-    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "id": "7866e3e2b4a8313b38316061",
+    "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "roxana@hotmail.com",
+    "age": 24,
     "password": "hola5678",
     "role": "user"
   },
   {
-    "id": "87c0dc28e059461874632a50",
-    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "id": "bf91a83d73fb3fd4e454789e",
+    "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "celine@hotmail.com",
+    "age": 18,
     "password": "hola91011",
     "role": "user"
   },
   {
-    "id": "db4ea255b35eec82ab9e991b",
-    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "id": "48a35bdd67b2944c0d985980",
+    "photo": "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     "email": "martin@hotmail.com",
+    "age": 33,
     "password": "hola1213",
     "role": "user"
-  },
-  {
-    "id": "17cd2e3f3b301a0de9bc70f4",
-    "foto": "https://i.postimg.cc/wTgNFWhR/profile.png",
-    "email": "prueba@coder.com",
-    "password": "hola",
-    "role": "0"
-  },
-  {
-    "id": "3f908aa2d9f7f65da75b9775",
-    "foto": "https://www.pngplay.com/image/325510",
-    "email": {},
-    "password": {}
-  },
-  {
-    "id": "40b5c22cccaabba2a1a9b8c5",
-    "foto": "https://www.pngplay.com/image/325510",
-    "email": {},
-    "password": {}
-  },
-  {
-    "id": "2f2bc5be1e116997ec0aeb6a",
-    "foto": "https://www.bing.com/search?q=mar%c3%ada+(madre+de+jes%c3%bas)&filters=dtbk:%22MCFvdmVydmlldyFvdmVydmlldyFjMDg3MjRhOS04NTY4LWJmODMtMGNjOC1jZGVkYTRiMmE1OTM%3d%22+sid:%22c08724a9-8568-bf83-0cc8-cdeda4b2a593%22+tphint:%22f%22&FORM=DEPNAV",
-    "email": {},
-    "password": {}
   }
 ]

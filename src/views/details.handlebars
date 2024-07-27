@@ -1,7 +1,9 @@
+<main>
+<a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary mt-auto">Volver</a>
 {{#if product.id}}
 
 <div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
-      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product.id}} </h1>
+      <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product._id}} </h1>
       <hr>
   <div class="row g-0">
     <div class="col-md-4 align-content-center">
@@ -12,7 +14,8 @@
         <h5 class="card-title" style="font-size: 23px;">{{product.title}}</h5>
         <p class="card-text" style="font-size: 18px;">Category: {{product.category}}</p>
         <p class="card-text" style="font-size: 18px;"><small class="text-body-secondary">Stock: {{product.stock}}</small> <small class="text-body-secondary">Price: {{product.price}}</small> </p>
-        <button href="#" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to List</button>
+        <button id="addToCart" type="button" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to Cart</button>
+        
       </div>
     </div>
   </div>
@@ -22,5 +25,56 @@
   <h1>NOT FOUND PRODUCT</h1>
 {{/if}}
 
+</main>
 
-{{!-- verificar porque no mantiene la vista y no arroja el h1 del else --}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const addToCart = document.getElementById("addToCart");
+
+    if (addToCart) {
+      addToCart.addEventListener("click", async (event) => {
+        // Prevenir el comportamiento predeterminado del botón
+        event.preventDefault();
+
+        // Obtener el ID del producto y la cantidad
+        const product_id = "{{product._id}}";
+        const user_id = "6660fcb73892bc1eecfeabe9";
+        const quantity = 1;
+
+        //console.log("Product ID:", product_id);
+        //console.log("User ID:", user_id);
+        //console.log("Quantity:", quantity);
+
+        try {
+          // Realizar la solicitud POST para añadir el producto al carrito
+          const response = await fetch("/api/carts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              product_id,
+              user_id,
+              quantity
+            })
+          });
+
+          // Revisar el estado de la respuesta
+          if (response.ok) {
+            const responseData = await response.json();
+            //console.log("Response Data:", responseData);
+            alert("Product added to cart successfully");
+          } else {
+            const errorData = await response.json();
+            console.error('Error:', errorData);
+            alert("Error adding product to cart: " + (errorData.message || 'Unknown error'));
+          }
+        } catch (error) {
+          console.error('Fetch error:', error);
+          alert("Network error: " + error.message);
+        }
+      });
+    }
+  });
+</script>

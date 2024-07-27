@@ -9,7 +9,7 @@ const schema = new Schema(
     role: { type: Number, default: 0 },
     photo: {
       type: String,
-      default: "https://www.pngplay.com/image/325510",
+      default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     },
 
     user_id: {

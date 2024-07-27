@@ -1,0 +1,114 @@
+<main>
+    {{#if carts}}
+    <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
+      <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Carritos del Usuario: {{#if carts.[0].user_id}}{{carts.[0].user_id.email}}{{/if}}</h2>
+    </div>
+    {{#each carts}}
+    <div class="d-flex mb-2 mx-auto justify-content-center">
+
+      <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
+
+        <div class="col-md-4 align-content-center">
+          <img class="img-fluid object-fit-cover p-3" style="width: 20rem" src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}" alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
+        </div>
+      
+        <div class="mx-3">
+          <h3 class="my-3 " "font-size: 20px;">{{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
+         <label for="quantity">Cantidad:</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="{{this.quantity}}">
+        <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
+       <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}"><img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+       </div>
+       
+      </div>
+
+    </div>
+    {{/each}}
+    <div class="d-flex justify-content-between w-50 mx-auto">
+       <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
+       <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+    </div>
+  {{else}}
+    <p>Tu carrito esta vacio</p>
+  {{/if}}
+</main>
+
+<script>
+    //funcion para eliminar un producto del carrito
+  async function removeFromCart(cartItemId) {
+    try {
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/${cartItemId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        // muestro un mensaje de exito
+        alert("Product deleted successfully");
+
+        // Si la solicitud se realizó con éxito, recargar la página
+        location.reload();
+      } 
+      else {
+        // Si hubo un error en la solicitud, mostrar un mensaje de error
+        console.error("Error on deleting product:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error on deleting product:", error.message);
+    }
+  }
+
+  //funcion para cancelar y vaciar el carrito 
+  async function destroyAll(event, user_id) {
+    try{
+      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+      //console.log("User ID:", user_id);
+
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/cart/${user_id}`, {
+        method: 'DELETE'
+      });
+
+      //console.log("fetch:", response)
+
+      if(response.ok) {
+        alert("Cart is empty")
+        console.log("resultado:",response)
+        location.reload()
+        
+      } else {
+         const error = await response.json();
+        console.error("Error on cart deleting:", error.message);
+      }
+    } catch(error){
+      console.error(error)
+    }
+  }
+
+//funcion para confirmar la compra y vaciar el carrito
+  async function checkout(event, user_id) {
+    try{
+      event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+      //console.log("User ID:", user_id);
+
+      // Realizar una solicitud DELETE al endpoint correspondiente
+      const response = await fetch(`/api/carts/cart/${user_id}`, {
+        method: 'DELETE'
+      });
+
+      //console.log("fetch:", response)
+
+      if(response.ok) {
+        alert("successful purchase!")
+        console.log("resultado:",response)
+        location.reload()
+        
+      } else {
+         const error = await response.json();
+        console.error("Error on purchase:", error.message);
+      }
+    } catch(error){
+      console.error(error)
+    }
+  }
+</script>
