@@ -20,6 +20,7 @@ const cartsRouter = new CartsRouter();
 //Endpoint para crear un carrito
 async function create(req, res, next) {
   try {
+    console.log("User:", req.user);
     const data = req.body;
     const user_id = req.user ? req.user._id : null;
     if (user_id) {

@@ -43,16 +43,21 @@
         const quantity = 1;
 
         try {
-          const isOnline = await fetch("/api/sessions/online", {
+          // Verificar si el usuario está online
+          const onlineResponse = await fetch("/online", {
             method: "GET",
             headers: {
+              credentials: "include",
               "Content-Type": "application/json"
             }
           });
-          if (isOnline.status === 200) {
+
+          if (onlineResponse.status === 200) {
+            // El usuario está online, proceder a agregar el producto al carrito
             const response = await fetch("/api/carts", {
               method: "POST",
               headers: {
+                credentials: "include",
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
@@ -60,14 +65,20 @@
                 quantity
               })
             });
+
+            // Revisar el estado de la respuesta
             if (response.status === 201) {
               const responseData = await response.json();
-              alert("Product added to cart successfully");
-              location.reload();
+              alert("Product added to cart successfully" || responseData.message);
+              location.replace("/products");
             } else {
-              alert("Please log in for adding to cart");
-              location.reload()
+              const errorData = await response.json();
+              console.error('Error:', errorData);
+              alert("Please log in for adding to cart" || errorData.message);
             }
+          } else if (onlineResponse.status === 401) {
+            const errorData = await onlineResponse.json();
+            alert("Error adding product to cart" || errorData.message);
           }
         } catch (error) {
           console.error('Fetch error:', error);
@@ -76,4 +87,5 @@
       });
     }
   });
+
 </script>
