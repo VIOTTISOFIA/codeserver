@@ -16,7 +16,7 @@
 </section>
 
 <script>
-    document.querySelector("#register").addEventListener("click", async ()=> {
+    document.querySelector("#register").addEventListener("click", async () => {
         const data = {
             email: document.querySelector("#email").value,
             age: document.querySelector("#age").value,
@@ -32,27 +32,19 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
-            }
+        }
 
-            let response = await fetch ("/api/sessions/register", opts)
-            response = await response.json()
+        let response = await fetch("/api/sessions/register", opts)
+        response = await response.json()
 
-            console.log(response)
+        console.log(response)
 
-            if (response.statusCode === 201) {
-                alert("User created successfully")
-                location.replace("/login")
-            } else {
-                alert(response.message)
-            }
-            
-            
+        if (response.statusCode === 201) {
+            alert("User created successfully")
+            location.replace("/login")
+        } else {
+            alert(response.message)
+        }
+    })
 
-    } )
-            
 </script>
-
-
-
-
-

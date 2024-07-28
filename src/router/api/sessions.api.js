@@ -61,15 +61,15 @@ sessionRouter.post("/signout", (req, res, next) => {
         statusCode: 200,
         message: "Signed out!",
       });
-      }
-      return res.json({
-        statusCode: 401,
-        message: "No active session to signout!",
-      })
-    } catch (error) {
-      return next(error);
     }
-  });
+    return res.json({
+      statusCode: 401,
+      message: "No active session to signout!",
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
 
 sessionRouter.get(
   "/google",
