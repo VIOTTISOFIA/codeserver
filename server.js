@@ -8,6 +8,8 @@ import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 //import fileStore from "session-file-store";
+import passport from "passport";
+import "dotenv/config"; // Para cargar las variables de entorno
 import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/router/index.router.js";
@@ -17,6 +19,7 @@ import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
 import dbConnect from "./src/utils/dbConnect.util.js";
 import argsUtil from "./src/utils/args.util.js";
+import CustomRouter from "./src/router/customRouter.js";
 
 // console.log(process.env);
 // console.log(process.env.MONGO_URI);
@@ -32,6 +35,10 @@ const ready = async () => {
 const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);
+
+// // INICIALIZAR
+// server.use(passport.initialize());
+// server.use(passport.session());
 
 //configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
 const hbs = ExpressHandlebars.create({
