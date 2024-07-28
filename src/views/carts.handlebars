@@ -5,7 +5,6 @@
     </div>
     {{#each carts}}
     <div class="d-flex mb-2 mx-auto justify-content-center">
-
       <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
 
         <div class="col-md-4 align-content-center">
@@ -25,9 +24,10 @@
 
     </div>
     {{/each}}
-    <div class="d-flex justify-content-between w-50 mx-auto">
+    <div class="d-flex justify-content-evenly w-50 mx-auto">
        <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
        <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+       <a class="btn btn-primary mt-3 w-25 align-self-center" href="/products">Continue shopping!</a>
     </div>
   {{else}}
   <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded">
