@@ -6,7 +6,7 @@ const schema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
     password: { type: String, required: true },
-    role: { type: Number, default: 0 },
+    role: { type: Number, default: 0, index: true },
     photo: {
       type: String,
       default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
@@ -16,14 +16,21 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      required: true,
+      /*  required: true, */
     },
-    user: { type: String, required: true },
+    /* user: { type: String, required: true }, */
   },
   {
     timestamps: true,
   }
 );
+
 schema.plugin(mongoosePaginate);
+// schema.pre("find", function () {
+//   this.populate("user_id", "email photo -_id");
+// });
+
 const User = model(collection, schema);
 export default User;
+
+// linea 19 y 21 las comento para eliminar el campo obligatorio del id de usuario

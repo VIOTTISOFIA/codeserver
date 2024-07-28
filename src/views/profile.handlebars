@@ -2,12 +2,12 @@
     <h1 class="bg-success-subtle p-2 text-center w-100 fst-italic text-dark-emphasis"> USERS </h1>
     <section class="text-center m-3 w-100 d-flex d-flex  justify-content-center gap-3">
 
-        {{#if user._id}}
-{{!-- <h1>{{user._id}} </h1> --}}
+        {{!-- {{#if user._id}} --}}
+<h1>{{user._id}} </h1>
 
         <div class="card" style="width: 18rem;">   
             
-            <img src="{{user.photo}}" class="card-img-top" alt="{{user.id}}"/>
+            <img src="{{user.photo}}" class="card-img-top" alt="{{user._id}}"/>
             <div class="card-body">
             <div class="card-body">
                 <h5 class="card-title">{{user.email}}</h5>
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        {{/if}}
+        {{!-- {{/if}} --}}
     </section>
 </main>
 

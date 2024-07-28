@@ -23,17 +23,7 @@ class Manager {
     }
   }
 
-  async paginate({ filter, opts }) {
-    try {
-      const all = await this.Model.paginate(filter, opts);
-      console.log(filter);
-      return all;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async readOne(id) {
+  async paginate({ filter = {}, opts = {} } = {}) {
     try {
       const options = {
         ...opts,
@@ -52,6 +42,16 @@ class Manager {
   async readOne(filter) {
     try {
       const one = await this.Model.findById(filter).lean();
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+//nuevo metodo 'ReadByEmail' utilizado en sessions
+  async readByEmail(email) {
+    try {
+      const one = await this.Model.findOne({ email });
       return one;
     } catch (error) {
       throw error;

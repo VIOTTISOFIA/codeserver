@@ -5,6 +5,10 @@ import { Server } from "socket.io";
 import morgan from "morgan";
 import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+//import fileStore from "session-file-store";
+import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
@@ -42,6 +46,10 @@ const hbs = ExpressHandlebars.create({
       return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     },
   },
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 });
 
 socketServer.on("connection", socketCb);
@@ -51,10 +59,46 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 // middlewares
+server.get(cookieParser(process.env.SECRET_COOKIE));
+server.get(
+  session({
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 },
+  })
+);
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
+server.use(cookieParser(process.env.SECRET_COOKIE));
+//const FileSession = fileStore(session);
+server.use(
+  session({
+    //FILESTORE
+    /*  store: new FileSession({
+      path: "./src/data/fs/file/sessions",
+      ttl: 60 * 60,
+    }), */
+
+  //MONGOSTORE
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 10 * 60 * 1000 },
+  store: new MongoStore ({
+     mongoUrl: process.env.MONGO_URI,
+     ttl: 60 * 60
+   }),
+})
+);
+
+//variables globales
+server.use((req, res, next) => {
+  res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
+  next();
+});
 
 // endpoints
 server.use("/", indexRouter);
