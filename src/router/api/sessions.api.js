@@ -1,7 +1,7 @@
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import passport from "../../middlewares/passport.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
-import passportCb from "../../middlewares/passportCb.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 import CustomRouter from "../customRouter.js";
 import {
   register,
@@ -13,21 +13,8 @@ import {
 
 class SessionsRouter extends CustomRouter {
   init() {
-    this.create(
-      "/register",
-      ["PUBLIC"],
-      passportCb("register"),
-      async (req, res, next) => {
-        try {
-          return res.response201("Registered!");
-        } catch (error) {
-          return next(error);
-        }
-      }
-    );
-
+    this.create("/register", ["PUBLIC"], register);
     this.create("/login", ["PUBLIC"], passportCb("login"), login);
-
     this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), profile);
 
     this.create("/signout", ["USER", "ADMIN"], signout);
@@ -40,11 +27,11 @@ class SessionsRouter extends CustomRouter {
     this.read(
       "/google/callback",
       ["PUBLIC"],
-      passport.authenticate("google", { failureRedirect: "/login" }),
+      passport.authenticate("google", { failureRedirect: "/" }),
       function (req, res, next) {
         try {
           // Autenticación exitosa, redirigir a home
-          res.redirect("/login");
+          res.redirect("/");
         } catch (error) {
           return next(error);
         }
