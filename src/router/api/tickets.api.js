@@ -6,7 +6,7 @@ import { Router } from "express";
 
 class TicketsRouter extends CustomRouter {
   init() {
-    this.create("/", ["USER"], isAuth, async (req, res, next) => {
+    this.create("/", ["USER", "ADMIN"], isAuth, async (req, res, next) => {
       try {
         const user_id = req.user._id; //Obtengo user_id desde el token verificado
 
