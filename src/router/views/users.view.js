@@ -3,7 +3,6 @@ import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 import CustomRouter from "../customRouter.js";
 // import userManager from "../../data/fs/UserManager.fs.js";
-import CustomRouter from "../customRouter.js";
 
 class UsersRouter extends CustomRouter {
   init() {

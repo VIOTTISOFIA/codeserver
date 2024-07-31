@@ -10,13 +10,6 @@ class ViewsRouter extends CustomRouter {
     this.use("/carts", cartsRouter);
     this.use("/products", productsRouter);
     this.use("/users", usersRouter);
-<<<<<<< HEAD
-
-    this.read("/", ["PUBLIC"], async (req, res, next) => {
-      try {
-        const products = await productManager.read();
-        return res.render("index", { title: "HOME", products });
-=======
     this.read("/", ["PUBLIC"], async (req, res, next) => {
       try {
         const products = await productManager.read();
@@ -32,30 +25,6 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
-
-    this.read("/login", ["PUBLIC"], (req, res, next) => {
-      try {
-        return res.render("login", { title: "LOGIN" });
->>>>>>> cc7609140cb53a526b812185c62b1f757e4b015b
-      } catch (error) {
-        return next(error);
-      }
-    });
-
-<<<<<<< HEAD
-    this.read("/", ["PUBLIC"], (req, res, next) => {
-      try {
-        return res.render("products", { title: "PRODUCTS" });
-=======
-    this.read("/register", ["PUBLIC"], (req, res, next) => {
-      try {
-        return res.render("register", { title: "REGISTER" });
->>>>>>> cc7609140cb53a526b812185c62b1f757e4b015b
-      } catch (error) {
-        return next(error);
-      }
-    });
-<<<<<<< HEAD
 
     this.read("/login", ["PUBLIC"], (req, res, next) => {
       try {
@@ -83,18 +52,5 @@ class ViewsRouter extends CustomRouter {
   }
 }
 
-=======
-    this.read("/profile", ["USER", "ADMIN"], async (req, res, next) => {
-      try {
-        const users = await userManager.read();
-        return res.render("profile", { title: "PROFILE", users });
-      } catch (error) {
-        return next(error);
-      }
-    });
-  }
-}
-
->>>>>>> cc7609140cb53a526b812185c62b1f757e4b015b
 const viewsRouter = new ViewsRouter();
 export default viewsRouter.getRouter();
