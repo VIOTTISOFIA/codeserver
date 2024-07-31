@@ -47,10 +47,9 @@ async function checkSession() {
       `;
     } else {
       userOptions.innerHTML = `
-      <a class="nav-link active mt-2" href="/register">REGISTER</a>
-      <a href="/login">
-        <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
-      </a>
+        <a href="/login">
+            <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          </a>
       `;
     }
   } catch (error) {

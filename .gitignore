@@ -1,6 +1,9 @@
 node_modules
 
 .env
+<<<<<<< HEAD
 .env.dev
 .env.prod
+=======
+>>>>>>> cc7609140cb53a526b812185c62b1f757e4b015b
 

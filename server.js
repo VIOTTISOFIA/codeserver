@@ -36,10 +36,6 @@ const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);
 
-// // INICIALIZAR
-// server.use(passport.initialize());
-// server.use(passport.session());
-
 //configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
 const hbs = ExpressHandlebars.create({
   helpers: {

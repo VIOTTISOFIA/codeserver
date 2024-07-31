@@ -34,6 +34,37 @@ class UserManager {
       console.log(error);
     }
   }
+  // async paginate({ filter = {}, opts = {} } = {}) {
+  //   try {
+  //     const options = {
+  //       page: opts.page || 1, // Página predeterminada: 1
+  //       limit: opts.limit || 10, // Límite predeterminado: 10
+  //     };
+
+  //     const skip = (options.page - 1) * options.limit;
+
+  //     const totalDocs = await this.Model.countDocuments(filter); // Total de documentos que coinciden con el filtro
+  //     const docs = await this.Model.find(filter)
+  //       .skip(skip)
+  //       .limit(options.limit)
+  //       .exec();
+
+  //     const result = {
+  //       docs, // Documentos de la página actual
+  //       totalDocs, // Total de documentos
+  //       limit: options.limit, // Límite de documentos por página
+  //       page: options.page, // Página actual
+  //       totalPages: Math.ceil(totalDocs / options.limit), // Total de páginas
+  //       hasNextPage: options.page < Math.ceil(totalDocs / options.limit), // Si hay una página siguiente
+  //       hasPrevPage: options.page > 1, // Si hay una página anterior
+  //     };
+
+  //     console.log(result);
+  //     return result;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   readOne(id) {
     try {

@@ -62,6 +62,28 @@ class UserManager {
       throw error;
     }
   }
+  // class PaginationService {
+  // constructor(model) {
+  //   this.Model = model;
+  // }
+
+  //   async paginate({ filter = {}, opts = {} } = {}) {
+  //     try {
+  //       const options = {
+  //         ...opts,
+  //         page: opts.page || 1, // Página predeterminada: 1
+  //         limit: opts.limit || 10, // Límite predeterminado: 10
+  //       };
+
+  //       const result = await this.Model.paginate(filter, options);
+  //       console.log(result);
+  //       return result;
+  //     } catch (error) {
+  //       throw error;
+  //     }
+  //   }
+  // }
+  // export default PaginationService;
   async readOne(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");
