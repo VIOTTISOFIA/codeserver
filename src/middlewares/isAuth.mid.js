@@ -2,8 +2,10 @@ import { verifyToken } from "../utils/token.util.js";
 
 function isAuth(req, res, next) {
   try {
-    const { token } = req.headers;
+    const token = req.cookies["token"];
+    console.log(token);
     const data = verifyToken(token);
+    console.log(data);
     if (data) {
       req.user = data;
       return next();
@@ -16,3 +18,4 @@ function isAuth(req, res, next) {
     return next(error);
   }
 }
+export default isAuth;
