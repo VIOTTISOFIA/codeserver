@@ -9,8 +9,8 @@ class UsersRouter extends CustomRouter {
     this.create("/", ["PUBLIC"], create);
     this.read("/", ["USER", "ADMIN"], read);
     this.read("/users", ["USER", "ADMIN"], readOne);
-    this.update("/:uid", ["USER","ADMIN"], update);
-    this.destroy("/:uid", ["USER","ADMIN"], destroy);
+    this.update("/:uid", ["USER", "ADMIN"], update);
+    this.destroy("/:uid", ["USER", "ADMIN"], destroy);
   }
 }
 const usersRouter = new UsersRouter();

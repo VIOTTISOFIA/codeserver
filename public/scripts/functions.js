@@ -136,7 +136,6 @@ async function checkout(event, user_id) {
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
-
   const quantityInput = document.getElementById(`quantity-${cartItemId}`);
   const quantity = quantityInput.value;
   try {
