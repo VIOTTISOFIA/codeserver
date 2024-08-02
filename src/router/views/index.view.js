@@ -1,4 +1,4 @@
-import { Router } from "express";
+//import { Router } from "express";
 import productsRouter from "./products.view.js";
 import usersRouter from "./users.view.js";
 import cartsRouter from "./carts.view.js";
@@ -18,7 +18,6 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
-
     this.read("/", ["PUBLIC"], (req, res, next) => {
       try {
         return res.render("products", { title: "PRODUCTS" });

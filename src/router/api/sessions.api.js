@@ -1,23 +1,68 @@
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import passport from "../../middlewares/passport.mid.js";
-import isAuth from "../../middlewares/isAuth.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
+import isAuth from "../../middlewares/isAuth.mid.js";
 import CustomRouter from "../customRouter.js";
-import {
-  register,
-  login,
-  signout,
-  google,
-  profile,
-} from "../../controllers/sessions.controller.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
-    this.create("/register", ["PUBLIC"], register);
-    this.create("/login", ["PUBLIC"], passportCb("login"), login);
-    this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), profile);
+    this.create(
+      "/register",
+      ["PUBLIC"],
+      passportCb("register"),
+      async (req, res, next) => {
+        try {
+          return res.response201("Registered!");
+        } catch (error) {
+          return next(error);
+        }
+      }
+    );
 
-    this.create("/signout", ["USER", "ADMIN"], signout);
+    this.create(
+      "/login",
+      ["PUBLIC"],
+      passportCb("login"),
+      async (req, res, next) => {
+        try {
+          const { email } = req.body;
+          const one = await userManager.readByEmail(email);
+          return res
+            .cookie("token", req.user.token, { signedCookie: true })
+            .response200("Logged in! " + one.email);
+        } catch (error) {
+          return next(error);
+        }
+      }
+    );
+
+    this.read(
+      "/online",
+      ["USER", "ADMIN"],
+      passportCb("jwt"),
+      async (req, res, next) => {
+        try {
+          if (req.user.online) {
+            return res.response200("Is online");
+          }
+          return res.error401();
+        } catch (error) {
+          return next(error);
+        }
+      }
+    );
+
+    this.create("/signout", ["USER", "ADMIN"], isAuth, (req, res, next) => {
+      try {
+        if (req.user.email) {
+          res.clearCookie("token");
+          return res.response200("Signed out!");
+        }
+        return res.error401();
+      } catch (error) {
+        return next(error);
+      }
+    });
 
     this.read(
       "/google",
@@ -26,12 +71,13 @@ class SessionsRouter extends CustomRouter {
     );
     this.read(
       "/google/callback",
-      ["PUBLIC"],
-      passport.authenticate("google", { failureRedirect: "/" }),
-      function (req, res, next) {
+      passport.authenticate("google", { session: false }),
+      (req, res, next) => {
         try {
-          // Autenticación exitosa, redirigir a home
-          res.redirect("/");
+          return res.json({
+            statusCode: 200,
+            message: "Logged in with google!",
+          });
         } catch (error) {
           return next(error);
         }
@@ -40,5 +86,5 @@ class SessionsRouter extends CustomRouter {
   }
 }
 
-const sessionsRouter = new SessionsRouter();
-export default sessionsRouter.getRouter();
+const sessionRouter = new SessionsRouter();
+export default sessionRouter.getRouter();

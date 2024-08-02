@@ -8,8 +8,6 @@ import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 //import fileStore from "session-file-store";
-import passport from "passport";
-import "dotenv/config"; // Para cargar las variables de entorno
 import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/router/index.router.js";
@@ -26,7 +24,7 @@ import CustomRouter from "./src/router/customRouter.js";
 
 // http server
 const server = express();
-const port = enviroment.PORT || argsUtil.p;
+const port = 8080;
 const ready = async () => {
   console.log("server ready on port" + port);
   await dbConnect();
@@ -103,7 +101,7 @@ server.use((req, res, next) => {
   res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
   next();
 });
-
+// endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);

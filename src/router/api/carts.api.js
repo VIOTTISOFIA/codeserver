@@ -5,13 +5,12 @@ import CustomRouter from "../customRouter.js";
 
 class CartsRouter extends CustomRouter {
   init() {
-    //agrego politicas solo desde usuario porque el carrito solo se modifica desde el usuario logeado
-    this.create("/", ["USER"], isAuth, create);
-    this.read("/", ["USER"], isAuth, read);
-    this.read("/cart", ["USER"], isAuth, readCart);
-    this.update("/:cid", ["USER"], isAuth, update);
-    this.destroy("/:cid", ["USER"], isAuth, destroy);
-    this.destroy("/cart/empty", ["USER"], isAuth, destroyAll);
+    this.create("/", ["USER", "ADMIN"], isAuth, create);
+    this.read("/", ["USER", "ADMIN"], isAuth, read);
+    this.read("/cart", ["USER", "ADMIN"], isAuth, readCart);
+    this.update("/:cid", ["USER", "ADMIN"], isAuth, update);
+    this.destroy("/:cid", ["USER", "ADMIN"], isAuth, destroy);
+    this.destroy("/cart/empty", ["USER", "ADMIN"], isAuth, destroyAll);
   }
 }
 
