@@ -5,30 +5,31 @@ class UserManager {
   static #users = [];
   async create(data) {
     try {
-      const user = {
-        id: crypto.randomBytes(12).toString("hex"),
-        photo:
-          data.photo || "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
-        email: data.email,
-        password: data.password,
-        role: data.role,
-      };
+      // const user = {
+      //   id: crypto.randomBytes(12).toString("hex"),
+      //   photo:
+      //     data.photo || "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
+      //   email: data.email,
+      //   password: data.password,
+      //   role: data.role,
+      // };
 
       if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
-        UserManager.#users.push(user);
+        UserManager.#users.push(data);
+        return data;
       }
     } catch (error) {
       console.log(error);
     }
   }
-  read() {
+  static read(role) {
     try {
       if (UserManager.#users.length === 0) {
         throw new Error("Ingrese nuevamente los datos");
       } else {
-        return UserManager.#users;
+        return UserManager.#users.filter((user) => user.role === role);
       }
     } catch (error) {
       console.log(error);

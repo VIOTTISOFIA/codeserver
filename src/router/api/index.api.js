@@ -18,20 +18,3 @@ class ApiRouter extends CustomRouter {
 }
 const apiRouter = new ApiRouter();
 export default apiRouter.getRouter();
-import cookiesRouter from "./cookies.api.js";
-import sessionsRouter from "./sessions.api.js";
-import CustomRouter from "../customRouter.js";
-
-class ApiRouter extends CustomRouter {
-  init() {
-    this.use("/products", productRouter);
-    this.use("/users", usersRouter);
-    this.use("/carts", cartsRouter);
-    this.use("/tickets", ticketsRouter);
-    this.use("/cookies", cookiesRouter);
-    this.use("/sessions", sessionsRouter);
-  }
-}
-
-const apiRouter = new ApiRouter();
-export default apiRouter.getRouter();
