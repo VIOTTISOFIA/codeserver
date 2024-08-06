@@ -15,14 +15,14 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
-import dbConnect from "./src/utils/dbConnect.util.js";
+// import dbConnect from "./src/utils/dbConnect.util.js";
 
 // http server
 const server = express();
 const port = environment.PORT;
 const ready = async () => {
   console.log("server ready on port" + port);
-  await dbConnect();
+  // await dbConnect();
   //hay que incluir la conexion a mongo desde el patron factory
 };
 
