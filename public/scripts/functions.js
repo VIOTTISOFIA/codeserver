@@ -47,9 +47,10 @@ async function checkSession() {
       `;
     } else {
       userOptions.innerHTML = `
-        <a href="/login">
-            <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
-          </a>
+      <a class="nav-link active mt-2" href="/register">REGISTER</a>
+      <a href="/login">
+        <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+      </a>
       `;
     }
   } catch (error) {
@@ -103,7 +104,6 @@ async function destroyAll(event, user_id) {
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
-    
     // Crear un ticket
     const ticketResponse = await fetch(`/api/tickets`, {
       method: "POST",
@@ -121,7 +121,6 @@ async function checkout(event, user_id) {
         method: "DELETE",
         credentials: "include",
       });
-      
       location.reload();
     } else {
       const ticketError = await ticketResponse.json();
@@ -135,7 +134,6 @@ async function checkout(event, user_id) {
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
-
   const quantityInput = document.getElementById(`quantity-${cartItemId}`);
   const quantity = quantityInput.value;
   try {

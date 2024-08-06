@@ -1,16 +1,16 @@
 //import { Router } from "express";
 // import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 
 class UsersRouter extends CustomRouter {
   // genero
   init() {
-    this.create("/", ["USER"], create);
+    this.create("/", ["PUBLIC"], create);
     this.read("/", ["USER", "ADMIN"], read);
     this.read("/users", ["USER", "ADMIN"], readOne);
-    this.update("/:uid", ["USER"], update);
-    this.destroy("/:uid", ["USER"], destroy);
+    this.update("/:uid", ["USER", "ADMIN"], update);
+    this.destroy("/:uid", ["USER", "ADMIN"], destroy);
   }
 }
 const usersRouter = new UsersRouter();

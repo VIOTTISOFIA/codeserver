@@ -51,8 +51,7 @@ Tambien se implemento el uso de la biblioteca "Bcrypt" que nos ayuda a mantener 
 Para probar nuestro proyecto pueden crear un usuario libremente el cual sera almacenado en nuestra base de datos con la contraseña protegida. Podran crear un nuevo carrito y visualizar su perfil de usuario segun la sesion iniciada.
 
 **DESAFIO ENTREGABLE "SPRINT8"**
-
-En esta entrega se agrego la generacion de tickets de compra en mongoDB mediante el uso del metido "aggregate" de mongoose.
+En esta entrega se agrego la generacion de tickets de compra en mongoDB mediante el uso del metodo "aggregate" de mongoose.
 
 Tambien se agrego la nueva funcionalidad de customRouter para agilizar y optimizar el codigo mediante respuestas "automaticas" agregadas en el archivo de customRouter, las cuales nos permiten usar una sola linea de codigo dependiendo del coodigo de estado generado y la respuesta del servidor que se haya configurado.
 

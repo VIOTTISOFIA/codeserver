@@ -43,33 +43,42 @@
         const quantity = 1;
 
         try {
-          // Realizar la solicitud POST para añadir el producto al carrito
-          const response = await fetch("/api/carts", {
-            method: "POST",
+          // Verificar si el usuario está online
+          const onlineResponse = await fetch("/online", {
+            method: "GET",
             headers: {
+              credentials: "include",
               "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              product_id,
-              quantity
-            })
+            }
           });
 
-          // Revisar el estado de la respuesta
-          if (response.ok) {
-            const responseData = await response.json();
-            alert("Product added to cart successfully");
-            location.reload("/products")
-          } 
-          
-          else if (response.status === 401) {
-            alert("Please log in for adding to cart");
-          }
+          if (onlineResponse.status === 200) {
+            // El usuario está online, proceder a agregar el producto al carrito
+            const response = await fetch("/api/carts", {
+              method: "POST",
+              headers: {
+                credentials: "include",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                product_id,
+                quantity
+              })
+            });
 
-          else {
-            const errorData = await response.json();
-            console.error('Error:', errorData);
-            alert("Error adding product to cart: " + (errorData.message || 'Unknown error'));
+            // Revisar el estado de la respuesta
+            if (response.status === 201) {
+              const responseData = await response.json();
+              alert("Product added to cart successfully" || responseData.message);
+              location.replace("/products");
+            } else {
+              const errorData = await response.json();
+              console.error('Error:', errorData);
+              alert("Please log in for adding to cart" || errorData.message);
+            }
+          } else if (onlineResponse.status === 401) {
+            const errorData = await onlineResponse.json();
+            alert("Error adding product to cart" || errorData.message);
           }
         } catch (error) {
           console.error('Fetch error:', error);
