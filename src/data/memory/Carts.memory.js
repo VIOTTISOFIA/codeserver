@@ -145,4 +145,9 @@ function test() {
 }
 
 
-test();
+//test();
+
+const cartsManager = new CartsManager();
+export default cartsManager;
+
+//AGREGAR METODOS FALTANTES DE MONGO

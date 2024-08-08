@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import isAuth from "../../middlewares/isAuth.mid.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 import {
   create,
   read,
@@ -13,7 +13,7 @@ import {
 class CartsRouter extends CustomRouter {
   init() {
     this.create("/", ["USER", "ADMIN"], isAuth, create);
-    this.read("/", ["USER", "ADMIN"], isAuth, read);
+    this.read("/", ["PUBLIC"]/* ["USER", "ADMIN"] */, isAuth, read);
     this.read("/cart", ["USER", "ADMIN"], isAuth, readCart);
     this.update("/:cid", ["USER", "ADMIN"], isAuth, update);
     this.destroy("/:cid", ["USER", "ADMIN"], isAuth, destroy);

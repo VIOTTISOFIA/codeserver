@@ -14,7 +14,7 @@ class UsersRouter extends CustomRouter {
   // genero
   init() {
     this.create("/", ["PUBLIC"], create);
-    this.read("/", ["USER", "ADMIN"], read);
+    this.read("/", ["PUBLIC"], /* ["USER", "ADMIN"] */ read);
     this.read("/users", ["USER", "ADMIN"], readOne);
     this.update("/:uid", ["USER", "ADMIN"], update);
     this.destroy("/:uid", ["USER", "ADMIN"], destroy);

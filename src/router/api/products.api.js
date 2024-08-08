@@ -2,7 +2,7 @@
 //import productManager from "../../data/fs/ProductManager.fs.js";
 //import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
-import CustomRouter from "../CustomRouter.js";
+import CustomRouter from "../customRouter.js";
 import { create, read, readOne, paginate, update, destroy } from "../../controllers/products.controller.js";
 
 class ProductsRouter extends CustomRouter {

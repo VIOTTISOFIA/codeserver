@@ -117,8 +117,8 @@ class CartsManager {
 
 async function test() {
   const gestorDeCarts = new CartsManager();
-/* 
-  await gestorDeCarts.create({
+  
+ /*  await gestorDeCarts.create({
     quantity: "2",
   });
 
@@ -134,9 +134,9 @@ async function test() {
 
   console.log(await gestorDeCarts.read());
   //console.log(await gestorDeCarts.readOne("103afd77d65cef61b42e0dbe"))
-  
-  //METODO UPDATE 
-  const cartState = "reserved"; 
+
+  //METODO UPDATE
+  const cartState = "reserved";
   const updateState = { state: "paid" };
   try {
     const updatedCart = await gestorDeCarts.update(cartState, updateState);
@@ -147,8 +147,13 @@ async function test() {
 
   console.log("Carritos después de la actualización:");
   console.log(await gestorDeCarts.read());
-  
+ 
   //console.log(await gestorDeCarts.destroy("delivered"))
 }
 
 //test();
+
+const cartsManager = new CartsManager();
+export default cartsManager;
+
+//AGREGAR METODOS FALTANTES DE MONGO

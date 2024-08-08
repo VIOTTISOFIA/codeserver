@@ -410,3 +410,5 @@ async function pruebaAsync() {
 
 const productManager = new ProductManager();
 export default productManager;
+
+//AGREGAR METODOS FALTANTES DE MONGO
