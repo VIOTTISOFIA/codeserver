@@ -1,4 +1,4 @@
-import "dotenv/config.js";
+import environment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
+import argsUtil from "./src/utils/args.util.js";
 import session from "express-session";
 //import fileStore from "session-file-store";
 import MongoStore from "connect-mongo";
@@ -22,7 +23,7 @@ import dbConnect from "./src/utils/dbConnect.util.js";
 
 // http server
 const server = express();
-const port = 8080;
+const port = environment.PORT;
 const ready = async () => {
   console.log("server ready on port" + port);
   await dbConnect();
@@ -59,10 +60,10 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 // middlewares
-server.get(cookieParser(process.env.SECRET_COOKIE));
+server.get(cookieParser(environment.SECRET_COOKIE));
 server.get(
   session({
-    secret: process.env.SECRET_SESSION,
+    secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
@@ -72,7 +73,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
-server.use(cookieParser(process.env.SECRET_COOKIE));
+server.use(cookieParser(environment.SECRET_COOKIE));
 //const FileSession = fileStore(session);
 server.use(
   session({
@@ -83,12 +84,12 @@ server.use(
     }), */
 
     //MONGOSTORE
-    secret: process.env.SECRET_SESSION,
+    secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 10 * 60 * 1000 },
     store: new MongoStore({
-      mongoUrl: process.env.MONGO_URI,
+      mongoUrl: environment.MONGO_URI,
       ttl: 60 * 60,
     }),
   })
@@ -103,3 +104,6 @@ server.use((req, res, next) => {
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);
+
+//console.log(argsUtil)
+//console.log(environment)
