@@ -1,3 +1,5 @@
+import userManager from "../mongo/managers/UserManager.mongo";
+
 const fs = require("fs");
 const crypto = require("crypto");
 
@@ -24,7 +26,7 @@ class UserManager {
       console.log(error);
     }
   }
-  static read(role) {
+  read(role) {
     try {
       if (UserManager.#users.length === 0) {
         throw new Error("Ingrese nuevamente los datos");
@@ -152,3 +154,4 @@ gestorDeUsuarios.create({
 });
 
 console.log(gestorDeUsuarios.read());
+export default userManager;

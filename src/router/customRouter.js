@@ -31,10 +31,12 @@ class CustomRouter {
   response = (req, res, next) => {
     res.response200 = (message, response) =>
       res.json({ statusCode: 200, message, response });
-    res.response201 = (message) => res.status(201).json({ statusCode: 201, message });
+    res.response201 = (message) =>
+      res.status(201).json({ statusCode: 201, message });
     res.paginate = (response, info) =>
       res.json({ statusCode: 201, response, info });
-    res.error400 = (message) => res.status(400).json({ statusCode: 400, message });
+    res.error400 = (message) =>
+      res.status(400).json({ statusCode: 400, message });
     res.error401 = () =>
       res.json({ statusCode: 401, message: "Bad auth from policies!" });
     res.error403 = () =>

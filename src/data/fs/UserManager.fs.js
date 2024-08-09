@@ -1,5 +1,6 @@
 import fs from "fs";
 import crypto from "crypto";
+// const path = require("path");
 
 class UserManager {
   constructor() {
@@ -62,28 +63,47 @@ class UserManager {
       throw error;
     }
   }
-  // class PaginationService {
-  // constructor(model) {
-  //   this.Model = model;
-  // }
+  // async paginate({ filePath, filter = {}, opts = {} } = {}) {
+  //   try {
+  //     const options = {
+  //       ...opts,
+  //       page: opts.page || 1, // Página predeterminada: 1
+  //       limit: opts.limit || 10, // Límite predeterminado: 10
+  //     };
 
-  //   async paginate({ filter = {}, opts = {} } = {}) {
-  //     try {
-  //       const options = {
-  //         ...opts,
-  //         page: opts.page || 1, // Página predeterminada: 1
-  //         limit: opts.limit || 10, // Límite predeterminado: 10
-  //       };
+  //     const data = await fs.readFile(path.resolve(filePath), "utf8");
+  //     let items = JSON.parse(data);
 
-  //       const result = await this.Model.paginate(filter, options);
-  //       console.log(result);
-  //       return result;
-  //     } catch (error) {
-  //       throw error;
+  //     // Filtrar los datos si se proporciona un filtro
+  //     if (Object.keys(filter).length > 0) {
+  //       items = items.filter((item) => {
+  //         return Object.keys(filter).every((key) => item[key] === filter[key]);
+  //       });
   //     }
+
+  //     const startIndex = (options.page - 1) * options.limit;
+  //     const endIndex = options.page * options.limit;
+  //     const paginatedItems = items.slice(startIndex, endIndex);
+
+  //     const result = {
+  //       totalItems: items.length,
+  //       totalPages: Math.ceil(items.length / options.limit),
+  //       currentPage: options.page,
+  //       items: paginatedItems,
+  //     };
+
+  //     console.log(result);
+  //     return result;
+  //   } catch (error) {
+  //     throw error;
   //   }
   // }
-  // export default PaginationService;
+
+  // // Uso del ejemplo
+  // paginate({ filePath: 'data.json', filter: { type: 'example' }, opts: { page: 2, limit: 5 } })
+  //   .then(result => console.log(result))
+  //   .catch(error => console.error(error));
+
   async readOne(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");

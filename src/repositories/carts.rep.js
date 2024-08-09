@@ -1,16 +1,16 @@
 import dao from "../data/dao.factory.js";
-import UsersDTO from "../dto/users.dto.js";
-const { usersManager } = dao;
+import CartsDTO from "../dto/carts.dto.js";
+const { cartsManager } = dao;
 //REPOSITORIO ES LA CAPA QUE LLAMA A DAO (DAO importa la persistencia que corresponda)
 //ADEMAS ES LA CAPA ENCARGADA DE TRANSFORMAR LOS OBJETOS CON LOS DTO CORRESPONDIENTES
 
-class UsersRepository {
+class CartsRepository {
   constructor(manager) {
     this.model = manager;
   }
   createRepository = async (data) => {
     try {
-      data = new UsersDTO(data);
+      data = new CartsDTO(data);
       const one = await this.model.create(data);
       return one;
     } catch (error) {
@@ -59,5 +59,5 @@ class UsersRepository {
   };
 }
 
-const usersRepository = new UsersRepository(usersManager);
-export default usersRepository;
+const cartsRepository = new CartsRepository(cartsManager);
+export default cartsRepository;

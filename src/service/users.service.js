@@ -1,7 +1,7 @@
 import Service from "./service.js";
 // import userManager from "../data/fs/UserManager.fs.js";
 // import userManager from "../data/memory/UserManager.memory.js";
-// import userManager from "../data/mongo/Manager.mongo.js";
+//  import userManager from "../data/mongo/managers/Manager.mongo.js";
 // AHORA NINGUN SERVICIO LLAMA A LA PERSISTENCIA
 // LOS SERVICIOS VAN A LLAMAR AL DAO
 // SIEMPRE Y CUANDO NO SE IMPLEMENTE UNA CAPA EXTRA : REPOSITORY
@@ -12,6 +12,7 @@ import Service from "./service.js";
 import usersRepository from "../repositories/users.rep.js";
 // SERVICO LLAMA A REPOSITORY
 const usersService = new Service(usersRepository);
+
 export const {
   createService,
   readService,
