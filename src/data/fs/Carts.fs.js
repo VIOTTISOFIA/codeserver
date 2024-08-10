@@ -21,20 +21,20 @@ class CartsManager {
     try {
       let cart;
       if (!cart) {
-        const cart = {
+       /*  const cart = {
           user_id: crypto.randomBytes(12).toString("hex"),
           product_id: crypto.randomBytes(12).toString("hex"),
           quantity: data.quantity || "1",
           state: data.state || "reserved",
-        };
+        }; */
 
         let carts = await fs.promises.readFile(this.path, "utf-8");
         carts = JSON.parse(carts);
-        carts.push(cart);
+        carts.push(data);
         console.log("Created");
         carts = JSON.stringify(carts, null, 2);
         await fs.promises.writeFile(this.path, carts);
-        return cart;
+        return data;
       } else {
         throw new Error("Not found!");
       }
@@ -57,13 +57,13 @@ class CartsManager {
 
   async readOne(user_id) {
     try {
-      let one = await fs.promises.readFile(this.path, "utf-8");
-      one = JSON.parse(one);
-      let found = one.find((cart) => cart.user_id === user_id);
-      if (!found) {
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      all = JSON.parse(all);
+      let one = one.find((cart) => cart.user_id === user_id);
+      if (!one) {
         throw new Error("Not found! Try again.");
       }
-      return found;
+      return one;
     } catch (error) {
       console.error(error);
       throw error;

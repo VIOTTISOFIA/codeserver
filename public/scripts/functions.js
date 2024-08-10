@@ -104,6 +104,7 @@ async function destroyAll(event, user_id) {
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
+
     // Crear un ticket
     const ticketResponse = await fetch(`/api/tickets`, {
       method: "POST",
@@ -121,6 +122,7 @@ async function checkout(event, user_id) {
         method: "DELETE",
         credentials: "include",
       });
+
       location.reload();
     } else {
       const ticketError = await ticketResponse.json();
@@ -130,7 +132,6 @@ async function checkout(event, user_id) {
     console.error("Error:", error);
   }
 }
-
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();

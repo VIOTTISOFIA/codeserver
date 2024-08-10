@@ -21,22 +21,22 @@ class ProductManager {
       if ( !data.title ) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
-        const product = {
+       /*  const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
           photo: data.photo || "https://i.postimg.cc/pVcL6v4t/package.png",
           category: data.category || "Not defined",
           price: data.price || "1",
           stock: data.stock || "1",
-        };
+        }; */
 
         let products = await fs.promises.readFile(this.path, "utf-8");
         products = JSON.parse(products);
-        products.push(product);
+        products.push(data);
         console.log("Producto creado");
         products = JSON.stringify(products, null, 2);
         await fs.promises.writeFile(this.path, products);
-        return product;
+        return data;
       }
     } catch (error) {
       console.error(error);
@@ -60,13 +60,13 @@ class ProductManager {
     try {
       let all = await fs.promises.readFile(this.path, "utf-8");
       all = JSON.parse(all);
-      let found = all.find((product) => product.id === id);
-      if (!found) {
+      let one = all.find((product) => product.id === id);
+      if (!one) {
         const error = new Error("NOT FOUND");
         error.statusCode = 404;
         throw error;
       }
-      return found;
+      return one;
     } catch (error) {
        console.error("Error al leer el producto:", error.message);
       throw error;

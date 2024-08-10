@@ -1,81 +1,81 @@
 //import userManager from "../data/mongo/managers/UserManager.mongo.js";
 
 class Service {
-  constructor(manager) {
-    this.manager = manager;
+  constructor(repository) {
+    this.repository = repository;
   }
 
   createService = async (data) => {
     try {
-      const one = await this.manager.create(data);
+      const one = await this.repository.createRepository(data);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
- readService = async (role) => {
+  readService = async (role) => {
     try {
-      const all = await this.manager.read(role);
+      const all = await this.repository.readRepository(role);
       return all;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   paginateService = async ({ filter, opts }) => {
     try {
-      const all = await this.manager.paginate({ filter, opts });
+      const all = await this.repository.paginateRepository({ filter, opts });
       return all;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   readOneService = async (email) => {
     try {
-      const one = await this.manager.readOne(email);
+      const one = await this.repository.readOneRepository(email);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   readCartService = async ({ user_id }) => {
     try {
-      const cart = await this.manager.readCart({ user_id });
+      const cart = await this.repository.readCartRepository({ user_id });
       return cart;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   updateService = async (uid, data) => {
     try {
-      const one = await this.manager.update(uid, data);
+      const one = await this.repository.updateRepository(uid, data);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   destroyService = async (uid) => {
     try {
-      const one = await this.manager.destroy(uid);
+      const one = await this.repository.destroyRepository(uid);
       return one;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   destroyAllService = async (userIdObject) => {
     try {
-      const result = await this.manager.destroyAll(userIdObject);
+      const result = await this.repository.destroyAllRepository(userIdObject);
       return result;
     } catch (error) {
       throw error;
     }
-  }
+  };
 }
 
 export default Service;
