@@ -1,0 +1,44 @@
+<section>
+  <article class="w-75 align-items-center d-flex flex-column">
+    <h2 class="text-center">LOG IN TO YOUR ACCOUNT!</h2>
+    <h3 class="text-center">Do not have an account? Sign up</h3>
+
+    <form class="d-flex flex-column w-50">
+      <input class="m-2" type="button" id="google-login" value="Login with Google" />
+      <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL" />
+      <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD" />
+      <input class="m-2" type="button" id="login" value="LOG IN!" />
+    </form>
+  </article>
+  <article id="products" class="d-flex flex-wrap w-50"></article>
+</section>
+
+<script>
+  document.querySelector("#login").addEventListener("click", async () => {
+    const data = {
+      email: document.querySelector("#email").value,
+      password: document.querySelector("#password").value,
+    }
+
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }
+
+    let response = await fetch("/api/sessions/login", opts)
+    response = await response.json()
+    console.log("respuesta:", response)
+
+    if (response.statusCode === 200) {
+      alert("Login successful!")
+      location.replace("/")
+    } else {
+      alert(response.message)
+    }
+  })
+
+  document.querySelector("#google-login").addEventListener("click", () => {
+    window.location.href = "/api/sessions/google";
+  });
+</script>
