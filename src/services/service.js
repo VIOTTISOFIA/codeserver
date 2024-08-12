@@ -1,5 +1,3 @@
-//import userManager from "../data/mongo/managers/UserManager.mongo.js";
-
 class Service {
   constructor(repository) {
     this.repository = repository;

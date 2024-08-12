@@ -1,4 +1,5 @@
 //import cartsManager from "../data/mongo/managers/CartsManager.mongo.js";
+import { ObjectId } from "mongodb";
 import { createService, destroyAllService, destroyService, readCartService, readService, updateService } from "../services/carts.service.js";
 import { readOneService } from "../services/products.service.js";
 
@@ -11,7 +12,7 @@ async function create(req, res, next) {
     if (user_id) {
       data.user_id = user_id;
       const one = await createService(data);
-      return res.response201("CREATED");
+      return res.response201("CREATED", one);
     } else {
       return res.error400("Please login for adding to cart");
     }
