@@ -43,13 +43,13 @@ class ProductManager {
 
   readOne(id) {
     try {
-      const find = ProductManager.#products.find((each) => each.id === id);
-      if (!find) {
+      const one = ProductManager.#products.find((each) => each.id === id);
+      if (!one) {
         throw new Error(
           "El producto que buscas no existe. Verifica el dato proporcionado e intentalo nuevamente."
         );
       } else {
-        return find;
+        return one;
       }
     } catch (error) {
       console.log(error);
@@ -267,5 +267,3 @@ function prueba() {
 
 const productManager = new ProductManager();
 export default productManager;
-
-//AGREGAR METODOS FALTANTES DE MONGO

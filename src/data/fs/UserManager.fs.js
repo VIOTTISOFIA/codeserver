@@ -1,5 +1,6 @@
 import fs from "fs";
 import crypto from "crypto";
+// const path = require("path");
 
 class UserManager {
   constructor() {
@@ -22,27 +23,27 @@ class UserManager {
       if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
-        const user = {
-          id: crypto.randomBytes(12).toString("hex"),
-          photo:
-            data.photo ||
-            "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
-          email: data.email,
-          age: data.age,
-          password: data.password,
-          role: data.role,
-        };
+        // const user = {
+        //   id: crypto.randomBytes(12).toString("hex"),
+        //   photo:
+        //     data.photo ||
+        //     "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
+        //   email: data.email,
+        //   age: data.age,
+        //   password: data.password,
+        //   role: data.role,
+        // };
         // creo el objeto con los datos de la nota
         let users = await fs.promises.readFile(this.path, "utf-8");
         // espero la lectura del archivo y lo guardo en la variable users
         users = JSON.parse(users);
         // parseo
-        users.push(user);
+        users.push(data);
         // pusheo
         console.log("usuario creado");
         users = JSON.stringify(users, null, 2);
         await fs.promises.writeFile(this.path, users);
-        return user;
+        return data;
       }
     } catch (error) {
       console.log(error);
@@ -62,6 +63,47 @@ class UserManager {
       throw error;
     }
   }
+  // async paginate({ filePath, filter = {}, opts = {} } = {}) {
+  //   try {
+  //     const options = {
+  //       ...opts,
+  //       page: opts.page || 1, // Página predeterminada: 1
+  //       limit: opts.limit || 10, // Límite predeterminado: 10
+  //     };
+
+  //     const data = await fs.readFile(path.resolve(filePath), "utf8");
+  //     let items = JSON.parse(data);
+
+  //     // Filtrar los datos si se proporciona un filtro
+  //     if (Object.keys(filter).length > 0) {
+  //       items = items.filter((item) => {
+  //         return Object.keys(filter).every((key) => item[key] === filter[key]);
+  //       });
+  //     }
+
+  //     const startIndex = (options.page - 1) * options.limit;
+  //     const endIndex = options.page * options.limit;
+  //     const paginatedItems = items.slice(startIndex, endIndex);
+
+  //     const result = {
+  //       totalItems: items.length,
+  //       totalPages: Math.ceil(items.length / options.limit),
+  //       currentPage: options.page,
+  //       items: paginatedItems,
+  //     };
+
+  //     console.log(result);
+  //     return result;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+  // // Uso del ejemplo
+  // paginate({ filePath: 'data.json', filter: { type: 'example' }, opts: { page: 2, limit: 5 } })
+  //   .then(result => console.log(result))
+  //   .catch(error => console.error(error));
+
   async readOne(id) {
     try {
       let users = await fs.promises.readFile(this.path, "utf-8");

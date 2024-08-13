@@ -1,7 +1,24 @@
-import { createService, destroyService, readOneService, readService, updateService } from "../services/users.service.js";
+// import userManager from "../data/fs/UserManager.fs.js";
+import {
+  createService,
+  readService,
+  readOneService,
+  updateService,
+  destroyService,
+} from "../services/users.service.js";
 
 class UsersController {
-  async read(req, res, next) {
+  create = async (req, res, next) => {
+    try {
+      const data = req.body;
+      const one = await createService(data);
+      return res.response201("CREATED ID: " + one._id);
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  read = async (req, res, next) => {
     try {
       const { role } = req.query;
       const all = await readService(role);
@@ -15,10 +32,8 @@ class UsersController {
     } catch (error) {
       return next(error);
     }
-  }
-
-  //un parametro
-  async readOne(req, res, next) {
+  };
+  readOne = async (req, res, next) => {
     try {
       const { email } = req.session;
       const one = await readOneService(email);
@@ -33,19 +48,8 @@ class UsersController {
       console.log(error);
       return next(error);
     }
-  }
-
-  async create(req, res, next) {
-    try {
-      const data = req.body;
-      const one = await createService(data);
-      return res.response201("CREATED ID: " + one.id);
-    } catch (error) {
-      return next(error);
-    }
-  }
-
-  async update(req, res, next) {
+  };
+  update = async (req, res, next) => {
     try {
       const { uid } = req.params;
       const data = req.body;
@@ -54,9 +58,9 @@ class UsersController {
     } catch (error) {
       return next(error);
     }
-  }
+  };
 
-  async destroy(req, res, next) {
+  destroy = async (req, res, next) => {
     try {
       const { uid } = req.params;
       const one = await destroyService(uid);
@@ -64,7 +68,7 @@ class UsersController {
     } catch (error) {
       return next(error);
     }
-  }
+  };
 }
 
 const usersController = new UsersController();

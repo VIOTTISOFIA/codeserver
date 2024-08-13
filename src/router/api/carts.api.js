@@ -12,7 +12,7 @@ import {
 class CartsRouter extends CustomRouter {
   init() {
     this.create("/", ["USER", "ADMIN"], isAuth, create);
-    this.read("/", ["PUBLIC"] /* ["USER", "ADMIN"] */, isAuth, read);
+    this.read("/", ["USER", "ADMIN"], isAuth, read);
     this.read("/cart", ["USER", "ADMIN"], isAuth, readCart);
     this.update("/:cid", ["USER", "ADMIN"], isAuth, update);
     this.destroy("/:cid", ["USER", "ADMIN"], isAuth, destroy);

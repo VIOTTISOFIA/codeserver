@@ -31,9 +31,7 @@ switch (persistence) {
     const { default: productsManagerFs } = await import(
       "./fs/ProductManager.fs.js"
     );
-    const { default: usersManagerFs } = await import(
-      "./fs/UserManager.fs.js"
-    );
+    const { default: usersManagerFs } = await import("./fs/UserManager.fs.js");
     const { default: cartsManagerFs } = await import("./fs/Carts.fs.js");
     //una vez que tengo las importaciones de los managers, lleno el obj DAO con los recursos correspondientes
     dao = {

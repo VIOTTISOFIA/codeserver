@@ -21,7 +21,7 @@ class CartsManager {
     try {
       let cart;
       if (!cart) {
-       /*  const cart = {
+        /*  const cart = {
           user_id: crypto.randomBytes(12).toString("hex"),
           product_id: crypto.randomBytes(12).toString("hex"),
           quantity: data.quantity || "1",
@@ -117,8 +117,8 @@ class CartsManager {
 
 async function test() {
   const gestorDeCarts = new CartsManager();
-  
- /*  await gestorDeCarts.create({
+
+  /*  await gestorDeCarts.create({
     quantity: "2",
   });
 
@@ -147,7 +147,7 @@ async function test() {
 
   console.log("Carritos después de la actualización:");
   console.log(await gestorDeCarts.read());
- 
+
   //console.log(await gestorDeCarts.destroy("delivered"))
 }
 
@@ -155,5 +155,3 @@ async function test() {
 
 const cartsManager = new CartsManager();
 export default cartsManager;
-
-//AGREGAR METODOS FALTANTES DE MONGO

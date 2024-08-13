@@ -6,9 +6,7 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
-import argsUtil from "./src/utils/args.util.js";
 import session from "express-session";
-//import fileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/router/index.router.js";
@@ -16,18 +14,12 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
-//import dbConnect from "./src/utils/dbConnect.util.js";
-
-// console.log(process.env);
-// console.log(process.env.MONGO_URI);
 
 // http server
 const server = express();
 const port = environment.PORT;
 const ready = async () => {
   console.log("server ready on port" + port);
-  //await dbConnect();
-  //hay que incluir la conexion a mongo desd el patron factory
 };
 
 const nodeServer = createServer(server);
@@ -75,15 +67,8 @@ server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(cookieParser(environment.SECRET_COOKIE));
-//const FileSession = fileStore(session);
 server.use(
   session({
-    //FILESTORE
-    /*  store: new FileSession({
-      path: "./src/data/fs/file/sessions",
-      ttl: 60 * 60,
-    }), */
-
     //MONGOSTORE
     secret: environment.SECRET_SESSION,
     resave: true,
@@ -101,10 +86,8 @@ server.use((req, res, next) => {
   res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
   next();
 });
+
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);
-
-//console.log(argsUtil)
-//console.log(environment)

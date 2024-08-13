@@ -5,7 +5,6 @@ function sum() {
   }
   return result;
 }
-
 process.on("message", () => {
   const result = sum();
   process.send(result);

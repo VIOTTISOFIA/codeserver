@@ -18,10 +18,10 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if ( !data.title ) {
+      if (!data.title) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
-       /*  const product = {
+        /*  const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
           photo: data.photo || "https://i.postimg.cc/pVcL6v4t/package.png",
@@ -68,7 +68,7 @@ class ProductManager {
       }
       return one;
     } catch (error) {
-       console.error("Error al leer el producto:", error.message);
+      console.error("Error al leer el producto:", error.message);
       throw error;
     }
   }
@@ -84,7 +84,9 @@ class ProductManager {
         let filtered = all.filter((product) => product.id !== id);
         filtered = JSON.stringify(filtered, null, 2);
         await fs.promises.writeFile(this.path, filtered);
-        console.log(`El producto con ID "${id}" fue encontrado y eliminado satisfactoriamente`);
+        console.log(
+          `El producto con ID "${id}" fue encontrado y eliminado satisfactoriamente`
+        );
         return one;
       }
     } catch (error) {
@@ -114,7 +116,6 @@ class ProductManager {
       throw error;
     }
   }
-
 }
 async function pruebaAsync() {
   const gestorDeProductos = new ProductManager();
@@ -410,5 +411,3 @@ async function pruebaAsync() {
 
 const productManager = new ProductManager();
 export default productManager;
-
-//AGREGAR METODOS FALTANTES DE MONGO

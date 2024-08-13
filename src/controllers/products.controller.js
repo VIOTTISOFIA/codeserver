@@ -1,4 +1,3 @@
-//import productManager from "../data/mongo/managers/ProductsManager.mongo.js";
 import {
   createService,
   destroyService,
