@@ -1,9 +1,7 @@
-import userManager from "../mongo/managers/UserManager.mongo";
+import fs from "fs";
+import crypto from "crypto";
 
-const fs = require("fs");
-const crypto = require("crypto");
-
-class UserManager {
+class UsersManager {
   static #users = [];
   async create(data) {
     try {
@@ -19,7 +17,7 @@ class UserManager {
       if (!data.email || !data.password) {
         throw new Error("Usuario no creado.Ingrese todos los datos.");
       } else {
-        UserManager.#users.push(data);
+        UsersManager.#users.push(data);
         return data;
       }
     } catch (error) {
@@ -28,10 +26,10 @@ class UserManager {
   }
   read(role) {
     try {
-      if (UserManager.#users.length === 0) {
+      if (UsersManager.#users.length === 0) {
         throw new Error("Ingrese nuevamente los datos");
       } else {
-        return UserManager.#users.filter((user) => user.role === role);
+        return UsersManager.#users.filter((user) => user.role === role);
       }
     } catch (error) {
       console.log(error);
@@ -71,7 +69,7 @@ class UserManager {
 
   readOne(id) {
     try {
-      const one = UserManager.#users.find((each) => each.id === id);
+      const one = UsersManager.#users.find((each) => each.id === id);
       if (!one) {
         throw new Error("No existe el usuario");
       } else {
@@ -84,7 +82,7 @@ class UserManager {
 
   readByEmail(email) {
     try {
-      const one = UserManager.#users.find((each) => each.email === email);
+      const one = UsersManager.#users.find((each) => each.email === email);
       if (!one) {
         throw new Error("No existe el usuario");
       } else {
@@ -118,7 +116,7 @@ class UserManager {
   destroy(id) {
     try {
       this.readOne(id);
-      const filtered = UserManager.#users.filter((each) => each.id !== id);
+      const filtered = UsersManager.#users.filter((each) => each.id !== id);
       UserManager.#users = filtered;
       console.log("Usuario eliminado");
     } catch (error) {
@@ -127,7 +125,7 @@ class UserManager {
   }
 }
 
-const gestorDeUsuarios = new UserManager();
+const gestorDeUsuarios = new UsersManager();
 gestorDeUsuarios.create({
   photo: "sofia.jpg",
   email: "sofi_04_04@hotmail.com",
@@ -154,4 +152,4 @@ gestorDeUsuarios.create({
 });
 
 console.log(gestorDeUsuarios.read());
-export default userManager;
+export default UsersManager;

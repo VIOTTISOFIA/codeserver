@@ -1,17 +1,18 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+//const fs = require("fs");
+//const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class CartsManager {
   static #carts = [];
   create(data) {
     try {
-      // const cart = {
-      //   user_id: crypto.randomBytes(12).toString("hex"),
-      //   product_id: crypto.randomBytes(12).toString("hex"),
-      //   quantity: data.quantity || "1",
-      //   state: data.state || "reserved",
-      // };
+      const cart = {
+        user_id: crypto.randomBytes(12).toString("hex"),
+        product_id: crypto.randomBytes(12).toString("hex"),
+        quantity: data.quantity || "1",
+        state: data.state || "reserved",
+      };
       if (!cart) {
         throw new Error("Not found!");
       } else {
@@ -140,4 +141,9 @@ function test() {
   } */
 }
 
-test();
+//test();
+
+const cartsManager = new CartsManager();
+export default cartsManager;
+
+//AGREGAR METODOS FALTANTES DE MONGO

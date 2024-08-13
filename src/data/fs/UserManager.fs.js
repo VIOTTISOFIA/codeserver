@@ -2,7 +2,7 @@ import fs from "fs";
 import crypto from "crypto";
 // const path = require("path");
 
-class UserManager {
+class UsersManager {
   constructor() {
     this.path = "./src/data/fs/file/user.json";
     this.init();
@@ -172,7 +172,7 @@ class UserManager {
   }
 }
 
-const User = new UserManager();
+const User = new UsersManager();
 
 async function test() {
   const gestorDeUsuarios = new UserManager();
@@ -204,5 +204,5 @@ async function test() {
   console.log(await gestorDeUsuarios.readOne("950ffdebf54f79300a3c7328"));
 }
 // test();
-const userManager = new UserManager();
-export default userManager;
+const usersManager = new UsersManager();
+export default usersManager;

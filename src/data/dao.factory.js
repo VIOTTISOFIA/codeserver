@@ -10,36 +10,34 @@ switch (persistence) {
     console.log("connected to memory");
     //voy a llenar dao con las importaciones de memory
     const { default: productsManagerMem } = await import(
-      "./memory/ProductsManager.memory.js"
+      "./memory/ProductManager.memory.js"
     );
-    const { default: cartsManagerMem } = await import(
-      "./memory/CartsManager.memory.js"
-    );
+    const { default: cartsMem } = await import("./memory/Carts.memory.js");
     const { default: usersManagerMem } = await import(
-      "./memory/UsersManager.memory.js"
+      "./memory/UserManager.memory.js"
     );
     //se tienen que traer TODOS los manager de todos los recursos y ya tienen que estar HOMOLOGADOS
     //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
     dao = {
       users: usersManagerMem,
       products: productsManagerMem,
-      carts: cartsManagerMem,
+      carts: cartsMem,
     };
     break;
   case "fs":
     console.log("connected to file system");
     //voy a llenar dao con las importaciones de fs
     const { default: productsManagerFs } = await import(
-      "./fs/ProductsManager.fs.js"
+      "./fs/ProductManager.fs.js"
     );
-    const { default: cartsManagerFs } = await import("./fs/CartsManager.fs.js");
-    const { default: usersManagerFs } = await import("./fs/UsersManager.fs.js");
+    const { default: cartsFs } = await import("./fs/Carts.fs.js");
+    const { default: usersManagerFs } = await import("./fs/UserManager.fs.js");
     //se tienen que traer TODOS los manager de todos los recursos y ya tienen que estar HOMOLOGADOS
     //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
     dao = {
       users: usersManagerFs,
-      // products: productsManagerFs,
-      // carts: cartsManagerFs,
+      products: productsManagerFs,
+      carts: cartsFs,
     };
     break;
   default:
@@ -50,7 +48,7 @@ switch (persistence) {
     const { default: productsManagerMongo } = await import(
       "./mongo/managers/ProductsManager.mongo.js"
     );
-    const { default: cartsManagerMongo } = await import(
+    const { default: cartsMongo } = await import(
       "./mongo/managers/CartsManager.mongo.js"
     );
     const { default: usersManagerMongo } = await import(
@@ -60,8 +58,8 @@ switch (persistence) {
     //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
     dao = {
       users: usersManagerMongo,
-      // products: productsManagerMongo,
-      // carts: cartsManagerMongo,
+      products: productsManagerMongo,
+      carts: cartsMongo,
     };
     break;
 }

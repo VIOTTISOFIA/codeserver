@@ -20,7 +20,7 @@ class UsersController {
 
   read = async (req, res, next) => {
     try {
-      const { role } = req.query;
+      // const { role } = req.query;
       const all = await readService(role);
       if (all.length > 0) {
         return res.response200(all);

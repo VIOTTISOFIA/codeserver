@@ -1,6 +1,5 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+import fs from "fs";
+import crypto from "crypto";
 
 class ProductManager {
   static #products = [];
