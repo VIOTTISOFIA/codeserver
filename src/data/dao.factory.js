@@ -3,23 +3,22 @@ import dbConnect from "../utils/dbConnect.util.js";
 
 const persistence = argsUtil.persistence;
 let dao = {};
-//objeto que voy a cargar dinamicamente con las importaciones de los managers que correspondan
+//obj que voy a cargar dinamicamente con las importaciones de los managers correspondientes
 
 switch (persistence) {
   case "memory":
-    console.log("connected to memory");
-    //voy a llenar dao con las importaciones de memory
+    console.log("Connected to memory");
+    //voy a llenar dao con importaciones de memory
     const { default: productsManagerMem } = await import(
-      "./memory/ProductsManager.memory.js"
-    );
-    const { default: cartsManagerMem } = await import(
-      "./memory/CartsManager.memory.js"
+      "./memory/ProductManager.memory.js"
     );
     const { default: usersManagerMem } = await import(
-      "./memory/UsersManager.memory.js"
+      "./memory/UserManager.memory.js"
     );
-    //se tienen que traer TODOS los manager de todos los recursos y ya tienen que estar HOMOLOGADOS
-    //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
+    const { default: cartsManagerMem } = await import(
+      "./memory/Carts.memory.js"
+    );
+    //una vez que tengo las importaciones de los managers, lleno el obj DAO con los recursos correspondientes
     dao = {
       users: usersManagerMem,
       products: productsManagerMem,
@@ -27,41 +26,39 @@ switch (persistence) {
     };
     break;
   case "fs":
-    console.log("connected to file system");
-    //voy a llenar dao con las importaciones de fs
+    console.log("Connected to File System");
+    //voy a llenar dao con importaciones de FS
     const { default: productsManagerFs } = await import(
-      "./fs/ProductsManager.fs.js"
+      "./fs/ProductManager.fs.js"
     );
-    const { default: cartsManagerFs } = await import("./fs/CartsManager.fs.js");
-    const { default: usersManagerFs } = await import("./fs/UsersManager.fs.js");
-    //se tienen que traer TODOS los manager de todos los recursos y ya tienen que estar HOMOLOGADOS
-    //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
+    const { default: usersManagerFs } = await import("./fs/UserManager.fs.js");
+    const { default: cartsManagerFs } = await import("./fs/Carts.fs.js");
+    //una vez que tengo las importaciones de los managers, lleno el obj DAO con los recursos correspondientes
     dao = {
       users: usersManagerFs,
-      // products: productsManagerFs,
-      // carts: cartsManagerFs,
+      products: productsManagerFs,
+      carts: cartsManagerFs,
     };
     break;
   default:
-    console.log("connected to database");
+    console.log("Connected to Mongo DB");
     dbConnect();
-    //por defecto manejemos mongo
-    // voy a llenar dao con las importaciones de mongo
+    //por defecto manejamos mongo
+    //voy a llenar dao con importaciones de mongo
     const { default: productsManagerMongo } = await import(
       "./mongo/managers/ProductsManager.mongo.js"
-    );
-    const { default: cartsManagerMongo } = await import(
-      "./mongo/managers/CartsManager.mongo.js"
     );
     const { default: usersManagerMongo } = await import(
       "./mongo/managers/UserManager.mongo.js"
     );
-    //se tienen que traer TODOS los manager de todos los recursos y ya tienen que estar HOMOLOGADOS
-    //una vez que logré importar los managers, lleno el objeto dao con los recursos correspondientes
+    const { default: cartsManagerMongo } = await import(
+      "./mongo/managers/CartsManager.mongo.js"
+    );
+    //una vez que tengo las importaciones de los managers, lleno el obj DAO con los recursos correspondientes
     dao = {
       users: usersManagerMongo,
-      // products: productsManagerMongo,
-      // carts: cartsManagerMongo,
+      products: productsManagerMongo,
+      carts: cartsManagerMongo,
     };
     break;
 }

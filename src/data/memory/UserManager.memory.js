@@ -1,7 +1,7 @@
-import userManager from "../mongo/managers/UserManager.mongo";
-
-const fs = require("fs");
-const crypto = require("crypto");
+//const fs = require("fs");
+//const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class UserManager {
   static #users = [];
@@ -154,4 +154,6 @@ gestorDeUsuarios.create({
 });
 
 console.log(gestorDeUsuarios.read());
+
+const userManager = new UserManager();
 export default userManager;

@@ -1,21 +1,22 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+//const fs = require("fs");
+//const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class CartsManager {
   static #carts = [];
   create(data) {
     try {
-      // const cart = {
-      //   user_id: crypto.randomBytes(12).toString("hex"),
-      //   product_id: crypto.randomBytes(12).toString("hex"),
-      //   quantity: data.quantity || "1",
-      //   state: data.state || "reserved",
-      // };
-      if (!cart) {
+      /* const cart = {
+      user_id: crypto.randomBytes(12).toString("hex"),
+      product_id: crypto.randomBytes(12).toString("hex"),
+      quantity: data.quantity || "1",
+      state: data.state || "reserved",
+      }; */
+      if (!data) {
         throw new Error("Not found!");
       } else {
-        CartsManager.#carts.push(cart);
+        CartsManager.#carts.push(data);
         console.log(cart);
       }
     } catch (error) {
@@ -140,4 +141,7 @@ function test() {
   } */
 }
 
-test();
+//test();
+
+const cartsManager = new CartsManager();
+export default cartsManager;

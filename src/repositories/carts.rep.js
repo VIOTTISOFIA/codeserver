@@ -1,14 +1,12 @@
 import dao from "../data/dao.factory.js";
 import CartsDTO from "../dto/carts.dto.js";
-const { cartsManager } = dao;
-//REPOSITORIO ES LA CAPA QUE LLAMA A DAO (DAO importa la persistencia que corresponda)
-//ADEMAS ES LA CAPA ENCARGADA DE TRANSFORMAR LOS OBJETOS CON LOS DTO CORRESPONDIENTES
+const { carts } = dao;
 
 class CartsRepository {
   constructor(manager) {
     this.model = manager;
   }
-  createRepository = async (data) => {
+  createRepository = async (data, dto) => {
     try {
       data = new CartsDTO(data);
       const one = await this.model.create(data);
@@ -17,6 +15,7 @@ class CartsRepository {
       throw error;
     }
   };
+
   readRepository = async (role) => {
     try {
       const all = await this.model.read(role);
@@ -25,22 +24,25 @@ class CartsRepository {
       throw error;
     }
   };
+
   paginateRepository = async ({ filter, opts }) => {
     try {
-      const all = await this.model.paginate({ filter, opts });
+      const all = await this.model.read({ filter, opts });
       return all;
     } catch (error) {
       throw error;
     }
   };
-  readOneRepository = async (uid) => {
+
+  readCartRepository = async ({ user_id }) => {
     try {
-      const one = await this.model.readOne(uid);
-      return one;
+      const cart = await this.model.readCart({ user_id });
+      return cart;
     } catch (error) {
       throw error;
     }
   };
+
   updateRepository = async (uid, data) => {
     try {
       const one = await this.model.update(uid, data);
@@ -49,6 +51,7 @@ class CartsRepository {
       throw error;
     }
   };
+
   destroyRepository = async (uid) => {
     try {
       const one = await this.model.destroy(uid);
@@ -57,7 +60,16 @@ class CartsRepository {
       throw error;
     }
   };
+
+  destroyAllRepository = async (userIdObject) => {
+    try {
+      const result = await this.model.destroyAll(userIdObject);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
-const cartsRepository = new CartsRepository(cartsManager);
+const cartsRepository = new CartsRepository(carts);
 export default cartsRepository;

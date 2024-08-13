@@ -5,7 +5,6 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
-import enviroment from "../utils/env.util.js";
 
 //ESTRATEGIA PARA REGISTER
 passport.use(
@@ -89,7 +88,7 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromExtractors([
         (req) => req?.cookies["token"],
       ]),
-      secretOrKey: enviroment.SECRET_JWT,
+      secretOrKey: process.env.SECRET_JWT,
     },
     (data, done) => {
       try {

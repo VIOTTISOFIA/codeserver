@@ -5,7 +5,7 @@ import {
   readOneService,
   updateService,
   destroyService,
-} from "../service/users.service.js";
+} from "../services/users.service.js";
 
 class UsersController {
   create = async (req, res, next) => {

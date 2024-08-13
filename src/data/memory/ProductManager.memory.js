@@ -1,19 +1,22 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+//const fs = require("fs");
+//const crypto = require("crypto");
+//const { error } = require("console");
+import fs from "fs";
+import crypto from "crypto";
+import { error } from "console";
 
 class ProductManager {
   static #products = [];
   create(data) {
     try {
-      // const product = {
-      //   id: crypto.randomBytes(12).toString("hex"),
-      //   title: data.title,
-      //   photo: data.photo || "images/package.png",
-      //   category: data.category,
-      //   price: data.price,
-      //   stock: data.stock,
-      // };
+      const product = {
+        id: crypto.randomBytes(12).toString("hex"),
+        title: data.title,
+        photo: data.photo || "images/package.png",
+        category: data.category,
+        price: data.price,
+        stock: data.stock,
+      };
 
       if (!data.title || !data.category || !data.price || !data.stock) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
@@ -40,14 +43,13 @@ class ProductManager {
 
   readOne(id) {
     try {
-      const find = ProductManager.#products.find((each) => each.id === id);
-      console.log(find);
-      if (!find) {
+      const one = ProductManager.#products.find((each) => each.id === id);
+      if (!one) {
         throw new Error(
           "El producto que buscas no existe. Verifica el dato proporcionado e intentalo nuevamente."
         );
       } else {
-        return find;
+        return one;
       }
     } catch (error) {
       console.log(error);
@@ -240,7 +242,7 @@ function prueba() {
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
 
-  const productId = "chupete";
+  /* const productId = "chupete";
 
   try {
     const deleteProduct = gestorDeProductos.readOne(productId);
@@ -258,7 +260,10 @@ function prueba() {
     }
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
-  }
+  } */
 }
 
 //prueba();
+
+const productManager = new ProductManager();
+export default productManager;
