@@ -3,6 +3,7 @@ import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
 import CustomRouter from "../customRouter.js";
+import { verifyCode } from "../../controllers/users.controller.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
@@ -83,6 +84,7 @@ class SessionsRouter extends CustomRouter {
         }
       }
     );
+    this.create("/verify", ["PUBLIC"], verifyCode )
   }
 }
 

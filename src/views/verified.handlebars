@@ -1,0 +1,41 @@
+<section>
+  <article class="w-75 align-items-center d-flex flex-column">
+    <h2 class="text-center">You are almost ready! We sent you a verify code to you email address</h2>
+    <h3 class="text-center">Please enter it here</h3>
+
+    <form class="d-flex flex-column w-50">
+      <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL" />
+      <input class="m-2" type="text" name="code" id="code" placeholder="Verify Code" />
+      <input class="m-2" type="button" id="verified" value="Verify" />
+    </form>
+  </article>
+</section>
+
+<script>
+  document.querySelector("#verified").addEventListener("click", async () => {
+    const data = {
+      email: document.querySelector("#email").value,
+      code: document.querySelector("#code").value,
+    }
+    console.log(data)
+
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }
+
+    let response = await fetch("/api/sessions/verify", opts)
+    response = await response.json()
+    console.log("respuesta:", response)
+
+    if (response.statusCode === 200) {
+      alert("Verified User succesfully!")
+      //location.replace("/")
+    } else {
+      alert(response.message)
+    }
+  })
+</script>
+
+{{!-- FALTA DESCOMENTAR EL .REPLACE DE LA 35 --}}

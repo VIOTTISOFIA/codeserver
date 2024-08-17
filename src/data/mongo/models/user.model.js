@@ -16,9 +16,9 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      /*  required: true, */
     },
-    /* user: { type: String, required: true }, */
+    verify: { type: Boolean, default: false },
+    verifyCode: { type: String, required: true}
   },
   {
     timestamps: true,
@@ -26,11 +26,7 @@ const schema = new Schema(
 );
 
 schema.plugin(mongoosePaginate);
-// schema.pre("find", function () {
-//   this.populate("user_id", "email photo -_id");
-// });
 
 const User = model(collection, schema);
 export default User;
 
-// linea 19 y 21 las comento para eliminar el campo obligatorio del id de usuario

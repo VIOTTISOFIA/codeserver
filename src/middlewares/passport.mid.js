@@ -5,9 +5,52 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
+import usersRepository from "../repositories/users.rep.js";
+import UsersDTO from "../dto/users.dto.js";
+import sendEmail from "../utils/mailing.util.js";
 
 //ESTRATEGIA PARA REGISTER
 passport.use(
+  "register",
+  new LocalStrategy(
+    { passReqToCallback: true, usernameField: "email" },
+    async (req, email, password, done) => {
+      try {
+        if (!email || !password) {
+          const error = new Error("Please enter email and passsword");
+          error.statusCode = 401;
+          return done(null, null, error);
+        }
+
+       //const one = await usersRepository.readByEmailRepository(email);
+        const one = await userManager.readByEmail(email);
+        if (one) {
+          const error = new Error("Bad auth from register!");
+          error.statusCode = 401;
+          return done(error);
+        }
+
+        const hashPassword = createHash(password);
+        req.body.password = hashPassword;
+
+        const data = new UsersDTO(req.body);
+       const user = await userManager.create(data);
+        //una vez que el usuario se creo
+        //la estrategia debe enviar un correo electronico con un codigo aletatorio para la verificacion del usuario
+        await sendEmail({
+          to: email,
+          email: user.email,
+          code: user.verifyCode,
+        });
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+/* passport.use(
   "register",
   new LocalStrategy(
     { passReqToCallback: true, usernameField: "email" },
@@ -36,7 +79,7 @@ passport.use(
       }
     }
   )
-);
+); */
 
 //ESTRATEGIA PARA LOGIN
 passport.use(
@@ -67,8 +110,6 @@ passport.use(
           user.token = token;
           console.log("user tokenizado", user);
           return done(null, user);
-          // agrego la propiedad USER al objeto de requerimientos
-          // esa propiedad USER tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
         const error = new Error("Invalid credentials");
         error.statusCode = 401;

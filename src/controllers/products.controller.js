@@ -1,6 +1,7 @@
 import {
   createService,
   destroyService,
+  paginateService,
   readOneService,
   readService,
   updateService,
