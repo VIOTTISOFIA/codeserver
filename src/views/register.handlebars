@@ -6,7 +6,8 @@
 
         <form class="d-flex flex-column w-50 ">
             <input class="m-2" type="text" name="photo" id="photo" placeholder="PHOTO">
-            <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL">
+            <input class="m-2" type="text" name="name" id="name" placeholder="NAME" required>
+            <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL" required>
             <input class="m-2" type="text" name="age" id="age" placeholder="AGE" required>
             <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD" required>
             <input class="m-2" type="button" id="register" value="REGISTER!">
@@ -18,6 +19,7 @@
 <script>
     document.querySelector("#register").addEventListener("click", async () => {
         const data = {
+            name: document.querySelector("#name").value,
             email: document.querySelector("#email").value,
             age: document.querySelector("#age").value,
             password: document.querySelector("#password").value,
@@ -46,5 +48,4 @@
             alert(response.message)
         }
     })
-
 </script>

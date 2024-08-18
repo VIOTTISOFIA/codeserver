@@ -2,11 +2,16 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
+// import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
+import usersRepository from "../repositories/users.rep.js";
+import UsersDTO from "../dto/users.dto.js";
+import crypto from "crypto";
+import sendEmail from "../utils/mailing.util.js";
 
 //ESTRATEGIA PARA REGISTER
+
 passport.use(
   "register",
   new LocalStrategy(
@@ -19,17 +24,31 @@ passport.use(
           error.statusCode = 401;
           return done(null, null, error);
         }
-
-        const one = await userManager.readByEmail(email);
+        // verifico que el usuario no este registrado
+        let one = await usersRepository.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");
           error.statusCode = 401;
           return done(error);
         }
-
+        // hasheamos el password
         const hashPassword = createHash(password);
         req.body.password = hashPassword;
-        const user = await userManager.create(req.body);
+
+        // creamos el usuario
+        const data = new UsersDTO(req.body);
+        user = await usersRepository.createRepository(data);
+        // una vez que se creo el usuario
+        // la estrategia debe enviar un correoelectronico
+        // con el codigo aleatorio para la verificacion del usuario
+        console.log(user);
+        // Enviamos el email con código verificador
+        await sendEmail({
+          to: user.email,
+          name: user.name,
+          code: user.verifyCode,
+        });
+
         return done(null, user);
       } catch (error) {
         return done(error);
@@ -131,11 +150,6 @@ passport.use(
           }),
             (user = await userManager.create(user));
         }
-        (req.session.email = user.email),
-          (req.session.online = true),
-          (req.session.role = user.role),
-          (req.session.photo = user.photo),
-          (req.session.user_id = user._id);
 
         return done(null, user);
       } catch (error) {

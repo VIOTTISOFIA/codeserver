@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
+// import userManager from "../data/mongo/managers/UserManager.mongo.js";
+import usersRepository from "../repositories/users.rep.js";
 
 class CustomRouter {
   //para contruir y configurar cada instancia del enrutador
@@ -55,17 +56,30 @@ class CustomRouter {
         try {
           token = verifyToken(token, process.env.SECRET_JWT);
           const { role, email } = token;
+          // el rol lo necesito para autorizaciones
+          // el email para buscar el usuario y agregar la propiedad user al objeto de requerimientos
           if (
             (policies.includes("USER") && role === 0) ||
             (policies.includes("ADMIN") && role === 1)
           ) {
-            const user = await userManager.readByEmail(email);
+            const user = await usersRepository.readyByEmailRepository(email);
             //proteger constraseña del usuario en el obj req.user
-            req.user = user;
+            if (user) {
+              delete user.password;
+              user.online = online;
+              user.user_id = user._id;
+              req.user = user;
+            }
             return next();
-          } else return res.error403();
+          } else {
+            return res
+              .status(403)
+              .json({ message: "Forbidden. Insufficient permissions" });
+          }
         } catch (error) {
-          return res.error400(error.message);
+          return res
+            .status(400)
+            .json({ message: `Invalid token. ${error.message}` });
         }
       }
     }

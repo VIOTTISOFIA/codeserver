@@ -5,8 +5,11 @@ const collection = "users";
 const schema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
+    name: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: Number, default: 0, index: true },
+    verify: { type: Boolean, default: false },
+    verifyCode: { type: String, required: true },
     photo: {
       type: String,
       default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
