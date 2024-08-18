@@ -100,5 +100,6 @@ class UsersController {
 }
 
 const usersController = new UsersController();
-const { create, read, readOne, update, destroy, readByEmail, verifyCode } = usersController;
+const { create, read, readOne, update, destroy, readByEmail, verifyCode } =
+  usersController;
 export { create, read, readOne, update, destroy, readByEmail, verifyCode };

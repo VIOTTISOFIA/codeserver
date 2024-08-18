@@ -5,8 +5,11 @@ const collection = "users";
 const schema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
+
     password: { type: String, required: true },
     role: { type: Number, default: 0, index: true },
+    verify: { type: Boolean, default: false },
+    verifyCode: { type: String, required: true },
     photo: {
       type: String,
       default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
@@ -18,7 +21,7 @@ const schema = new Schema(
       index: true,
     },
     verify: { type: Boolean, default: false },
-    verifyCode: { type: String, required: true}
+    verifyCode: { type: String, required: true },
   },
   {
     timestamps: true,
@@ -29,4 +32,3 @@ schema.plugin(mongoosePaginate);
 
 const User = model(collection, schema);
 export default User;
-
