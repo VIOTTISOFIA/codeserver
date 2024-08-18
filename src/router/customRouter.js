@@ -56,30 +56,17 @@ class CustomRouter {
         try {
           token = verifyToken(token, process.env.SECRET_JWT);
           const { role, email } = token;
-          // el rol lo necesito para autorizaciones
-          // el email para buscar el usuario y agregar la propiedad user al objeto de requerimientos
           if (
             (policies.includes("USER") && role === 0) ||
             (policies.includes("ADMIN") && role === 1)
           ) {
             const user = await usersRepository.readByEmailRepository(email);
             //proteger constraseña del usuario en el obj req.user
-            if (user) {
-              delete user.password;
-              user.online = online;
-              user.user_id = user._id;
-              req.user = user;
-            }
+            req.user = user;
             return next();
-          } else {
-            return res
-              .status(403)
-              .json({ message: "Forbidden. Insufficient permissions" });
-          }
+          } else return res.error403();
         } catch (error) {
-          return res
-            .status(400)
-            .json({ message: `Invalid token. ${error.message}` });
+          return res.error400(error.message);
         }
       }
     }

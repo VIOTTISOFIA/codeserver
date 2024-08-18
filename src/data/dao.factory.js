@@ -54,10 +54,6 @@ switch (persistence) {
     const { default: cartsManagerMongo } = await import(
       "./mongo/managers/CartsManager.mongo.js"
     );
-    // Verifica que los managers no sean undefined
-    console.log("productsManagerMongo:", productsManagerMongo);
-    console.log("usersManagerMongo:", usersManagerMongo);
-    console.log("cartsManagerMongo:", cartsManagerMongo);
     //una vez que tengo las importaciones de los managers, lleno el obj DAO con los recursos correspondientes
     dao = {
       users: usersManagerMongo,

@@ -6,16 +6,6 @@ const persistence = argsUtil.persistence;
 
 class UsersDTO {
   constructor(data) {
-    if (!data.name) {
-      throw new Error("Name is required");
-    }
-    if (!data.email) {
-      throw new Error("Email is required");
-    }
-    if (!data.password) {
-      throw new Error("Password is required");
-    }
-
     if (persistence !== "mongo") {
       this._id = crypto.randomBytes(12).toString("hex");
       this.createdAt = new Date();
