@@ -22,13 +22,13 @@ class UsersDTO {
       this.updatedAt = new Date();
     }
     this.email = data.email;
-    this.name = data.name;
-    this.password = createHash(data.password);
+    //this.password = createHash(data.password); ESTA LINEA DE CODIGO SOBREESCRIBE EL HASH DE LA CONTRASEÑA Y NO PERMITIA VALIDAR CORRECTAMENTE CON LO ALMACENADO EN MONGO
+    this.password = data.password;
     this.role = data.role || 0;
     this.photo =
       data.photo || "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg";
     this.verify = false;
-    this.verifyCode = crypto.randomBytes(12).toString("ascii");
+    this.verifyCode = crypto.randomBytes(12).toString("hex");
   }
 }
 

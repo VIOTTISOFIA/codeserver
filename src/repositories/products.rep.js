@@ -34,9 +34,9 @@ class ProductsRepository {
       }
     };
 
-    readOneRepository = async (email) => {
+    readOneRepository = async (id) => {
       try {
-        const one = await this.model.readOne(email);
+        const one = await this.model.readOne(id);
         return one;
       } catch (error) {
         throw error;

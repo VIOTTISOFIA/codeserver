@@ -7,7 +7,6 @@ import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
 import UsersDTO from "../dto/users.dto.js";
-import crypto from "crypto";
 import sendEmail from "../utils/mailing.util.js";
 
 //ESTRATEGIA PARA REGISTER
@@ -16,7 +15,6 @@ passport.use(
   "register",
   new LocalStrategy(
     { passReqToCallback: true, usernameField: "email" },
-
     async (req, email, password, done) => {
       try {
         if (!email || !password) {
@@ -24,31 +22,26 @@ passport.use(
           error.statusCode = 401;
           return done(null, null, error);
         }
-        // verifico que el usuario no este registrado
-        let one = await usersRepository.readByEmail(email);
+
+        //const one = await usersRepository.readByEmailRepository(email);
+        const one = await userManager.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");
           error.statusCode = 401;
           return done(error);
         }
-        // hasheamos el password
+
         const hashPassword = createHash(password);
         req.body.password = hashPassword;
-
-        // creamos el usuario
         const data = new UsersDTO(req.body);
-        user = await usersRepository.createRepository(data);
-        // una vez que se creo el usuario
-        // la estrategia debe enviar un correoelectronico
-        // con el codigo aleatorio para la verificacion del usuario
-        console.log(user);
-        // Enviamos el email con código verificador
+        const user = await userManager.create(data);
+        //una vez que el usuario se creo
+        //la estrategia debe enviar un correo electronico con un codigo aletatorio para la verificacion del usuario
         await sendEmail({
-          to: user.email,
-          name: user.name,
+          to: email,
+          email: user.email,
           code: user.verifyCode,
         });
-
         return done(null, user);
       } catch (error) {
         return done(error);
@@ -56,6 +49,36 @@ passport.use(
     }
   )
 );
+
+/* passport.use(
+  "register",
+  new LocalStrategy(
+    { passReqToCallback: true, usernameField: "email" },
+    async (req, email, password, done) => {
+      try {
+        if (!email || !password) {
+          const error = new Error("Please enter email and passsword");
+          error.statusCode = 401;
+          return done(null, null, error);
+        }
+
+        const one = await userManager.readByEmail(email);
+        if (one) {
+          const error = new Error("Bad auth from register!");
+          error.statusCode = 401;
+          return done(error);
+        }
+
+        const hashPassword = createHash(password);
+        req.body.password = hashPassword;
+        const user = await userManager.create(req.body);
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+); */
 
 //ESTRATEGIA PARA LOGIN
 passport.use(
@@ -71,13 +94,16 @@ passport.use(
           return done(error);
         }
 
-        const verify = verifyHash(password, one.password);
-        if (verify) {
+        const verifyPass = verifyHash(password, one.password);
+        const verifyAccount = one.verify;
+        //Aca verifico constraseña y si el usuario esta correctamente verificado
+        if (verifyPass && verifyAccount) {
           const user = {
             email,
             role: one.role,
             photo: one.photo,
             _id: one._id,
+            verify: one.verify,
             online: true,
           };
 
@@ -86,8 +112,6 @@ passport.use(
           user.token = token;
           console.log("user tokenizado", user);
           return done(null, user);
-          // agrego la propiedad USER al objeto de requerimientos
-          // esa propiedad USER tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
         const error = new Error("Invalid credentials");
         error.statusCode = 401;

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
-// import userManager from "../data/mongo/managers/UserManager.mongo.js";
+//import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import usersRepository from "../repositories/users.rep.js";
 
 class CustomRouter {
@@ -62,7 +62,7 @@ class CustomRouter {
             (policies.includes("USER") && role === 0) ||
             (policies.includes("ADMIN") && role === 1)
           ) {
-            const user = await usersRepository.readyByEmailRepository(email);
+            const user = await usersRepository.readByEmailRepository(email);
             //proteger constraseña del usuario en el obj req.user
             if (user) {
               delete user.password;

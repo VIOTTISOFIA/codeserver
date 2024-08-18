@@ -28,6 +28,15 @@ class IndexRouter extends CustomRouter {
         return next(error);
       }
     });
+    this.create("/api/nodemailer", ["PUBLIC"], async (req, res, next) => {
+      try {
+        const { email, name } = req.body;
+        await sendEmail({to: email, name})
+        return res.response200("EMAIL SENT!")
+      } catch (error) {
+       next (error) 
+      }
+    })
   }
 }
 

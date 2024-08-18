@@ -5,6 +5,7 @@ import {
   readOneService,
   updateService,
   destroyService,
+  readByEmailService,
 } from "../services/users.service.js";
 
 class UsersController {
@@ -69,8 +70,35 @@ class UsersController {
       return next(error);
     }
   };
+  readByEmail = async (req, res, next) => {
+    try {
+      const { email } = req.session;
+      const one = await readByEmailService(email);
+      if (one) {
+        return res.response200("CREATED", one);
+      } else {
+        const error = new Error("not found");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      console.log(error);
+      return next(error);
+    }
+  };
+  verifyCode = async (req, res, next) => {
+    const { email, code } = req.body;
+    const one = await readByEmailService(email);
+    const verify = code === one.verifyCode;
+    if (verify) {
+      updateService(one._id, { verify });
+      return res.response200("Verified User!");
+    } else {
+      return res.error400("Invalid credentials");
+    }
+  };
 }
 
 const usersController = new UsersController();
-const { create, read, readOne, update, destroy } = usersController;
-export { create, read, readOne, update, destroy };
+const { create, read, readOne, update, destroy, readByEmail, verifyCode } = usersController;
+export { create, read, readOne, update, destroy, readByEmail, verifyCode };

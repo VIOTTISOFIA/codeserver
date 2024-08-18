@@ -49,6 +49,13 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
+    this.read("/verified", ["PUBLIC"], async (req, res, next) => {
+      try {
+        return res.render("verified", { title: "VERIFY" });
+      } catch (error) {
+        return next(error);
+      }
+    });
   }
 }
 
