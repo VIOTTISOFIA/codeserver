@@ -41,7 +41,12 @@ class Manager {
 
   async readOne(filter) {
     try {
-      const one = await this.Model.findById(filter).lean();
+      // Si filter es un string, lo tratamos como un email
+      if (typeof filter === "string") {
+        filter = { email: filter };
+      }
+
+      const one = await this.Model.findOne(filter).lean();
       return one;
     } catch (error) {
       throw error;
