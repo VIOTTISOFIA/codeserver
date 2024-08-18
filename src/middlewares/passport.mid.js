@@ -22,7 +22,7 @@ passport.use(
           return done(null, null, error);
         }
 
-       //const one = await usersRepository.readByEmailRepository(email);
+        //const one = await usersRepository.readByEmailRepository(email);
         const one = await userManager.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");
@@ -32,9 +32,8 @@ passport.use(
 
         const hashPassword = createHash(password);
         req.body.password = hashPassword;
-
         const data = new UsersDTO(req.body);
-       const user = await userManager.create(data);
+        const user = await userManager.create(data);
         //una vez que el usuario se creo
         //la estrategia debe enviar un correo electronico con un codigo aletatorio para la verificacion del usuario
         await sendEmail({
@@ -95,13 +94,16 @@ passport.use(
           return done(error);
         }
 
-        const verify = verifyHash(password, one.password);
-        if (verify) {
+        const verifyPass = verifyHash(password, one.password);
+        const verifyAccount = one.verify;
+        //Aca verifico constraseña y si el usuario esta correctamente verificado
+        if (verifyPass && verifyAccount) {
           const user = {
             email,
             role: one.role,
             photo: one.photo,
             _id: one._id,
+            verify: one.verify,
             online: true,
           };
 
