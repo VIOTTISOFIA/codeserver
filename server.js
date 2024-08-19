@@ -8,6 +8,7 @@ import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import compression from "express-compression";
 
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
@@ -67,6 +68,11 @@ server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(cookieParser(environment.SECRET_COOKIE));
+server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
+  })
+);
 server.use(
   session({
     //MONGOSTORE
