@@ -18,9 +18,9 @@ const schema = new Schema(
     },
     category: {
       type: String,
-      required: true,
+      /* required: true, */
       default: "Not defined",
-      enum: [
+      /* enum: [
         "Not defined",
         "Accesorios",
         "Indumentaria",
@@ -28,7 +28,7 @@ const schema = new Schema(
         "Calzado",
         "Jugueteria",
         "Deportes",
-      ],
+      ], */
       index: true,
     },
     price: { type: Number, default: "1" },
@@ -37,7 +37,7 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      required: true,
+      /* required: true, */
     },
   },
   {
