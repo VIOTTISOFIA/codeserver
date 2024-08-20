@@ -75,3 +75,8 @@ En este desafío se implemento el módulo de nodemailer para el desarrollo de me
 -verified.handlebars
 
 Además, se continuó con las mejoras en la arquitectura de las capas adaptando el customRouter para que trabaje con la capa de repositorio.
+
+**DESAFIO ENTREGABLE "SPRINT 10"**
+En el actual desafío crearon 1000 productos con la función "npm run product" que ejecuta un script para crear de forma aleatoria información usando una dependencia de "fakers" para traer información aleatoria. Por otro lado, se crearon users con la función "npm run users" de la misma manera que se ejecutó products.
+
+También se incorporó compresión al servidor y manejo de errores.

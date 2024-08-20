@@ -8,6 +8,7 @@ import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import compression from "express-compression";
 
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
@@ -78,6 +79,12 @@ server.use(
       mongoUrl: environment.MONGO_URI,
       ttl: 60 * 60,
     }),
+  })
+);
+// Middleware para comprimir y mejorar la transferencia del servidor
+server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
   })
 );
 
