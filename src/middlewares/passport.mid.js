@@ -49,37 +49,6 @@ passport.use(
   )
 );
 
-/* passport.use(
-  "register",
-  new LocalStrategy(
-    { passReqToCallback: true, usernameField: "email" },
-
-    async (req, email, password, done) => {
-      try {
-        if (!email || !password) {
-          const error = new Error("Please enter email and passsword");
-          error.statusCode = 401;
-          return done(null, null, error);
-        }
-
-        const one = await userManager.readByEmail(email);
-        if (one) {
-          const error = new Error("Bad auth from register!");
-          error.statusCode = 401;
-          return done(error);
-        }
-
-        const hashPassword = createHash(password);
-        req.body.password = hashPassword;
-        const user = await userManager.create(req.body);
-        return done(null, user);
-      } catch (error) {
-        return done(error);
-      }
-    }
-  )
-); */
-
 //ESTRATEGIA PARA LOGIN
 passport.use(
   "login",

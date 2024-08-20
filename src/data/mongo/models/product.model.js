@@ -18,9 +18,9 @@ const schema = new Schema(
     },
     category: {
       type: String,
-      /* required: true, */
+      required: true,
       default: "Not defined",
-      /* enum: [
+      enum: [
         "Not defined",
         "Accesorios",
         "Indumentaria",
@@ -28,7 +28,7 @@ const schema = new Schema(
         "Calzado",
         "Jugueteria",
         "Deportes",
-      ], */
+      ],
       index: true,
     },
     price: { type: Number, default: "1" },
@@ -53,8 +53,6 @@ schema.pre("find", function () {
 schema.pre("findOne", function () {
   this.populate("user_id", "email");
 });
-//schema.pre("findOneAndDelete", function () {this.populate("user_id", "email")})
-//schema.pre("findOneAndUpdate", function () {this.populate("user_id", "email")})
 
 const Product = model(collection, schema);
 export default Product;

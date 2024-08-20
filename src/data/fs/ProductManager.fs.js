@@ -21,15 +21,6 @@ class ProductManager {
       if (!data.title) {
         throw new Error("Producto no creado. Ingrese los datos correctos");
       } else {
-        /*  const product = {
-          id: crypto.randomBytes(12).toString("hex"),
-          title: data.title,
-          photo: data.photo || "https://i.postimg.cc/pVcL6v4t/package.png",
-          category: data.category || "Not defined",
-          price: data.price || "1",
-          stock: data.stock || "1",
-        }; */
-
         let products = await fs.promises.readFile(this.path, "utf-8");
         products = JSON.parse(products);
         products.push(data);

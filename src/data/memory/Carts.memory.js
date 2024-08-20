@@ -7,12 +7,6 @@ class CartsManager {
   static #carts = [];
   create(data) {
     try {
-      /* const cart = {
-      user_id: crypto.randomBytes(12).toString("hex"),
-      product_id: crypto.randomBytes(12).toString("hex"),
-      quantity: data.quantity || "1",
-      state: data.state || "reserved",
-      }; */
       if (!data) {
         throw new Error("Not found!");
       } else {

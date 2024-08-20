@@ -6,11 +6,11 @@ import productsRepository from "../repositories/products.rep.js";
 async function createData() {
   try {
     dbConnect()
-    for (let i = 1; i <=10; i++) {
+    for (let i = 1; i <=1000; i++) {
       const product = {
         title: faker.commerce.product(),
         photo: faker.image.urlLoremFlickr({ category: 'sports' }),
-        category: faker.commerce.productAdjective(),
+        category: "Deportes",
         price: faker.number.binary(255),
         stock: faker.number.binary(255),
       };
