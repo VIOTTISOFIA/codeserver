@@ -69,6 +69,11 @@ server.use(express.json());
 server.use(morgan("dev"));
 server.use(cookieParser(environment.SECRET_COOKIE));
 server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
+  })
+);
+server.use(
   session({
     //MONGOSTORE
     secret: environment.SECRET_SESSION,
@@ -79,12 +84,6 @@ server.use(
       mongoUrl: environment.MONGO_URI,
       ttl: 60 * 60,
     }),
-  })
-);
-// Middleware para comprimir y mejorar la transferencia del servidor
-server.use(
-  compression({
-    brotli: { enabled: true, zlib: {} },
   })
 );
 

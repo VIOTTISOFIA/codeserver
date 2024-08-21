@@ -37,7 +37,7 @@ const schema = new Schema(
       type: Types.ObjectId,
       ref: "users",
       index: true,
-      required: true,
+      /* required: true, */
     },
   },
   {
@@ -53,8 +53,6 @@ schema.pre("find", function () {
 schema.pre("findOne", function () {
   this.populate("user_id", "email");
 });
-//schema.pre("findOneAndDelete", function () {this.populate("user_id", "email")})
-//schema.pre("findOneAndUpdate", function () {this.populate("user_id", "email")})
 
 const Product = model(collection, schema);
 export default Product;

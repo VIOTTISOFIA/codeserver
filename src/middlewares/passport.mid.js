@@ -5,13 +5,11 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
-// import usersRepository from "../repositories/users.rep.js";
+import usersRepository from "../repositories/users.rep.js";
 import UsersDTO from "../dto/users.dto.js";
 import sendEmail from "../utils/mailing.util.js";
-// import usersRepository from "../repositories/users.rep.js";
 
 //ESTRATEGIA PARA REGISTER
-
 passport.use(
   "register",
   new LocalStrategy(
@@ -24,7 +22,7 @@ passport.use(
           return done(null, null, error);
         }
 
-        // const one = await usersRepository.readByEmailRepository(email);
+        //const one = await usersRepository.readByEmailRepository(email);
         const one = await userManager.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");

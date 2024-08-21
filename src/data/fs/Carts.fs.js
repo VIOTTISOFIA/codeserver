@@ -21,13 +21,6 @@ class CartsManager {
     try {
       let cart;
       if (!cart) {
-        /*  const cart = {
-          user_id: crypto.randomBytes(12).toString("hex"),
-          product_id: crypto.randomBytes(12).toString("hex"),
-          quantity: data.quantity || "1",
-          state: data.state || "reserved",
-        }; */
-
         let carts = await fs.promises.readFile(this.path, "utf-8");
         carts = JSON.parse(carts);
         carts.push(data);
