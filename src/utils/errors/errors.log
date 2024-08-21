@@ -1,0 +1,7 @@
+[33mERROR[39m: undefined {"statusCode":401}
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 18.54.56 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 19.10.57 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 19.59.05 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 19.59.18 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 19.59.23 - Bad auth from register!
