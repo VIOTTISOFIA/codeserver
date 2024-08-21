@@ -34,6 +34,7 @@ passport.use(
         req.body.password = hashPassword;
         const data = new UsersDTO(req.body);
         const user = await userManager.create(data);
+        // const user = await usersRepository.createRepository(data);
         //una vez que el usuario se creo
         //la estrategia debe enviar un correo electronico con un codigo aletatorio para la verificacion del usuario
         await sendEmail({
@@ -57,6 +58,7 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const one = await userManager.readByEmail(email);
+        // const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
           const error = new Error("Bad auth from login!");
           error.statusCode = 401;
@@ -143,11 +145,6 @@ passport.use(
           }),
             (user = await userManager.create(user));
         }
-        (req.session.email = user.email),
-          (req.session.online = true),
-          (req.session.role = user.role),
-          (req.session.photo = user.photo),
-          (req.session.user_id = user._id);
 
         return done(null, user);
       } catch (error) {

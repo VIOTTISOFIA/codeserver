@@ -22,6 +22,7 @@ http://localhost:8080/carts/cart?user_id=6660fcb73892bc1eecfeabe9 (ID harcodeado
 **DESAFIO ENTREGABLE "SPRINT6"**
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies. 
 
 - Agregamos un nuevo archivo con rutas utilizando las cookies como memoria de almacenamiento de datos segun la informacion recibida desde el front, como por ejemplo, el inicio de sesion de un usuario ya existente en nuestra base de datos (DB), o el registro de un nuevo usuario.
@@ -32,6 +33,8 @@ En esta entrega se han implementado nuevas funcionalidades y nuevos metodos rela
 
 - Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB. 
 =======
+=======
+>>>>>>> sprint10
 En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies.
 
 - Agregamos un nuevo archivo con rutas utilizando las cookies como memoria de almacenamiento de datos segun la informacion recibida desde el front, como por ejemplo, el inicio de sesion de un usuario ya existente en nuestra base de datos (DB), o el registro de un nuevo usuario.
@@ -41,7 +44,10 @@ En esta entrega se han implementado nuevas funcionalidades y nuevos metodos rela
 - Asimismo el perfil de un usuario y su carrito (si existe) se renderizan en funcion a la sesion iniciada.
 
 - Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB.
+<<<<<<< HEAD
 >>>>>>> sprint9
+=======
+>>>>>>> sprint10
 
 - Finalmente, creamos un nuevo metodo al Manager generico de mongo: "ReadByEmail", el cual utilizamos para generar el incio de sesion correcto de un usuario segun el email registrado. Este mismo metodo tambien fue creado en el manager correspondiente a usuarios segun la persistencia (FS o Memory)
 
@@ -73,10 +79,27 @@ Asimismo, dentro del customRouter hemos agregado el uso de "Policies" para la co
 En esta etapa de nuestro proyecto hemos implementado la separacion de responsabilidades en capas para mejorar la escalabilidad y optimizacion de nuestro codigo a nivel de persistencias. Hemos agregado:
 
 -Capa de controlador o negocio, para el manejo de la logica.
+<<<<<<< HEAD
 -Capa de servicio para ser el intermediario entre el controlador y la persistencia. 
+=======
+-Capa de servicio para ser el intermediario entre el controlador y la persistencia.
+>>>>>>> sprint10
 -Capa de modelo para las propiedades a implementar segun el recurso y persistencia necesaria.
 
 Tambien agregamos nuevos patrones para el manejo de persistencias.
 
 -El patron DAO se ha orientado para conectar el servidor segun la persistencia solicitada (Fyle System, memory o MongoDB como base de datos)
 -El patron Factory es un recurso generado para el manejo correcto de las importaciones de los managers segun su persistencia.
+
+**DESAFIO ENTREGABLE "CHALLENGE 3"**
+En este desafío se implemento el módulo de nodemailer para el desarrollo de mensajería. En el cual se realiza la verificación del usuario registrado mediante el envió de mensajes con gmail con un código aleatorio. Se agregó:
+-mailing.utils.js
+-verified.handlebars
+
+Además, se continuó con las mejoras en la arquitectura de las capas adaptando el customRouter para que trabaje con la capa de repositorio.
+
+**DESAFIO ENTREGABLE "SPRINT 10"**
+En el actual desafío crearon 1000 productos con la función "npm run product" que ejecuta un script para crear de forma aleatoria información usando una dependencia de "fakers" para traer información aleatoria. Por otro lado, se crearon users con la función "npm run users" de la misma manera que se ejecutó products.
+
+También se incorporó compresión al servidor y manejo de errores.
+

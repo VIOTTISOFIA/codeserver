@@ -11,7 +11,8 @@
     "memory": "nodemon ./server.js -p 8081 --env prod --persistence=memory",
     "fs": "nodemon ./server.js -p 8082 --env prod --persistence=fs",
     "tdd": "node ./test/sum.tdd.js",
-    "products": "node ./src/mocks/products.mock.js"
+    "products": "node ./src/mocks/products.mock.js",
+    "users": "node ./src/mocks/users.mocks.js"
   },
   "keywords": [],
   "author": "",

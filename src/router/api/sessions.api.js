@@ -84,7 +84,7 @@ class SessionsRouter extends CustomRouter {
         }
       }
     );
-    this.create("/verify", ["PUBLIC"], verifyCode )
+    this.create("/verify", ["PUBLIC"], verifyCode);
   }
 }
 
