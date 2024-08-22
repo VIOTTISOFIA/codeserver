@@ -1,0 +1,20 @@
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: POST / 401 - 21:16:06 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 21:17:40 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:17:41 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 21:59:45 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:59:47 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:59:47 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 22:00:19 - Bad auth from policies!
+[33mERROR[39m: POST / 403 - 22:00:55 - Forbidden from policies!
+[33mERROR[39m: POST / 403 - 22:01:18 - Forbidden from policies!
+[33mERROR[39m: POST /signout 401 - 22:01:38 - Bad auth from policies!
+[33mERROR[39m: Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33mERROR[39m: Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33mERROR[39m: POST / 400 - 22:07:07 - jwt expired
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden

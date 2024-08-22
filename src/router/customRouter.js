@@ -2,6 +2,7 @@ import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
 //import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import usersRepository from "../repositories/users.rep.js";
+import winston from "../utils/winston.util.js";
 
 class CustomRouter {
   //para contruir y configurar cada instancia del enrutador
@@ -36,14 +37,38 @@ class CustomRouter {
       res.status(201).json({ statusCode: 201, message });
     res.paginate = (response, info) =>
       res.json({ statusCode: 201, response, info });
-    res.error400 = (message) =>
-      res.status(400).json({ statusCode: 400, message });
-    res.error401 = () =>
-      res.json({ statusCode: 401, message: "Bad auth from policies!" });
-    res.error403 = () =>
-      res.json({ statusCode: 400, message: "Forbidden from policies!" });
-    res.error404 = () =>
-      res.json({ statudCode: 404, message: "Not found docs" });
+    res.error400 = (message) => {
+      const errorMessage = `${req.method} ${
+        req.url
+      } 400 - ${new Date().toLocaleTimeString()} - ${message}`;
+      winston.ERROR(errorMessage);
+      return res.json({ statusCode: 400, message: message });
+    };
+    res.error401 = () => {
+      const errorMessage = `${req.method} ${
+        req.url
+      } 401 - ${new Date().toLocaleTimeString()} - Bad auth from policies!`;
+      winston.ERROR(errorMessage);
+      return res.json({ statusCode: 401, message: "Bad auth from policies!" });
+    };
+    res.error403 = () => {
+      const errorMessage = `${req.method} ${
+        req.url
+      } 403 - ${new Date().toLocaleTimeString()} - Forbidden from policies!`;
+      winston.ERROR(errorMessage);
+      return res.json({
+        statusCode: 403,
+        message: "Forbidden from policies!",
+      });
+    };
+    res.error404 = () => {
+      const errorMessage = `${req.method} ${
+        req.url
+      } 404 - ${new Date().toLocaleTimeString()} - Not found docs`;
+      winston.ERROR(errorMessage);
+      return res.json({ statusCode: 404, message: "Not found docs" });
+    };
+
     return next();
   };
 

@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "artillery": "^2.0.20",
     "nodemon": "^3.1.0"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "winston": "^3.14.2"
   }
 }
