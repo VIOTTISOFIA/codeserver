@@ -4,12 +4,15 @@ import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
 import CustomRouter from "../customRouter.js";
 import { verifyCode } from "../../controllers/users.controller.js";
+import validator from "../../middlewares/joi.mind.js";
+import usersSchema from "../../schemas/user.schema.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
     this.create(
       "/register",
       ["PUBLIC"],
+      validator(usersSchema),
       passportCb("register"),
       async (req, res, next) => {
         try {
