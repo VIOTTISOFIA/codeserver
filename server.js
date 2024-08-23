@@ -9,12 +9,15 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import compression from "express-compression";
+import swaggerJSDoc from "swagger-jsdoc";
+import { serve, setup } from "swagger-ui-express";
 
 import winston from "./src/middlewares/winston.mid.js";
 import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
+import configs from "./src/utils/swagger.util.js"
 import __dirname from "./utils.js";
 
 // http server
@@ -54,6 +57,8 @@ server.engine("handlebars", hbs.engine);
 server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
+const specs = swaggerJSDoc(configs);
+
 // middlewares
 server.get(cookieParser(environment.SECRET_COOKIE));
 server.get(
@@ -69,6 +74,7 @@ server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(winston);
 server.use(cookieParser(environment.SECRET_COOKIE));
+server.use("/api/docs", serve, setup(specs));
 server.use(
   compression({
     brotli: { enabled: true, zlib: {} },

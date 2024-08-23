@@ -18,3 +18,12 @@
 [33mERROR[39m: POST / 400 - 22:07:07 - jwt expired
 [33mERROR[39m: Forbidden
 [33mERROR[39m: Forbidden
+[33mERROR[39m: GET /online 401 - 20:19:51 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:21 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:29 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:35 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:41 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 22:47:55 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 22:48:10 - Bad auth from policies!
+[33mERROR[39m: Cast to ObjectId failed for value ":pid" (type string) at path "_id" for model "products"
+[33mERROR[39m: Not found!
