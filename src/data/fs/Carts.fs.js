@@ -21,20 +21,20 @@ class CartsManager {
     try {
       let cart;
       if (!cart) {
-        const cart = {
+        /*  const cart = {
           user_id: crypto.randomBytes(12).toString("hex"),
           product_id: crypto.randomBytes(12).toString("hex"),
           quantity: data.quantity || "1",
           state: data.state || "reserved",
-        };
+        }; */
 
         let carts = await fs.promises.readFile(this.path, "utf-8");
         carts = JSON.parse(carts);
-        carts.push(cart);
+        carts.push(data);
         console.log("Created");
         carts = JSON.stringify(carts, null, 2);
         await fs.promises.writeFile(this.path, carts);
-        return cart;
+        return data;
       } else {
         throw new Error("Not found!");
       }
@@ -57,13 +57,13 @@ class CartsManager {
 
   async readOne(user_id) {
     try {
-      let one = await fs.promises.readFile(this.path, "utf-8");
-      one = JSON.parse(one);
-      let found = one.find((cart) => cart.user_id === user_id);
-      if (!found) {
+      let all = await fs.promises.readFile(this.path, "utf-8");
+      all = JSON.parse(all);
+      let one = one.find((cart) => cart.user_id === user_id);
+      if (!one) {
         throw new Error("Not found! Try again.");
       }
-      return found;
+      return one;
     } catch (error) {
       console.error(error);
       throw error;
@@ -117,8 +117,8 @@ class CartsManager {
 
 async function test() {
   const gestorDeCarts = new CartsManager();
-/* 
-  await gestorDeCarts.create({
+
+  /*  await gestorDeCarts.create({
     quantity: "2",
   });
 
@@ -134,9 +134,9 @@ async function test() {
 
   console.log(await gestorDeCarts.read());
   //console.log(await gestorDeCarts.readOne("103afd77d65cef61b42e0dbe"))
-  
-  //METODO UPDATE 
-  const cartState = "reserved"; 
+
+  //METODO UPDATE
+  const cartState = "reserved";
   const updateState = { state: "paid" };
   try {
     const updatedCart = await gestorDeCarts.update(cartState, updateState);
@@ -147,8 +147,10 @@ async function test() {
 
   console.log("Carritos después de la actualización:");
   console.log(await gestorDeCarts.read());
-  
   //console.log(await gestorDeCarts.destroy("delivered"))
 }
 
 //test();
+
+const cartsManager = new CartsManager();
+export default cartsManager;

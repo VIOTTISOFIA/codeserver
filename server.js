@@ -1,4 +1,4 @@
-import "dotenv/config.js";
+import environment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -7,7 +7,6 @@ import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-//import fileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/router/index.router.js";
@@ -15,17 +14,12 @@ import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
-import dbConnect from "./src/utils/dbConnect.util.js";
-
-// console.log(process.env);
-// console.log(process.env.MONGO_URI);
 
 // http server
 const server = express();
-const port = 8080;
+const port = environment.PORT;
 const ready = async () => {
   console.log("server ready on port" + port);
-  await dbConnect();
 };
 
 const nodeServer = createServer(server);
@@ -59,10 +53,10 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 // middlewares
-server.get(cookieParser(process.env.SECRET_COOKIE));
+server.get(cookieParser(environment.SECRET_COOKIE));
 server.get(
   session({
-    secret: process.env.SECRET_SESSION,
+    secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
@@ -72,23 +66,16 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(morgan("dev"));
-server.use(cookieParser(process.env.SECRET_COOKIE));
-//const FileSession = fileStore(session);
+server.use(cookieParser(environment.SECRET_COOKIE));
 server.use(
   session({
-    //FILESTORE
-    /*  store: new FileSession({
-      path: "./src/data/fs/file/sessions",
-      ttl: 60 * 60,
-    }), */
-
     //MONGOSTORE
-    secret: process.env.SECRET_SESSION,
+    secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 10 * 60 * 1000 },
     store: new MongoStore({
-      mongoUrl: process.env.MONGO_URI,
+      mongoUrl: environment.MONGO_URI,
       ttl: 60 * 60,
     }),
   })

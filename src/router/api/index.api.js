@@ -16,6 +16,5 @@ class ApiRouter extends CustomRouter {
     this.use("/sessions", sessionsRouter);
   }
 }
-
 const apiRouter = new ApiRouter();
 export default apiRouter.getRouter();

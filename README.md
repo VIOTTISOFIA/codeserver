@@ -56,3 +56,15 @@ En esta entrega se agrego la generacion de tickets de compra en mongoDB mediante
 Tambien se agrego la nueva funcionalidad de customRouter para agilizar y optimizar el codigo mediante respuestas "automaticas" agregadas en el archivo de customRouter, las cuales nos permiten usar una sola linea de codigo dependiendo del coodigo de estado generado y la respuesta del servidor que se haya configurado.
 
 Asimismo, dentro del customRouter hemos agregado el uso de "Policies" para la correcta autenticacion del usuario, es decir, si es usuario comun o un administrador del sitio tendra acceso a diferentes funcionalidades.
+
+**DESAFIO ENTREGABLE "SPRINT9"**
+En esta etapa de nuestro proyecto hemos implementado la separacion de responsabilidades en capas para mejorar la escalabilidad y optimizacion de nuestro codigo a nivel de persistencias. Hemos agregado:
+
+-Capa de controlador o negocio, para el manejo de la logica.
+-Capa de servicio para ser el intermediario entre el controlador y la persistencia. 
+-Capa de modelo para las propiedades a implementar segun el recurso y persistencia necesaria.
+
+Tambien agregamos nuevos patrones para el manejo de persistencias.
+
+-El patron DAO se ha orientado para conectar el servidor segun la persistencia solicitada (Fyle System, memory o MongoDB como base de datos)
+-El patron Factory es un recurso generado para el manejo correcto de las importaciones de los managers segun su persistencia.

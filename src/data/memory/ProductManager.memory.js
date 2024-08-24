@@ -1,6 +1,9 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+//const fs = require("fs");
+//const crypto = require("crypto");
+//const { error } = require("console");
+import fs from "fs";
+import crypto from "crypto";
+import { error } from "console";
 
 class ProductManager {
   static #products = [];
@@ -40,13 +43,13 @@ class ProductManager {
 
   readOne(id) {
     try {
-      const find = ProductManager.#products.find((each) => each.id === id);
-      if (!find) {
+      const one = ProductManager.#products.find((each) => each.id === id);
+      if (!one) {
         throw new Error(
           "El producto que buscas no existe. Verifica el dato proporcionado e intentalo nuevamente."
         );
       } else {
-        return find;
+        return one;
       }
     } catch (error) {
       console.log(error);
@@ -160,85 +163,85 @@ function prueba() {
   });
 
   gestorDeProductos.create({
-    title: "Buzo talle 2 Frozen"
+    title: "Buzo talle 2 Frozen",
   });
 
   gestorDeProductos.create({
-    title: "Muñeco Buzz Lightyear con sonido"
+    title: "Muñeco Buzz Lightyear con sonido",
   });
 
   gestorDeProductos.create({
-    title: "Remera talle 4 F1 Ferrari"
+    title: "Remera talle 4 F1 Ferrari",
   });
 
   gestorDeProductos.create({
-    title: "Conjunto talle 3 AFA"
+    title: "Conjunto talle 3 AFA",
   });
 
   gestorDeProductos.create({
-    title: "Vestido con lazos de fiesta talle 2"
+    title: "Vestido con lazos de fiesta talle 2",
   });
 
   gestorDeProductos.create({
-    title: "Sandalias rosas para nena"
+    title: "Sandalias rosas para nena",
   });
 
   gestorDeProductos.create({
-    title: "Coche Carestino reclinable a 3 niveles"
+    title: "Coche Carestino reclinable a 3 niveles",
   });
 
   gestorDeProductos.create({
-    title: "Asiento elevador Carestino para niños"
+    title: "Asiento elevador Carestino para niños",
   });
 
   gestorDeProductos.create({
-    title: "Butaca de viaje Carestino con giro 360°"
+    title: "Butaca de viaje Carestino con giro 360°",
   });
 
   gestorDeProductos.create({
-    title: "Sillita mecedora Carestino para siestas"
+    title: "Sillita mecedora Carestino para siestas",
   });
 
   gestorDeProductos.create({
-    title: "Sacaleche electrico con mamadera"
+    title: "Sacaleche electrico con mamadera",
   });
 
   gestorDeProductos.create({
-    title: "Mamadera Avent 12onz"
+    title: "Mamadera Avent 12onz",
   });
 
   gestorDeProductos.create({
-    title: "Bañera plegable con soporte para Recien nacidos"
+    title: "Bañera plegable con soporte para Recien nacidos",
   });
 
   gestorDeProductos.create({
-    title: "Silla de comedor con juguete unisex"
+    title: "Silla de comedor con juguete unisex",
   });
 
   gestorDeProductos.create({
-    title: "xCombo mosquitero + protector de lluvia para cochecitos"
+    title: "xCombo mosquitero + protector de lluvia para cochecitos",
   });
 
   gestorDeProductos.create({
-    title: "Cochecito SMARTDUO Carestino"
+    title: "Cochecito SMARTDUO Carestino",
   });
 
   gestorDeProductos.create({
-    title: "Mochila portabebes"
+    title: "Mochila portabebes",
   });
 
   gestorDeProductos.create({
-    title: "Gimnasio didactico multifuncion"
+    title: "Gimnasio didactico multifuncion",
   });
 
   gestorDeProductos.create({
-    title: "Mecedor de caballito de madera"
+    title: "Mecedor de caballito de madera",
   });
 
   console.log("Productos creados:");
   console.log(gestorDeProductos.read());
 
-  const productId = "chupete";
+  /* const productId = "chupete";
 
   try {
     const deleteProduct = gestorDeProductos.readOne(productId);
@@ -256,7 +259,10 @@ function prueba() {
     }
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
-  }
+  } */
 }
 
 //prueba();
+
+const productManager = new ProductManager();
+export default productManager;

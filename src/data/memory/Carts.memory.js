@@ -1,21 +1,22 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const { error } = require("console");
+//const fs = require("fs");
+//const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class CartsManager {
   static #carts = [];
   create(data) {
     try {
-      const cart = {
-        user_id: crypto.randomBytes(12).toString("hex"),
-        product_id: crypto.randomBytes(12).toString("hex"),
-        quantity: data.quantity || "1",
-        state: data.state || "reserved",
-      };
-      if (!cart) {
+      /* const cart = {
+      user_id: crypto.randomBytes(12).toString("hex"),
+      product_id: crypto.randomBytes(12).toString("hex"),
+      quantity: data.quantity || "1",
+      state: data.state || "reserved",
+      }; */
+      if (!data) {
         throw new Error("Not found!");
       } else {
-        CartsManager.#carts.push(cart);
+        CartsManager.#carts.push(data);
         console.log(cart);
       }
     } catch (error) {
@@ -23,7 +24,7 @@ class CartsManager {
     }
   }
 
- read() {
+  read() {
     try {
       if (CartsManager.#carts.length === 0) {
         throw new Error("Not exist a product!");
@@ -39,9 +40,7 @@ class CartsManager {
     try {
       const find = CartsManager.#carts.find((cart) => cart.state === state);
       if (!find) {
-        throw new Error(
-          "Not found! Try again."
-        );
+        throw new Error("Not found! Try again.");
       } else {
         return find;
       }
@@ -61,10 +60,9 @@ class CartsManager {
     }
   }
 
-  
   update(state, data) {
     try {
-        this.readOne(state);
+      this.readOne(state);
       const one = CartsManager.#carts.find((cart) => cart.state === state);
       if (one) {
         for (let prop in data) {
@@ -87,43 +85,43 @@ function test() {
   const gestorDeCarts = new CartsManager();
 
   gestorDeCarts.create({
-    quantity: "2"
+    quantity: "2",
   });
 
   gestorDeCarts.create({
     quantity: "5",
-    state: "paid"
+    state: "paid",
   });
 
   gestorDeCarts.create({
     quantity: "4",
-    state: "delivered"
+    state: "delivered",
   });
 
   console.log("Productos creados:");
   console.log(gestorDeCarts.read());
 
   const productState = "reserved";
-  const updateState = "paid"
+  const updateState = "paid";
   try {
-      const updateProduct = gestorDeCarts.readOne(productState);
-      if (updateProduct) {
-          gestorDeCarts.update(productState, { state: updateState });
-          console.log(
-              `Producto con estado "${productState}" actualizado satisfactoriamente.`
-            );
-            console.log("Productos después de la actualización:");
-            console.log(gestorDeCarts.read());
-        } else {
-            console.log(
-                `El producto con estado "${productState}" no existe en la lista. Inténtalo nuevamente`
-            );
-        }
-    } catch (error) {
-        console.error("Error al actualizar el producto:", error.message);
+    const updateProduct = gestorDeCarts.readOne(productState);
+    if (updateProduct) {
+      gestorDeCarts.update(productState, { state: updateState });
+      console.log(
+        `Producto con estado "${productState}" actualizado satisfactoriamente.`
+      );
+      console.log("Productos después de la actualización:");
+      console.log(gestorDeCarts.read());
+    } else {
+      console.log(
+        `El producto con estado "${productState}" no existe en la lista. Inténtalo nuevamente`
+      );
     }
-    
-    /* 
+  } catch (error) {
+    console.error("Error al actualizar el producto:", error.message);
+  }
+
+  /* 
       try {
         const deleteProduct = gestorDeCarts.readOne(productState);
     if (deleteProduct) {
@@ -141,8 +139,9 @@ function test() {
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error.message);
   } */
-
 }
 
+//test();
 
-test();
+const cartsManager = new CartsManager();
+export default cartsManager;
