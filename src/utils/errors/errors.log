@@ -27,3 +27,4 @@
 [33mERROR[39m: POST / 401 - 22:48:10 - Bad auth from policies!
 [33mERROR[39m: Cast to ObjectId failed for value ":pid" (type string) at path "_id" for model "products"
 [33mERROR[39m: Not found!
+[33mERROR[39m: PUT /664533651cbd7fd9bcafce04 401 - 21:15:40 - Bad auth from policies!

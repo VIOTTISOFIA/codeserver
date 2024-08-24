@@ -195,6 +195,26 @@ paths:
             aplication/json:
               schema:
                 $ref: '#/components/responses/Error500'
+    get:
+      summary: Ruta para obtener todos los productos de la base de datos
+      tags:
+        - product
+      responses:
+        200:
+          description: Productos obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        500:
+          description: Error por parte del servidor
+          content:
+            application/json:
+              schema:
+              $ref: '#/components/responses/Error500'
+
   /api/products/{pid}:
     get:
       summary: Ruta para obtener un producto de la base de datos
@@ -204,16 +224,135 @@ paths:
         - name: pid
           in: path
           required: true
-          description: Identificador unico de la mascota a encontrar
+          description: Identificador unico del producto a encontrar
           schema:
-            $type: string
+            type: string
       responses:
-        Response200:
-          description: Exito en la letura de una mascota
+        200:
+          description: Exito en la letura del producto
           content:
             application/json:
               schema:
-                $ref: '#/componets/responses/Response200'
-
-      
-
+                $ref: '#/components/responses/Response200'
+    put:
+      summary: Ruta para actualizar un producto de la base de datos
+      tags:
+        - product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Identificador unico del producto a encontrar
+          schema:
+            type: string
+      requestBody:
+        description: Datos del producto a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      responses:
+        200:
+          description: Exito en la lectura y actualizacion del producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Response200'
+        401:
+          description: Error en autenticacion del usuario para actualizar un producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error401'
+        404:
+          description: Error al no encontrar el producto del ID especificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error404'
+        500:
+          description: Error por parte del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error500'
+    delete:
+      summary: Ruta para eliminar un producto de la base de datos
+      tags:
+        - product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Identificador único del producto a eliminar
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Response200'
+        401:
+          description: Error en autenticación del usuario para eliminar un producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error401'
+        404:
+          description: Error al no encontrar el producto con el ID especificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error404'
+        500:
+          description: Error por parte del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error500'
+  /api/products/paginate:
+    get:
+      summary: Ruta para obtener productos paginados de la base de datos
+      tags:
+        - product
+      parameters:
+        - name: page
+          in: query
+          description: Número de la página que se desea obtener
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Cantidad de productos por página
+          schema:
+            type: integer
+            default: 10
+        - name: sort
+          in: query
+          description: Orden de los productos (ascendente o descendente)
+          schema:
+           type: string
+           enum: [asc, desc]
+      responses:
+        200:
+          description: Productos obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                type: '#/components/responses/Paginate'
+        400:
+          description: Error en la solicitud, parámetros de paginación inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error400'
+        500:
+          description: Error por parte del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error500'
