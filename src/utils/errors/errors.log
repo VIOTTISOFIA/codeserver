@@ -14,3 +14,18 @@
 [33mERROR[39m: POST /api/sessions/register 400 - 19.02.09 - "password" with value "HolaMundo123" fails to match the required pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]+$/
 [31mFATAL[39m: Este es un mensaje de log FATAL
 [33mERROR[39m: Este es un mensaje de log ERROR
+[31mFATAL[39m: Este es un mensaje de log FATAL
+[33mERROR[39m: Este es un mensaje de log ERROR
+[33mERROR[39m: POST /api/sessions/register 400 - 22.34.04 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
+[33mERROR[39m: POST /api/sessions/register 401 - 22.42.19 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 22.42.45 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 401 - 09.26.06 - Bad auth from register!
+[33mERROR[39m: POST /api/sessions/register 400 - 10.53.26 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
+[33mERROR[39m: POST /api/sessions/register 401 - 10.53.53 - Bad auth from register!
+[33mERROR[39m: GET /api/users?role=1 undefined - 13.53.03 - Parameter "filter" to find() must be an object, got "1" (type string)
+[33mERROR[39m: GET /api/users?role=0 undefined - 13.53.32 - Parameter "filter" to find() must be an object, got "0" (type string)
+[33mERROR[39m: GET /api/users?role=2 undefined - 13.53.57 - Parameter "filter" to find() must be an object, got "2" (type string)
+[33mERROR[39m: GET /api/users?role=1 undefined - 13.54.20 - Parameter "filter" to find() must be an object, got "1" (type string)
+[33mERROR[39m: GET /api/users?role=1 undefined - 14.01.01 - Parameter "filter" to find() must be an object, got "1" (type string)
+[33mERROR[39m: GET /api/users?role=1 undefined - 14.22.40 - Parameter "filter" to find() must be an object, got "1" (type string)
+[33mERROR[39m: POST /api/sessions/register 400 - 18.19.45 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
