@@ -140,7 +140,6 @@ async function test() {
 
   console.log("Carritos después de la actualización:");
   console.log(await gestorDeCarts.read());
-
   //console.log(await gestorDeCarts.destroy("delivered"))
 }
 
