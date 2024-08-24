@@ -53,7 +53,7 @@ server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 
 // middlewares
-server.get(cookieParser(environment.SECRET_COOKIE));
+/* server.get(cookieParser(environment.SECRET_COOKIE));
 server.get(
   session({
     secret: environment.SECRET_SESSION,
@@ -61,7 +61,7 @@ server.get(
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
   })
-);
+); */
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
@@ -86,6 +86,7 @@ server.use((req, res, next) => {
   res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
   next();
 });
+
 // endpoints
 server.use("/", indexRouter);
 server.use(errorHandler);

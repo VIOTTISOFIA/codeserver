@@ -12,9 +12,9 @@ class Service {
     }
   };
 
-  readService = async (role) => {
+  readService = async (id) => {
     try {
-      const all = await this.repository.readRepository(role);
+      const all = await this.repository.readRepository(id);
       return all;
     } catch (error) {
       throw error;
@@ -29,8 +29,15 @@ class Service {
       throw error;
     }
   };
-
-  readOneService = async (email) => {
+  readOneService = async (id) => {
+    try {
+      const one = await this.repository.readOneRepository(id);
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  };
+  readByEmailService = async (email) => {
     try {
       const one = await this.repository.readOneRepository(email);
       return one;
