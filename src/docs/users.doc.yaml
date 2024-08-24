@@ -1,0 +1,361 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of the user registering
+        password:
+          type: string
+          description: Password of the user registering
+        photo:
+          type: string
+          description: URL of the profile picture the user will use
+        role:
+          type: number
+          description: To define permissions according to the role
+        verify:
+          type: boolean
+          description: To define whether an account is verified or not
+        verifyCode:
+          type: string
+          description: Verification code for the account
+      example:
+        email: sofi_04_04@hotmail.com
+        password: hola1234
+        photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+
+  responses:
+    Response200:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to a successful request
+        message:
+          type: string
+          description: Descriptive text indicating the success of the operation
+      example:
+        statusCode: 200
+        message: Verified User!
+
+    Response201:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to the success of a creation request
+        message:
+          type: string
+          description: Descriptive text indicating the success of the creation
+      example:
+        statusCode: 201
+        message: User registered!
+
+    Response200one:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to the success of a request returning data
+        response:
+          type: object
+          description: Object containing the requested resource data
+      example:
+        statusCode: 200
+        response:
+          email: sofi_04_04@hotmail.com
+          password: hola1234
+          photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+
+    Response200all:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to the success of a request returning data
+        response:
+          type: array
+          description: Array of objects of the requested resource
+      example:
+        statusCode: 200
+        response:
+          - email: sofi_04_04@hotmail.com
+            password: hola1234
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+          - email: roxi@hotmail.com
+            password: hola5678
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+          - email: celine@hotmail.com
+            password: hola91011
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+
+    Paginate:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to the success of a request returning paginated data
+        response:
+          type: array
+          description: Array of paginated and ordered objects of the requested resource
+        info:
+          type: object
+          description: Pagination details
+      example:
+        statusCode: 200
+        response:
+          - email: sofi_04_04@hotmail.com
+            password: hola1234
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+          - email: roxi@hotmail.com
+            password: hola5678
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+          - email: celine@hotmail.com
+            password: hola91011
+            photo: https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg
+        info:
+          next: null
+          prev: null
+
+    Error400:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to the failure of the request due to client issues
+        message:
+          type: string
+          description: Descriptive text indicating the client error message
+      example:
+        statusCode: 400
+        message: Incomplete data on mid
+
+    Error401:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to authentication failure
+        message:
+          type: string
+          description: Descriptive text indicating the authentication error message
+      example:
+        statusCode: 401
+        message: Bad auth from policies!
+
+    Error403:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to authorization failure
+        message:
+          type: string
+          description: Descriptive text indicating the authorization error message
+      example:
+        statusCode: 403
+        message: Forbidden from policies!
+
+    Error404:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to failure due to the requested resource not being found
+        message:
+          type: string
+          description: Descriptive text indicating the resource not found error message
+      example:
+        statusCode: 404
+        message: Not found docs
+
+    Error500:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code corresponding to server-side error
+        message:
+          type: string
+          description: Descriptive text indicating the server error message
+      example:
+        statusCode: 500
+        message: CODER API ERROR
+
+paths:
+  /api/sessions/register:
+    post:
+      summary: Route for registering a new user on our server
+      tags:
+        - User
+      requestBody:
+        required: true
+        description: Data required to register a user
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        201:
+          description: Success in registering a user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response201"
+        400:
+          description: Fracaso por datos incompletos o mal pasados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error400"
+        500:
+          description: Fracaso por error fatal en el servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error500"
+
+  /api/users:
+    post:
+      summary: Create a new user
+      tags:
+        - User
+      requestBody:
+        required: true
+        description: Data required to create a new user
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        201:
+          description: Successfully created a new user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response201"
+        400:
+          description: Invalid data provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error400"
+
+    get:
+      summary: Get all users
+      tags:
+        - User
+      parameters:
+        - in: query
+          name: role
+          schema:
+            type: integer
+          description: Filter users by role
+      responses:
+        200:
+          description: Successfully retrieved users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response200all"
+        404:
+          description: No users found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error404"
+
+  /api/users/{uid}:
+    get:
+      summary: Get a user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the user
+      responses:
+        200:
+          description: Successfully retrieved the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response200one"
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error404"
+
+    put:
+      summary: Update a user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the user
+      requestBody:
+        required: true
+        description: Data to update the user
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        200:
+          description: Successfully updated the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response200one"
+        400:
+          description: Invalid data provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error400"
+
+    delete:
+      summary: Delete a user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the user
+      responses:
+        200:
+          description: Successfully deleted the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Response200"
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error404"
