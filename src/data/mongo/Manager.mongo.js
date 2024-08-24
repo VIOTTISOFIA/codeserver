@@ -40,23 +40,24 @@ class Manager {
   }
 
   //MODIFICO METODO READONE PARA QUE PUEDA SER UTILIZADO TANTO PARA USUARIOS COMO PARA PRODUCTOS
-  async readOne(filter) {
-    try {
-      // Si filter es un string, detectamos si es un email o un ID
-      if (typeof filter === "string") {
-        if (filter.includes("@")) {
-          filter = { email: filter };
-        } else {
-          filter = { _id: filter };
+    async readOne(filter) {
+      try {
+        // Si filter es un string, detectamos si es un email o un ID
+        if (typeof filter === "string") {
+          if (filter.includes("@")) {
+            filter = { email: filter };
+          } else {
+            filter = { _id: filter };
+          }
         }
+    
+        const one = await this.Model.findOne(filter).lean();
+        return one;
+      } catch (error) {
+        throw error;
       }
-
-      const one = await this.Model.findOne(filter).lean();
-      return one;
-    } catch (error) {
-      throw error;
     }
-  }
+    
 
   //nuevo metodo 'ReadByEmail' utilizado en sessions
   async readByEmail(email) {

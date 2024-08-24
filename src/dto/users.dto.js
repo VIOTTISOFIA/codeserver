@@ -17,7 +17,7 @@ class UsersDTO {
     this.role = data.role || 0;
     this.photo =
       data.photo || "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg";
-    this.verify = false;
+    this.verify = data.verify || false;
     this.verifyCode = crypto.randomBytes(12).toString("hex");
   }
 }
