@@ -8,9 +8,9 @@ class ProductsDTO {
     persistence !== "mongo" &&
       (this._id = crypto.randomBytes(12).toString("hex"));
     this.title = data.title;
-    this.price = data.price;
-    this.stock = data.stock;
-    this.category = data.category;
+    this.price = data.price || 1;
+    this.stock = data.stock || 1;
+    this.category = data.category || "Not defined";
     this.photo = data.photo || "https://i.postimg.cc/pVcL6v4t/package.png";
     persistence !== "mongo" && (this.createdAt = new Date());
     persistence !== "mongo" && (this.updatedAt = new Date());

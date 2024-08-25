@@ -1,6 +1,7 @@
 async function isValidAdmin(req, res, next) {
   try {
-    const { role } = req.session;
+    const { role } = req.user;
+    //console.log("usuario legeado:", role);    
     if (role === 1) {
       return next();
     }

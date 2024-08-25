@@ -28,3 +28,101 @@
 [33mERROR[39m: Cast to ObjectId failed for value ":pid" (type string) at path "_id" for model "products"
 [33mERROR[39m: Not found!
 [33mERROR[39m: PUT /664533651cbd7fd9bcafce04 401 - 21:15:40 - Bad auth from policies!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: POST / 401 - 01:08:00 - Bad auth from policies!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: DELETE /66c3e8d564a539aa3d70cd79 401 - 01:21:58 - Bad auth from policies!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: DELETE /66c3e8d564a539aa3d70cd79 401 - 01:22:30 - Bad auth from policies!
+[33mERROR[39m: GET /real 401 - 13:01:17 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13:01:59 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13:02:50 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 13:09:08 - Bad auth from policies!
+[33mERROR[39m: GET /real 401 - 13:09:10 - Bad auth from policies!
+[33mERROR[39m: GET /real 403 - 13:09:29 - Forbidden from policies!
+[33mERROR[39m: GET /real 403 - 13:09:30 - Forbidden from policies!
+[33mERROR[39m: GET /online 401 - 13:10:51 - Bad auth from policies!
+[33mERROR[39m: GET /real 400 - 13:26:15 - jwt expired
+[33mERROR[39m: POST /signout 400 - 13:26:23 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:26:25 - jwt expired
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden
+[33mERROR[39m: GET /online 400 - 13:32:05 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:32:09 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:12 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:16 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:17 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:19 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:37 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:41 - jwt expired
+[33mERROR[39m: GET /real 400 - 13:34:47 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:58:07 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:58:08 - jwt expired
+[33mERROR[39m: GET /real 400 - 14:04:13 - jwt expired
+[33mERROR[39m: POST /signout 400 - 14:04:18 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:04:19 - jwt expired
+[33mERROR[39m: POST / 400 - 14:09:59 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:10:05 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:10:07 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:06 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:14 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:17 - jwt expired
+[33mERROR[39m: Bad auth from login!
+[33mERROR[39m: GET /online 401 - 14:24:27 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 14:25:44 - Bad auth from policies!
+[33mERROR[39m: GET /online 400 - 14:31:55 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:31:56 - jwt expired
+[33mERROR[39m: GET /online 401 - 14:34:37 - Bad auth from policies!
+[33mERROR[39m: GET /online 400 - 14:40:30 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:40:32 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:46:52 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:46:54 - jwt expired
+[33mERROR[39m: GET /online 401 - 14:51:20 - Bad auth from policies!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: GET /online 401 - 16:15:23 - Bad auth from policies!
