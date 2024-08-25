@@ -12,7 +12,9 @@
     "fs": "nodemon ./server.js -p 8082 --env prod --persistence=fs",
     "tdd": "node ./test/sum.tdd.js",
     "products": "node ./src/mocks/products.mock.js",
-    "users": "node ./src/mocks/users.mocks.js"
+    "users": "node ./src/mocks/users.mocks.js",
+    "mocha": "mocha ./test/mocha",
+    "chai": "mocha ./test/chai"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,8 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "artillery": "^2.0.20",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.0"
   },
   "dependencies": {
