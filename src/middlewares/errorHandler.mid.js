@@ -4,8 +4,11 @@ function errorHandler(error, req, res, next) {
   const message = `${req.method} ${req.url} ${
     error.statusCode
   } - ${new Date().toLocaleTimeString()} - ${error.message}`;
-  winston.ERROR(message);
-  return res.json({
+
+  // Aquí utilizamos el método `error` correctamente
+  winston.error(message);
+
+  return res.status(error.statusCode || 500).json({
     statusCode: error.statusCode || 500,
     message: error.message || "CODER API ERROR",
   });

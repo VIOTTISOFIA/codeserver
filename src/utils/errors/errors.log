@@ -29,3 +29,8 @@
 [33mERROR[39m: GET /api/users?role=1 undefined - 14.01.01 - Parameter "filter" to find() must be an object, got "1" (type string)
 [33mERROR[39m: GET /api/users?role=1 undefined - 14.22.40 - Parameter "filter" to find() must be an object, got "1" (type string)
 [33mERROR[39m: POST /api/sessions/register 400 - 18.19.45 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
+[33merror[39m: POST /api/sessions/register 401 - 12.55.46 - Bad auth from register!
+[33merror[39m: POST /api/sessions/login 401 - 12.55.47 - Invalid credentials
+[33merror[39m: POST /api/sessions/register 401 - 13.07.51 - Bad auth from register!
+[33merror[39m: POST /api/products undefined - 13.13.16 - Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33merror[39m: POST /api/products undefined - 13.20.42 - Cannot destructure property 'role' of 'req.sessions' as it is undefined.
