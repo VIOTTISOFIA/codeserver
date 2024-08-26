@@ -17,10 +17,10 @@ describe("Testeando Baby Shop API", function () {
   const product = {
     title: "mesa",
     category: "Muebles",
-  }; 
+  };
   let token = "";
   let productId = "";
-   it("Registro de un usuario", async () => {
+  it("Registro de un usuario", async () => {
     const response = await requester.post("/sessions/register").send(user);
     const { _body } = response;
     console.log(_body);
@@ -41,9 +41,9 @@ describe("Testeando Baby Shop API", function () {
       .post("/products")
       .send(product)
       .set("Cookie", token);
-    const { _body } = response
-    console.log("Respuesta de creación del producto:", _body)
-        expect(_body.statusCode).to.be.equals(201);
+    const { _body } = response;
+    console.log("Respuesta de creación del producto:", _body);
+    expect(_body.statusCode).to.be.equals(201);
   });
   it("Cierre de sesion", async () => {
     const response = await requester
@@ -52,7 +52,7 @@ describe("Testeando Baby Shop API", function () {
     const { _body } = response;
     expect(_body.statusCode).to.be.equals(200);
   });
-}) 
+});
 //-------------- ESTOS TEST NO ME FUNCIONAN ----------------------------
 /*  it("Eliminacion de un producto por parte de un administrador", async () => {
     
@@ -70,7 +70,7 @@ describe("Testeando Baby Shop API", function () {
      console.log("Respuesta de eliminación:", _body);
      expect(_body.statusCode).to.be.equals(200);
    }); */
-   /* it("Eliminacion de un producto por parte de un usuario comun", async () => {
+/* it("Eliminacion de un producto por parte de un usuario comun", async () => {
     const response = await requester
       .delete("/products/66c3e8d564a539aa3d70cd79")
       .send(product);
@@ -78,7 +78,7 @@ describe("Testeando Baby Shop API", function () {
     expect(_body.statusCode).to.be.equals(401);
   }); */
 
- /*  it("Eliminacion de un usuario", 
+/*  it("Eliminacion de un usuario", 
     async () => {
     const foundUser = await usersRepository.readByEmailRepository(user.email);
     console.log(foundUser); //este log arroja null

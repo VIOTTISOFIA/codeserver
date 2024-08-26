@@ -26,7 +26,7 @@ async function signOut() {
 //Funcion para ocultar/mostrar barra de navegacion
 async function checkSession() {
   try {
-    const response = await fetch("/api/sessions/online");    
+    const response = await fetch("/api/sessions/online");
     const result = await response.json();
     console.log("resultado:", result);
 
@@ -34,11 +34,11 @@ async function checkSession() {
     userOptions.innerHTML = "";
 
     if (response.ok && result.statusCode === 200) {
-      const { role } = result.response
+      const { role } = result.response;
       //console.log("usuario legeado:", role);
-      
+
       if (role === 1) {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a class="nav-link active mt-2" href="/products/real">NEW PRODUCT</a>
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
@@ -51,7 +51,7 @@ async function checkSession() {
           </a>
           `;
       } else {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
           </a>
@@ -63,15 +63,14 @@ async function checkSession() {
           </a>
           `;
       }
-  } else {
+    } else {
       userOptions.innerHTML = `
       <a class="nav-link active mt-2" href="/register">REGISTER</a>
       <a href="/login">
           <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
       </a>
       `;
-  }
-  
+    }
   } catch (error) {
     console.error("Error:", error.message);
   }
