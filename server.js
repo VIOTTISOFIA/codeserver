@@ -2,13 +2,13 @@ import environment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-// import morgan from "morgan";
+//import morgan from "morgan";
 import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import compression from "compression";
+import compression from "express-compression";
 import swaggerJSDoc from "swagger-jsdoc";
 import { serve, setup } from "swagger-ui-express";
 
@@ -17,7 +17,6 @@ import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
-import argsUtil from "./src/utils/args.util.js";
 import configs from "./src/utils/swagger.util.js";
 import __dirname from "./utils.js";
 
@@ -61,7 +60,7 @@ server.set("views", __dirname + "/src/views");
 const specs = swaggerJSDoc(configs);
 
 // middlewares
-/* server.get(cookieParser(environment.SECRET_COOKIE));
+server.get(cookieParser(environment.SECRET_COOKIE));
 server.get(
   session({
     secret: environment.SECRET_SESSION,
@@ -69,12 +68,18 @@ server.get(
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
   })
-); */
+);
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
 server.use(winston);
 server.use(cookieParser(environment.SECRET_COOKIE));
+server.use("/api/docs", serve, setup(specs));
+server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
+  })
+);
 server.use(
   session({
     //MONGOSTORE

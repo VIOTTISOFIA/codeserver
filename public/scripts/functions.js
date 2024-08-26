@@ -26,38 +26,56 @@ async function signOut() {
 //Funcion para ocultar/mostrar barra de navegacion
 async function checkSession() {
   try {
-    const response = await fetch("/api/sessions/online");
+    const response = await fetch("/api/sessions/online");    
     const result = await response.json();
-    console.log(result);
+    console.log("resultado:", result);
 
     const userOptions = document.getElementById("user-options");
-    userOptions.innerHTML = ""; // Limpia el contenido anterior
+    userOptions.innerHTML = "";
 
     if (response.ok && result.statusCode === 200) {
-      userOptions.innerHTML = `
-      <a href="/users">
-          <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
-        </a>
-        <a href="/carts">
-          <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
-        </a>
-        <a href="#" onclick="signOut()">
-          <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout widget">
-        </a>
-      `;
-    } else {
+      const { role } = result.response
+      //console.log("usuario legeado:", role);
+      
+      if (role === 1) {
+          userOptions.innerHTML = `
+          <a class="nav-link active mt-2" href="/products/real">NEW PRODUCT</a>
+          <a href="/users">
+              <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          </a>
+          <a href="/carts">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
+          </a>
+          <a href="#" onclick="signOut()">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout Widget">
+          </a>
+          `;
+      } else {
+          userOptions.innerHTML = `
+          <a href="/users">
+              <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          </a>
+          <a href="/carts">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
+          </a>
+          <a href="#" onclick="signOut()">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout Widget">
+          </a>
+          `;
+      }
+  } else {
       userOptions.innerHTML = `
       <a class="nav-link active mt-2" href="/register">REGISTER</a>
       <a href="/login">
-        <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
       </a>
       `;
-    }
+  }
+  
   } catch (error) {
     console.error("Error:", error.message);
   }
 }
-// Llama a checkSession al cargar la página
 window.onload = checkSession;
 
 /* BOTONES CARRITO */

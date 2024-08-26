@@ -16,9 +16,9 @@ class ProductsRepository {
       }
     };
 
-    readRepository = async (role) => {
+    readRepository = async (title) => {
       try {
-        const all = await this.model.read(role);
+        const all = await this.model.read(title);
         return all;
       } catch (error) {
         throw error;

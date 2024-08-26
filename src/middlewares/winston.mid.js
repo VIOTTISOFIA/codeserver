@@ -5,7 +5,7 @@ function winston(req, res, next) {
   const message = `${req.method} ${
     req.url
   } - ${new Date().toLocaleTimeString()}`;
-  req.logger.http(message);
+  req.logger.HTTP(message);
   return next();
 }
 

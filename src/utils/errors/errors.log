@@ -1,36 +1,128 @@
-[33mERROR[39m: undefined {"statusCode":401}
 [33mERROR[39m: Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 18.54.56 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 19.10.57 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 19.59.05 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 19.59.18 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 19.59.23 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 400 - 18.45.18 - la contraseña es requerido
-[33mERROR[39m: POST /api/sessions/register 400 - 18.45.38 - la contraseña debe ser alfanumerica con min/MAY
-[33mERROR[39m: POST /api/sessions/register 400 - 18.45.49 - la contraseña debe ser alfanumerica con min/MAY
-[33mERROR[39m: POST /api/sessions/register 400 - 18.46.20 - la contraseña debe ser alfanumerica con min/MAY
-[33mERROR[39m: POST /api/sessions/register 400 - 18.48.18 - "password" with value "HOLAbt0055" fails to match the required pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]+$/
-[33mERROR[39m: POST /api/sessions/register 400 - 18.58.05 - "password" with value "Hola1234" fails to match the required pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]+$/
-[33mERROR[39m: POST /api/sessions/register 400 - 19.02.09 - "password" with value "HolaMundo123" fails to match the required pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]+$/
-[31mFATAL[39m: Este es un mensaje de log FATAL
-[33mERROR[39m: Este es un mensaje de log ERROR
-[31mFATAL[39m: Este es un mensaje de log FATAL
-[33mERROR[39m: Este es un mensaje de log ERROR
-[33mERROR[39m: POST /api/sessions/register 400 - 22.34.04 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
-[33mERROR[39m: POST /api/sessions/register 401 - 22.42.19 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 22.42.45 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 401 - 09.26.06 - Bad auth from register!
-[33mERROR[39m: POST /api/sessions/register 400 - 10.53.26 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
-[33mERROR[39m: POST /api/sessions/register 401 - 10.53.53 - Bad auth from register!
-[33mERROR[39m: GET /api/users?role=1 undefined - 13.53.03 - Parameter "filter" to find() must be an object, got "1" (type string)
-[33mERROR[39m: GET /api/users?role=0 undefined - 13.53.32 - Parameter "filter" to find() must be an object, got "0" (type string)
-[33mERROR[39m: GET /api/users?role=2 undefined - 13.53.57 - Parameter "filter" to find() must be an object, got "2" (type string)
-[33mERROR[39m: GET /api/users?role=1 undefined - 13.54.20 - Parameter "filter" to find() must be an object, got "1" (type string)
-[33mERROR[39m: GET /api/users?role=1 undefined - 14.01.01 - Parameter "filter" to find() must be an object, got "1" (type string)
-[33mERROR[39m: GET /api/users?role=1 undefined - 14.22.40 - Parameter "filter" to find() must be an object, got "1" (type string)
-[33mERROR[39m: POST /api/sessions/register 400 - 18.19.45 - La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
-[33merror[39m: POST /api/sessions/register 401 - 12.55.46 - Bad auth from register!
-[33merror[39m: POST /api/sessions/login 401 - 12.55.47 - Invalid credentials
-[33merror[39m: POST /api/sessions/register 401 - 13.07.51 - Bad auth from register!
-[33merror[39m: POST /api/products undefined - 13.13.16 - Cannot destructure property 'role' of 'req.sessions' as it is undefined.
-[33merror[39m: POST /api/products undefined - 13.20.42 - Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: POST / 401 - 21:16:06 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 21:17:40 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:17:41 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 21:59:45 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:59:47 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:59:47 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 22:00:19 - Bad auth from policies!
+[33mERROR[39m: POST / 403 - 22:00:55 - Forbidden from policies!
+[33mERROR[39m: POST / 403 - 22:01:18 - Forbidden from policies!
+[33mERROR[39m: POST /signout 401 - 22:01:38 - Bad auth from policies!
+[33mERROR[39m: Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33mERROR[39m: Cannot destructure property 'role' of 'req.sessions' as it is undefined.
+[33mERROR[39m: POST / 400 - 22:07:07 - jwt expired
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden
+[33mERROR[39m: GET /online 401 - 20:19:51 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:21 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:29 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:35 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:34:41 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 22:47:55 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 22:48:10 - Bad auth from policies!
+[33mERROR[39m: Cast to ObjectId failed for value ":pid" (type string) at path "_id" for model "products"
+[33mERROR[39m: Not found!
+[33mERROR[39m: PUT /664533651cbd7fd9bcafce04 401 - 21:15:40 - Bad auth from policies!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: POST / 401 - 01:08:00 - Bad auth from policies!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: DELETE /66c3e8d564a539aa3d70cd79 401 - 01:21:58 - Bad auth from policies!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: DELETE /66c3e8d564a539aa3d70cd79 401 - 01:22:30 - Bad auth from policies!
+[33mERROR[39m: GET /real 401 - 13:01:17 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13:01:59 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13:02:50 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 13:09:08 - Bad auth from policies!
+[33mERROR[39m: GET /real 401 - 13:09:10 - Bad auth from policies!
+[33mERROR[39m: GET /real 403 - 13:09:29 - Forbidden from policies!
+[33mERROR[39m: GET /real 403 - 13:09:30 - Forbidden from policies!
+[33mERROR[39m: GET /online 401 - 13:10:51 - Bad auth from policies!
+[33mERROR[39m: GET /real 400 - 13:26:15 - jwt expired
+[33mERROR[39m: POST /signout 400 - 13:26:23 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:26:25 - jwt expired
+[33mERROR[39m: Forbidden
+[33mERROR[39m: Forbidden
+[33mERROR[39m: GET /online 400 - 13:32:05 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:32:09 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:12 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:16 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:17 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:19 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:37 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:34:41 - jwt expired
+[33mERROR[39m: GET /real 400 - 13:34:47 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:58:07 - jwt expired
+[33mERROR[39m: GET /online 400 - 13:58:08 - jwt expired
+[33mERROR[39m: GET /real 400 - 14:04:13 - jwt expired
+[33mERROR[39m: POST /signout 400 - 14:04:18 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:04:19 - jwt expired
+[33mERROR[39m: POST / 400 - 14:09:59 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:10:05 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:10:07 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:06 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:14 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:21:17 - jwt expired
+[33mERROR[39m: Bad auth from login!
+[33mERROR[39m: GET /online 401 - 14:24:27 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 14:25:44 - Bad auth from policies!
+[33mERROR[39m: GET /online 400 - 14:31:55 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:31:56 - jwt expired
+[33mERROR[39m: GET /online 401 - 14:34:37 - Bad auth from policies!
+[33mERROR[39m: GET /online 400 - 14:40:30 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:40:32 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:46:52 - jwt expired
+[33mERROR[39m: GET /online 400 - 14:46:54 - jwt expired
+[33mERROR[39m: GET /online 401 - 14:51:20 - Bad auth from policies!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
+[33mERROR[39m: GET /online 401 - 16:15:23 - Bad auth from policies!

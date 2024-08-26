@@ -31,14 +31,8 @@ const schema = new Schema(
       ],
       index: true,
     },
-    price: { type: Number, default: "1" },
-    stock: { type: Number, default: "1" },
-    user_id: {
-      type: Types.ObjectId,
-      ref: "users",
-      index: true,
-      required: true,
-    },
+    price: { type: Number, default: 1 },
+    stock: { type: Number, default: 1 },
   },
   {
     timestamps: true,
@@ -53,8 +47,6 @@ schema.pre("find", function () {
 schema.pre("findOne", function () {
   this.populate("user_id", "email");
 });
-//schema.pre("findOneAndDelete", function () {this.populate("user_id", "email")})
-//schema.pre("findOneAndUpdate", function () {this.populate("user_id", "email")})
 
 const Product = model(collection, schema);
 export default Product;

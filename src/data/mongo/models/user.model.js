@@ -14,14 +14,11 @@ const schema = new Schema(
       type: String,
       default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     },
-
     user_id: {
       type: Types.ObjectId,
       ref: "users",
       index: true,
     },
-    verify: { type: Boolean, default: false },
-    verifyCode: { type: String, required: true },
   },
   {
     timestamps: true,

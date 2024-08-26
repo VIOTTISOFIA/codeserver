@@ -4,8 +4,8 @@ const options = {
   definition: {
     openapi: "3.1.0",
     info: {
-      title: "Baby shop",
-      description: "Documentation of Baby shop",
+      title: "Baby Shop API",
+      description: "Documentation of Baby Shop API",
     },
   },
   apis: [__dirname + "/src/docs/*.yaml"],

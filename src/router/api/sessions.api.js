@@ -47,7 +47,7 @@ class SessionsRouter extends CustomRouter {
       async (req, res, next) => {
         try {
           if (req.user.online) {
-            return res.response200("Is online");
+            return res.response200("Is online", req.user);
           }
           return res.error401();
         } catch (error) {
