@@ -19,6 +19,7 @@ async function read(req, res, next) {
       throw error;
     }
   } catch (error) {
+    console.error("Error reading products:", error);
     return next(error);
   }
 }
@@ -28,10 +29,10 @@ async function paginate(req, res, next) {
     const filter = {};
     const opts = {};
     if (req.query.limit) {
-      opts.limit = req.query.limit;
+      opts.limit = parseInt(req.query.limit, 10);
     }
     if (req.query.page) {
-      opts.page = req.query.page;
+      opts.page = parseInt(req.query.page, 10);
     }
     if (req.query.user_id) {
       filter.user_id = req.query.user_id;
@@ -47,6 +48,7 @@ async function paginate(req, res, next) {
     };
     return res.paginate(all.docs, info);
   } catch (error) {
+    console.error("Error paginating products:", error);
     return next(error);
   }
 }
@@ -63,6 +65,7 @@ async function readOne(req, res, next) {
       throw error;
     }
   } catch (error) {
+    console.error("Error reading product by ID:", error);
     return next(error);
   }
 }
@@ -73,6 +76,7 @@ async function create(req, res, next) {
     const one = await createService(data);
     return res.response201("CREATED ID: " + one._id);
   } catch (error) {
+    console.error("Error creating product:", error);
     return next(error);
   }
 }
@@ -84,7 +88,7 @@ async function update(req, res, next) {
     const one = await updateService(pid, data);
     return res.response200("UPDATED ID: " + one.id);
   } catch (error) {
-    console.error("Error al actualizar el producto:", error);
+    console.error("Error updating product:", error);
     return next(error);
   }
 }
@@ -93,8 +97,9 @@ async function destroy(req, res, next) {
   try {
     const { pid } = req.params;
     const one = await destroyService(pid);
-    return res.response200(one);
+    return res.response200("DELETED", one);
   } catch (error) {
+    console.error("Error deleting product:", error);
     return next(error);
   }
 }

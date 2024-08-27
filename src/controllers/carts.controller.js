@@ -1,4 +1,3 @@
-//import cartsManager from "../data/mongo/managers/CartsManager.mongo.js";
 import { ObjectId } from "mongodb";
 import {
   createService,
@@ -10,10 +9,8 @@ import {
 } from "../services/carts.service.js";
 import { readOneService } from "../services/products.service.js";
 
-//Endpoint para crear un carrito
 async function create(req, res, next) {
   try {
-    console.log("User:", req.user);
     const data = req.body;
     const user_id = req.user ? req.user._id : null;
     if (user_id) {
@@ -21,36 +18,34 @@ async function create(req, res, next) {
       const one = await createService(data);
       return res.response201("CREATED", one);
     } else {
-      return res.error400("Please login for adding to cart");
+      return res.error400("Please login to add to cart");
     }
   } catch (error) {
+    console.error("Error creating cart:", error);
     return next(error);
   }
 }
 
-//Endpoint para leer todos los carritos creados
 async function read(req, res, next) {
   try {
     const all = await readService();
     return res.response200("READ", all);
   } catch (error) {
+    console.error("Error reading carts:", error);
     return next(error);
   }
 }
 
-//Endpoint para leer un carrito segun ID de usuario
 async function readCart(req, res, next) {
   try {
-    if (!req.session || !req.user) {
+    if (!req.user) {
       const error = new Error("User session is required");
       error.statusCode = 400;
       throw error;
     }
 
-    // Acceder al user_id desde req.session.user
     const user_id = req.user._id;
 
-    // Verificar explícitamente si user_id está definido
     if (!user_id) {
       const error = new Error("User ID is required");
       error.statusCode = 400;
@@ -58,21 +53,19 @@ async function readCart(req, res, next) {
     }
 
     const cart = await readCartService({ user_id });
-    //console.log(cart);
     if (cart.length > 0) {
       return res.response200("READ", cart);
     } else {
-      const error = new Error("Cart not found for user required");
+      const error = new Error("Cart not found for user");
       error.statusCode = 404;
       throw error;
     }
   } catch (error) {
-    console.error("Error occurred:", error);
+    console.error("Error reading user cart:", error);
     return next(error);
   }
 }
 
-//Endpoint para actualizar un carrito segun ID de usuario
 async function update(req, res, next) {
   try {
     const { cid } = req.params;
@@ -83,11 +76,11 @@ async function update(req, res, next) {
     updatedCart.subTotal = subTotal;
     return res.response200("UPDATED", { updatedCart, subTotal });
   } catch (error) {
+    console.error("Error updating cart:", error);
     return next(error);
   }
 }
 
-//Endpoint para borrar un carrito segun ID de usuario
 async function destroy(req, res, next) {
   try {
     const { cid } = req.params;
@@ -99,6 +92,7 @@ async function destroy(req, res, next) {
       throw new Error(`Failed to delete cart with ID ${cid}.`);
     }
   } catch (error) {
+    console.error("Error deleting cart:", error);
     return next(error);
   }
 }
@@ -110,7 +104,7 @@ async function destroyAll(req, res, next) {
     const result = await destroyAllService(userIdObject);
     return res.response200("DELETED", result);
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting all carts:", error);
     return next(error);
   }
 }

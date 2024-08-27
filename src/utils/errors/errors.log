@@ -126,3 +126,20 @@
 [33mERROR[39m: Invalid credentials
 [33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
 [33mERROR[39m: GET /online 401 - 16:15:23 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 19.51.28 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 19.51.43 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 19.51.50 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
+[33mERROR[39m: "user_id" is required
+[33mERROR[39m: GET /online 401 - 19.53.29 - Bad auth from policies!
+[33mERROR[39m: "user_id" is required
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: "user_id" is required,"_id" is not allowed
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: "user_id" is required,"_id" is not allowed
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
