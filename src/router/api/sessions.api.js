@@ -2,6 +2,8 @@ import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 import isAuth from "../../middlewares/isAuth.mid.js";
+import validator from "../../middlewares/joi.mid.js";
+import usersSchema from "../../schemas/user.schema.js";
 import CustomRouter from "../customRouter.js";
 import { verifyCode } from "../../controllers/users.controller.js";
 
@@ -10,6 +12,7 @@ class SessionsRouter extends CustomRouter {
     this.create(
       "/register",
       ["PUBLIC"],
+      validator(usersSchema),
       passportCb("register"),
       async (req, res, next) => {
         try {
