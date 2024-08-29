@@ -132,3 +132,40 @@
 [33mERROR[39m: La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
 [33mERROR[39m: Bad auth from login!
 [33mERROR[39m: POST /signout 401 - 22:54:42 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 00:08:17 - Bad auth from policies!
+[33mERROR[39m: carts validation failed: product_id: Path `product_id` is required.
+[33mERROR[39m: Cart not found for user required
+[33mERROR[39m: GET /online 401 - 00:10:07 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 00:10:09 - Bad auth from policies!
+[33mERROR[39m: GET /cart 401 - 22:09:45 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 22:14:15 - Bad auth from policies!
+[33mERROR[39m: POST / 400 - 22:20:58 - jwt expired
+[33mERROR[39m: GET /online 401 - 22:42:02 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 22:42:27 - Bad auth from policies!
+[33mERROR[39m: GET / 400 - 22:49:56 - jwt expired
+[33mERROR[39m: GET /online 400 - 22:50:00 - jwt expired
+[33mERROR[39m: GET /online 400 - 22:50:01 - jwt expired
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: GET /online 400 - 22:56:44 - jwt expired
+[33mERROR[39m: GET /online 400 - 22:56:46 - jwt expired
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: GET / 400 - 23:03:31 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:03:34 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:03:36 - jwt expired
+[33mERROR[39m: GET / 400 - 23:19:56 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:19:59 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:20:00 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:28:26 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:28:28 - jwt expired
+[33mERROR[39m: PlanExecutor error during aggregation :: caused by :: $multiply only supports numeric types, not string
+[33mERROR[39m: GET / 400 - 23:39:55 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:39:58 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:40:00 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:48:34 - jwt expired
+[33mERROR[39m: GET /online 400 - 23:48:40 - jwt expired
+[33mERROR[39m: Bad auth from login!
+[33mERROR[39m: Bad auth from login!
+[33mERROR[39m: GET /online 400 - 23:49:03 - jwt expired

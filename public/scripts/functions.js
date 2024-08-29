@@ -119,7 +119,47 @@ async function destroyAll(event, user_id) {
 }
 
 //funcion para confirmar la compra y vaciar el carrito
+
 async function checkout(event, user_id) {
+  try {
+    event.preventDefault();
+
+    // Hacer fetch a la ruta de Stripe para obtener la URL de checkout
+    const paymentResponse = await fetch(`/api/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    if (paymentResponse.ok) {
+      const paymentData = await paymentResponse.json();
+      const checkoutUrl = paymentData.response.url;
+      
+      if (checkoutUrl) {
+        // Redirigir a la URL de Stripe
+        window.location.href = checkoutUrl;
+      }
+    } else {
+      const paymentError = await paymentResponse.json();
+      console.error("Error creating payment:", paymentError.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+
+// Vaciar el carrito después de crear el ticket
+/* await fetch(`/api/carts/cart/empty`, {
+  method: "DELETE",
+  credentials: "include",
+});
+
+location.reload(); */
+/* async function checkout(event, user_id) {
   try {
     event.preventDefault();
 
@@ -149,7 +189,7 @@ async function checkout(event, user_id) {
   } catch (error) {
     console.error("Error:", error);
   }
-}
+} */
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
