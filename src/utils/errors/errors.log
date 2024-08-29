@@ -126,3 +126,64 @@
 [33mERROR[39m: Invalid credentials
 [33mERROR[39m: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "products"
 [33mERROR[39m: GET /online 401 - 16:15:23 - Bad auth from policies!
+[33mERROR[39m: La contraseña debe ser alfanumérica con minúsculas y MAYÚSCULAS.
+[33mERROR[39m: "user_id" is required
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: POST / 401 - 14.47.30 - Bad auth from policies!
+[33mERROR[39m: POST /signout 401 - 14.47.30 - Bad auth from policies!
+[33mERROR[39m: "user_id" is required
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 23.47.48 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 23.48.58 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Bad auth from login!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 13.28.08 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13.28.19 - Bad auth from policies!
+[33mERROR[39m: "age" is not allowed
+[33mERROR[39m: "age" is not allowed
+[33mERROR[39m: "age" is not allowed
+[33mERROR[39m: GET /online 401 - 13.29.22 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 401 - 13.29.58 - Bad auth from policies!
+[33mERROR[39m: "age" is not allowed
+[33mERROR[39m: La edad debe ser un número.
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: GET /online 401 - 13.40.22 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 13.41.04 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: POST / 401 - 13.57.07 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 13.58.21 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Bad auth from register!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Failed to lookup view "purchases" in views directory "C:\Users\Sofi\Desktop\proyecto-sofiaviotti\codeserver/src/views"
+[33mERROR[39m: GET /online 400 - 22.51.42 - jwt expired
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 400 - 10.22.18 - jwt expired
+[33mERROR[39m: GET /online 400 - 10.34.58 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.08.47 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.09.53 - jwt expired
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /online 400 - 11.20.56 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.21.47 - jwt expired
+[33mERROR[39m: GET / 400 - 11.21.56 - jwt expired
+[33mERROR[39m: GET / 400 - 11.22.14 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.22.23 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.22.27 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.58.26 - jwt expired
+[33mERROR[39m: GET /online 400 - 11.58.31 - jwt expired
+[33mERROR[39m: Missing helper: "formatPrice"

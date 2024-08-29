@@ -1,9 +1,9 @@
 import Joi from "joi";
 
 const productSchema = Joi.object({
-  user_id: Joi.string()
-    .pattern(/^[0-9a-fA-F]{24}$/)
-    .required(), // Validación de ObjectId de MongoDB
+  // user_id: Joi.string()
+  //   .pattern(/^[0-9a-fA-F]{24}$/)
+  //   .required(), // Validación de ObjectId de MongoDB
   title: Joi.string().min(1).max(255).required(),
   photo: Joi.string()
     .uri()

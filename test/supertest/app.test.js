@@ -9,8 +9,8 @@ const requester = supertest(`http://localhost:${environment.PORT}/api`);
 describe("Testeando Baby Shop API", function () {
   this.timeout(20000);
   const user = {
-    email: "prueba@coder.com",
-    password: "hola1234",
+    email: "prueba30@coder.com",
+    password: "HolaMundo1234",
     role: 1,
     verify: true,
   };

@@ -1,41 +1,109 @@
-<main>
-    {{#if carts}}
-    <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
-      <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Carritos del Usuario: {{#if carts.[0].user_id}}{{carts.[0].user_id.email}}{{/if}}</h2>
-    </div>
-    {{#each carts}}
-    <div class="d-flex mb-2 mx-auto justify-content-center">
-      <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
+{{!-- <main>
+  {{#if carts}}
+  <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
+    <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Carritos del Usuario: {{#if
+      carts.[0].user_id}}{{carts.[0].user_id.email}}{{/if}}</h2>
+  </div>
+  {{#each carts}}
+  <div class="d-flex mb-2 mx-auto justify-content-center">
+    <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
 
-        <div class="col-md-4 align-content-center">
-          <img class="img-fluid object-fit-cover p-3" style="width: 20rem" src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}" alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
-        </div>
-      
-        <div class="mx-3">
-          <h3 class="my-3 " "font-size: 20px;">{{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
-         <label for="quantity">Cantidad:</label>
-          <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}">
-        <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
-       <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}"><img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
-       <a href="#" onclick="updateCart(event, '{{this._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/tJmvT5bg/Icono-De-C-rculo-De-Flecha-Aislado.png"></a>
-       </div>
-       
+      <div class="col-md-4 align-content-center">
+        <img class="img-fluid object-fit-cover p-3" style="width: 20rem"
+          src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}"
+          alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
+      </div>
+
+      <div class="mx-3">
+        <h3 class="my-3 " "font-size: 20px;">{{#if this.product_id}}{{this.product_id.title}}{{/if}}</h3>
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}">
+        <p class="card-text" style="font-size: 18px;"><strong class="text-body-secondary">Price: {{#if
+            this.product_id}}{{this.product_id.price}}{{/if}}</strong></p>
+        <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}"><img class="img-fluid w-25"
+            src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png"></a>
+        <a href="#" onclick="updateCart(event, '{{this._id}}')"> <img class="img-fluid w-25"
+            src="https://i.postimg.cc/tJmvT5bg/Icono-De-C-rculo-De-Flecha-Aislado.png"></a>
       </div>
 
     </div>
-    {{/each}}
-    <div class="d-flex justify-content-evenly w-50 mx-auto">
-       <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
-       <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25" src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
-       <a class="btn btn-primary mt-3 w-25 align-self-center" href="/products">Continue shopping!</a>
-    </div>
+
+  </div>
+  {{/each}}
+  <div class="d-flex justify-content-evenly w-50 mx-auto">
+    <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25"
+        src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"></a>
+    <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')"> <img class="img-fluid w-25"
+        src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png"></a>
+    <a class="btn btn-primary mt-3 w-25 align-self-center" href="/products">Continue shopping!</a>
+  </div>
   {{else}}
   <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded">
     <div class="d-flex justify-content-center">
-    <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Bolsas de compras">
-  </div>
+      <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Bolsas de compras">
+    </div>
     <p class="text-center fst-italic" style="font-size: 35px;">Your cart is empty!</p>
     <a class="btn btn-primary mt-auto w-50 align-self-center" href="/products">Continue shopping!</a>
+  </div>
+  {{/if}}
+</main> --}}
+
+<main>
+  {{#if carts}}
+  <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
+    <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Carrito del Usuario: {{user.email}}</h2>
+    <p class="text-center">Nombre: {{user.name}}</p>
+    <p class="text-center">Dirección: {{user.address}}</p>
+    <!-- Agrega más campos de información del usuario aquí si es necesario -->
+  </div>
+  {{#each carts}}
+  <div class="d-flex mb-2 mx-auto justify-content-center">
+    <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
+      <div class="col-md-4 align-content-center">
+        <img class="img-fluid object-fit-cover p-3" style="width: 20rem" src="{{this.product_id.photo}}"
+          alt="{{this.product_id.title}}">
+      </div>
+      <div class="mx-3">
+        <h3 class="my-3" style="font-size: 20px;">{{this.product_id.title}}</h3>
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}">
+        <p class="card-text" style="font-size: 18px;">
+          <strong class="text-body-secondary">Precio: {{formatPrice this.product_id.price}}</strong>
+        </p>
+        <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}">
+          <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png">
+        </a>
+        <a href="#" onclick="updateCart(event, '{{this._id}}')">
+          <img class="img-fluid w-25" src="https://i.postimg.cc/tJmvT5bg/Icono-De-C-rculo-De-Flecha-Aislado.png">
+        </a>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  <div class="d-flex justify-content-evenly w-50 mx-auto">
+    <a href="#" onclick="destroyAll(event, '{{user._id}}')">
+      <img class="img-fluid w-25"
+        src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png">
+    </a>
+    <a href="#" onclick="checkout(event, '{{user._id}}')">
+      <img class="img-fluid w-25"
+        src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png">
+    </a>
+    <a class="btn btn-primary mt-3 w-25 align-self-center" href="/products">Continue shopping!</a>
+  </div>
+
+  <!-- Botón de Confirmación de Checkout -->
+  <div class="text-center mt-5">
+    <button class="btn btn-success" onclick="confirmCheckout('{{user._id}}')">Confirmar Compra</button>
+  </div>
+
+  {{else}}
+  <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded">
+    <div class="d-flex justify-content-center">
+      <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Bolsas de compras">
+    </div>
+    <p class="text-center fst-italic" style="font-size: 35px;">¡Tu carrito está vacío!</p>
+    <a class="btn btn-primary mt-auto w-50 align-self-center" href="/products">¡Sigue comprando!</a>
   </div>
   {{/if}}
 </main>

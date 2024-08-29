@@ -6,6 +6,7 @@ import cookiesRouter from "./cookies.api.js";
 import sessionsRouter from "./sessions.api.js";
 import CustomRouter from "../customRouter.js";
 import loggersRouter from "./loggers.api.js";
+import paymentRouter from "./payments.api.js";
 
 class ApiRouter extends CustomRouter {
   init() {
@@ -16,6 +17,7 @@ class ApiRouter extends CustomRouter {
     this.use("/cookies", cookiesRouter);
     this.use("/loggers", loggersRouter);
     this.use("/sessions", sessionsRouter);
+    this.use("/payments", paymentRouter);
   }
 }
 const apiRouter = new ApiRouter();

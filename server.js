@@ -2,7 +2,6 @@ import environment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-//import morgan from "morgan";
 import { engine } from "express-handlebars";
 import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
@@ -24,14 +23,14 @@ import __dirname from "./utils.js";
 const server = express();
 const port = environment.PORT;
 const ready = async () => {
-  console.log("server ready on port" + port);
+  console.log("server ready on port " + port);
 };
 
 const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
 nodeServer.listen(port, ready);
 
-//configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
+// Configuración de helpers de Handlebars para los botones (range, ifEquals) de paginación
 const hbs = ExpressHandlebars.create({
   helpers: {
     range: function (start, end) {
@@ -59,30 +58,13 @@ server.set("views", __dirname + "/src/views");
 
 const specs = swaggerJSDoc(configs);
 
-// middlewares
-server.get(cookieParser(environment.SECRET_COOKIE));
-server.get(
-  session({
-    secret: environment.SECRET_SESSION,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 },
-  })
-);
+// Middlewares
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());
-server.use(winston);
 server.use(cookieParser(environment.SECRET_COOKIE));
-server.use("/api/docs", serve, setup(specs));
-server.use(
-  compression({
-    brotli: { enabled: true, zlib: {} },
-  })
-);
 server.use(
   session({
-    //MONGOSTORE
     secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
@@ -93,21 +75,23 @@ server.use(
     }),
   })
 );
-server.use("/api/docs", serve, setup(specs));
-// Middleware para comprimir y mejorar la transferencia del servidor
+server.use(winston);
 server.use(
   compression({
     brotli: { enabled: true, zlib: {} },
   })
 );
+server.use("/api/docs", serve, setup(specs));
 
-//variables globales
+// Variables globales
 server.use((req, res, next) => {
-  res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
+  res.locals.user_id = req.session.user_id || null;
   next();
 });
 
-// endpoints
+// Rutas principales
 server.use("/", indexRouter);
+
+// Manejadores de errores
 server.use(errorHandler);
 server.use(pathHandler);
