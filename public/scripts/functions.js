@@ -1,5 +1,5 @@
 /* BOTONES NAVBAR */
-//Funcion para boton SignOut
+// Función para botón SignOut
 async function signOut() {
   try {
     const response = await fetch("/api/sessions/signout", {
@@ -23,7 +23,7 @@ async function signOut() {
   }
 }
 
-//Funcion para ocultar/mostrar barra de navegacion
+// Función para ocultar/mostrar barra de navegación
 async function checkSession() {
   try {
     const response = await fetch("/api/sessions/online");
@@ -35,7 +35,6 @@ async function checkSession() {
 
     if (response.ok && result.statusCode === 200) {
       const { role } = result.response;
-      //console.log("usuario legeado:", role);
 
       if (role === 1) {
         userOptions.innerHTML = `
@@ -78,7 +77,7 @@ async function checkSession() {
 window.onload = checkSession;
 
 /* BOTONES CARRITO */
-//funcion para eliminar un producto del carrito
+// Función para eliminar un producto del carrito
 async function removeFromCart(cartItemId) {
   try {
     const response = await fetch(`/api/carts/${cartItemId}`, {
@@ -96,7 +95,7 @@ async function removeFromCart(cartItemId) {
   }
 }
 
-//funcion para cancelar y vaciar el carrito
+// Función para cancelar y vaciar el carrito
 async function destroyAll(event, user_id) {
   try {
     event.preventDefault();
@@ -117,7 +116,7 @@ async function destroyAll(event, user_id) {
   }
 }
 
-//funcion para confirmar la compra y vaciar el carrito
+// Función para confirmar la compra y vaciar el carrito
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
@@ -149,7 +148,8 @@ async function checkout(event, user_id) {
     console.error("Error:", error);
   }
 }
-//Funcion para actualizar datos del darrito
+
+// Función para actualizar datos del carrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
   const quantityInput = document.getElementById(`quantity-${cartItemId}`);
@@ -171,5 +171,29 @@ async function updateCart(event, cartItemId) {
     }
   } catch (error) {
     console.error("Error on updating product:", error.message);
+  }
+}
+
+// Función para confirmar el checkout
+async function confirmCheckout(userId) {
+  try {
+    const response = await fetch(`/api/confirmCheckout/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    if (response.ok) {
+      // Redirigir a la página de éxito
+      window.location.href = "/thankyou";
+    } else {
+      // Manejar errores
+      console.error("Error al confirmar la compra");
+    }
+  } catch (error) {
+    console.error("Error en la solicitud:", error);
   }
 }

@@ -1,15 +1,16 @@
-//import { Router } from "express";
+import CustomRouter from "../customRouter.js"; // Asegúrate de que esta ruta sea correcta
 import productsRouter from "./products.view.js";
 import usersRouter from "./users.view.js";
 import cartsRouter from "./carts.view.js";
 import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
-import CustomRouter from "../customRouter.js";
+import userManager from "../../data/mongo/managers/UserManager.mongo.js";
 
 class ViewsRouter extends CustomRouter {
   init() {
     this.use("/carts", cartsRouter);
     this.use("/products", productsRouter);
     this.use("/users", usersRouter);
+
     this.read("/", ["PUBLIC"], async (req, res, next) => {
       try {
         const products = await productManager.read();
@@ -18,7 +19,8 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
-    this.read("/", ["PUBLIC"], (req, res, next) => {
+
+    this.read("/products", ["PUBLIC"], (req, res, next) => {
       try {
         return res.render("products", { title: "PRODUCTS" });
       } catch (error) {
@@ -41,6 +43,7 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
+
     this.read("/profile", ["USER", "ADMIN"], async (req, res, next) => {
       try {
         const users = await userManager.read();
@@ -49,9 +52,25 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
+
     this.read("/verified", ["PUBLIC"], async (req, res, next) => {
       try {
         return res.render("verified", { title: "VERIFY" });
+      } catch (error) {
+        return next(error);
+      }
+    });
+
+    this.read("/thankyou", ["USER", "ADMIN"], (req, res, next) => {
+      try {
+        if (req.user && req.user.email) {
+          return res.render("success", { userEmail: req.user.email });
+        } else {
+          return res.status(404).send({
+            statusCode: 404,
+            message: "GET /thankyou not found path",
+          });
+        }
       } catch (error) {
         return next(error);
       }

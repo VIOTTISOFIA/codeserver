@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
-//import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import usersRepository from "../repositories/users.rep.js";
 import winston from "../utils/winston.util.js";
 

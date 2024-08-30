@@ -187,3 +187,34 @@
 [33mERROR[39m: GET /online 400 - 11.58.26 - jwt expired
 [33mERROR[39m: GET /online 400 - 11.58.31 - jwt expired
 [33mERROR[39m: Missing helper: "formatPrice"
+[33mERROR[39m: GET / 400 - 17.15.22 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.15.34 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.15.37 - jwt expired
+[33mERROR[39m: Missing helper: "formatPrice"
+[33mERROR[39m: GET /online 400 - 17.45.08 - jwt expired
+[33mERROR[39m: GET / 400 - 17.45.14 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.45.22 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.45.27 - jwt expired
+[33mERROR[39m: POST / 400 - 17.45.29 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.45.32 - jwt expired
+[33mERROR[39m: Lexical error on line 49. Unrecognized text.
+...>  {{/if}}  {{!-{{!-- <!-- Botón de 
+---------------------^
+[33mERROR[39m: GET / 400 - 17.52.27 - jwt expired
+[33mERROR[39m: GET / 400 - 17.52.29 - jwt expired
+[33mERROR[39m: GET /online 400 - 17.52.33 - jwt expired
+[33mERROR[39m: GET / 400 - 18.01.04 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.01.09 - jwt expired
+[33mERROR[39m: GET / 400 - 18.15.33 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.15.39 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.22.12 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.22.15 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.29.51 - jwt expired
+[33mERROR[39m: GET /online 400 - 18.29.53 - jwt expired
+[33mERROR[39m: GET /online 400 - 21.08.03 - jwt expired
+[33mERROR[39m: GET /online 400 - 21.23.32 - jwt expired
+[33mERROR[39m: GET /online 400 - 21.23.34 - jwt expired
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: GET /thankyou 400 - 21.47.12 - jwt expired
+[33mERROR[39m: GET /online 400 - 21.53.53 - jwt expired
+[33mERROR[39m: GET /online 400 - 21.53.55 - jwt expired

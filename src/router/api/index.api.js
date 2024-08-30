@@ -20,5 +20,6 @@ class ApiRouter extends CustomRouter {
     this.use("/payments", paymentRouter);
   }
 }
+
 const apiRouter = new ApiRouter();
 export default apiRouter.getRouter();
