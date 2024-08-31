@@ -56,6 +56,15 @@ class ViewsRouter extends CustomRouter {
         return next(error);
       }
     });
+
+    this.read("/thankyou", ["USER", "ADMIN"], (req, res, next) => {
+      try {
+        const { email } = req.body;
+        return res.render("success", { userEmail: email });
+      } catch (error) {
+        return next(error);
+      }
+    });
   }
 }
 

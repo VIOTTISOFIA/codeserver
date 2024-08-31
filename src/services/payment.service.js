@@ -1,4 +1,7 @@
-import { createPaymentRepository } from "../repositories/payment.rep.js";
+import {
+  createPaymentRepository,
+  emptyCartRepository,
+} from "../repositories/payment.rep.js";
 
 const createPaymentService = async (user_id) => {
   try {
@@ -9,4 +12,13 @@ const createPaymentService = async (user_id) => {
   }
 };
 
-export { createPaymentService };
+const emptyCartService = async (user_id) => {
+  try {
+    const response = await emptyCartRepository(user_id);
+    return response;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export { createPaymentService, emptyCartService };

@@ -1,4 +1,7 @@
-import { createPaymentService } from "../services/payment.service.js";
+import {
+  createPaymentService,
+  emptyCartService,
+} from "../services/payment.service.js";
 
 const createPayment = async (req, res, next) => {
   try {
@@ -10,47 +13,15 @@ const createPayment = async (req, res, next) => {
 };
 
 const successPayment = async (req, res, next) => {
-  const { _id: user_id } = req.user; // Ajusta la obtención de user_id correctamente
-  console.log("user_id:", user_id);
-  
+  const { _id: user_id } = req.user;
   try {
-    console.log(`Vaciando carrito en la URL: /api/carts/cart/empty`);
-    // Vaciar el carrito
-    const emptyCart = await fetch(`http://localhost:8080/api/carts/cart/empty`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-
-    console.log("emptyCart:", emptyCart);
-    if (!emptyCart.ok) {
-      throw new Error("Error emptying cart");
-    }
+    await emptyCartService(user_id);
 
     // Redirigir a la página de confirmación
-    //res.redirect("/success");
-    res.redirect("/");
+    res.redirect("/thankyou");
   } catch (error) {
     return next(error);
   }
 };
 
 export { createPayment, successPayment };
-
-
-
-
-
- /* // Crear el ticket
-    const ticketResponse = await fetch(`http://localhost:8080/api/tickets`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    console.log("ticketResponse:", ticketResponse);
-    
-    if (!ticketResponse.ok) {
-      throw new Error("Error creating ticket");
-    } */

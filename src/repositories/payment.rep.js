@@ -28,4 +28,13 @@ const createPaymentRepository = async (user_id) => {
   }
 };
 
-export { createPaymentRepository }
+const emptyCartRepository = async (user_id) => {
+  try {
+    const result = await cartsManager.destroyAll(user_id);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { createPaymentRepository, emptyCartRepository };
