@@ -169,3 +169,10 @@
 [33mERROR[39m: Bad auth from login!
 [33mERROR[39m: Bad auth from login!
 [33mERROR[39m: GET /online 400 - 23:49:03 - jwt expired
+[33mERROR[39m: GET /online 401 - 15:37:30 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 15:37:48 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 15:37:56 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 15:37:59 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 15:38:09 - Bad auth from policies!
+[33mERROR[39m: GET / 401 - 15:38:17 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 15:40:14 - Bad auth from policies!

@@ -1,5 +1,5 @@
 /* BOTONES NAVBAR */
-//Funcion para boton SignOut
+// Función para botón SignOut
 async function signOut() {
   try {
     const response = await fetch("/api/sessions/signout", {
@@ -23,10 +23,10 @@ async function signOut() {
   }
 }
 
-//Funcion para ocultar/mostrar barra de navegacion
+// Función para ocultar/mostrar barra de navegación
 async function checkSession() {
   try {
-    const response = await fetch("/api/sessions/online");    
+    const response = await fetch("/api/sessions/online");
     const result = await response.json();
     console.log("resultado:", result);
 
@@ -34,11 +34,10 @@ async function checkSession() {
     userOptions.innerHTML = "";
 
     if (response.ok && result.statusCode === 200) {
-      const { role } = result.response
-      //console.log("usuario legeado:", role);
-      
+      const { role } = result.response;
+
       if (role === 1) {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a class="nav-link active mt-2" href="/products/real">NEW PRODUCT</a>
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
@@ -51,7 +50,7 @@ async function checkSession() {
           </a>
           `;
       } else {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
           </a>
@@ -63,15 +62,14 @@ async function checkSession() {
           </a>
           `;
       }
-  } else {
+    } else {
       userOptions.innerHTML = `
       <a class="nav-link active mt-2" href="/register">REGISTER</a>
       <a href="/login">
           <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
       </a>
       `;
-  }
-  
+    }
   } catch (error) {
     console.error("Error:", error.message);
   }
@@ -79,7 +77,7 @@ async function checkSession() {
 window.onload = checkSession;
 
 /* BOTONES CARRITO */
-//funcion para eliminar un producto del carrito
+// Función para eliminar un producto del carrito
 async function removeFromCart(cartItemId) {
   try {
     const response = await fetch(`/api/carts/${cartItemId}`, {
@@ -97,7 +95,7 @@ async function removeFromCart(cartItemId) {
   }
 }
 
-//funcion para cancelar y vaciar el carrito
+// Función para cancelar y vaciar el carrito
 async function destroyAll(event, user_id) {
   try {
     event.preventDefault();
@@ -118,8 +116,7 @@ async function destroyAll(event, user_id) {
   }
 }
 
-//funcion para confirmar la compra y vaciar el carrito
-
+// Función para confirmar la compra y vaciar el carrito
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
@@ -212,5 +209,29 @@ async function updateCart(event, cartItemId) {
     }
   } catch (error) {
     console.error("Error on updating product:", error.message);
+  }
+}
+
+// Función para confirmar el checkout
+async function confirmCheckout(userId) {
+  try {
+    const response = await fetch(`/api/confirmCheckout/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    if (response.ok) {
+      // Redirigir a la página de éxito
+      window.location.href = "/thankyou";
+    } else {
+      // Manejar errores
+      console.error("Error al confirmar la compra");
+    }
+  } catch (error) {
+    console.error("Error en la solicitud:", error);
   }
 }

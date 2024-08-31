@@ -8,5 +8,4 @@ const createPaymentService = async (user_id) => {
     throw new Error(error);
   }
 };
-
 export { createPaymentService };

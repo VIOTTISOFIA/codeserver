@@ -3,11 +3,11 @@ const suma = (...nums) => {
     return 0;
   }
 
-  if (nums.some(num => typeof num !== "number")) {
+  if (nums.some((num) => typeof num !== "number")) {
     return null;
   }
 
-  return nums.reduce((acc,val) => acc+val);
+  return nums.reduce((acc, val) => acc + val);
 };
 
 let contadorPruebasOk = 0;

@@ -1,17 +1,17 @@
 components:
   schemas:
-   cart: 
-    type: object
-    properties:
-      quantity: 
-        type: number
-        description: cantidad de pruductos a agregar
-      state: 
-        type: string
-        description: Estado en el que se encuentra el carrito generado
-    example:
-      quantity: 2
-      state: reserved
+    cart:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: cantidad de pruductos a agregar
+        state:
+          type: string
+          description: Estado en el que se encuentra el carrito generado
+      example:
+        quantity: 2
+        state: reserved
   securitySchemes:
     cookieAuth:
       type: apiKey
@@ -37,7 +37,7 @@ components:
     Response201:
       type: object
       properties:
-        statuscode: 
+        statuscode:
           type: integer
           format: int64
           description: codigo de estado correspondiente a la solicitud de creacion
@@ -46,7 +46,7 @@ components:
           description: Texto descriptivo con el exito en la creacion
       example:
         statusCode: 201
-        message: 'CREATED ID: 123acdf586dd'
+        message: "CREATED ID: 123acdf586dd"
     Error400:
       type: object
       properties:
@@ -112,7 +112,7 @@ components:
       example:
         statusCode: 500
         message: CODER API ERROR
-paths: 
+paths:
   /api/carts/:
     post:
       summary: Ruta para la generacion de un carrito en la base de datos
@@ -126,20 +126,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/cart'
+              $ref: "#/components/schemas/cart"
       responses:
         201:
           description: Creado correctamente
           content:
             aplication/json:
               schema:
-                $ref: '#/components/responses/Response201'
+                $ref: "#/components/responses/Response201"
         500:
           description: Error en el servidor
           content:
             aplication/json:
               schema:
-                $ref: '#/components/responses/Error500'
+                $ref: "#/components/responses/Error500"
     get:
       summary: Ruta para obtener todos los carritos de la base de datos
       tags:
@@ -154,13 +154,13 @@ paths:
               schema:
           type: array
           items:
-            $ref: '#/components/schemas/cart'
+            $ref: "#/components/schemas/cart"
         500:
           description: Error por parte del servidor
           content:
             application/json:
               schema:
-              $ref: '#/components/responses/Error500'
+              $ref: "#/components/responses/Error500"
   /api/products/cart:
     get:
       summary: Ruta para obtener un carrito segun ID de un usuario registrado
@@ -181,7 +181,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Response200'
+                $ref: "#/components/responses/Response200"
   /api/carts/{:cid}:
     put:
       summary: Ruta para actualizar un carrito de la base de datos
@@ -202,32 +202,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/product'
+              $ref: "#/components/schemas/product"
       responses:
         200:
           description: Exito en la lectura y actualizacion del carrito
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Response200'
+                $ref: "#/components/responses/Response200"
         401:
           description: Error en autenticacion del usuario para actualizar un carrito
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error401'
+                $ref: "#/components/responses/Error401"
         404:
           description: Error al no encontrar el carrito del ID especificado
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error404'
+                $ref: "#/components/responses/Error404"
         500:
           description: Error por parte del servidor
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error500'
+                $ref: "#/components/responses/Error500"
     delete:
       summary: Ruta para eliminar un producto especifio de un carrito
       tags:
@@ -247,61 +247,61 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Response200'
+                $ref: "#/components/responses/Response200"
         401:
           description: Error en autenticación del usuario para eliminar un producto del carrito
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error401'
+                $ref: "#/components/responses/Error401"
         404:
           description: Error al no encontrar el carrito con el ID especificado
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error404'
+                $ref: "#/components/responses/Error404"
         500:
           description: Error por parte del servidor
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/Error500'
+                $ref: "#/components/responses/Error500"
 /api/carts/cart/empty:
-     delete:
-      summary: Ruta para eliminar/vaciar un carrito de la base de datos
-      tags:
-        - cart
-      security:
-        - cookieAuth: []
-      parameters:
-        - name: cid
-          in: path
-          required: true
-          description: Identificador único del carrito a eliminar
-          schema:
-            type: string
-      responses:
-        200:
-          description: Carrito eliminado exitosamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Response200'
-        401:
-          description: Error en autenticación del usuario para vaciar un carrito
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error401'
-        404:
-          description: Error al no encontrar el carrito con el ID especificado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error404'
-        500:
-          description: Error por parte del servidor
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error500'
+  delete:
+    summary: Ruta para eliminar/vaciar un carrito de la base de datos
+    tags:
+      - cart
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Identificador único del carrito a eliminar
+        schema:
+          type: string
+    responses:
+      200:
+        description: Carrito eliminado exitosamente
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/responses/Response200"
+      401:
+        description: Error en autenticación del usuario para vaciar un carrito
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/responses/Error401"
+      404:
+        description: Error al no encontrar el carrito con el ID especificado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/responses/Error404"
+      500:
+        description: Error por parte del servidor
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/responses/Error500"

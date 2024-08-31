@@ -5,24 +5,27 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
-import usersRepository from "../repositories/users.rep.js";
+// import usersRepository from "../repositories/users.rep.js";
 import UsersDTO from "../dto/users.dto.js";
 import sendEmail from "../utils/mailing.util.js";
+// import usersRepository from "../repositories/users.rep.js";
 
 //ESTRATEGIA PARA REGISTER
+
 passport.use(
   "register",
   new LocalStrategy(
     { passReqToCallback: true, usernameField: "email" },
     async (req, email, password, done) => {
       try {
+        console.log("Estrategia de registro iniciada");
         if (!email || !password) {
           const error = new Error("Please enter email and passsword");
           error.statusCode = 401;
           return done(null, null, error);
         }
 
-        //const one = await usersRepository.readByEmailRepository(email);
+        // const one = await usersRepository.readByEmailRepository(email);
         const one = await userManager.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");
@@ -42,8 +45,10 @@ passport.use(
           email: user.email,
           code: user.verifyCode,
         });
+        console.log("Usuario creado con éxito");
         return done(null, user);
       } catch (error) {
+        console.error("Error en la estrategia de registro:", error);
         return done(error);
       }
     }

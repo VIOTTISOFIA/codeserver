@@ -7,7 +7,8 @@ function errorHandler(error, req, res, next) {
   winston.ERROR(error.message);
   return res.json({
     statusCode: error.statusCode || 500,
-    message: error.message || "coder api ERROR",
+    message: error.message || "CODER API ERROR",
   });
 }
+
 export default errorHandler;

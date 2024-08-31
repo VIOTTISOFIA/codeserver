@@ -1,6 +1,3 @@
-//import { Router } from "express";
-//import productManager from "../../data/fs/ProductManager.fs.js";
-//import productManager from "../../data/mongo/managers/ProductsManager.mongo.js";
 import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 import validator from "../../middlewares/joi.mid.js";
 import productSchema from "../../schemas/product.schema.js";

@@ -1,12 +1,16 @@
-<section>
-  <article class="w-75 align-items-center d-flex flex-column">
-    <h2 class="text-center">You are almost ready! We sent you a verify code to you email address</h2>
-    <h3 class="text-center">Please enter it here</h3>
+<section class="d-flex justify-content-center align-items-center vh-100">
+  <article class="shadow-sm p-5 rounded-4 bg-white d-flex flex-column align-items-center"
+    style="max-width: 400px; width: 100%;">
+    <h2 class="text-center mb-4 text-success-subtle">You are almost ready! We sent you a verification code to your email
+      address</h2>
+    <h3 class="text-center mb-4 text-success-subtle">Please enter it here</h3>
 
-    <form class="d-flex flex-column w-50">
-      <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL" />
-      <input class="m-2" type="text" name="code" id="code" placeholder="Verify Code" />
-      <input class="m-2" type="button" id="verified" value="Verify" />
+    <form class="d-grid gap-3 w-100">
+      <input class="form-control border-0 rounded-3 p-2" style="background-color: #DFF0D8;" type="text" name="email"
+        id="email" placeholder="EMAIL" />
+      <input class="form-control border-0 rounded-3 p-2" style="background-color: #DFF0D8;" type="text" name="code"
+        id="code" placeholder="Verify Code" />
+      <button type="button" id="verified" class="btn btn-success-subtle text-dark fw-bold btn-lg w-100">Verify</button>
     </form>
   </article>
 </section>
@@ -16,26 +20,24 @@
     const data = {
       email: document.querySelector("#email").value,
       code: document.querySelector("#code").value,
-    }
-    console.log(data)
+    };
+    console.log(data);
 
     const opts = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    }
+      body: JSON.stringify(data),
+    };
 
-    let response = await fetch("/api/sessions/verify", opts)
-    response = await response.json()
-    console.log("respuesta:", response)
+    let response = await fetch("/api/sessions/verify", opts);
+    response = await response.json();
+    console.log("respuesta:", response);
 
     if (response.statusCode === 200) {
-      alert("Verified User succesfully!")
-      location.replace("/login")
+      alert("Verified User successfully!");
+      location.replace("/login");
     } else {
-      alert(response.message)
+      alert(response.message);
     }
-  })
+  });
 </script>
-
-{{!-- FALTA DESCOMENTAR EL .REPLACE DE LA 35 --}}

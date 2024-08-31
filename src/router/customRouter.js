@@ -1,25 +1,20 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
-//import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import usersRepository from "../repositories/users.rep.js";
 import winston from "../utils/winston.util.js";
 
 class CustomRouter {
-  //para contruir y configurar cada instancia del enrutador
   constructor() {
     this.router = Router();
     this.init();
   }
 
-  //para obtener todas las rutas del enrutador definido
   getRouter() {
     return this.router;
   }
 
-  //para inicializar las clases/propiedades heredadas(sub-routers)
   init() {}
 
-  //para manejar las cbs (middlewares y la final)
   applyCbs(callbacks) {
     return callbacks.map((callback) => async (...params) => {
       try {
@@ -86,7 +81,6 @@ class CustomRouter {
             (policies.includes("ADMIN") && role === 1)
           ) {
             const user = await usersRepository.readByEmailRepository(email);
-            //proteger constraseña del usuario en el obj req.user
             req.user = user;
             return next();
           } else return res.error403();
@@ -96,6 +90,7 @@ class CustomRouter {
       }
     }
   };
+
   create(path, arrOfPolicies, ...callbacks) {
     this.router.post(
       path,

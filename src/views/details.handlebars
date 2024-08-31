@@ -1,90 +1,209 @@
-<main>
-  <a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary mt-auto">Volver</a>
-  {{#if product.id}}
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="card mb-2 mx-auto my-5 border-success" style="max-width: 60rem;">
-    <h1 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">Product ID: {{product._id}} </h1>
-    <hr>
-    <div class="row g-0">
-      <div class="col-md-4 align-content-center">
-        <img src="{{product.photo}}" class="img-fluid object-fit-cover rounded-start border-end border-dark-subtle"
-          alt="{{product.title}}">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title" style="font-size: 23px;">{{product.title}}</h5>
-          <p class="card-text" style="font-size: 18px;">Category: {{product.category}}</p>
-          <p class="card-text" style="font-size: 18px;"><small class="text-body-secondary">Stock:
-              {{product.stock}}</small> <small class="text-body-secondary">Price: {{product.price}}</small> </p>
-          <button id="addToCart" type="button" class="btn btn-info d-flex w-50 justify-content-center mx-auto">Add to
-            Cart</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <!-- Asegúrate de que la ruta al archivo CSS esté correctamente configurada -->
+  <link rel="stylesheet" href="/path/to/your/styles.css">
+  <!-- Importa una fuente moderna y agradable como 'Nunito' -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #F0F8F4;
+      /* Fondo pastel claro */
+      color: #333;
+      /* Color de texto oscuro para contraste */
+    }
 
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .btn-primary {
+      background-color: #4CAF50;
+      /* Verde pastel */
+      color: #FFFFFF;
+      /* Texto blanco */
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #45A049;
+      /* Un verde ligeramente más oscuro para el hover */
+    }
+
+    .card {
+      width: 100%;
+      max-width: 60rem;
+      /* Máximo ancho de la tarjeta */
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #FFFFFF;
+      /* Fondo blanco para la tarjeta */
+      border: 2px solid #DFF0D8;
+      /* Borde verde pastel */
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-size: 25px;
+      color: #4CAF50;
+      /* Verde pastel */
+      text-align: center;
+      font-style: italic;
+      padding-top: 1rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 15rem;
+      /* Aumentar la altura de la imagen */
+      object-fit: cover;
+      border-bottom: 2px solid #DFF0D8;
+      /* Borde inferior verde pastel */
+    }
+
+    .card-text {
+      font-size: 18px;
+    }
+
+    .btn-info {
+      background-color: #DFF0D8;
+      /* Verde pastel claro */
+      color: #2E6A4F;
+      /* Verde oscuro para el texto */
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s;
+      margin-top: 1rem;
+    }
+
+    .btn-info:hover {
+      background-color: #B8D8B8;
+      /* Verde pastel más oscuro para el hover */
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        max-width: 100%;
+      }
+
+      .card-img-top {
+        height: auto;
+        /* Ajustar la altura de la imagen en pantallas pequeñas */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <a href="/products/paginate?page=${page}&limit=10" class="btn btn-primary">Volver</a>
+    {{#if product.id}}
+    <div class="card mb-2 mx-auto my-5">
+      <h1 class="card-title">Product ID: {{product._id}}</h1>
+      <hr>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{product.photo}}" class="card-img-top" alt="{{product.title}}">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">Category: {{product.category}}</p>
+            <p class="card-text">
+              <small>Stock: {{product.stock}}</small>
+              <small>Price: {{product.price}}</small>
+            </p>
+            <button id="addToCart" type="button" class="btn btn-info">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    {{else}}
+    <h1 class="text-center">NOT FOUND PRODUCT</h1>
+    {{/if}}
+  </main>
 
-  {{else}}
-  <h1>NOT FOUND PRODUCT</h1>
-  {{/if}}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const addToCart = document.getElementById("addToCart");
 
-</main>
+      if (addToCart) {
+        addToCart.addEventListener("click", async (event) => {
+          event.preventDefault();
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const addToCart = document.getElementById("addToCart");
+          // Obtener el ID del producto y la cantidad
+          const product_id = "{{product._id}}";
+          const quantity = 1;
 
-    if (addToCart) {
-      addToCart.addEventListener("click", async (event) => {
-        event.preventDefault();
-
-        // Obtener el ID del producto y la cantidad
-        const product_id = "{{product._id}}";
-        const quantity = 1;
-
-        try {
-          // Verificar si el usuario está online
-          const onlineResponse = await fetch("/online", {
-            method: "GET",
-            headers: {
-              credentials: "include",
-              "Content-Type": "application/json"
-            }
-          });
-
-          if (onlineResponse.status === 200) {
-            // El usuario está online, proceder a agregar el producto al carrito
-            const response = await fetch("/api/carts", {
-              method: "POST",
+          try {
+            // Verificar si el usuario está online
+            const onlineResponse = await fetch("/online", {
+              method: "GET",
               headers: {
                 credentials: "include",
                 "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                product_id,
-                quantity
-              })
+              }
             });
 
-            // Revisar el estado de la respuesta
-            if (response.status === 201) {
-              const responseData = await response.json();
-              alert("Product added to cart successfully" || responseData.message);
-              location.replace("/products");
-            } else {
-              const errorData = await response.json();
-              console.error('Error:', errorData);
-              alert("Please log in for adding to cart" || errorData.message);
+            if (onlineResponse.status === 200) {
+              // El usuario está online, proceder a agregar el producto al carrito
+              const response = await fetch("/api/carts", {
+                method: "POST",
+                headers: {
+                  credentials: "include",
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  product_id,
+                  quantity
+                })
+              });
+
+              // Revisar el estado de la respuesta
+              if (response.status === 201) {
+                const responseData = await response.json();
+                alert("Product added to cart successfully" || responseData.message);
+                location.replace("/products");
+              } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                alert("Please log in for adding to cart" || errorData.message);
+              }
+            } else if (onlineResponse.status === 401) {
+              const errorData = await onlineResponse.json();
+              alert("Error adding product to cart" || errorData.message);
             }
-          } else if (onlineResponse.status === 401) {
-            const errorData = await onlineResponse.json();
-            alert("Error adding product to cart" || errorData.message);
+          } catch (error) {
+            console.error('Fetch error:', error);
+            alert("Network error: " + error.message);
           }
-        } catch (error) {
-          console.error('Fetch error:', error);
-          alert("Network error: " + error.message);
-        }
-      });
-    }
-  });
-</script>
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

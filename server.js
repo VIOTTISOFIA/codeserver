@@ -2,9 +2,7 @@ import environment from "./src/utils/env.util.js";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-//import morgan from "morgan";
 import { engine } from "express-handlebars";
-import ExpressHandlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
@@ -17,31 +15,34 @@ import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
-import configs from "./src/utils/swagger.util.js"
+import configs from "./src/utils/swagger.util.js";
 import __dirname from "./utils.js";
 
-// http server
+// HTTP server setup
 const server = express();
 const port = environment.PORT;
-const ready = async () => {
-  console.log("server ready on port" + port);
-};
 
+// Create HTTP server
 const nodeServer = createServer(server);
 const socketServer = new Server(nodeServer);
-nodeServer.listen(port, ready);
 
-//configuracion de helpers de Handlebars para los botones (range, ifEquals) de paginacion
-const hbs = ExpressHandlebars.create({
+nodeServer.listen(port, () => {
+  console.log("Server ready on port " + port);
+});
+
+socketServer.on("connection", socketCb);
+
+// Handlebars setup with custom helpers
+const hbs = engine({
   helpers: {
-    range: function (start, end) {
+    range: (start, end) => {
       let range = [];
       for (let i = start; i <= end; i++) {
         range.push(i);
       }
       return range;
     },
-    ifEquals: function (arg1, arg2, options) {
+    ifEquals: (arg1, arg2, options) => {
       return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     },
   },
@@ -51,38 +52,20 @@ const hbs = ExpressHandlebars.create({
   },
 });
 
-socketServer.on("connection", socketCb);
-
-server.engine("handlebars", hbs.engine);
+server.engine("handlebars", hbs);
 server.set("view engine", "handlebars");
-server.set("views", __dirname + "/src/views");
+server.set("views", `${__dirname}/src/views`);
 
+// Swagger documentation setup
 const specs = swaggerJSDoc(configs);
 
-// middlewares
-server.get(cookieParser(environment.SECRET_COOKIE));
-server.get(
-  session({
-    secret: environment.SECRET_SESSION,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 },
-  })
-); 
+// Middleware setup
 server.use(express.urlencoded({ extended: true }));
-server.use(express.static(__dirname + "/public"));
+server.use(express.static(`${__dirname}/public`));
 server.use(express.json());
-server.use(winston);
 server.use(cookieParser(environment.SECRET_COOKIE));
-server.use("/api/docs", serve, setup(specs));
-server.use(
-  compression({
-    brotli: { enabled: true, zlib: {} },
-  })
-);
 server.use(
   session({
-    //MONGOSTORE
     secret: environment.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
@@ -93,14 +76,39 @@ server.use(
     }),
   })
 );
+server.use(winston);
+server.use(
+  compression({
+    brotli: { enabled: true, zlib: {} },
+  })
+);
+server.use("/api/docs", serve, setup(specs));
 
-//variables globales
+// Set global variables
 server.use((req, res, next) => {
-  res.locals.user_id = req.session.user_id || null; // Pasa el user_id si está en la sesión, de lo contrario null
+  res.locals.user_id = req.session.user_id || null;
+  res.locals.userEmail = req.session.userEmail || ""; // Add global variable for user's email
   next();
 });
 
-// endpoints
+// Main routes
 server.use("/", indexRouter);
+
+// Route to handle checkout confirmation
+server.post("/api/confirmCheckout/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    // Logic to confirm purchase
+    // Example: Empty cart, generate receipt, etc.
+
+    // If purchase is successful, redirect to success page
+    res.redirect("/thankyou");
+  } catch (error) {
+    console.error("Error confirming purchase:", error);
+    res.status(500).send("Error confirming purchase");
+  }
+});
+
+// Error and path handling
 server.use(errorHandler);
 server.use(pathHandler);
