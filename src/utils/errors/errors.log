@@ -169,3 +169,46 @@
 [33mERROR[39m: Bad auth from login!
 [33mERROR[39m: Bad auth from login!
 [33mERROR[39m: GET /online 400 - 23:49:03 - jwt expired
+[33mERROR[39m: GET /online 401 - 20:45:11 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 20:45:14 - Bad auth from policies!
+[33mERROR[39m: Cannot destructure property 'user_id' of 'req.user' as it is undefined.
+[33mERROR[39m: POST /success 401 - 21:04:10 - Bad auth from policies!
+[33mERROR[39m: Failed to parse URL from /api/tickets
+[33mERROR[39m: Cannot destructure property 'user_id' of 'req.user.user_id' as it is undefined.
+[33mERROR[39m: Failed to parse URL from /api/tickets
+[33mERROR[39m: POST /success 400 - 21:15:59 - jwt expired
+[33mERROR[39m: POST / 401 - 21:16:09 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:16:09 - Bad auth from policies!
+[33mERROR[39m: GET /online 400 - 21:16:29 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:16:30 - jwt expired
+[33mERROR[39m: GET /success 400 - 21:24:31 - jwt expired
+[33mERROR[39m: POST / 401 - 21:24:41 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:24:41 - Bad auth from policies!
+[33mERROR[39m: GET /success 400 - 21:24:46 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:24:53 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:24:55 - jwt expired
+[33mERROR[39m: POST / 401 - 21:25:07 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:25:07 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 21:25:52 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:25:52 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 21:27:28 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:27:28 - Bad auth from policies!
+[33mERROR[39m: POST / 401 - 21:31:26 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:31:26 - Bad auth from policies!
+[33mERROR[39m: POST / 400 - 21:32:50 - jwt expired
+[33mERROR[39m: GET / 400 - 21:33:30 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:33:35 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:33:36 - jwt expired
+[33mERROR[39m: GET /online 400 - 21:33:37 - jwt expired
+[33mERROR[39m: POST / 401 - 21:35:24 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:35:24 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:38:19 - Bad auth from policies!
+[33mERROR[39m: DELETE /cart/empty 401 - 21:38:58 - Bad auth from policies!
+[33mERROR[39m: POST / 400 - 21:39:57 - jwt expired
+[33mERROR[39m: Cart not found for user required
+[33mERROR[39m: GET /online 401 - 21:42:30 - Bad auth from policies!
+[33mERROR[39m: POST /signout 401 - 21:46:29 - Bad auth from policies!
+[33mERROR[39m: GET /online 401 - 21:46:31 - Bad auth from policies!
+[33mERROR[39m: Invalid credentials
+[33mERROR[39m: Failed to parse URL from /api/carts/cart/empty
+[33mERROR[39m: DELETE /cart/empty 401 - 21:50:55 - Bad auth from policies!

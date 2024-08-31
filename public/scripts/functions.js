@@ -26,7 +26,7 @@ async function signOut() {
 //Funcion para ocultar/mostrar barra de navegacion
 async function checkSession() {
   try {
-    const response = await fetch("/api/sessions/online");    
+    const response = await fetch("/api/sessions/online");
     const result = await response.json();
     console.log("resultado:", result);
 
@@ -34,11 +34,10 @@ async function checkSession() {
     userOptions.innerHTML = "";
 
     if (response.ok && result.statusCode === 200) {
-      const { role } = result.response
-      //console.log("usuario legeado:", role);
-      
+      const { role } = result.response;
+
       if (role === 1) {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a class="nav-link active mt-2" href="/products/real">NEW PRODUCT</a>
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
@@ -51,7 +50,7 @@ async function checkSession() {
           </a>
           `;
       } else {
-          userOptions.innerHTML = `
+        userOptions.innerHTML = `
           <a href="/users">
               <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
           </a>
@@ -63,15 +62,14 @@ async function checkSession() {
           </a>
           `;
       }
-  } else {
+    } else {
       userOptions.innerHTML = `
       <a class="nav-link active mt-2" href="/register">REGISTER</a>
       <a href="/login">
           <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
       </a>
       `;
-  }
-  
+    }
   } catch (error) {
     console.error("Error:", error.message);
   }
@@ -118,8 +116,7 @@ async function destroyAll(event, user_id) {
   }
 }
 
-//funcion para confirmar la compra y vaciar el carrito
-
+//funcion para confirmar la compra
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
@@ -136,9 +133,9 @@ async function checkout(event, user_id) {
     if (paymentResponse.ok) {
       const paymentData = await paymentResponse.json();
       const checkoutUrl = paymentData.response.url;
-      
+
       if (checkoutUrl) {
-        // Redirigir a la URL de Stripe
+        // Redirige a la URL de Stripe
         window.location.href = checkoutUrl;
       }
     } else {
@@ -150,46 +147,6 @@ async function checkout(event, user_id) {
   }
 }
 
-
-
-// Vaciar el carrito después de crear el ticket
-/* await fetch(`/api/carts/cart/empty`, {
-  method: "DELETE",
-  credentials: "include",
-});
-
-location.reload(); */
-/* async function checkout(event, user_id) {
-  try {
-    event.preventDefault();
-
-    // Crear un ticket
-    const ticketResponse = await fetch(`/api/tickets`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    if (ticketResponse.ok) {
-      alert("Success purchase!");
-
-      // Vaciar el carrito después de crear el ticket
-      const emptyCart = await fetch(`/api/carts/cart/empty`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      location.reload();
-    } else {
-      const ticketError = await ticketResponse.json();
-      console.error("Error creating ticket:", ticketError.message);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-} */
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
