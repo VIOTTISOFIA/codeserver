@@ -1,29 +1,31 @@
-<main>
+<main class="d-flex flex-column align-items-center w-100 p-4" style="background-color: #F0F8F4;">
+
   {{#if carts}}
-  <div class="card mb-2 mx-auto my-5 border-black" style="max-width: 60rem;">
-    <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px;">
+  <div class="card mb-4 mx-auto my-5 border-success" style="max-width: 60rem; border-radius: 15px;">
+    <h2 class="card-title text-center pt-3 fst-italic" style="font-size: 25px; color: #2E6A4F;">
       Carritos del Usuario: {{#if carts.[0].user_id}}{{carts.[0].user_id.email}}{{/if}}
     </h2>
   </div>
 
   {{#each carts}}
-  <div class="d-flex mb-2 mx-auto justify-content-center">
-    <div class="border border-black rounded-2 d-flex mt-3" id="cart-{{this._id}}">
+  <div class="d-flex mb-4 mx-auto justify-content-center">
+    <div class="border border-success rounded-3 d-flex shadow-lg" id="cart-{{this._id}}" style="max-width: 60rem;">
 
-      <div class="col-md-4 align-content-center">
-        <img class="img-fluid object-fit-cover p-3" style="width: 20rem"
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img class="img-fluid object-fit-cover p-3" style="width: 25rem; border-radius: 10px;"
           src="{{#if this.product_id}}{{this.product_id.photo}}{{else}}#{{/if}}"
           alt="{{#if this.product_id}}{{this.product_id.title}}{{else}}Sin título{{/if}}">
       </div>
 
-      <div class="mx-3">
-        <h3 class="my-3" style="font-size: 20px;">
+      <div class="mx-3 d-flex flex-column justify-content-center">
+        <h3 class="my-3" style="font-size: 22px; color: #2E6A4F;">
           {{#if this.product_id}}{{this.product_id.title}}{{/if}}
         </h3>
         <label for="quantity">Cantidad:</label>
-        <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}">
-        <p class="card-text" style="font-size: 18px;">
-          <strong class="text-body-secondary">Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong>
+        <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="{{this.quantity}}"
+          style="border-radius: 10px;">
+        <p class="card-text mt-2" style="font-size: 18px; color: #2E6A4F;">
+          <strong>Price: {{#if this.product_id}}{{this.product_id.price}}{{/if}}</strong>
         </p>
         <a href="#" onclick="removeFromCart('{{this._id}}')" data-cart-id="{{this._id}}">
           <img class="img-fluid w-25" src="https://i.postimg.cc/yxFKy9nZ/Papelera-removebg-preview.png" alt="Remove">
@@ -33,31 +35,30 @@
             alt="Update">
         </a>
       </div>
-
     </div>
   </div>
   {{/each}}
 
-  <div class="d-flex justify-content-evenly w-50 mx-auto">
-    <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')">
+  <div class="d-flex justify-content-evenly w-75 mx-auto mb-5">
+    <a href="#" onclick="destroyAll(event, '{{carts.[0].user_id._id}}')" class="d-flex align-items-center">
       <img class="img-fluid w-25"
         src="https://i.postimg.cc/W4Y41mxs/Cancelled-Sign-Clipart-Vector-Red-Cross-Vector-Icon-No-Symbol-Rejected-Cancel-Negative-Sign-Deny-Is.png"
         alt="Cancel">
     </a>
-    <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')">
+    <a href="#" onclick="checkout(event, '{{carts.[0].user_id._id}}')" class="d-flex align-items-center">
       <img class="img-fluid w-25"
         src="https://i.postimg.cc/GtpPkJbM/Download-check-mark-icon-for-free-removebg-preview.png" alt="Checkout">
     </a>
-    <a class="btn btn-primary mt-3 w-25 align-self-center" href="/products">Continue shopping!</a>
+    <a class="btn btn-primary mt-3 w-50 align-self-center" href="/products">Continue shopping!</a>
   </div>
 
   {{else}}
-  <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded">
-    <div class="d-flex justify-content-center">
-      <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Shopping Bags">
+  <div class="card mb-2 mx-auto my-5 w-50 shadow-lg p-3 bg-body-tertiary rounded" style="max-width: 50rem;">
+    <div class="d-flex justify-content-center mb-3">
+      <img src="https://i.postimg.cc/fbFqJKq0/compras-Iconremove.png" alt="Shopping Bags" style="width: 5rem;">
     </div>
-    <p class="text-center fst-italic" style="font-size: 35px;">Your cart is empty!</p>
-    <a class="btn btn-primary mt-auto w-50 align-self-center" href="/products">Continue shopping!</a>
+    <p class="text-center fst-italic" style="font-size: 35px; color: #2E6A4F;">Your cart is empty!</p>
+    <a class="btn btn-primary mt-3 w-50" href="/products">Continue shopping!</a>
   </div>
   {{/if}}
 

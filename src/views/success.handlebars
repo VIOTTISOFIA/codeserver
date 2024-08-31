@@ -7,27 +7,88 @@
     <title>Thank You!</title>
     <!-- Asegúrate de que la ruta al archivo CSS esté correctamente configurada -->
     <link rel="stylesheet" href="/path/to/your/styles.css">
+    <!-- Importa una fuente agradable como 'Poppins' o 'Nunito' -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F0F8F4;
+            /* Color de fondo suave pastel */
+            color: #333;
+            /* Color de texto oscuro para contraste */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Ocupa toda la altura de la ventana */
+        }
+
+        .card {
+            max-width: 500px;
+            width: 100%;
+            background-color: #FFFFFF;
+            /* Fondo blanco para la tarjeta */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .text-success {
+            color: #4CAF50;
+            /* Verde pastel */
+        }
+
+        .text-primary {
+            color: #5BC0BE;
+            /* Verde azul pastel */
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            /* Verde pastel */
+            color: #FFFFFF;
+            /* Texto blanco */
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #45A049;
+            /* Un verde ligeramente más oscuro para el hover */
+        }
+    </style>
 </head>
 
 <body>
     <main class="container">
-        <div class="card mb-4 mx-auto my-5 w-75 shadow-lg p-3 bg-body-tertiary rounded">
-            <h2 class="text-center text-success">¡Gracias por tu compra, {{userEmail}}!</h2>
-            <p class="text-center" style="font-size: 18px;">
+        <div class="card mb-4 mx-auto my-5">
+            <h2 class="text-success">¡Gracias por tu compra, {{userEmail}}!</h2>
+            <p style="font-size: 18px;">
                 Querido cliente,<br>
                 Queremos agradecerte por tu reciente compra. Tu apoyo significa mucho para nosotros y
                 estamos encantados de haberte podido servir.<br><br>
                 Como muestra de nuestra gratitud, te ofrecemos un cupón con un descuento especial del 10% en tu
                 próxima compra. Usa el siguiente código en tu próximo pedido:
             </p>
-            <div class="text-center">
-                <h3 class="text-primary">CUPÓN: <strong>THANKYOU10</strong></h3>
+            <div class="text-primary">
+                <h3>CUPÓN: <strong>THANKYOU10</strong></h3>
             </div>
-            <div class="text-center mt-4">
-                <a class="btn btn-primary" href="/products">Volver a las compras</a>
+            <div class="mt-4">
+                <a class="btn-primary" href="/products">Volver a las compras</a>
             </div>
         </div>
     </main>
 </body>
+
+</html>
 
 </html>
