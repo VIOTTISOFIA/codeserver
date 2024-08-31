@@ -61,11 +61,9 @@ class ViewsRouter extends CustomRouter {
       }
     });
 
-    this.read("/thankyou", ["PUBLIC"], (req, res, next) => {
+    this.read("/thankyou", ["USER", "ADMIN"], (req, res, next) => {
       try {
-        if (req.user && req.user.email) {
-          return res.render("success", { userEmail: req.user.email });
-        } 
+        return res.render("success", { userEmail: req.user.email });
       } catch (error) {
         return next(error);
       }

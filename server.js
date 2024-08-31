@@ -94,21 +94,6 @@ server.use((req, res, next) => {
 // Main routes
 server.use("/", indexRouter);
 
-// Route to handle checkout confirmation
-server.post("/api/confirmCheckout/:userId", async (req, res) => {
-  const { userId } = req.params;
-  try {
-    // Logic to confirm purchase
-    // Example: Empty cart, generate receipt, etc.
-
-    // If purchase is successful, redirect to success page
-    res.redirect("/thankyou");
-  } catch (error) {
-    console.error("Error confirming purchase:", error);
-    res.status(500).send("Error confirming purchase");
-  }
-});
-
 // Error and path handling
 server.use(errorHandler);
 server.use(pathHandler);
