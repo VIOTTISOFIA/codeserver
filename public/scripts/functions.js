@@ -179,8 +179,8 @@ async function updateCart(event, cartItemId) {
 
     if (response.ok) {
       Swal.fire({
-        title: "Success!",
-        text: "UPDATED!" || response.message,
+        title: "UPDATED!",
+        text: "Success!" || response.message,
         icon: "success",
         confirmButtonText: "OK",
       }).then(() => {

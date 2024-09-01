@@ -30,7 +30,7 @@ const usersSchema = Joi.object({
     "number.base": "La edad debe ser un número.",
     "number.integer": "La edad debe ser un número entero.",
     "number.min": "La edad no puede ser negativa.",
-  }),
+  }).allow("").default(18),
   photo: Joi.string().uri(),
   role: Joi.number(),
   verify: Joi.boolean(),
