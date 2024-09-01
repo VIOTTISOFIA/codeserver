@@ -26,11 +26,16 @@ const usersSchema = Joi.object({
       "string.min": "La contraseña tiene que tener mínimo 3 caracteres.",
       "string.max": "La contraseña tiene que tener máximo 50 caracteres.",
     }),
-  age: Joi.number().integer().min(0).messages({
-    "number.base": "La edad debe ser un número.",
-    "number.integer": "La edad debe ser un número entero.",
-    "number.min": "La edad no puede ser negativa.",
-  }).allow("").default(18),
+  age: Joi.number()
+    .integer()
+    .min(0)
+    .messages({
+      "number.base": "La edad debe ser un número.",
+      "number.integer": "La edad debe ser un número entero.",
+      "number.min": "La edad no puede ser negativa.",
+    })
+    .allow("")
+    .default(18),
   photo: Joi.string().uri(),
   role: Joi.number(),
   verify: Joi.boolean(),
