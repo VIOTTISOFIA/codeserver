@@ -12,14 +12,23 @@ async function signOut() {
     const result = await response.json();
     if (response.ok) {
       console.log(result);
-      alert("Signout successful");
-      location.replace("/login"); // Redirige a la página de inicio de sesión
-    } else {
-      alert("Error signing out");
+      Swal.fire({
+        title: "Success!",
+        text: "Signout successful" || response.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        location.replace("/login");
+      });
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("An error occurred while signing out");
+    Swal.fire({
+      title: "Error",
+      text: "An error occurred while signing out",
+      icon: "warning",
+      confirmButtonText: "OK",
+    });
   }
 }
 
@@ -28,28 +37,42 @@ async function checkSession() {
   try {
     const response = await fetch("/api/sessions/online");
     const result = await response.json();
-    console.log(result);
+    console.log("resultado:", result);
 
     const userOptions = document.getElementById("user-options");
-    userOptions.innerHTML = ""; // Limpia el contenido anterior
+    userOptions.innerHTML = "";
 
     if (response.ok && result.statusCode === 200) {
-      userOptions.innerHTML = `
-      <a href="/users">
-          <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
-        </a>
-        <a href="/carts">
-          <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
-        </a>
-        <a href="#" onclick="signOut()">
-          <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout widget">
-        </a>
-      `;
+      const { role } = result.response;
+
+      if (role === 1) {
+        userOptions.innerHTML = `
+          <a class="nav-link active mt-2" href="/products/real">NEW PRODUCT</a>
+          <a href="/users">
+              <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          </a>
+          <a href="#" onclick="signOut()">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout Widget">
+          </a>
+          `;
+      } else {
+        userOptions.innerHTML = `
+          <a href="/users">
+              <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          </a>
+          <a href="/carts">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/WpxgDy7n/cart-Widget.png" alt="Cart Widget">
+          </a>
+          <a href="#" onclick="signOut()">
+              <img class="mt-2" style="width: 30px; height: 30px;" src="https://i.postimg.cc/W4Zbqh95/flecha-a-la-izquierda-del-arco.png" alt="Signout Widget">
+          </a>
+          `;
+      }
     } else {
       userOptions.innerHTML = `
       <a class="nav-link active mt-2" href="/register">REGISTER</a>
       <a href="/login">
-        <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
+          <img style="width: 55px; height: 50px;" src="https://i.postimg.cc/sfJC1FyF/user-Icon-removebg-preview.png" alt="User Widget">
       </a>
       `;
     }
@@ -57,7 +80,6 @@ async function checkSession() {
     console.error("Error:", error.message);
   }
 }
-// Llama a checkSession al cargar la página
 window.onload = checkSession;
 
 /* BOTONES CARRITO */
@@ -69,8 +91,13 @@ async function removeFromCart(cartItemId) {
     });
 
     if (response.ok) {
-      alert("Product deleted successfully");
-      location.reload();
+      Swal.fire({
+        text: "Product deleted!" || response.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        location.reload();
+      });
     } else {
       console.error("Error on deleting product:", response.statusText);
     }
@@ -89,8 +116,13 @@ async function destroyAll(event, user_id) {
     });
 
     if (response.ok) {
-      alert("Cart is empty");
-      location.reload();
+      Swal.fire({
+        text: "Cart is empty" || response.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        location.reload();
+      });
     } else {
       const error = await response.json();
       console.error("Error on cart deleting:", error.message);
@@ -100,13 +132,13 @@ async function destroyAll(event, user_id) {
   }
 }
 
-//funcion para confirmar la compra y vaciar el carrito
+//funcion para confirmar la compra
 async function checkout(event, user_id) {
   try {
     event.preventDefault();
 
-    // Crear un ticket
-    const ticketResponse = await fetch(`/api/tickets`, {
+    // Hacer fetch a la ruta de Stripe para obtener la URL de checkout
+    const paymentResponse = await fetch(`/api/payment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -114,19 +146,17 @@ async function checkout(event, user_id) {
       credentials: "include",
     });
 
-    if (ticketResponse.ok) {
-      alert("Success purchase!");
+    if (paymentResponse.ok) {
+      const paymentData = await paymentResponse.json();
+      const checkoutUrl = paymentData.response.url;
 
-      // Vaciar el carrito después de crear el ticket
-      const emptyCart = await fetch(`/api/carts/cart/empty`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      location.reload();
+      if (checkoutUrl) {
+        // Redirige a la URL de Stripe
+        window.location.href = checkoutUrl;
+      }
     } else {
-      const ticketError = await ticketResponse.json();
-      console.error("Error creating ticket:", ticketError.message);
+      const paymentError = await paymentResponse.json();
+      console.error("Error creating payment:", paymentError.message);
     }
   } catch (error) {
     console.error("Error:", error);
@@ -147,8 +177,14 @@ async function updateCart(event, cartItemId) {
     });
 
     if (response.ok) {
-      alert("UPDATED!");
-      location.reload();
+      Swal.fire({
+        title: "Success!",
+        text: "UPDATED!" || response.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        location.reload();
+      });
     } else {
       console.error("Error on updating product:", response.statusText);
     }

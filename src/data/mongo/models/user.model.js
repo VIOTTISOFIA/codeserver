@@ -8,20 +8,18 @@ const schema = new Schema(
 
     password: { type: String, required: true },
     role: { type: Number, default: 0, index: true },
+    age: { type: Number, default: 18 },
     verify: { type: Boolean, default: false },
     verifyCode: { type: String, required: true },
     photo: {
       type: String,
       default: "https://i.postimg.cc/cCWcV6X2/Profile-Avatar-PNG.jpg",
     },
-
     user_id: {
       type: Types.ObjectId,
       ref: "users",
       index: true,
     },
-    verify: { type: Boolean, default: false },
-    verifyCode: { type: String, required: true },
   },
   {
     timestamps: true,

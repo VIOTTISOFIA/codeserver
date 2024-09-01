@@ -5,10 +5,8 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
-// import usersRepository from "../repositories/users.rep.js";
 import UsersDTO from "../dto/users.dto.js";
 import sendEmail from "../utils/mailing.util.js";
-// import usersRepository from "../repositories/users.rep.js";
 
 //ESTRATEGIA PARA REGISTER
 
@@ -24,7 +22,6 @@ passport.use(
           return done(null, null, error);
         }
 
-        // const one = await usersRepository.readByEmailRepository(email);
         const one = await userManager.readByEmail(email);
         if (one) {
           const error = new Error("Bad auth from register!");
@@ -36,7 +33,6 @@ passport.use(
         req.body.password = hashPassword;
         const data = new UsersDTO(req.body);
         const user = await userManager.create(data);
-        // const user = await usersRepository.createRepository(data);
         //una vez que el usuario se creo
         //la estrategia debe enviar un correo electronico con un codigo aletatorio para la verificacion del usuario
         await sendEmail({
@@ -60,7 +56,6 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const one = await userManager.readByEmail(email);
-        // const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
           const error = new Error("Bad auth from login!");
           error.statusCode = 401;

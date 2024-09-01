@@ -1,44 +1,113 @@
-<section>
-  <article class="w-75 align-items-center d-flex flex-column">
-    <h2 class="text-center">LOG IN TO YOUR ACCOUNT!</h2>
-    <h3 class="text-center">Do not have an account? Sign up</h3>
+<!DOCTYPE html>
+<html lang="en">
 
-    <form class="d-flex flex-column w-50">
-      <input class="m-2" type="button" id="google-login" value="Login with Google" />
-      <input class="m-2" type="text" name="email" id="email" placeholder="EMAIL" />
-      <input class="m-2" type="password" name="password" id="password" placeholder="PASSWORD" />
-      <input class="m-2" type="button" id="login" value="LOG IN!" />
-    </form>
-  </article>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .bg-success-subtle {
+      background-color: #DFF0D8 !important;
+    }
+
+    .btn-success-subtle {
+      background-color: #DFF0D8;
+      color: #4C956C;
+    }
+
+    .btn-success-subtle:hover {
+      background-color: #C8E0C6;
+      color: #4C956C;
+    }
+
+    .text-success-subtle {
+      color: #4C956C;
+    }
+
+    .btn-light {
+      background-color: #DFF0D8;
+      border-color: #4C956C;
+      color: #4C956C;
+    }
+
+    .btn-light:hover {
+      background-color: #C8E0C6;
+      color: #4C956C;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="d-flex justify-content-center align-items-center vh-100">
+    <article class="shadow-sm p-5 rounded-4 bg-white d-flex flex-column align-items-center"
+      style="max-width: 400px; width: 100%;">
+      <h2 class="text-center mb-3 text-success-subtle">LOG IN TO YOUR ACCOUNT!</h2>
+      <h3 class="text-center mb-4" style="color: #66A182;">Do not have an account? <a href="/signup"
+          style="text-decoration: none; color: #4C956C;">Sign up</a></h3>
+
+      <form class="d-grid gap-3 w-100">
+        <button type="button" id="google-login"
+          class="btn btn-light border border-success-subtle text-dark-emphasis fw-bold w-100 p-2 mb-2">Login with
+          Google</button>
+        <input class="form-control border-0 rounded-3 p-2" style="background-color: #DFF0D8;" type="email" name="email"
+          id="email" placeholder="EMAIL" required>
+        <input class="form-control border-0 rounded-3 p-2" style="background-color: #DFF0D8;" type="password"
+          name="password" id="password" placeholder="PASSWORD" required>
+        <button type="button" id="login" class="btn btn-success-subtle text-dark fw-bold w-100 p-2">LOG IN!</button>
+      </form>
+    </article>
+  </section>
+
   <article id="products" class="d-flex flex-wrap w-50"></article>
-</section>
 
-<script>
-  document.querySelector("#login").addEventListener("click", async () => {
-    const data = {
-      email: document.querySelector("#email").value,
-      password: document.querySelector("#password").value,
-    }
+  <script>
+    document.querySelector("#login").addEventListener("click", async () => {
+      const data = {
+        email: document.querySelector("#email").value,
+        password: document.querySelector("#password").value,
+      };
 
-    const opts = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    }
+      const opts = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
 
-    let response = await fetch("/api/sessions/login", opts)
-    response = await response.json()
-    console.log("respuesta:", response)
+      let response = await fetch("/api/sessions/login", opts);
+      response = await response.json();
+      console.log("respuesta:", response);
 
-    if (response.statusCode === 200) {
-      alert("Login successful!")
-      location.replace("/")
-    } else {
-      alert(response.message)
-    }
-  })
+      if (response.statusCode === 200) {
+        Swal.fire({
+          title: 'Success',
+          text: "Login successful!",
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          location.replace("/");
+        });
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: response.message,
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        })
+      }
+    });
 
-  document.querySelector("#google-login").addEventListener("click", () => {
-    window.location.href = "/api/sessions/google";
-  });
-</script>
+    document.querySelector("#google-login").addEventListener("click", () => {
+      window.location.href = "/api/sessions/google";
+    });
+  </script>
+</body>
+
+</html>
