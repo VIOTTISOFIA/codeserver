@@ -15,6 +15,7 @@
   </article>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.querySelector("#verified").addEventListener("click", async () => {
     const data = {
@@ -34,10 +35,21 @@
     console.log("respuesta:", response);
 
     if (response.statusCode === 200) {
-      alert("Verified User successfully!");
-      location.replace("/login");
+      Swal.fire({
+        title: 'Success',
+        text: "Verified User successfully!",
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        location.replace("/login");
+      });
     } else {
-      alert(response.message);
+      Swal.fire({
+        title: 'Network Error',
+        text: response.message,
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
     }
   });
 </script>
