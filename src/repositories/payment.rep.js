@@ -15,7 +15,7 @@ const createPaymentRepository = async (user_id) => {
     console.log(productsOnCart);
     const line_items = productsOnCart;
     const mode = "payment";
-    const success_url = "https://babyshop.up.railway.app/thankyou";
+    const success_url = "https://babyshop.up.railway.app/api/payment/success";
     const intent = await stripe.checkout.sessions.create({
       line_items,
       mode,
