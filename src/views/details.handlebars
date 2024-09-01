@@ -5,10 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Details</title>
-  <!-- Asegúrate de que la ruta al archivo CSS esté correctamente configurada -->
-  <link rel="stylesheet" href="/path/to/your/styles.css">
-  <!-- Importa una fuente moderna y agradable como 'Nunito' -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       font-family: 'Nunito', sans-serif;
@@ -185,20 +183,41 @@
               // Revisar el estado de la respuesta
               if (response.status === 201) {
                 const responseData = await response.json();
-                alert("Product added to cart successfully" || responseData.message);
+                Swal.fire({
+                title: 'Success!',
+                text:"Product added to cart successfully" || responseData.message ,
+                icon: 'success',
+                confirmButtonText: 'OK'
+              }).then(() => {
                 location.replace("/products");
+              });
               } else {
                 const errorData = await response.json();
                 console.error('Error:', errorData);
-                alert("Please log in for adding to cart" || errorData.message);
+                Swal.fire({
+                title: 'Error',
+                text: "Please log in for adding to cart" || errorData.message,
+                icon: 'warning',
+                confirmButtonText: 'OK'
+              });
               }
             } else if (onlineResponse.status === 401) {
               const errorData = await onlineResponse.json();
-              alert("Error adding product to cart" || errorData.message);
+              Swal.fire({
+              title: 'Error',
+              text: "Error adding product to cart" || errorData.message,
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
             }
           } catch (error) {
             console.error('Fetch error:', error);
-            alert("Network error: " + error.message);
+            Swal.fire({
+            title: 'Network Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
           }
         });
       }
