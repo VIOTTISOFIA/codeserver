@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baby's Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F0F8F4;
+        }
+
+        h1 {
+            color: #2E6A4F;
+            background-color: #D0F2E2;
+            padding: 1rem;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #2E6A4F;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: #8FC7A4;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #7DBF9A;
+        }
+
+        .card {
+            border: 1px solid #8FC7A4;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            border-bottom: 1px solid #8FC7A4;
+        }
+
+        .card-body {
+            padding: 1rem;
+            background-color: #EAF8F1;
+        }
+
+        .form-container,
+        .product-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-center my-4">
+        <h1>The Baby's Shop</h1>
+    </header>
+
+    <section>
+        <article class="form-container d-flex flex-column align-items-center">
+            <h2 class="text-center">Register Form!</h2>
+            <form class="d-flex flex-column w-75">
+                <div class="form-group">
+                    <input class="form-control m-2" type="text" name="photo" id="photo" placeholder="PHOTO">
+                </div>
+                <div class="form-group">
+                    <input class="form-control m-2" type="text" name="title" id="title" placeholder="TITLE">
+                </div>
+                <div class="form-group">
+                    <input class="form-control m-2" type="text" name="category" id="category" placeholder="CATEGORY">
+                </div>
+                <div class="form-group">
+                    <input class="form-control m-2" type="number" name="price" id="price" placeholder="PRICE">
+                </div>
+                <div class="form-group">
+                    <input class="form-control m-2" type="number" name="stock" id="stock" placeholder="STOCK">
+                </div>
+                <button type="button" id="register" class="btn btn-primary m-2">Register!</button>
+            </form>
+        </article>
+
+        <div id="products-container" class="product-container">
+            <!-- Aquí se agregarán los productos nuevos -->
+        </div>
+    </section>
+
+    <script>
+        document.querySelector("#register").addEventListener("click", async () => {
+            const data = {
+                photo: document.querySelector("#photo").value,
+                title: document.querySelector("#title").value,
+                category: document.querySelector("#category").value,
+                price: document.querySelector("#price").value,
+                stock: document.querySelector("#stock").value
+            };
+
+            const opts = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            };
+
+            let response = await fetch("/api/products", opts);
+            response = await response.json();
+
+            console.log(response);
+
+            if (response.statusCode === 201) {
+                alert("Product created successfully");
+                // Crear una nueva tarjeta para el producto
+                const productCard = document.createElement("div");
+                productCard.className = "card m-2";
+                productCard.innerHTML = `
+          <img src="${data.photo}" class="card-img-top" alt="${data.title}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${data.title}</h5>
+            <p class="card-text">Category: ${data.category}</p>
+            <div class="d-flex justify-content-between">
+              <strong class="card-text">Price: $${data.price}</strong>
+              <strong class="card-text">Stock: ${data.stock}</strong>
+            </div>
+          </div>
+        `;
+                // Agregar la tarjeta al contenedor de productos
+                document.querySelector("#products-container").appendChild(productCard);
+            } else {
+                alert(response.message);
+            }
+        });
+    </script>
+</body>
+
+</html>
