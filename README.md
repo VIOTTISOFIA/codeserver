@@ -21,21 +21,7 @@ http://localhost:8080/carts/cart?user_id=6660fcb73892bc1eecfeabe9 (ID harcodeado
 
 **DESAFIO ENTREGABLE "SPRINT6"**
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies. 
-
-- Agregamos un nuevo archivo con rutas utilizando las cookies como memoria de almacenamiento de datos segun la informacion recibida desde el front, como por ejemplo, el inicio de sesion de un usuario ya existente en nuestra base de datos (DB), o el registro de un nuevo usuario.
-
-- Logramos condicionar las vistas para que se rendericen segun las sesiones activas y asi mejorar la experiencia de usuario. Ejemplo de esto, es nuestro 'NavBar' el cual se renderiza con opcion de "login" si el usuario no ha iniciado sesion, o la muestra del boton del carrito o "signout" si tiene una sesion activa. 
-
-- Asimismo el perfil de un usuario y su carrito (si existe) se renderizan en funcion a la sesion iniciada. 
-
-- Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB. 
-=======
-=======
->>>>>>> sprint10
-En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies.
 
 - Agregamos un nuevo archivo con rutas utilizando las cookies como memoria de almacenamiento de datos segun la informacion recibida desde el front, como por ejemplo, el inicio de sesion de un usuario ya existente en nuestra base de datos (DB), o el registro de un nuevo usuario.
 
@@ -43,11 +29,8 @@ En esta entrega se han implementado nuevas funcionalidades y nuevos metodos rela
 
 - Asimismo el perfil de un usuario y su carrito (si existe) se renderizan en funcion a la sesion iniciada.
 
-- Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB.
-<<<<<<< HEAD
->>>>>>> sprint9
-=======
->>>>>>> sprint10
+- Tambien se agregaron nuevos middlewares de autenticacion para verificar que el email y contrasenia coincidan segun lo registrado en la DB, y nuevos middlewares para validar que los datos agregados al momento de registrar un nuevo usuario no existan en la DB. 
+En esta entrega se han implementado nuevas funcionalidades y nuevos metodos relacionados a la autenticacion de un usuario utilzando cookies.
 
 - Finalmente, creamos un nuevo metodo al Manager generico de mongo: "ReadByEmail", el cual utilizamos para generar el incio de sesion correcto de un usuario segun el email registrado. Este mismo metodo tambien fue creado en el manager correspondiente a usuarios segun la persistencia (FS o Memory)
 
@@ -79,11 +62,7 @@ Asimismo, dentro del customRouter hemos agregado el uso de "Policies" para la co
 En esta etapa de nuestro proyecto hemos implementado la separacion de responsabilidades en capas para mejorar la escalabilidad y optimizacion de nuestro codigo a nivel de persistencias. Hemos agregado:
 
 -Capa de controlador o negocio, para el manejo de la logica.
-<<<<<<< HEAD
--Capa de servicio para ser el intermediario entre el controlador y la persistencia. 
-=======
 -Capa de servicio para ser el intermediario entre el controlador y la persistencia.
->>>>>>> sprint10
 -Capa de modelo para las propiedades a implementar segun el recurso y persistencia necesaria.
 
 Tambien agregamos nuevos patrones para el manejo de persistencias.

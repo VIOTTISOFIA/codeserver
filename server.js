@@ -17,7 +17,7 @@ import indexRouter from "./src/router/index.router.js";
 import socketCb from "./src/router/index.socket.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
-import configs from "./src/utils/swagger.util.js"
+import configs from "./src/utils/swagger.util.js";
 import __dirname from "./utils.js";
 
 // http server
@@ -68,7 +68,7 @@ server.get(
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 },
   })
-); 
+);
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(__dirname + "/public"));
 server.use(express.json());

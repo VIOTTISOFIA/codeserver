@@ -162,7 +162,6 @@ async function checkout(event, user_id) {
     console.error("Error:", error);
   }
 }
-
 //Funcion para actualizar datos del darrito
 async function updateCart(event, cartItemId) {
   event.preventDefault();
